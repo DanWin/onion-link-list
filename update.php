@@ -57,7 +57,7 @@ function check_links(&$onions, &$ch, $link){
 	}
 }
 
-function add_onions(&$onions, $db){
+function add_onions(&$onions, PDO $db){
 	$stmt=$db->query('SELECT md5sum FROM ' . PREFIX . 'onions;');
 	while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
 		if(isSet($onions[$tmp[0]])){

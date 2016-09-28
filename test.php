@@ -26,6 +26,7 @@ include('common_config.php');
 echo '<!DOCTYPE html><html><head>';
 echo "<title>Daniel - $I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+echo '<meta name=viewport content="width=device-width, initial-scale=1">';
 echo '<style type="text/css">.red{color:red;} .green{color:green;}</style>';
 echo '</head><body>';
 echo '<h2>Online-Test</h2>';

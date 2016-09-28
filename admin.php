@@ -19,6 +19,9 @@
 */
 
 header('Content-Type: text/html; charset=UTF-8');
+header('Pragma: no-cache');
+header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
+header('Expires: 0');
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // headers sent, no further processing needed
 }
@@ -32,6 +35,7 @@ asort($categories);
 echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[admintitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+echo '<meta name=viewport content="width=device-width, initial-scale=1">';
 echo '<style type="text/css">.red{color:red;} .green{color:green;}</style>';
 echo '</head><body>';
 echo "<h2>$I[admintitle]</h2>";

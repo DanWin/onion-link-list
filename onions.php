@@ -61,6 +61,7 @@ function send_html(){
 	echo '<!DOCTYPE html><html><head>';
 	echo "<title>$I[title]</title>";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+	echo '<meta name=viewport content="width=device-width, initial-scale=1">';
 	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up{background-color:#008000;} .down{background-color:#FF0000;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;}</style>';
 	echo '</head><body>';
 	echo "<h2>$I[title]</h2>";
@@ -71,7 +72,6 @@ function send_html(){
 		echo '</body></html>';
 		exit;
 	}
-	echo '<p>I\'m not responsible for any content of websites linked here. Be careful and use your brain.</p><p>Do you want your address to be highlighted and featured at the top of the results? Send Bitcoins to <a href="bitcoin:1CHvjeMJum2Zfd3JEdb35RUEdz1jjQvdPT">1CHvjeMJum2Zfd3JEdb35RUEdz1jjQvdPT</a> and then <a href="/contact.php">tell me</a> your transaction ID and which address(es) you want to be highlighted. 0.025 BTC equals 10 days for one address. Any other amount can be calculated thereof.</p>';
 	//update onions description form
 	echo "<table><tr valign=\"top\"><td><form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
@@ -143,7 +143,7 @@ function send_html(){
 		}
 		++$cat;
 	}
-	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . PREFIX . "onions.id=onion_id AND address!='';")->fetch(PDO::FETCH_NUM);
+	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;")->fetch(PDO::FETCH_NUM);
 	if($category==$cat){
 		echo " <li class=\"active\"><a href=\"?cat=$cat&amp;lang=$language\">$I[phishingclones] ($num[0])</a></li>";
 	}else{
@@ -153,7 +153,7 @@ function send_html(){
 	echo " <li>$I[removed] ($num[0])</li></ul><br><br>";
 	//List normal categories
 	echo "<ul class=\"list\"><li>$I[categories]:</li>";
-	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing);');
+	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
 	foreach($categories as $cat=>$name){
 		$stmt->execute(array($cat));
 		$num=$stmt->fetch(PDO::FETCH_NUM);
@@ -211,7 +211,7 @@ function send_html(){
 		$pagination='';
 	}
 	if(!empty($_REQUEST['q'])){//run search query
-		$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND (description LIKE ? OR address LIKE ?) ORDER BY address;');
+		$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 AND (description LIKE ? OR address LIKE ?) ORDER BY address;');
 		$query=htmlspecialchars($_REQUEST['q']);
 		$query="%$query%";
 		$stmt->execute(array($query, $query));
@@ -254,7 +254,7 @@ function send_html(){
 	echo '</body></html>';
 }
 
-function get_table($stmt, &$numrows=0, $promoted=false){
+function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 	global $I, $db, $language;
 	$time=time();
 	ob_start();
@@ -319,7 +319,7 @@ function get_table($stmt, &$numrows=0, $promoted=false){
 function print_phishing_table(){
 	global $I, $db;
 	echo "<table border=\"1\"><tr><th>$I[link]</th><th>$I[cloneof]</th><th>$I[lastup]</th></tr>";
-	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . PREFIX . "onions.id=onion_id AND address!='' ORDER BY onions.address;");
+	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . PREFIX . "onions.id=onion_id AND address!='' ORDER BY onions.address AND timediff<604800;");
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
 		if($link['lastup']===$link['lasttest']){
 			$class='up';
