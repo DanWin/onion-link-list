@@ -18,7 +18,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$I=array(
+$I=[
 	'all'		=>	'All',
 	'lastadded'	=>	'Last added',
 	'offline'	=>	'Offline > 1 week',
@@ -93,5 +93,5 @@ $I=array(
 	'dateextrequired' => 'The date extension of PHP is required. Please install it first.',
 	'succdbcreate'	=>	'The database has successfully been created!',
 	'statusok'	=>	'Status: OK',
-);
+];
 ?>

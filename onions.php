@@ -89,7 +89,7 @@ function send_html(){
 			$addr=strtolower($addr[4]);
 			$md5=md5($addr, true);
 			$stmt=$db->prepare('SELECT description, category FROM ' . PREFIX . 'onions WHERE md5sum=?;');
-			$stmt->execute(array($md5));
+			$stmt->execute([$md5]);
 			if($desc=$stmt->fetch(PDO::FETCH_ASSOC)){
 				$category=$desc['category'];
 				echo str_replace('<br>', "\n", $desc['description']);
@@ -155,7 +155,7 @@ function send_html(){
 	echo "<ul class=\"list\"><li>$I[categories]:</li>";
 	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
 	foreach($categories as $cat=>$name){
-		$stmt->execute(array($cat));
+		$stmt->execute([$cat]);
 		$num=$stmt->fetch(PDO::FETCH_NUM);
 		if($category==$cat){
 			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
@@ -173,7 +173,7 @@ function send_html(){
 			$addr=strtolower($addr[4]);
 			$md5=md5($addr, true);
 			$stmt=$db->prepare('SELECT locked FROM ' . PREFIX . 'onions WHERE md5sum=?;');
-			$stmt->execute(array($md5));
+			$stmt->execute([$md5]);
 			$stmt->bindColumn(1, $locked);
 			if($category==count($categories)){
 				$category=0;
@@ -186,18 +186,18 @@ function send_html(){
 				$desc=preg_replace("/(\r?\n|\r\n?)/", '<br>', $desc);
 			}
 			if(!$stmt->fetch(PDO::FETCH_BOUND)){//new link, add to database
-				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category) VALUES (?, ?, ?, ?);');
-				$stmt->execute(array($addr, $desc, $md5, $category));
+				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded) VALUES (?, ?, ?, ?, ?);');
+				$stmt->execute([$addr, $desc, $md5, $category, time()]);
 				echo "<p class=\"green\">$I[succadd]</p>";
 			}elseif($locked==1){//locked, not editable
 				echo "<p class=\"red\">$I[faillocked]</p>";
 			}elseif($desc!==''){//update description
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=? WHERE md5sum=?;');
-				$stmt->execute(array($desc, $category, $md5));
+				$stmt->execute([$desc, $category, $md5]);
 				echo "<p class=\"green\">$I[succupddesc]</p>";
 			}elseif($category!=0){//update category only
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=? WHERE md5sum=?;');
-				$stmt->execute(array($category, $md5));
+				$stmt->execute([$category, $md5]);
 				echo "<p class=\"green\">$I[succupdcat]</p>";
 			}else{//nothing changed and already known
 				echo "<p class=\"green\">$I[alreadyknown]</p>";
@@ -214,7 +214,7 @@ function send_html(){
 		$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 AND (description LIKE ? OR address LIKE ?) ORDER BY address;');
 		$query=htmlspecialchars($_REQUEST['q']);
 		$query="%$query%";
-		$stmt->execute(array($query, $query));
+		$stmt->execute([$query, $query]);
 		$table=get_table($stmt, $numrows);
 		printf("<p><b>$I[searchresult]</b></p>", $_REQUEST['q'], $numrows);
 		echo $table;
@@ -245,7 +245,7 @@ function send_html(){
 			$offsetquery='';
 		}
 		$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND category=? AND timediff<604800 ORDER BY address$offsetquery;");
-		$stmt->execute(array($category));
+		$stmt->execute([$category]);
 		echo get_table($stmt, $numrows, true);
 	}
 	echo '<br>';
@@ -262,7 +262,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 	if($promoted){//print promoted links at the top
 		$time=time();
 		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
-		$promo->execute(array($time));
+		$promo->execute([$time]);
 		while($link=$promo->fetch(PDO::FETCH_ASSOC)){
 			if($link['lastup']===$link['lasttest']){
 				$class='up';

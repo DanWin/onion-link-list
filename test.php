@@ -66,7 +66,7 @@ if(!empty($_REQUEST['addr'])){
 		$md5=md5($addr, true);
 		//display warning, if a phishing clone was tested
 		$phishing=$db->prepare('SELECT original FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE address=? AND onion_id=' . PREFIX . 'onions.id;');
-		$phishing->execute(array($addr));
+		$phishing->execute([$addr]);
 		if($orig=$phishing->fetch(PDO::FETCH_NUM)){
 			printf("<p class=\"red\">$I[testphishing]</p>", "<a href=\"http://$orig[0].onion\">$orig[0].onion</a>");
 		}
@@ -74,17 +74,17 @@ if(!empty($_REQUEST['addr'])){
 			if(isSet($db)){
 				//update entry in database
 				$stmt=$db->prepare('SELECT * FROM ' . PREFIX . 'onions WHERE md5sum=?;');
-				$stmt->execute(array($md5));
+				$stmt->execute([$md5]);
 				if(!$stmt->fetch(PDO::FETCH_NUM)){
-					$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);')->execute(array($addr, $md5, time()));
+					$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);')->execute([$addr, $md5, time()]);
 				}
-				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, lastup=lasttest, timediff=0 WHERE md5sum=?;')->execute(array(time(), $md5));
+				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, lastup=lasttest, timediff=0 WHERE md5sum=?;')->execute([time(), $md5]);
 			}
 			echo "<p class=\"green\">$I[testonline]</p>";
 		}else{
 			if(isSet($db)){
 				$time=time();
-				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, timediff=lasttest-lastup WHERE md5sum=? AND lasttest<?;')->execute(array($time, $md5, $time));
+				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, timediff=lasttest-lastup WHERE md5sum=? AND lasttest<?;')->execute([$time, $md5, $time]);
 			}
 			echo "<p class=\"red\">$I[testoffline]</p>";
 		}

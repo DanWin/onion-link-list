@@ -18,7 +18,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$T=array(
+$T=[
 	'all'		=>	'Alle',
 	'lastadded'	=>	'Zuletzt hinzugefügt',
 	'offline'	=>	'Offline > 1 Woche',
@@ -93,5 +93,5 @@ $T=array(
 	'dateextrequired' =>	'Die date Erweiterung von PHP wird benötigt. Bitte installieren Sie diese zuerst.',
 	'succdbcreate'	=>	'Die Datenbank wurde erfolgreich erstellt!',
 	'statusok'	=>	'Status: OK',
-);
+];
 ?>

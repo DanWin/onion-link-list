@@ -39,10 +39,10 @@ $categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Cryptocurrencies
 
 
 // Language selection
-$L=array(
+$L=[
 	'de' => 'Deutsch',
 	'en' => 'English',
-);
+];
 if(isSet($_REQUEST['lang']) && isSet($L[$_REQUEST['lang']])){
 	$language=$_REQUEST['lang'];
 	if(!isSet($_COOKIE['language']) || $_COOKIE['language']!==$language){
