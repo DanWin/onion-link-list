@@ -137,7 +137,7 @@ function send_html(){
 		}
 		if($category==$cat){
 			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
-			$pages=ceil($num[0]/100);
+			$pages=ceil($num[0]/PER_PAGE);
 		}else{
 			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
 		}
@@ -159,7 +159,7 @@ function send_html(){
 		$num=$stmt->fetch(PDO::FETCH_NUM);
 		if($category==$cat){
 			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
-			$pages=ceil($num[0]/100);
+			$pages=ceil($num[0]/PER_PAGE);
 		}else{
 			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
 		}
@@ -227,20 +227,20 @@ function send_html(){
 			--$tmp;
 		}
 		if($category-count($categories)===1){
-			$query.=' ORDER BY id DESC LIMIT 100';
+			$query.=' ORDER BY id DESC LIMIT ' . PER_PAGE;
 		}else{
 			$query.=' ORDER BY address';
 			if($_REQUEST['pg']>0){
-				$offset=100*($_REQUEST['pg']-1);
-				$query.=" LIMIT 100 OFFSET $offset";
+				$offset=PER_PAGE*($_REQUEST['pg']-1);
+				$query.=' LIMIT ' . PER_PAGE . " OFFSET $offset";
 			}
 		}
 		$stmt=$db->query('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $query;");
 		echo get_table($stmt, $numrows, true);
 	}else{//show normal categories
 		if($_REQUEST['pg']>0){
-			$offset=100*($_REQUEST['pg']-1);
-			$offsetquery=" LIMIT 100 OFFSET $offset";
+			$offset=PER_PAGE*($_REQUEST['pg']-1);
+			$offsetquery=' LIMIT ' . PER_PAGE . " OFFSET $offset";
 		}else{
 			$offsetquery='';
 		}
@@ -319,7 +319,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 function print_phishing_table(){
 	global $I, $db;
 	echo "<table border=\"1\"><tr><th>$I[link]</th><th>$I[cloneof]</th><th>$I[lastup]</th></tr>";
-	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . PREFIX . "onions.id=onion_id AND address!='' ORDER BY onions.address AND timediff<604800;");
+	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800 ORDER BY address;");
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
 		if($link['lastup']===$link['lasttest']){
 			$class='up';

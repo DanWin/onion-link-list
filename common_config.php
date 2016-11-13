@@ -31,6 +31,7 @@ define('USERAGENT', 'Daniels Online-Test http://tt3j2x4k5ycaa5zt.onion/test.php'
 define('LANG', 'en'); // Default language
 define('PROMOTEPRICE', 0.025); // Price to promote a site for PROMOTETIME long
 define('PROMOTETIME', 864000); // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
+define('PER_PAGE', 50); // Sites listed per page
 define('VERSION', '1'); // Script version
 define('DBVERSION', 1); // Database layout version
 //Categories - new links will always be put into the first one, leave it to Unsorted
