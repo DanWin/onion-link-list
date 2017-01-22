@@ -33,7 +33,7 @@ define('PROMOTEPRICE', 0.025); // Price to promote a site for PROMOTETIME long
 define('PROMOTETIME', 864000); // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
 define('PER_PAGE', 50); // Sites listed per page
 define('VERSION', '1'); // Script version
-define('DBVERSION', 1); // Database layout version
+define('DBVERSION', 2); // Database layout version
 //Categories - new links will always be put into the first one, leave it to Unsorted
 //once configured, only add new categories at the end or you have to manually adjust the database.
 $categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Cryptocurrencies', 'Empty/Error/Unknown', 'Forums', 'Hacking', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Scam', 'Security/Privacy', 'Whistleblowing'];

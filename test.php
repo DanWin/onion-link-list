@@ -47,7 +47,7 @@ if(!empty($_REQUEST['addr'])){
 		ob_end_flush();
 	}
 	try{
-		$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME, DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
+		$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 	}catch(PDOException $e){
 	}
 	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
