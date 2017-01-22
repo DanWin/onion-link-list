@@ -62,7 +62,7 @@ function send_html(){
 	echo "<title>$I[title]</title>";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name=viewport content="width=device-width, initial-scale=1">';
-	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up{background-color:#008000;} .down{background-color:#FF0000;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;}</style>';
+	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up td+td+td{background-color:#aaff88;} .down td+td+td{background-color:#ff4444;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset;}</style>';
 	echo '</head><body>';
 	echo "<h2>$I[title]</h2>";
 	print_langs();
