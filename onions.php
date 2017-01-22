@@ -258,7 +258,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 	global $I, $db, $language;
 	$time=time();
 	ob_start();
-	echo "<table border=\"1\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[editdesc]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[testnow]</th></tr>";
+	echo "<table border=\"1\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[actions]</th></tr>";
 	if($promoted){//print promoted links at the top
 		$time=time();
 		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
@@ -309,7 +309,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 		}else{
 			$edit="<form target=\"_blank\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[edit]\" type=\"submit\"></form>";
 		}
-		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\" target=\"_blank\">$link[address].onion</a></td><td>$link[description]</td><td>$edit</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form target=\"_blank\" method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
+		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\" target=\"_blank\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td>$edit <form target=\"_blank\" method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
 		++$numrows;
 	}
 	echo '</table>';
