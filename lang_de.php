@@ -18,6 +18,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+//Native language name: Deutsch
 $T=[
 	'all'		=>	'Alle',
 	'lastadded'	=>	'Zuletzt hinzugefügt',

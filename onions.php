@@ -131,7 +131,7 @@ function send_html(){
 	$pages=1;
 	foreach($special as $name=>$query){
 		if($cat===count($categories)+1){
-			$num[0]=100;
+			$num[0]=PER_PAGE;
 		}else{
 			$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $query;")->fetch(PDO::FETCH_NUM);
 		}
