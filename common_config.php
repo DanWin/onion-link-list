@@ -43,6 +43,7 @@ $categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Cryptocurrencies
 $L=[
 	'de' => 'Deutsch',
 	'en' => 'English',
+	'ja' => '日本語'
 ];
 if(isSet($_REQUEST['lang']) && isSet($L[$_REQUEST['lang']])){
 	$language=$_REQUEST['lang'];
