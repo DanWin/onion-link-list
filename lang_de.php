@@ -17,8 +17,6 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-//Native language name: Deutsch
 $T=[
 	'all'		=>	'Alle',
 	'lastadded'	=>	'Zuletzt hinzugefügt',
@@ -86,12 +84,5 @@ $T=[
 	'unknown'	=>	'Unbekannt',
 	'language'	=>	'Sprache',
 	'format'	=>	'Format',
-	'pdo_mysqlextrequired' => 'Die pdo_mysql Erweiterung von PHP wird benötigt. Bitte installieren Sie diese zuerst.',
-	'pcreextrequired' =>	'Die pcre Erweiterung von PHP wird benötigt. Bitte installieren Sie diese zuerst.',
-	'jsonextrequired' =>	'Die json Erweiterung von PHP wird benötigt. Bitte installieren Sie diese zuerst.',
-	'curlextrequired' =>	'Die curl Erweiterung von PHP wird benötigt. Bitte installieren Sie diese zuerst.',
-	'dateextrequired' =>	'Die date Erweiterung von PHP wird benötigt. Bitte installieren Sie diese zuerst.',
-	'succdbcreate'	=>	'Die Datenbank wurde erfolgreich erstellt!',
-	'statusok'	=>	'Status: OK',
+	'hidelocked'	=>	'Gesperrte nicht anzeigen',
 ];
-?>

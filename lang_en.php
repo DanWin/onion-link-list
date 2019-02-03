@@ -17,7 +17,6 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 $I=[
 	'all'		=>	'All',
 	'lastadded'	=>	'Last added',
@@ -85,12 +84,5 @@ $I=[
 	'unknown'	=>	'Unknown',
 	'language'	=>	'Language',
 	'format'	=>	'Format',
-	'pdo_mysqlextrequired' => 'The pdo_mysql extension of PHP is required. Please install it first.',
-	'pcreextrequired' => 'The pcre extension of PHP is required. Please install it first.',
-	'jsonextrequired' => 'The json extension of PHP is required. Please install it first.',
-	'curlextrequired' => 'The curl extension of PHP is required. Please install it first.',
-	'dateextrequired' => 'The date extension of PHP is required. Please install it first.',
-	'succdbcreate'	=>	'The database has successfully been created!',
-	'statusok'	=>	'Status: OK',
+	'hidelocked'	=>	'Hide locked',
 ];
-?>

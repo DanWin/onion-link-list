@@ -77,4 +77,3 @@ foreach($offline as $tmp){
 //	$error_stmt->execute($tmp);
 //}
 $db->commit();
-?>

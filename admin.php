@@ -19,9 +19,6 @@
 */
 
 header('Content-Type: text/html; charset=UTF-8');
-header('Pragma: no-cache');
-header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
-header('Expires: 0');
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // headers sent, no further processing needed
 }
@@ -38,7 +35,7 @@ echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name=viewport content="width=device-width, initial-scale=1">';
 echo '<style type="text/css">.red{color:red;} .green{color:green;}</style>';
 echo '</head><body>';
-echo "<h2>$I[admintitle]</h2>";
+echo "<h1>$I[admintitle]</h1>";
 print_langs();
 
 //check password
@@ -74,7 +71,7 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	if(!empty($_REQUEST['desc'])){
 		echo htmlspecialchars(trim($_REQUEST['desc']));
 	}elseif(isSet($_REQUEST['addr'])){
-		if(preg_match('~(^(https?://)?([a-z2-7]{16})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+		if(preg_match('~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			$addr=strtolower($addr[3]);
 			$md5=md5($addr, true);
 			$stmt=$db->prepare('SELECT description, category FROM ' . PREFIX . 'onions WHERE md5sum=?;');
@@ -118,7 +115,7 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	echo '</form><br>';
 
 	if(!empty($_POST['addr'])){
-		if(!preg_match('~(^(https?://)?([a-z2-7]{16})(\.onion(/.*)?)?$)~i', trim($_POST['addr']), $addr)){
+		if(!preg_match('~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_POST['addr']), $addr)){
 			echo "<p class=\"red\">$I[invalonion]</p>";
 		}else{
 			$addr=strtolower($addr[3]);
@@ -163,7 +160,7 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 					$desc=preg_replace("/(\r?\n|\r\n?)/", '<br>', $desc);
 				}
 				if(!$stmt->fetch(PDO::FETCH_ASSOC)){ //not yet there, add it
-					$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded) VALUES (?, ?, ?, ?, ?);');
+					$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded, locked) VALUES (?, ?, ?, ?, ?, 1);');
 					$stmt->execute([$addr, $desc, $md5, $category, time()]);
 					echo "<p class=\"green\">$I[succadd]</p>";
 				}elseif($desc!=''){ //update description+category
@@ -171,14 +168,14 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 					$stmt->execute([$desc, $category, $md5]);
 					echo "<p class=\"green\">$I[succupddesc]</p>";
 				}elseif($category!=0){ //only update category
-					$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=? WHERE md5sum=?;');
+					$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=?, locked=1 WHERE md5sum=?;');
 					$stmt->execute([$category, $md5]);
 					echo "<p class=\"green\">$I[succupdcat]!</p>";
 				}else{ //no description or category change and already known
 					echo "<p class=\"green\">$I[alreadyknown]</p>";
 				}
 			}elseif($_POST['action']===$I['phishing']){//mark as phishing clone
-				if($_POST['original']!=='' && !preg_match('~(^(https?://)?([a-z2-7]{16})(\.onion(/.*)?)?$)~i', $_POST['original'], $orig)){
+				if($_POST['original']!=='' && !preg_match('~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', $_POST['original'], $orig)){
 					echo "<p class=\"red\">$I[invalonion]</p>";
 				}else{
 					if(isset($orig[3])){
@@ -189,6 +186,8 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 					if($orig!==$addr){
 						$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'phishing (onion_id, original) VALUES ((SELECT id FROM ' . PREFIX . 'onions WHERE address=?), ?);');
 						$stmt->execute([$addr, $orig]);
+						$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET locked=1 WHERE address=?;');
+						$stmt->execute([$addr]);
 						echo "<p class=\"green\">$I[succaddphish]</p>";
 					}else{
 						echo "<p class=\"red\">$I[samephish]</p>";
@@ -206,4 +205,3 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 }
 echo '<br><p style="text-align:center;font-size:small;"><a target="_blank" href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
 echo '</body></html>';
-?>

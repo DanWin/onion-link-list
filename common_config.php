@@ -30,13 +30,13 @@ define('PROXY', '127.0.0.1:9050'); // Socks5 Proxy to connect to (Tor)
 define('USERAGENT', 'Daniels Online-Test http://tt3j2x4k5ycaa5zt.onion/test.php'); // User-Agent to use when testing a site
 define('LANG', 'en'); // Default language
 define('PROMOTEPRICE', 0.025); // Price to promote a site for PROMOTETIME long
-define('PROMOTETIME', 864000); // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
+define('PROMOTETIME', 2592000); // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
 define('PER_PAGE', 50); // Sites listed per page
 define('VERSION', '1'); // Script version
-define('DBVERSION', 2); // Database layout version
+define('DBVERSION', 3); // Database layout version
 //Categories - new links will always be put into the first one, leave it to Unsorted
 //once configured, only add new categories at the end or you have to manually adjust the database.
-$categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Cryptocurrencies', 'Empty/Error/Unknown', 'Forums', 'Hacking', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Scam', 'Security/Privacy', 'Whistleblowing'];
+$categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Forums', 'Hacking/Programming/Software', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Security/Privacy/Encryption', 'Whistleblowing', 'Empty/Error/Unknown', 'Cryptocurrencies', 'Scams', 'Fun/Joke', 'Search', 'Autodetected scam (unchecked)'];
 
 
 // Language selection
@@ -55,9 +55,9 @@ if(isSet($_REQUEST['lang']) && isSet($L[$_REQUEST['lang']])){
 }else{
 	$language=LANG;
 }
-include_once('lang_en.php'); //always include English
+require_once('lang_en.php'); //always include English
 if($language!=='en'){
-	include_once("lang_$language.php"); //replace with translation if available
+	require_once("lang_$language.php"); //replace with translation if available
 	foreach($T as $name=>$translation){
 		$I[$name]=$translation;
 	}
@@ -66,9 +66,14 @@ if($language!=='en'){
 function print_langs(){
 	global $I, $L;
 	echo "<small>$I[language]: ";
+	$query=preg_replace('/(&?lang=[a-z_\-]*)/i', '', $_SERVER['QUERY_STRING']);
 	foreach($L as $code=>$name){
-		echo " <a href=\"?lang=$code\">$name</a>";
+		if($query===''){
+			$uri="?lang=$code";
+		}else{
+			$uri='?'.htmlspecialchars($query)."&amp;lang=$code";
+		}
+		echo " <a href=\"$uri\">$name</a>";
 	}
 	echo '</small>';
 }
-?>

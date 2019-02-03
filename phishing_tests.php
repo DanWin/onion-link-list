@@ -65,4 +65,3 @@ function check($link, $phishing_link){
 		}
 	}
 }
-?>

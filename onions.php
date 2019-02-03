@@ -44,7 +44,7 @@ function send_html(){
 	asort($categories);
 	//sql for special categories
 	$special=[
-		$I['all']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800',
+		$I['all']=>"address!='' AND category!=15 AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800',
 		$I['lastadded']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
 		$I['offline']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
@@ -61,10 +61,11 @@ function send_html(){
 	echo '<!DOCTYPE html><html><head>';
 	echo "<title>$I[title]</title>";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
-	echo '<meta name=viewport content="width=device-width, initial-scale=1">';
-	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up td+td+td{background-color:#aaff88;} .down td+td+td{background-color:#ff4444;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset;}</style>';
+	echo '<meta name="author" content="Daniel Winzen">';
+	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up td+td+td{background-color:#aaff88;} .down td+td+td{background-color:#ff4444;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset;} #maintable td+td{word-break:break-all;} #maintable td+td+td{word-break:unset;}</style>';
 	echo '</head><body>';
-	echo "<h2>$I[title]</h2>";
+	echo "<h1>$I[title]</h1>";
 	print_langs();
 	echo "<br><small>$I[format]: <a href=\"?format=text\">Text</a> <a href=\"?format=json\">JSON</a></small>";
 	if(!isSet($db)){
@@ -72,6 +73,7 @@ function send_html(){
 		echo '</body></html>';
 		exit;
 	}
+	echo '<p>I\'m not responsible for any content of websites linked here. Be careful and use your brain.</p>';
 	//update onions description form
 	echo "<table><tr valign=\"top\"><td><form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
@@ -85,7 +87,7 @@ function send_html(){
 	if(!empty($_REQUEST['desc'])){//use posted description
 		echo htmlspecialchars(trim($_REQUEST['desc']));
 	}elseif(!empty($_REQUEST['addr'])){//fetch description from database
-		if(preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+		if(preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			$addr=strtolower($addr[4]);
 			$md5=md5($addr, true);
 			$stmt=$db->prepare('SELECT description, category FROM ' . PREFIX . 'onions WHERE md5sum=?;');
@@ -113,6 +115,7 @@ function send_html(){
 		echo ">$name</option>";
 	}
 	echo '</select></p>';
+	send_captcha();
 	echo "<input type=\"submit\" name=\"action\" value=\"$I[update]\"></form></td>";
 	//search from
 	echo "<td><form action=\"$_SERVER[SCRIPT_NAME]\" method=\"post\">";
@@ -122,7 +125,26 @@ function send_html(){
 	if(isSet($_REQUEST['q'])){
 		echo htmlspecialchars($_REQUEST['q']);
 	}
-	echo '" required></p>';
+	echo '"></p>';
+	echo "<p>$I[category]: <select name=\"cat\">";
+	echo '<option value="'.count($categories).'"';
+	if($category>=count($categories)){
+		echo ' selected';
+	}
+	echo ">$I[all]</option>";
+	foreach($categories as $cat=>$name){
+		echo "<option value=\"$cat\"";
+		if($category==$cat){
+			echo ' selected';
+		}
+		echo ">$name</option>";
+	}
+	echo '</select></p>';
+	echo '<p><label><input type="checkbox" name="hidelocked" value="1"';
+	if(isset($_REQUEST['hidelocked'])){
+		echo ' checked';
+	}
+	echo ">$I[hidelocked]</label></p>";
 	echo "<input type=\"submit\" name=\"action\" value=\"$I[search]\"></form></td>";
 	echo '</tr></table><br>';
 	//List special categories
@@ -166,10 +188,27 @@ function send_html(){
 	}
 	echo '</ul><br><br>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
-		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			echo "<p class=\"red\">$I[invalonion]</p>";
 			echo "<p>$I[valid]: http://tt3j2x4k5ycaa5zt.onion</p>";
 		}else{
+			if(!isset($_REQUEST['challenge'])){
+				send_error('Error: Wrong Captcha');
+			}
+			$stmt=$db->prepare('SELECT code FROM ' . PREFIX . 'captcha WHERE id=?;');
+			$stmt->execute([$_REQUEST['challenge']]);
+			$stmt->bindColumn(1, $code);
+			if(!$stmt->fetch(PDO::FETCH_BOUND)){
+				send_error('Error: Captcha expired');
+			}
+			$time=time();
+			$stmt=$db->prepare('DELETE FROM ' . PREFIX . 'captcha WHERE id=? OR time<?;');
+			$stmt->execute([$_REQUEST['challenge'], $time-3600]);
+			if($_REQUEST['captcha']!==$code){
+				if(strrev($_REQUEST['captcha'])!==$code){
+					send_error('Error: Wrong captcha');
+				}
+			}
 			$addr=strtolower($addr[4]);
 			$md5=md5($addr, true);
 			$stmt=$db->prepare('SELECT locked FROM ' . PREFIX . 'onions WHERE md5sum=?;');
@@ -204,17 +243,27 @@ function send_html(){
 			}
 		}
 	}
-	if($pages>1 && empty($_REQUEST['q'])){
+	if($pages>1 && !isset($_REQUEST['q'])){
 		$pagination=get_pagination($category, $pages);
 		echo $pagination;
 	}else{
 		$pagination='';
 	}
-	if(!empty($_REQUEST['q'])){//run search query
-		$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 AND (description LIKE ? OR address LIKE ?) ORDER BY address;');
+	if(isset($_REQUEST['q'])){//run search query
 		$query=htmlspecialchars($_REQUEST['q']);
 		$query="%$query%";
-		$stmt->execute([$query, $query]);
+		if(isset($_REQUEST['hidelocked'])){
+			$hidelocked='AND locked=0';
+		}else{
+			$hidelocked='';
+		}
+		if($category>=count($categories)){
+			$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND timediff<604800 $hidelocked AND (description LIKE ? OR address LIKE ?) ORDER BY address;");
+			$stmt->execute([$query, $query]);
+		}else{
+			$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND category=? AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND timediff<604800 $hidelocked AND (description LIKE ? OR address LIKE ?) ORDER BY address;");
+			$stmt->execute([$category, $query, $query]);
+		}
 		$table=get_table($stmt, $numrows);
 		printf("<p><b>$I[searchresult]</b></p>", $_REQUEST['q'], $numrows);
 		echo $table;
@@ -232,7 +281,7 @@ function send_html(){
 			$query.=' ORDER BY address';
 			if($_REQUEST['pg']>0){
 				$offset=PER_PAGE*($_REQUEST['pg']-1);
-				$query.=' LIMIT ' . PER_PAGE . " OFFSET $offset";
+				$query.=' LIMIT ' . PER_PAGE ." OFFSET $offset";
 			}
 		}
 		$stmt=$db->query('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $query;");
@@ -258,7 +307,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 	global $I, $db, $language;
 	$time=time();
 	ob_start();
-	echo "<table border=\"1\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[actions]</th></tr>";
+	echo "<table id=\"maintable\" border=\"1\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[actions]</th></tr>";
 	if($promoted){//print promoted links at the top
 		$time=time();
 		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
@@ -310,6 +359,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 			$edit="<form target=\"_blank\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[edit]\" type=\"submit\"></form>";
 		}
 		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\" target=\"_blank\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td>$edit <form target=\"_blank\" method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
+//		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\" target=\"_blank\">$link[address].onion</a></td><td>$link[description]</td><td>$edit</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form target=\"_blank\" method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
 		++$numrows;
 	}
 	echo '</table>';
@@ -342,7 +392,7 @@ function print_phishing_table(){
 }
 
 function send_text(){
-	global $db;
+	global $I, $db;
 	if(!isSet($db)){
 		die("$I[error]: $I[nodb]");
 	}
@@ -354,7 +404,7 @@ function send_text(){
 }
 
 function send_json(){
-	global $db, $categories;
+	global $I, $db, $categories;
 	if(!isSet($db)){
 		die("$I[error]: $I[nodb]");
 	}
@@ -390,4 +440,54 @@ function get_pagination($category, $pages){
 	echo "</ul><br><br>";
 	return ob_get_clean();
 }
-?>
+
+function send_captcha(){
+	global $I, $db, $memcached;
+	$difficulty=2;
+	if($difficulty===0 || !extension_loaded('gd')){
+		return;
+	}
+	$captchachars='ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+	$length=strlen($captchachars)-1;
+	$code='';
+	for($i=0;$i<5;++$i){
+		$code.=$captchachars[mt_rand(0, $length)];
+	}
+	$randid=mt_rand();
+	$time=time();
+	$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'captcha (id, time, code) VALUES (?, ?, ?);');
+	$stmt->execute([$randid, $time, $code]);
+	echo "<p>Copy: ";
+	if($difficulty===1){
+		$im=imagecreatetruecolor(55, 24);
+		$bg=imagecolorallocate($im, 0, 0, 0);
+		$fg=imagecolorallocate($im, 255, 255, 255);
+		imagefill($im, 0, 0, $bg);
+		imagestring($im, 5, 5, 5, $code, $fg);
+		echo '<img width="55" height="24" src="data:image/gif;base64,';
+	}else{
+		$im=imagecreatetruecolor(55, 24);
+		$bg=imagecolorallocate($im, 0, 0, 0);
+		$fg=imagecolorallocate($im, 255, 255, 255);
+		imagefill($im, 0, 0, $bg);
+		imagestring($im, 5, 5, 5, $code, $fg);
+		$line=imagecolorallocate($im, 255, 255, 255);
+		for($i=0;$i<2;++$i){
+			imageline($im, 0, mt_rand(0, 24), 55, mt_rand(0, 24), $line);
+		}
+		$dots=imagecolorallocate($im, 255, 255, 255);
+		for($i=0;$i<100;++$i){
+			imagesetpixel($im, mt_rand(0, 55), mt_rand(0, 24), $dots);
+		}
+		echo '<img width="55" height="24" src="data:image/gif;base64,';
+	}
+	ob_start();
+	imagegif($im);
+	imagedestroy($im);
+	echo base64_encode(ob_get_clean()).'">';
+	echo "<input type=\"hidden\" name=\"challenge\" value=\"$randid\"><input type=\"text\" name=\"captcha\" size=\"15\" autocomplete=\"off\"></p>";
+}
+
+function send_error($msg){
+	die("<p style=\"color:red;\">$msg</p></div></body></html>");
+}

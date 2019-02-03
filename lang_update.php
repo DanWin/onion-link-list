@@ -39,7 +39,6 @@ foreach($T as $id=>$value){
 foreach($I as $id=>$value){
 	echo "\t'$id' => '".str_replace("'", "\'", $value)."',\n";
 }
-echo "];\n?>\n";
+echo "];\n";
 $file=ob_get_clean();
 file_put_contents("lang_$code.php", $file);
-?>

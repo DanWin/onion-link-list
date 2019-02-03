@@ -17,19 +17,19 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 header('Content-Type: text/html; charset=UTF-8');
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // headers sent, no further processing needed
 }
 include('common_config.php');
 echo '<!DOCTYPE html><html><head>';
-echo "<title>Daniel - $I[testtitle]</title>";
+echo "<title>$I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
-echo '<meta name=viewport content="width=device-width, initial-scale=1">';
+echo '<meta name="author" content="Daniel Winzen">';
+echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 echo '<style type="text/css">.red{color:red;} .green{color:green;}</style>';
 echo '</head><body>';
-echo '<h2>Online-Test</h2>';
+echo '<h1>Online-Test</h1>';
 print_langs();
 echo "<p>$I[testdesc]</p>";
 echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
@@ -49,8 +49,9 @@ if(!empty($_REQUEST['addr'])){
 	try{
 		$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 	}catch(PDOException $e){
+		die('No DB connection');
 	}
-	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 		echo "<p class=\"red\">$I[invalonion]</p>";
 		echo "<p>$I[valid]: http://tt3j2x4k5ycaa5zt.onion</p>";
 	}else{
@@ -61,6 +62,7 @@ if(!empty($_REQUEST['addr'])){
 		curl_setopt($ch, CURLOPT_PROXY, PROXY);
 		curl_setopt($ch, CURLOPT_PROXYTYPE, 7);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
+		curl_setopt($ch, CURLOPT_ENCODING, '');
 		curl_setopt($ch, CURLOPT_URL, "http://$addr[4].onion/");
 		$addr=strtolower($addr[4]);
 		$md5=md5($addr, true);
@@ -70,10 +72,14 @@ if(!empty($_REQUEST['addr'])){
 		if($orig=$phishing->fetch(PDO::FETCH_NUM)){
 			printf("<p class=\"red\">$I[testphishing]</p>", "<a href=\"http://$orig[0].onion\">$orig[0].onion</a>");
 		}
-		if(curl_exec($ch)!==false){
+		$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=? AND timediff=0 AND lasttest>?;');
+		$stmt->execute([$md5, time()-60]);
+		if($stmt->fetch(PDO::FETCH_NUM)){
+			echo "<p class=\"green\">$I[testonline]</p>";
+		}elseif(curl_exec($ch)!==false){
 			if(isSet($db)){
 				//update entry in database
-				$stmt=$db->prepare('SELECT * FROM ' . PREFIX . 'onions WHERE md5sum=?;');
+				$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=?;');
 				$stmt->execute([$md5]);
 				if(!$stmt->fetch(PDO::FETCH_NUM)){
 					$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);')->execute([$addr, $md5, time()]);
@@ -93,4 +99,3 @@ if(!empty($_REQUEST['addr'])){
 }
 echo '<br><p style="text-align:center;font-size:small;"><a target="_blank" href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
 echo '</body></html>';
-?>
