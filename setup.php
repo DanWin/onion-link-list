@@ -50,6 +50,7 @@ try{
 }
 if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
 	//create tables
+	$db->exec('CREATE TABLE ' . PREFIX . "captcha (id int(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, time int(10) UNSIGNED NOT NULL, code char(5) NOT NULL) ENGINE=MEMORY;");
 	$db->exec('CREATE TABLE ' . PREFIX . "onions (id int(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, address varchar(56) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL, md5sum binary(16) NOT NULL UNIQUE, lasttest int(10) UNSIGNED NOT NULL DEFAULT '0', lastup int(10) UNSIGNED NOT NULL DEFAULT '0', timediff int(10) UNSIGNED NOT NULL DEFAULT '0', timeadded int(10) UNSIGNED NOT NULL DEFAULT '0', description text CHARACTER SET utf8mb4 NOT NULL, category smallint(6) NOT NULL DEFAULT '0', locked smallint(6) NOT NULL DEFAULT '0', special int(10) UNSIGNED NOT NULL DEFAULT '0', INDEX(address), INDEX(lasttest), INDEX(timediff), INDEX(category), INDEX(special));");
 	$db->exec('CREATE TABLE ' . PREFIX . 'phishing (onion_id int(10) UNSIGNED NOT NULL PRIMARY KEY, original varchar(56) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL, FOREIGN KEY (onion_id) REFERENCES onions(id) ON DELETE CASCADE ON UPDATE CASCADE);');
 	$db->exec('CREATE TABLE ' . PREFIX . 'settings (setting varchar(50) NOT NULL PRIMARY KEY, value varchar(20000) NOT NULL);');
@@ -84,6 +85,9 @@ if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
 	}
 	if($version<4){
 		$db->exec("ALTER TABLE " . PREFIX . "onions CHANGE lasttest lasttest int(10) UNSIGNED NOT NULL DEFAULT '0', CHANGE lastup lastup int(10) UNSIGNED NOT NULL DEFAULT '0', CHANGE timediff timediff int(10) UNSIGNED NOT NULL DEFAULT '0', CHANGE timeadded timeadded int(10) UNSIGNED NOT NULL DEFAULT '0', CHANGE category category smallint(6) NOT NULL DEFAULT '0', CHANGE locked locked smallint(6) NOT NULL DEFAULT '0', CHANGE special special int(10) UNSIGNED NOT NULL DEFAULT '0'");
+	}
+	if($version<5){
+		$db->exec('CREATE TABLE ' . PREFIX . "captcha (id int(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, time int(10) UNSIGNED NOT NULL, code char(5) NOT NULL) ENGINE=MEMORY;");
 	}
 	$stmt=$db->prepare('UPDATE ' . PREFIX . "settings SET value=? WHERE setting='version';");
 	$stmt->execute([DBVERSION]);
