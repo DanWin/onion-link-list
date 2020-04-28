@@ -1,28 +1,9 @@
 <?php
-/*
-* Onion Link List - Admin interface
-*
-* Copyright (C) 2016 Daniel Winzen <d@winzen4.de>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 header('Content-Type: text/html; charset=UTF-8');
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // headers sent, no further processing needed
 }
-include('common_config.php');
+include('../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
@@ -56,7 +37,7 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	if(isSet($_REQUEST['addr'])){
 		echo htmlspecialchars($_REQUEST['addr']);
 	}
-	echo '" required></p>';
+	echo '" required autofocus></p>';
 	echo "<p>$I[cloneof]: <input type=\"text\" name=\"original\" size=\"30\"";
 	if(isSet($_REQUEST['original'])){
 		echo ' value="'.htmlspecialchars($_REQUEST['original']).'"';

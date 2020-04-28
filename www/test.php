@@ -1,27 +1,10 @@
 <?php
-/*
-* Onion Link List - Manual testing of hidden services
-*
-* Copyright (C) 2016 Daniel Winzen <d@winzen4.de>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 header('Content-Type: text/html; charset=UTF-8');
+header('Cache-Control: max-age=600');
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // headers sent, no further processing needed
 }
-include('common_config.php');
+include('../common_config.php');
 echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
@@ -53,17 +36,19 @@ if(!empty($_REQUEST['addr'])){
 	}
 	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 		echo "<p class=\"red\">$I[invalonion]</p>";
-		echo "<p>$I[valid]: http://tt3j2x4k5ycaa5zt.onion</p>";
 	}else{
 		$ch=curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
-		curl_setopt($ch, CURLOPT_PROXY, PROXY);
-		curl_setopt($ch, CURLOPT_PROXYTYPE, 7);
+//		curl_setopt($ch, CURLOPT_PROXY, PROXY);
+//		curl_setopt($ch, CURLOPT_PROXYTYPE, 7);
+		curl_setopt($ch, CURLOPT_HEADER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
 		curl_setopt($ch, CURLOPT_ENCODING, '');
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_URL, "http://$addr[4].onion/");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ["Host: $addr[4].onion", 'User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language: en-US,en;q=0.5', 'Accept-Encoding: gzip, deflate', 'Connection: keep-alive', 'Upgrade-Insecure-Requests: 1']);
 		$addr=strtolower($addr[4]);
 		$md5=md5($addr, true);
 		//display warning, if a phishing clone was tested
@@ -72,11 +57,20 @@ if(!empty($_REQUEST['addr'])){
 		if($orig=$phishing->fetch(PDO::FETCH_NUM)){
 			printf("<p class=\"red\">$I[testphishing]</p>", "<a href=\"http://$orig[0].onion\">$orig[0].onion</a>");
 		}
+		$scam=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=? AND category=15 AND locked=1;');
+		$scam->execute([$md5]);
+		if($scam->fetch(PDO::FETCH_NUM)){
+			echo "<p class=\"red\">Warning: This is a known scam!</p>";
+		}
 		$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=? AND timediff=0 AND lasttest>?;');
+//		$stmt->execute([$md5, time()-6]);
 		$stmt->execute([$md5, time()-60]);
 		if($stmt->fetch(PDO::FETCH_NUM)){
 			echo "<p class=\"green\">$I[testonline]</p>";
-		}elseif(curl_exec($ch)!==false){
+		}elseif(($content=curl_exec($ch))!==false){
+			$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+			$header = substr($content, 0, $header_size);
+			$content = substr($content, $header_size);
 			if(isSet($db)){
 				//update entry in database
 				$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=?;');
@@ -85,6 +79,27 @@ if(!empty($_REQUEST['addr'])){
 					$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);')->execute([$addr, $md5, time()]);
 				}
 				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, lastup=lasttest, timediff=0 WHERE md5sum=?;')->execute([time(), $md5]);
+				if(preg_match('~window\.location\.replace\("http://'.$addr.'.onion/(.*?)"\)~', $content, $matches)){
+					curl_setopt($ch, CURLOPT_URL, "http://$addr.onion/".$matches[1]);
+					$content=curl_exec($ch);
+				}
+				if(preg_match('~^refresh:.*url=(https?://[^;\s]+).*?$~m', $header, $matches)){
+					curl_setopt($ch, CURLOPT_URL, $matches[1]);
+					$content=curl_exec($ch);
+				}
+				if(preg_match_all('~<meta[^>]+http-equiv="refresh"[^>]+content="(\d+);[^>]*url=([^>"]+)">~', $content, $matches, PREG_SET_ORDER)){
+					$time = null;
+					$link_to_check = '';
+					foreach($matches as $match){
+						if($time === null || $time > $match[1]){
+							$time = $match[1];
+							$link_to_check = $match[2];
+						}
+					}
+					curl_setopt($ch, CURLOPT_URL, $link_to_check);
+					$content=curl_exec($ch);
+				}
+				blacklist_scams($addr, $content);
 			}
 			echo "<p class=\"green\">$I[testonline]</p>";
 		}else{

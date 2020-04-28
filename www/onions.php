@@ -2,7 +2,7 @@
 /*
 * Onion Link List - Main listing script
 *
-* Copyright (C) 2016 Daniel Winzen <d@winzen4.de>
+* Copyright (C) 2016 Daniel Winzen <daniel@danwin1210.me>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // ignore headers, no further processing needed
 }
-include('common_config.php');
+include('../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
@@ -58,32 +58,33 @@ function send_html(){
 	}else{
 		$_REQUEST['newpg']=0;
 	}
-	echo '<!DOCTYPE html><html><head>';
+	echo '<!DOCTYPE html><html lang="'.$language.'"><head>';
 	echo "<title>$I[title]</title>";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up td+td+td{background-color:#aaff88;} .down td+td+td{background-color:#ff4444;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset;} #maintable td+td{word-break:break-all;} #maintable td+td+td{word-break:unset;}</style>';
+	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up td+td+td{background-color:#aaff88;} .down td+td+td{background-color:#ff4444;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset;} #maintable td{word-break:break-all;} #maintable td+td+td{word-break:unset;} #maintable tr td:first-child{min-width:16em}</style>';
+	echo '<base rel="noopener" target="_blank">';
 	echo '</head><body>';
 	echo "<h1>$I[title]</h1>";
 	print_langs();
-	echo "<br><small>$I[format]: <a href=\"?format=text\">Text</a> <a href=\"?format=json\">JSON</a></small>";
+	echo "<br><small>$I[format]: <a href=\"?format=text\" target=\"_self\">Text</a> <a href=\"?format=json\" target=\"_self\">JSON</a></small>";
 	if(!isSet($db)){
 		echo "<p><b class=\"red\">$I[error]:</b> $I[nodb]</p>";
 		echo '</body></html>';
 		exit;
 	}
-	echo '<p>I\'m not responsible for any content of websites linked here. Be careful and use your brain.</p>';
+	echo '<p>I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. Every week I get 2-5 E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!</p>';
 	//update onions description form
-	echo "<table><tr valign=\"top\"><td><form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
+	echo "<table><tr valign=\"top\"><td><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<p>$I[addonion]: <br><input name=\"addr\" size=\"30\" placeholder=\"http://$_SERVER[HTTP_HOST]\" value=\"";
+	echo "<p><label>$I[addonion]: <br><input name=\"addr\" size=\"30\" placeholder=\"http://$_SERVER[HTTP_HOST]\" value=\"";
 	if(isSet($_REQUEST['addr'])){
 		echo htmlspecialchars($_REQUEST['addr']);
 	}
-	echo '" required></p>';
-	echo "<p>$I[adddesc]: <br><textarea name=\"desc\" rows=\"2\" cols=\"30\">";
+	echo '" required></label></p>';
+	echo "<p><label>$I[adddesc]: <br><textarea name=\"desc\" rows=\"2\" cols=\"30\">";
 	if(!empty($_REQUEST['desc'])){//use posted description
 		echo htmlspecialchars(trim($_REQUEST['desc']));
 	}elseif(!empty($_REQUEST['addr'])){//fetch description from database
@@ -98,7 +99,7 @@ function send_html(){
 			}
 		}
 	}
-	echo '</textarea></p>';
+	echo '</textarea></label></p>';
 	if(isSet($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
 		settype($_REQUEST['cat'], 'int');
 		$category=$_REQUEST['cat'];
@@ -106,7 +107,7 @@ function send_html(){
 	if(!isSet($category)){
 		$category=count($categories);
 	}
-	echo "<p>$I[category]: <select name=\"cat\">";
+	echo "<p><label>$I[category]: <select name=\"cat\">";
 	foreach($categories as $cat=>$name){
 		echo "<option value=\"$cat\"";
 		if($category==$cat || ($cat===0 && $category>=count($categories))){
@@ -114,19 +115,19 @@ function send_html(){
 		}
 		echo ">$name</option>";
 	}
-	echo '</select></p>';
+	echo '</select></label></p>';
 	send_captcha();
 	echo "<input type=\"submit\" name=\"action\" value=\"$I[update]\"></form></td>";
 	//search from
-	echo "<td><form action=\"$_SERVER[SCRIPT_NAME]\" method=\"post\">";
+	echo "<td><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"post\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<p>$I[search]: <br><input name=\"q\" size=\"30\" placeholder=\"$I[searchterm]\" value=\"";
+	echo "<p><label>$I[search]: <br><input name=\"q\" size=\"30\" placeholder=\"$I[searchterm]\" value=\"";
 	if(isSet($_REQUEST['q'])){
 		echo htmlspecialchars($_REQUEST['q']);
 	}
-	echo '"></p>';
-	echo "<p>$I[category]: <select name=\"cat\">";
+	echo '"></label></p>';
+	echo "<p><label>$I[category]: <select name=\"cat\">";
 	echo '<option value="'.count($categories).'"';
 	if($category>=count($categories)){
 		echo ' selected';
@@ -139,7 +140,7 @@ function send_html(){
 		}
 		echo ">$name</option>";
 	}
-	echo '</select></p>';
+	echo '</select></label></p>';
 	echo '<p><label><input type="checkbox" name="hidelocked" value="1"';
 	if(isset($_REQUEST['hidelocked'])){
 		echo ' checked';
@@ -158,18 +159,18 @@ function send_html(){
 			$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $query;")->fetch(PDO::FETCH_NUM);
 		}
 		if($category==$cat){
-			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
+			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
 			$pages=ceil($num[0]/PER_PAGE);
 		}else{
-			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
+			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
 		}
 		++$cat;
 	}
 	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;")->fetch(PDO::FETCH_NUM);
 	if($category==$cat){
-		echo " <li class=\"active\"><a href=\"?cat=$cat&amp;lang=$language\">$I[phishingclones] ($num[0])</a></li>";
+		echo " <li class=\"active\"><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($num[0])</a></li>";
 	}else{
-		echo " <li><a href=\"?cat=$cat&amp;lang=$language\">$I[phishingclones] ($num[0])</a></li>";
+		echo " <li><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($num[0])</a></li>";
 	}
 	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE address='';")->fetch(PDO::FETCH_NUM);
 	echo " <li>$I[removed] ($num[0])</li></ul><br><br>";
@@ -180,10 +181,10 @@ function send_html(){
 		$stmt->execute([$cat]);
 		$num=$stmt->fetch(PDO::FETCH_NUM);
 		if($category==$cat){
-			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
+			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
 			$pages=ceil($num[0]/PER_PAGE);
 		}else{
-			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\">$name ($num[0])</a></li>";
+			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
 		}
 	}
 	echo '</ul><br><br>';
@@ -228,12 +229,14 @@ function send_html(){
 				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded) VALUES (?, ?, ?, ?, ?);');
 				$stmt->execute([$addr, $desc, $md5, $category, time()]);
 				echo "<p class=\"green\">$I[succadd]</p>";
+//	mail('daniel@tt3j2x4k5ycaa5zt.onion', 'New onion', "$addr.onion was added - $desc", "Content-Type: text/plain; charset=UTF-8\r\n");
 			}elseif($locked==1){//locked, not editable
 				echo "<p class=\"red\">$I[faillocked]</p>";
 			}elseif($desc!==''){//update description
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=? WHERE md5sum=?;');
 				$stmt->execute([$desc, $category, $md5]);
 				echo "<p class=\"green\">$I[succupddesc]</p>";
+//	mail('daniel@tt3j2x4k5ycaa5zt.onion', 'Updated onion', "$addr.onion was updated - $desc", "Content-Type: text/plain; charset=UTF-8\r\n");
 			}elseif($category!=0){//update category only
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=? WHERE md5sum=?;');
 				$stmt->execute([$category, $md5]);
@@ -299,7 +302,7 @@ function send_html(){
 	}
 	echo '<br>';
 	echo $pagination;
-	echo '<br><p style="text-align:center;font-size:small;"><a target="_blank" href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
+	echo '<br><p style="text-align:center;font-size:small;"><a href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
 	echo '</body></html>';
 }
 
@@ -329,7 +332,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 				$lasttest=date('Y-m-d H:i:s', $link['lasttest']);
 			}
 			$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
-			echo "<tr class=\"$class promo\"><td><a href=\"http://$link[address].onion\" target=\"_blank\">$link[address].onion</a></td><td>$link[description]</td><td>-</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form target=\"_blank\" method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input name=\"lang\" value=\"$language\" type=\"hidden\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
+			echo "<tr class=\"$class promo\"><td><a href=\"http://$link[address].onion\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input name=\"lang\" value=\"$language\" type=\"hidden\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
 		}
 	}
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -356,10 +359,10 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 		if($link['locked']==1){
 			$edit='-';
 		}else{
-			$edit="<form target=\"_blank\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[edit]\" type=\"submit\"></form>";
+			$edit="<form><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[edit]\" type=\"submit\"></form>";
 		}
-		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\" target=\"_blank\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td>$edit <form target=\"_blank\" method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
-//		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\" target=\"_blank\">$link[address].onion</a></td><td>$link[description]</td><td>$edit</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form target=\"_blank\" method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
+		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td>$edit <form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
+//		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\">$link[address].onion</a></td><td>$link[description]</td><td>$edit</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
 		++$numrows;
 	}
 	echo '</table>';
@@ -382,7 +385,7 @@ function print_phishing_table(){
 			$lastup=date('Y-m-d H:i:s', $link['lastup']);
 		}
 		if($link['original']!==''){
-			$orig="<a href=\"http://$link[original].onion\" target=\"_blank\">$link[original].onion</a>";
+			$orig="<a href=\"http://$link[original].onion\">$link[original].onion</a>";
 		}else{
 			$orig=$I['unknown'];
 		}
@@ -426,15 +429,15 @@ function get_pagination($category, $pages){
 	ob_start();
 	echo "<ul class=\"list\"><li>$I[pages]:</li>";
 	if($_REQUEST['pg']==0){
-		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\">$I[all]</a></li>";
+		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all]</a></li>";
 	}else{
-		echo " <li><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\">$I[all]</a></li>";
+		echo " <li><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all]</a></li>";
 	}
 	for($i=1; $i<=$pages; ++$i){
 		if($_REQUEST['pg']==$i){
-			echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=$i&amp;lang=$language\">$i</a></li>";
+			echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=$i&amp;lang=$language\" target=\"_self\">$i</a></li>";
 		}else{
-			echo " <li><a href=\"?cat=$category&amp;pg=$i&amp;lang=$language\">$i</a></li>";
+			echo " <li><a href=\"?cat=$category&amp;pg=$i&amp;lang=$language\" target=\"_self\">$i</a></li>";
 		}
 	}
 	echo "</ul><br><br>";
@@ -443,7 +446,7 @@ function get_pagination($category, $pages){
 
 function send_captcha(){
 	global $I, $db, $memcached;
-	$difficulty=2;
+	$difficulty=1;
 	if($difficulty===0 || !extension_loaded('gd')){
 		return;
 	}
@@ -457,14 +460,14 @@ function send_captcha(){
 	$time=time();
 	$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'captcha (id, time, code) VALUES (?, ?, ?);');
 	$stmt->execute([$randid, $time, $code]);
-	echo "<p>Copy: ";
+	echo "<p><label>Copy: ";
 	if($difficulty===1){
 		$im=imagecreatetruecolor(55, 24);
 		$bg=imagecolorallocate($im, 0, 0, 0);
 		$fg=imagecolorallocate($im, 255, 255, 255);
 		imagefill($im, 0, 0, $bg);
 		imagestring($im, 5, 5, 5, $code, $fg);
-		echo '<img width="55" height="24" src="data:image/gif;base64,';
+		echo '<img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
 	}else{
 		$im=imagecreatetruecolor(55, 24);
 		$bg=imagecolorallocate($im, 0, 0, 0);
@@ -479,13 +482,13 @@ function send_captcha(){
 		for($i=0;$i<100;++$i){
 			imagesetpixel($im, mt_rand(0, 55), mt_rand(0, 24), $dots);
 		}
-		echo '<img width="55" height="24" src="data:image/gif;base64,';
+		echo '<img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
 	}
 	ob_start();
 	imagegif($im);
 	imagedestroy($im);
 	echo base64_encode(ob_get_clean()).'">';
-	echo "<input type=\"hidden\" name=\"challenge\" value=\"$randid\"><input type=\"text\" name=\"captcha\" size=\"15\" autocomplete=\"off\"></p>";
+	echo "<input type=\"hidden\" name=\"challenge\" value=\"$randid\"><input type=\"text\" name=\"captcha\" size=\"15\" autocomplete=\"off\"></label></p>";
 }
 
 function send_error($msg){

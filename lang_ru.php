@@ -1,9 +1,29 @@
 <?php
-$I=[
+/*
+* Onion Link List - Russian translation
+*
+* Copyright (C) 2016 Daniel Winzen <daniel@danwin1210.me>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+//Native language name: Русский
+$T=[
 	'all'		=>	'All',
 	'lastadded'	=>	'Last added',
 	'offline'	=>	'Offline > 1 week',
-	'removed'	=>	'Removed/Child porn',
+	'removed'	=>	'Removed',
 	'phishingclones'=>	'Phishing Clones',
 	'title'		=>	'Onion link list',
 	'error'		=>	'ERROR',
@@ -66,5 +86,11 @@ $I=[
 	'unknown'	=>	'Unknown',
 	'language'	=>	'Language',
 	'format'	=>	'Format',
-	'hidelocked'	=>	'Hide locked',
+	'pdo_mysqlextrequired' => 'The pdo_mysql extension of PHP is required. Please install it first.',
+	'pcreextrequired' => 'The pcre extension of PHP is required. Please install it first.',
+	'jsonextrequired' => 'The json extension of PHP is required. Please install it first.',
+	'curlextrequired' => 'The curl extension of PHP is required. Please install it first.',
+	'dateextrequired' => 'The date extension of PHP is required. Please install it first.',
+	'succdbcreate'	=>	'The database has successfully been created!',
+	'statusok'	=>	'Status: OK',
 ];
