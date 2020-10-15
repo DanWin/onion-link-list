@@ -14,7 +14,7 @@ echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[admintitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name=viewport content="width=device-width, initial-scale=1">';
-echo '<style type="text/css">.red{color:red} .green{color:green}</style>';
+echo '<style type="text/css">.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}</style>';
 echo '</head><body>';
 echo "<h1>$I[admintitle]</h1>";
 print_langs();
@@ -79,7 +79,7 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		echo ">$name</option>";
 	}
 	echo '</select></p>';
-	echo '<input style="display:none;" type="submit" name="action" value="None">';
+	echo '<input type="submit" name="action" value="None" hidden>';
 	echo '<table><tr>';
 	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[remove]\"></td>";
 	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[lock]\"></td>";
@@ -184,5 +184,5 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		}
 	}
 }
-echo '<br><p style="text-align:center;font-size:small;"><a target="_blank" href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
+echo '<br><p class="software-link"><a target="_blank" href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
 echo '</body></html>';

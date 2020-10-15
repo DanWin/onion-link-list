@@ -111,5 +111,5 @@ if(!empty($_REQUEST['addr'])){
 		curl_close($ch);
 	}
 }
-echo '<br><p style="text-align:center;font-size:small;"><a target="_blank" href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
+echo '<br><p class="software-link"><a target="_blank" href="https://github.com/DanWin/onion-link-list" rel="noopener">Onion Link List - ' . VERSION . '</a></p>';
 echo '</body></html>';

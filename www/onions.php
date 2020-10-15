@@ -65,7 +65,7 @@ function send_html(){
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-	echo '<style type="text/css">.red{color:red} .green{color:green} .up td+td+td{background-color:#aaff88} .down td+td+td{background-color:#ff4444} .promo{outline:medium solid #FFD700} .list{display: inline-block; padding: 0; margin: 0} .list li{display:inline} .active{font-weight:bold} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset} #maintable td{word-break:break-all} #maintable td+td+td{word-break:unset} #maintable tr td:first-child{min-width:16em}</style>';
+	echo '<style type="text/css">.red{color:red} .green{color:green} .up td+td+td{background-color:#aaff88} .down td+td+td{background-color:#ff4444} .promo{outline:medium solid #FFD700} .list{display: inline-block; padding: 0; margin: 0} .list li{display:inline} .active{font-weight:bold} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset} #maintable td{word-break:break-all} #maintable td+td+td{word-break:unset} #maintable tr td:first-child{min-width:16em} .software-link{text-align:center;font-size:small}</style>';
 	echo '<base rel="noopener" target="_blank">';
 	echo '</head><body>';
 	echo "<h1>$I[title]</h1>";
@@ -304,7 +304,7 @@ function send_html(){
 	}
 	echo '<br>';
 	echo $pagination;
-	echo '<br><p style="text-align:center;font-size:small;"><a href="https://github.com/DanWin/onion-link-list">Onion Link List - ' . VERSION . '</a></p>';
+	echo '<br><p class="software-link"><a href="https://github.com/DanWin/onion-link-list" target="_blank" rel="noopener">Onion Link List - ' . VERSION . '</a></p>';
 	echo '</body></html>';
 }
 
@@ -494,5 +494,5 @@ function send_captcha(){
 }
 
 function send_error($msg){
-	die("<p style=\"color:red;\">$msg</p></div></body></html>");
+	die("<p class=\"red\">$msg</p></div></body></html>");
 }
