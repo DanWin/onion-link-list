@@ -1,5 +1,5 @@
 <?php
-$I=[
+$T=[
 	'all'		=>	'Tümü',
 	'lastadded'	=>	'Son eklenen',
 	'offline'	=>	'Çevrimdışı > 1 hafta',
