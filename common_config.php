@@ -44,7 +44,9 @@ $I = [];
 $L=[
 	'de' => 'Deutsch',
 	'en' => 'English',
-	'ja' => '日本語'
+	'ja' => '日本語',
+	'ru' => 'Русский',
+	'tr' => 'Türkçe',
 ];
 if(isSet($_REQUEST['lang']) && isSet($L[$_REQUEST['lang']])){
 	$language=$_REQUEST['lang'];
