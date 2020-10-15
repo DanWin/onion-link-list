@@ -10,7 +10,7 @@ $ch=curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
 curl_setopt($ch, CURLOPT_PROXY, PROXY);
-curl_setopt($ch, CURLOPT_PROXYTYPE, 7);
+curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 25);
 curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 curl_setopt($ch, CURLOPT_ENCODING, '');
@@ -55,7 +55,7 @@ function check_links(&$onions, &$ch, $link_to_check, $scan_children = false, &$s
 				curl_setopt($ch_child, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch_child, CURLOPT_USERAGENT, USERAGENT);
 				curl_setopt($ch_child, CURLOPT_PROXY, PROXY);
-				curl_setopt($ch_child, CURLOPT_PROXYTYPE, 7);
+				curl_setopt($ch_child, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
 				curl_setopt($ch_child, CURLOPT_CONNECTTIMEOUT, 25);
 				curl_setopt($ch_child, CURLOPT_TIMEOUT, 30);
 				curl_setopt($ch_child, CURLOPT_ENCODING, '');
