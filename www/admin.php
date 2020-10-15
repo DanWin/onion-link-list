@@ -1,9 +1,7 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
-if($_SERVER['REQUEST_METHOD']==='HEAD'){
-	exit; // headers sent, no further processing needed
-}
 require_once('../common_config.php');
+$style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}';
+send_headers([$style]);
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
@@ -14,7 +12,7 @@ echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[admintitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name=viewport content="width=device-width, initial-scale=1">';
-echo '<style type="text/css">.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}</style>';
+echo '<style type="text/css">'.$style.'</style>';
 echo '</head><body>';
 echo "<h1>$I[admintitle]</h1>";
 print_langs();

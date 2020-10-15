@@ -1,16 +1,13 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
-header('Cache-Control: max-age=600');
-if($_SERVER['REQUEST_METHOD']==='HEAD'){
-	exit; // headers sent, no further processing needed
-}
 require_once('../common_config.php');
+$style = '.red{color:red} .green{color:green}';
+send_headers([$style]);
 echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name="author" content="Daniel Winzen">';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-echo '<style type="text/css">.red{color:red} .green{color:green}</style>';
+echo '<style type="text/css">'.$style.'</style>';
 echo '</head><body>';
 echo '<h1>Online-Test</h1>';
 print_langs();
