@@ -43,7 +43,7 @@ elseif(preg_match('~^HTTP/1\.1\s500\sInternal\sServer\sError\r\n~', $header) && 
 $move->execute($tmp);
 echo " - SCAM - moved";
 }
-elseif(preg_match('~^HTTP/1\.1\s500\sInternal\sServer\sError\r\n~', $header) && $body==='' && preg_match('~Connection:\s\[object\sObject\]\r\n~', $header2)){
+elseif(preg_match('~^HTTP/1\.1\s500\sInternal\sServer\sError\r\n~', $header) && $body==='' && preg_match('~Connection:\s\[object\sObject]\r\n~', $header2)){
 $move->execute($tmp);
 echo " - SCAM - moved";
 }

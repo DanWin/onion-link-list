@@ -18,6 +18,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+use JetBrains\PhpStorm\ExitPoint;
+
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // ignore headers, no further processing needed
 }
@@ -63,7 +65,7 @@ function send_html(){
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-	echo '<style type="text/css">.red{color:red;} .green{color:green;} .up td+td+td{background-color:#aaff88;} .down td+td+td{background-color:#ff4444;} .promo{outline:medium solid #FFD700;} .list{display: inline-block; padding: 0px; margin: 0px;} .list li{display:inline;} .active{font-weight:bold;} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset;} #maintable td{word-break:break-all;} #maintable td+td+td{word-break:unset;} #maintable tr td:first-child{min-width:16em}</style>';
+	echo '<style type="text/css">.red{color:red} .green{color:green} .up td+td+td{background-color:#aaff88} .down td+td+td{background-color:#ff4444} .promo{outline:medium solid #FFD700} .list{display: inline-block; padding: 0; margin: 0} .list li{display:inline} .active{font-weight:bold} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset} #maintable td{word-break:break-all} #maintable td+td+td{word-break:unset} #maintable tr td:first-child{min-width:16em}</style>';
 	echo '<base rel="noopener" target="_blank">';
 	echo '</head><body>';
 	echo "<h1>$I[title]</h1>";
@@ -445,7 +447,7 @@ function get_pagination($category, $pages){
 }
 
 function send_captcha(){
-	global $I, $db, $memcached;
+	global $db;
 	$difficulty=1;
 	if($difficulty===0 || !extension_loaded('gd')){
 		return;

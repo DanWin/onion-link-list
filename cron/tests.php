@@ -73,7 +73,7 @@ foreach($curl_handles as $handle){
 		}
 		$stmt->execute([$onion['id']]);
 		if(!$stmt->fetch(PDO::FETCH_NUM)){
-			if(preg_match('~^HTTP/1\.(1|0) 504 Connect to ([a-z2-7]{16}|[a-z2-7]{56})\.onion(:80)? failed: SOCKS error: host unreachable~', $content, $match)){
+			if(preg_match('~^HTTP/1\.[10] 504 Connect to ([a-z2-7]{16}|[a-z2-7]{56})\.onion(:80)? failed: SOCKS error: host unreachable~', $content, $match)){
 				$phishing_stmt->execute([$onion['id'], $match[2]]);
 			}elseif(strpos($content, "<body>HttpReadDisconnect('Server disconnected',)</body>")!==false){
 				$phishing_stmt->execute([$onion['id'], '']);
