@@ -2,7 +2,7 @@
 /*
 * Onion Link List - Setup
 *
-* Copyright (C) 2016 Daniel Winzen <daniel@danwin1210.me>
+* Copyright (C) 2016-2020 Daniel Winzen <daniel@danwin1210.me>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-include('common_config.php');
+require_once('common_config.php');
 if(!extension_loaded('pdo_mysql')){
 	die($I['pdo_mysqlextrequired']);
 }

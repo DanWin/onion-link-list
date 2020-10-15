@@ -4,7 +4,7 @@ header('Cache-Control: max-age=600');
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // headers sent, no further processing needed
 }
-include('../common_config.php');
+require_once('../common_config.php');
 echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
@@ -63,7 +63,6 @@ if(!empty($_REQUEST['addr'])){
 			echo "<p class=\"red\">Warning: This is a known scam!</p>";
 		}
 		$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=? AND timediff=0 AND lasttest>?;');
-//		$stmt->execute([$md5, time()-6]);
 		$stmt->execute([$md5, time()-60]);
 		if($stmt->fetch(PDO::FETCH_NUM)){
 			echo "<p class=\"green\">$I[testonline]</p>";

@@ -68,4 +68,3 @@ $T=[
 	'format'	=>	'Format',
 	'hidelocked'	=>	'Gesperrte nicht anzeigen',
 ];
-?>

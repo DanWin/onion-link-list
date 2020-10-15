@@ -2,7 +2,7 @@
 /*
 * Onion Link List - Configuration
 *
-* Copyright (C) 2016 Daniel Winzen <daniel@danwin1210.me>
+* Copyright (C) 2016-2020 Daniel Winzen <daniel@danwin1210.me>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@ $categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Forums', 'Hackin
 
 
 // Language selection
+$I = [];
 $L=[
 	'de' => 'Deutsch',
 	'en' => 'English',

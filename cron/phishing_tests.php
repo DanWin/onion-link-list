@@ -1,7 +1,7 @@
 <?php
 // Executed every 25 hours via cron - checks for phishing clones on known phishing sites.
 date_default_timezone_set('UTC');
-include('../common_config.php');
+require_once('../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
