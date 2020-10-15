@@ -1,5 +1,5 @@
 <?php
-require_once('../common_config.php');
+require_once(__DIR__.'/../common_config.php');
 $style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}';
 send_headers([$style]);
 try{
