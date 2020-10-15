@@ -19,18 +19,18 @@ $scanned_onions=[];
 
 //sources to get links from
 check_links($onions, $ch, 'http://q3lgwxinynjxkor6wghr6hrhlix7fquja3t25phbagqizkpju36fwdyd.onion/list.php');
-check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.to/antanistaticmap/stats/yesterday');
-check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.tor2web.org/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.link/antanistaticmap/stats/yesterday');
-check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.rip/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.sh/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.tor2web.io/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'http://visitorfi5kl7q7i.onion/address/');
-check_links($onions, $ch, 'https://onion.cab/list.php?a=list');
 check_links($onions, $ch, 'http://dhosting4xxoydyaivckq7tsmtgi4wfs3flpeyitekkmqwu4v4r46syd.onion/list.php');
 check_links($onions, $ch, 'http://3bbaaaccczcbdddz.onion/discover');
 check_links($onions, $ch, 'http://tor66sezptuu2nta.onion/fresh');
-check_links($onions, $ch, 'https://crt.sh/?q=%25.onion');
+check_links($onions, $ch, 'https://crt.sh/?q=.onion&exclude=expired&deduplicate=Y');
+check_links($onions, $ch, 'http://darkeyeb643f2syd.onion/');
+check_links($onions, $ch, 'http://darktorhvabc652txfc575oendhykqcllb7bh7jhhsjduocdlyzdbmqd.onion/hidden-wiki-onion-deepweb-tor-links-darknet.html');
+check_links($onions, $ch, 'http://vladhz5tmikfgxzfa2nk7nxah7x5msa5z5ygb75xb5nsizmeht2dazyd.onion/list.php');
+check_links($onions, $ch, 'http://raptortiabg7uyez.onion/');
 
 //add them to the database
 add_onions($onions, $db);
