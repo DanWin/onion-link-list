@@ -123,7 +123,7 @@ function send_headers(array $styles = []){
 	foreach($styles as $style) {
 		$style_hashes .= " 'sha256-".base64_encode(hash('sha256', $style, true))."'";
 	}
-	header("Content-Security-Policy: default-src 'none'; font-src 'self'; form-action 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'$style_hashes");
+	header("Content-Security-Policy: default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; style-src 'self'$style_hashes");
 	header('X-Content-Type-Options: nosniff');
 	header('X-Frame-Options: sameorigin');
 	header('X-XSS-Protection: 1; mode=block');
