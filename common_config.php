@@ -69,7 +69,7 @@ if($language!=='en'){
 function print_langs(){
 	global $I, $L;
 	echo "<small>$I[language]: ";
-	$query=preg_replace('/(&?lang=[a-z_\-]*)/i', '', $_SERVER['QUERY_STRING']);
+	$query=ltrim(preg_replace('/&?lang=[a-z_\-]*/i', '', $_SERVER['QUERY_STRING']), '&');
 	foreach($L as $code=>$name){
 		if($query===''){
 			$uri="?lang=$code";
