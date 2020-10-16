@@ -18,8 +18,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-use JetBrains\PhpStorm\ExitPoint;
-
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // ignore headers, no further processing needed
 }
@@ -158,11 +156,15 @@ function send_html(){
 	echo "<ul class=\"list\"><li>$I[specialcat]:</li>";
 	$cat=count($categories);
 	$pages=1;
+	$admin_approval = '';
+	if(REQUIRE_APPROVAL){
+		$admin_approval = PREFIX . 'onions.approved = 1 AND';
+	}
 	foreach($special as $name=>$query){
 		if($cat===count($categories)+1){
 			$num[0]=PER_PAGE;
 		}else{
-			$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $query;")->fetch(PDO::FETCH_NUM);
+			$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval $query;")->fetch(PDO::FETCH_NUM);
 		}
 		if($category==$cat){
 			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
@@ -172,17 +174,24 @@ function send_html(){
 		}
 		++$cat;
 	}
-	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;")->fetch(PDO::FETCH_NUM);
+	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;")->fetch(PDO::FETCH_NUM);
 	if($category==$cat){
 		echo " <li class=\"active\"><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($num[0])</a></li>";
 	}else{
 		echo " <li><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($num[0])</a></li>";
 	}
 	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE address='';")->fetch(PDO::FETCH_NUM);
-	echo " <li>$I[removed] ($num[0])</li></ul><br><br>";
+	echo " <li>$I[removed] ($num[0])</li>";
+	if(REQUIRE_APPROVAL) {
+		$num = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = 0 AND address!='';" )->fetch( PDO::FETCH_NUM );
+		echo " <li>$I[pendingapproval] ($num[0])</li>";
+		$num = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = -1 AND address!='';" )->fetch( PDO::FETCH_NUM );
+		echo " <li>$I[rejected] ($num[0])</li>";
+	}
+	echo '</ul><br><br>';
 	//List normal categories
 	echo "<ul class=\"list\"><li>$I[categories]:</li>";
-	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
+	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
 	foreach($categories as $cat=>$name){
 		$stmt->execute([$cat]);
 		$num=$stmt->fetch(PDO::FETCH_NUM);
@@ -235,14 +244,12 @@ function send_html(){
 				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded) VALUES (?, ?, ?, ?, ?);');
 				$stmt->execute([$addr, $desc, $md5, $category, time()]);
 				echo "<p class=\"green\">$I[succadd]</p>";
-//	mail('daniel@tt3j2x4k5ycaa5zt.onion', 'New onion', "$addr.onion was added - $desc", "Content-Type: text/plain; charset=UTF-8\r\n");
 			}elseif($locked==1){//locked, not editable
 				echo "<p class=\"red\">$I[faillocked]</p>";
 			}elseif($desc!==''){//update description
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=? WHERE md5sum=?;');
 				$stmt->execute([$desc, $category, $md5]);
 				echo "<p class=\"green\">$I[succupddesc]</p>";
-//	mail('daniel@tt3j2x4k5ycaa5zt.onion', 'Updated onion', "$addr.onion was updated - $desc", "Content-Type: text/plain; charset=UTF-8\r\n");
 			}elseif($category!=0){//update category only
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=? WHERE md5sum=?;');
 				$stmt->execute([$category, $md5]);
@@ -267,10 +274,10 @@ function send_html(){
 			$hidelocked='';
 		}
 		if($category>=count($categories)){
-			$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND timediff<604800 $hidelocked AND (description LIKE ? OR address LIKE ?) ORDER BY address;");
+			$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND timediff<604800 $hidelocked AND (description LIKE ? OR address LIKE ?) ORDER BY address;");
 			$stmt->execute([$query, $query]);
 		}else{
-			$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND category=? AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND timediff<604800 $hidelocked AND (description LIKE ? OR address LIKE ?) ORDER BY address;");
+			$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval address!='' AND category=? AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND timediff<604800 $hidelocked AND (description LIKE ? OR address LIKE ?) ORDER BY address;");
 			$stmt->execute([$category, $query, $query]);
 		}
 		$table=get_table($stmt, $numrows);
@@ -293,7 +300,7 @@ function send_html(){
 				$query.=' LIMIT ' . PER_PAGE ." OFFSET $offset";
 			}
 		}
-		$stmt=$db->query('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $query;");
+		$stmt=$db->query('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval $query;");
 		echo get_table($stmt, $numrows, true);
 	}else{//show normal categories
 		if($_REQUEST['pg']>0){
@@ -302,7 +309,7 @@ function send_html(){
 		}else{
 			$offsetquery='';
 		}
-		$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND category=? AND timediff<604800 ORDER BY address$offsetquery;");
+		$stmt=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . "phishing) AND category=? AND timediff<604800 ORDER BY address$offsetquery;");
 		$stmt->execute([$category]);
 		echo get_table($stmt, $numrows, true);
 	}
@@ -315,11 +322,15 @@ function send_html(){
 function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 	global $I, $db, $language;
 	$time=time();
+	$admin_approval = '';
+	if(REQUIRE_APPROVAL){
+		$admin_approval = PREFIX . 'onions.approved = 1 AND';
+	}
 	ob_start();
 	echo "<table id=\"maintable\" border=\"1\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[actions]</th></tr>";
 	if($promoted){//print promoted links at the top
 		$time=time();
-		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
+		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
 		$promo->execute([$time]);
 		while($link=$promo->fetch(PDO::FETCH_ASSOC)){
 			if($link['lastup']===$link['lasttest']){
@@ -368,7 +379,6 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 			$edit="<form><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[edit]\" type=\"submit\"></form>";
 		}
 		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td>$edit <form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
-//		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\">$link[address].onion</a></td><td>$link[description]</td><td>$edit</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
 		++$numrows;
 	}
 	echo '</table>';
@@ -377,8 +387,12 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 
 function print_phishing_table(){
 	global $I, $db;
+	$admin_approval = '';
+	if(REQUIRE_APPROVAL){
+		$admin_approval = 'approved = 1 AND';
+	}
 	echo "<table border=\"1\"><tr><th>$I[link]</th><th>$I[cloneof]</th><th>$I[lastup]</th></tr>";
-	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800 ORDER BY address;");
+	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800 ORDER BY address;");
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
 		if($link['lastup']===$link['lasttest']){
 			$class='up';
@@ -406,7 +420,11 @@ function send_text(){
 		die("$I[error]: $I[nodb]");
 	}
 	header('Content-Type: text/plain; charset=UTF-8');
-	$stmt=$db->query('SELECT address FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
+	$admin_approval = '';
+	if(REQUIRE_APPROVAL){
+		$admin_approval = 'approved = 1 AND';
+	}
+	$stmt=$db->query('SELECT address FROM ' . PREFIX . "onions WHERE $admin_approval address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
 	while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
 		echo "$tmp[0].onion\n";
 	}
@@ -418,14 +436,18 @@ function send_json(){
 		die("$I[error]: $I[nodb]");
 	}
 	header('Content-Type: application/json;');
+	$admin_approval = '';
+	if(REQUIRE_APPROVAL){
+		$admin_approval = PREFIX . 'onions.approved = 1 AND';
+	}
 	$data=['categories'=>$categories];
-	$stmt=$db->query('SELECT address, category, description, locked, lastup, lasttest, timeadded FROM ' . PREFIX . "onions WHERE address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
+	$stmt=$db->query('SELECT address, category, description, locked, lastup, lasttest, timeadded FROM ' . PREFIX . "onions WHERE $admin_approval address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
 	$data['onions']=$stmt->fetchALL(PDO::FETCH_ASSOC);
 	$stmt=$db->query('SELECT md5sum FROM ' . PREFIX . "onions WHERE address='';");
 	while($tmp=$stmt->fetch(PDO::FETCH_ASSOC)){
 		$data['removed'][]=bin2hex($tmp['md5sum']);
 	}
-	$stmt=$db->query('SELECT address, original FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE onion_id=' . PREFIX . "onions.id AND address!='' AND timediff<604800 ORDER BY address;");
+	$stmt=$db->query('SELECT address, original FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE onion_id=' . PREFIX . "onions.id AND $admin_approval address!='' AND timediff<604800 ORDER BY address;");
 	$data['phishing']=$stmt->fetchALL(PDO::FETCH_ASSOC);
 	echo json_encode($data);
 }

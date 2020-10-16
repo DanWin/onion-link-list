@@ -67,4 +67,9 @@ $T=[
 	'language'	=>	'Sprache',
 	'format'	=>	'Format',
 	'hidelocked'	=>	'Gesperrte nicht anzeigen',
+	'pendingapproval'   =>    'Genehmigung ausstehend',
+	'rejected'  =>  'Abgelehnt',
+	'reject'    =>  'Ablehnen',
+	'approve'   =>  'Akzeptieren',
+	'switchviewmode' => 'Ansichtsmodus wechseln',
 ];

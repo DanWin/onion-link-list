@@ -67,4 +67,9 @@ $I=[
 	'language'	=>	'Language',
 	'format'	=>	'Format',
 	'hidelocked'	=>	'Hide locked',
+	'pendingapproval'    => 'Pending approval',
+	'rejected'  =>  'Rejected',
+	'reject'    =>  'Reject',
+	'approve'   =>  'Approve',
+	'switchviewmode' => 'Switch view mode',
 ];
