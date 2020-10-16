@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/../common_config.php');
-$style = '.red{color:red} .green{color:green}';
+$style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}';
 send_headers([$style]);
 echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[testtitle]</title>";
