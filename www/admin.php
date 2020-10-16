@@ -12,6 +12,7 @@ echo '<!DOCTYPE html><html><head>';
 echo "<title>$I[admintitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name=viewport content="width=device-width, initial-scale=1">';
+echo '<meta name="robots" content="noindex">';
 echo '<style type="text/css">'.$style.'</style>';
 echo '</head><body>';
 echo "<h1>$I[admintitle]</h1>";

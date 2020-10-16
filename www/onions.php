@@ -69,6 +69,7 @@ function send_html(){
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+	echo '<meta name="description" content="Huge link list of Tor hidden service onions. All the darknet links you need in one place.">';
 	echo '<style type="text/css">'.$style.'</style>';
 	echo '<base rel="noopener" target="_blank">';
 	echo '</head><body>';

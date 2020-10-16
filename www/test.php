@@ -7,6 +7,7 @@ echo "<title>$I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name="author" content="Daniel Winzen">';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+echo '<meta name="description" content="Test whether a Tor hidden service onion is online or offline">';
 echo '<style type="text/css">'.$style.'</style>';
 echo '</head><body>';
 echo '<h1>Online-Test</h1>';
