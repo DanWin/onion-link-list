@@ -40,6 +40,7 @@ if(!isset($_REQUEST['format'])){
 
 function send_html(){
 	global $I, $categories, $db, $language;
+	$numrows = 0;
 	$style = '.red{color:red} .green{color:green} .up td+td+td{background-color:#aaff88} .down td+td+td{background-color:#ff4444}';
 	$style .= '.promo{outline:medium solid #FFD700} .list{display: inline-block; padding: 0; margin: 0} .list li{display:inline}';
 	$style .= '.active{font-weight:bold} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset} #maintable td{word-break:break-all}';
