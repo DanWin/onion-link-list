@@ -32,7 +32,7 @@ const LANG = 'en'; // Default language
 const PROMOTEPRICE = 0.025; // Price to promote a site for PROMOTETIME long
 const PROMOTETIME = 2592000; // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
 const PER_PAGE = 50; // Sites listed per page
-const VERSION = '1'; // Script version
+const VERSION = '1.1'; // Script version
 const DBVERSION = 6; // Database layout version
 const REQUIRE_APPROVAL = false; // require admin approval of new sites? true/false
 //Categories - new links will always be put into the first one, leave it to Unsorted
