@@ -51,7 +51,7 @@ $L=[
 if(isSet($_REQUEST['lang']) && isSet($L[$_REQUEST['lang']])){
 	$language=$_REQUEST['lang'];
 	if(!isSet($_COOKIE['language']) || $_COOKIE['language']!==$language){
-		setcookie('language', $language);
+		set_secure_cookie('language', $language);
 	}
 }elseif(isSet($_COOKIE['language']) && isSet($L[$_COOKIE['language']])){
 	$language=$_COOKIE['language'];
@@ -130,4 +130,25 @@ function send_headers(array $styles = []){
 	if($_SERVER['REQUEST_METHOD'] === 'HEAD'){
 		exit; // headers sent, no further processing needed
 	}
+}
+
+function set_secure_cookie($name, $value){
+	if (version_compare(PHP_VERSION, '7.3.0') >= 0) {
+		setcookie($name, $value, ['expires' => 0, 'path' => '/', 'domain' => '', 'secure' => is_definitely_ssl(), 'httponly' => true, 'samesite' => 'Strict']);
+	}else{
+		setcookie($name, $value, 0, '/', '', is_definitely_ssl(), true);
+	}
+}
+
+function is_definitely_ssl() {
+	if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+		return true;
+	}
+	if (isset($_SERVER['SERVER_PORT']) && ('443' == $_SERVER['SERVER_PORT'])) {
+		return true;
+	}
+	if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && ('https' === $_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+		return true;
+	}
+	return false;
 }
