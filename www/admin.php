@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/../common_config.php');
-$style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}';
+$style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small} #maintable ,#maintable th,#maintable td{border: 1px solid black}';
 send_headers([$style]);
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
@@ -48,7 +48,7 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		}
 		echo '" required autofocus></p>';
 	} else {
-		echo '<table border="1"><tr><th>Select</th><th>Address</th><th>Description</th><th>Category</th><th>Status</th></tr>';
+		echo '<table id="maintable"><tr><th>Select</th><th>Address</th><th>Description</th><th>Category</th><th>Status</th></tr>';
 		$stmt=$db->query('SELECT address, description, category, approved, locked FROM ' . PREFIX . "onions WHERE address!='';");
 		while($onion = $stmt->fetch(PDO::FETCH_ASSOC)){
 			echo '<tr><td><input type="checkbox" name="addr[]" value="'.$onion['address'].'"></td><td><a href="http://'.$onion['address'].'.onion" rel="noopener">'.$onion['address'].'.onion</a></td>';

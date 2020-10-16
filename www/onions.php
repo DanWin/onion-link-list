@@ -44,6 +44,7 @@ function send_html(){
 	$style .= '.promo{outline:medium solid #FFD700} .list{display: inline-block; padding: 0; margin: 0} .list li{display:inline}';
 	$style .= '.active{font-weight:bold} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset} #maintable td{word-break:break-all}';
 	$style .= '#maintable td+td+td{word-break:unset} #maintable tr td:first-child{min-width:16em} .software-link{text-align:center;font-size:small}';
+	$style .= '#maintable ,#maintable th,#maintable td{border: 1px solid black} #edit-search td{vertical-align:top}';
 	send_headers([$style]);
 	asort($categories);
 	//sql for special categories
@@ -80,7 +81,7 @@ function send_html(){
 	}
 	echo '<p>I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. Every week I get 2-5 E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!</p>';
 	//update onions description form
-	echo "<table><tr valign=\"top\"><td><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"POST\">";
+	echo "<table id=\"edit-search\"><tr><td><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p><label>$I[addonion]: <br><input name=\"addr\" size=\"30\" placeholder=\"http://$_SERVER[HTTP_HOST]\" value=\"";
@@ -327,7 +328,7 @@ function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
 		$admin_approval = PREFIX . 'onions.approved = 1 AND';
 	}
 	ob_start();
-	echo "<table id=\"maintable\" border=\"1\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[actions]</th></tr>";
+	echo "<table id=\"maintable\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[actions]</th></tr>";
 	if($promoted){//print promoted links at the top
 		$time=time();
 		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
@@ -391,7 +392,7 @@ function print_phishing_table(){
 	if(REQUIRE_APPROVAL){
 		$admin_approval = 'approved = 1 AND';
 	}
-	echo "<table border=\"1\"><tr><th>$I[link]</th><th>$I[cloneof]</th><th>$I[lastup]</th></tr>";
+	echo "<table id=\"maintable\"><tr><th>$I[link]</th><th>$I[cloneof]</th><th>$I[lastup]</th></tr>";
 	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800 ORDER BY address;");
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
 		if($link['lastup']===$link['lasttest']){
