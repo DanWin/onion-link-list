@@ -53,7 +53,7 @@ function send_html(){
 		$I['lastadded']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
 		$I['offline']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
-	if(!isSet($_REQUEST['pg'])){
+	if(!isset($_REQUEST['pg'])){
 		$_REQUEST['pg']=1;
 	}else{
 		settype($_REQUEST['pg'], 'int');
@@ -74,7 +74,7 @@ function send_html(){
 	echo "<h1>$I[title]</h1>";
 	print_langs();
 	echo "<br><small>$I[format]: <a href=\"?format=text\" target=\"_self\">Text</a> <a href=\"?format=json\" target=\"_self\">JSON</a></small>";
-	if(!isSet($db)){
+	if(!isset($db)){
 		echo "<p><b class=\"red\">$I[error]:</b> $I[nodb]</p>";
 		echo '</body></html>';
 		exit;
@@ -85,7 +85,7 @@ function send_html(){
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p><label>$I[addonion]: <br><input name=\"addr\" size=\"30\" placeholder=\"http://$_SERVER[HTTP_HOST]\" value=\"";
-	if(isSet($_REQUEST['addr'])){
+	if(isset($_REQUEST['addr'])){
 		echo htmlspecialchars($_REQUEST['addr']);
 	}
 	echo '" required></label></p>';
@@ -105,11 +105,11 @@ function send_html(){
 		}
 	}
 	echo '</textarea></label></p>';
-	if(isSet($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
+	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
 		settype($_REQUEST['cat'], 'int');
 		$category=$_REQUEST['cat'];
 	}
-	if(!isSet($category)){
+	if(!isset($category)){
 		$category=count($categories);
 	}
 	echo "<p><label>$I[category]: <select name=\"cat\">";
@@ -128,7 +128,7 @@ function send_html(){
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p><label>$I[search]: <br><input name=\"q\" size=\"30\" placeholder=\"$I[searchterm]\" value=\"";
-	if(isSet($_REQUEST['q'])){
+	if(isset($_REQUEST['q'])){
 		echo htmlspecialchars($_REQUEST['q']);
 	}
 	echo '"></label></p>';
@@ -234,7 +234,7 @@ function send_html(){
 			if($category==count($categories)){
 				$category=0;
 			}
-			if(!isSet($_POST['desc'])){
+			if(!isset($_POST['desc'])){
 				$desc='';
 			}else{
 				$desc=trim($_POST['desc']);
@@ -288,6 +288,7 @@ function send_html(){
 		print_phishing_table();
 	}elseif($category>=count($categories)){//show special categories
 		$tmp=$category-count($categories);
+		$query = '';
 		foreach($special as $name=>$query){
 			if($tmp===0) break;
 			--$tmp;
@@ -320,7 +321,7 @@ function send_html(){
 	echo '</body></html>';
 }
 
-function get_table(PDOStatement $stmt, &$numrows=0, $promoted=false){
+function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false) : string {
 	global $I, $db, $language;
 	$time=time();
 	$admin_approval = '';
@@ -417,7 +418,7 @@ function print_phishing_table(){
 
 function send_text(){
 	global $I, $db;
-	if(!isSet($db)){
+	if(!isset($db)){
 		die("$I[error]: $I[nodb]");
 	}
 	header('Content-Type: text/plain; charset=UTF-8');
@@ -433,7 +434,7 @@ function send_text(){
 
 function send_json(){
 	global $I, $db, $categories;
-	if(!isSet($db)){
+	if(!isset($db)){
 		die("$I[error]: $I[nodb]");
 	}
 	header('Content-Type: application/json;');
@@ -453,7 +454,7 @@ function send_json(){
 	echo json_encode($data);
 }
 
-function get_pagination($category, $pages){
+function get_pagination(int $category, int $pages) : string {
 	global $I, $language;
 	ob_start();
 	echo "<ul class=\"list\"><li>$I[pages]:</li>";
@@ -520,6 +521,6 @@ function send_captcha(){
 	echo "<input type=\"hidden\" name=\"challenge\" value=\"$randid\"><input type=\"text\" name=\"captcha\" size=\"15\" autocomplete=\"off\"></label></p>";
 }
 
-function send_error($msg){
+function send_error(string $msg){
 	die("<p class=\"red\">$msg</p></div></body></html>");
 }

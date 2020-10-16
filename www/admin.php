@@ -18,13 +18,13 @@ echo "<h1>$I[admintitle]</h1>";
 print_langs();
 
 //check password
-if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
+if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p>$I[password]: <input type=\"password\" name=\"pass\" size=\"30\" required></p>";
 	echo "<input type=\"submit\" name=\"action\" value=\"$I[login]\">";
 	echo '</form>';
-	if(isSet($_POST['pass'])){
+	if(isset($_POST['pass'])){
 		echo "<p class=\"red\">$I[wrongpass]</p>";
 	}
 }else{
@@ -57,12 +57,12 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		echo '</table>';
 	}
 	echo "<p>$I[cloneof]: <input type=\"text\" name=\"original\" size=\"30\"";
-	if(isSet($_REQUEST['original'])){
+	if(isset($_REQUEST['original'])){
 		echo ' value="'.htmlspecialchars($_REQUEST['original']).'"';
 	}
 	echo '></p>';
 	echo "<p>$I[bitcoins]: <input type=\"text\" name=\"btc\" size=\"30\"";
-	if(isSet($_REQUEST['btc'])){
+	if(isset($_REQUEST['btc'])){
 		echo ' value="'.htmlspecialchars($_REQUEST['btc']).'"';
 	}
 	echo '></p>';
@@ -82,10 +82,10 @@ if(!isSet($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		}
 	}
 	echo '</textarea></p>';
-	if(isSet($_REQUEST['cat']) && $_REQUEST['cat']<count($categories) && $_REQUEST['cat']>=0){
+	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<count($categories) && $_REQUEST['cat']>=0){
 		$category=$_REQUEST['cat'];
 	}
-	if(!isSet($category)){
+	if(!isset($category)){
 		$category=count($categories);
 	}
 	echo "<p>$I[category]: <select name=\"cat\">";

@@ -2,7 +2,8 @@
 $native = 'Deutsch'; // Native lanugae name
 $english = 'German'; // English language name
 $code = 'de'; // Language code
-
+$I=[];
+$T=[];
 ob_start();
 echo "<?php
 /*
@@ -32,7 +33,7 @@ if(file_exists("lang_$code.php")){
 }
 include('lang_en.php');
 foreach($T as $id=>$value){
-	if(isSet($I[$id])){
+	if(isset($I[$id])){
 		$I[$id]=$value;
 	}
 }

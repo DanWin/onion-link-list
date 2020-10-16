@@ -1,5 +1,5 @@
 <?php
-// Executed every 25 hours via cron - checks for phishing clones on known phishing sites.
+// Executed daily via cronjob - checks for phishing clones on known phishing sites.
 date_default_timezone_set('UTC');
 require_once(__DIR__.'/../common_config.php');
 try{
@@ -14,10 +14,11 @@ curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 25);
 curl_setopt($ch, CURLOPT_TIMEOUT, 40);
 
-check('http://tt3j2x4k5ycaa5zt.onion/onions.php?cat=15&pg=0', 'http://tt3j277rncfaqmj7.onion/onions.php?cat=15&pg=0');
-check('http://skunksworkedp2cg.onion/sites.html', 'http://skunkrdunsylcfqd.onion/sites.html');
+//check('http://tt3j2x4k5ycaa5zt.onion/onions.php?cat=15&pg=0', 'http://tt3j277rncfaqmj7.onion/onions.php?cat=15&pg=0');
+//check('http://skunksworkedp2cg.onion/sites.html', 'http://skunkrdunsylcfqd.onion/sites.html');
+check('http://dhosting4xxoydyaivckq7tsmtgi4wfs3flpeyitekkmqwu4v4r46syd.onion/list.php', 'http://dhostingwwafxyuaxhs6bkhzo5e2mueztbmhqe6wsng547ucvzfuh2ad.onion/list.php');
 
-function check($link, $phishing_link){
+function check(string $link, string $phishing_link){
 	global $ch, $db;
 	curl_setopt($ch, CURLOPT_URL, $link);
 	$links=curl_exec($ch);
@@ -27,8 +28,9 @@ function check($link, $phishing_link){
 		$phishings=$db->prepare('INSERT IGNORE INTO ' . PREFIX . 'phishing (onion_id, original) VALUES ((SELECT id FROM onions WHERE md5sum=?), ?);');
 		$select=$db->prepare('SELECT id FROM ' . PREFIX . 'onions WHERE md5sum=?;');
 		$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);');
-		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}).onion(/[^\s><"]*)?~i', $links, $addr);
-		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}).onion(/[^\s><"]*)?~i', $phishing_links, $phishing_addr);
+		$update=$db->prepare('UPDATE ' . PREFIX . 'onions SET locked=1 WHERE md5sum=?;');
+		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $links, $addr);
+		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $phishing_links, $phishing_addr);
 		$count=count($addr[3]);
 		if($count===count($phishing_addr[3])){ //only run with same data set
 			for($i=0; $i<$count; ++$i){
@@ -41,6 +43,7 @@ function check($link, $phishing_link){
 						$insert->execute([$phishing_address, $md5, time()]);
 					}
 					$phishings->execute([$md5, $address]);
+					$update->execute([$md5]);
 				}
 			}
 		}

@@ -37,13 +37,14 @@ add_onions($onions, $db);
 //delete links that were not seen within a month
 $db->exec('DELETE FROM ' . PREFIX . "onions WHERE address!='' AND timediff>2419200 AND lasttest-timeadded>2419200;");
 
-function check_links(&$onions, &$ch, $link_to_check, $scan_children = false, &$scanned_onoins = []){
+function check_links(array &$onions, CurlHandle &$ch, string $link_to_check, bool $scan_children = false, array &$scanned_onoins = []){
 	curl_setopt($ch, CURLOPT_URL, $link_to_check);
 	$links=curl_exec($ch);
 	if(preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $links, $addr)){
+		$mh = null;
+		$curl_handles = [];
 		if($scan_children){
 			$mh = curl_multi_init();
-			$curl_handles = [];
 		}
 		foreach($addr[3] as $link){
 			$link=strtolower($link);
@@ -96,7 +97,7 @@ function add_onions(&$onions, $db){
 //	$update=$db->prepare('UPDATE ' . PREFIX . "onions SET address = '', locked=1, description=CONCAT(description, ' - SCAM'), category=15 WHERE md5sum=? AND address!='';");
 	$stmt=$db->query('SELECT md5sum FROM ' . PREFIX . 'onions;');
 	while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
-		if(isSet($onions[$tmp[0]])){
+		if(isset($onions[$tmp[0]])){
 			unset($onions[$tmp[0]]);
 //			$update->execute($tmp);
 		}

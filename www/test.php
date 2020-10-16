@@ -15,7 +15,7 @@ echo "<p>$I[testdesc]</p>";
 echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
 echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 echo "<p>$I[link]: <br><input name=\"addr\" size=\"30\" value=\"";
-if(isSet($_REQUEST['addr'])){
+if(isset($_REQUEST['addr'])){
 	echo htmlspecialchars($_REQUEST['addr']);
 }else{
 	echo "http://$_SERVER[HTTP_HOST]";
@@ -67,7 +67,7 @@ if(!empty($_REQUEST['addr'])){
 			$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 			$header = substr($content, 0, $header_size);
 			$content = substr($content, $header_size);
-			if(isSet($db)){
+			if(isset($db)){
 				//update entry in database
 				$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=?;');
 				$stmt->execute([$md5]);
@@ -99,7 +99,7 @@ if(!empty($_REQUEST['addr'])){
 			}
 			echo "<p class=\"green\">$I[testonline]</p>";
 		}else{
-			if(isSet($db)){
+			if(isset($db)){
 				$time=time();
 				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, timediff=lasttest-lastup WHERE md5sum=? AND lasttest<?;')->execute([$time, $md5, $time]);
 			}

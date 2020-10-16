@@ -19,44 +19,42 @@
 */
 
 // Configuration
-define('DBHOST', 'localhost'); // Database host
-define('DBUSER', 'www-data'); // Database user
-define('DBPASS', 'YOUR_DB_PASS'); // Database password
-define('DBNAME', 'links'); // Database
-define('PREFIX', ''); // Table Prefix - useful if other programs use the same names for tables - use only alpha-numeric values (A-Z, a-z, 0-9, or _)
-define('PERSISTENT', true); // Use persistent database conection true/false
-define('ADMINPASS', 'YOUR_ADMIN_PASS'); // Password for the admin interface
-define('PROXY', '127.0.0.1:9050'); // Socks5 Proxy to connect to (Tor)
-define('USERAGENT', 'Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0'); // User-Agent to use when testing a site
-define('LANG', 'en'); // Default language
-define('PROMOTEPRICE', 0.025); // Price to promote a site for PROMOTETIME long
-define('PROMOTETIME', 2592000); // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
-define('PER_PAGE', 50); // Sites listed per page
-define('VERSION', '1'); // Script version
-define('DBVERSION', 6); // Database layout version
-define('REQUIRE_APPROVAL', false); // require admin approval of new sites? true/false
+const DBHOST = 'localhost'; // Database host
+const DBUSER = 'www-data'; // Database user
+const DBPASS = 'YOUR_DB_PASS'; // Database password
+const DBNAME = 'links'; // Database
+const PREFIX = ''; // Table Prefix - useful if other programs use the same names for tables - use only alpha-numeric values (A-Z, a-z, 0-9, or _)
+const PERSISTENT = true; // Use persistent database conection true/false
+const ADMINPASS = 'YOUR_ADMIN_PASS'; // Password for the admin interface
+const PROXY = '127.0.0.1:9050'; // Socks5 Proxy to connect to (Tor)
+const USERAGENT = 'Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0'; // User-Agent to use when testing a site
+const LANG = 'en'; // Default language
+const PROMOTEPRICE = 0.025; // Price to promote a site for PROMOTETIME long
+const PROMOTETIME = 2592000; // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
+const PER_PAGE = 50; // Sites listed per page
+const VERSION = '1'; // Script version
+const DBVERSION = 6; // Database layout version
+const REQUIRE_APPROVAL = false; // require admin approval of new sites? true/false
 //Categories - new links will always be put into the first one, leave it to Unsorted
 //once configured, only add new categories at the end or you have to manually adjust the database.
 $categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Forums', 'Hacking/Programming/Software', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Security/Privacy/Encryption', 'Whistleblowing', 'Empty/Error/Unknown', 'Cryptocurrencies', 'Scams', 'Fun/Games/Joke', 'Search', 'Autodetected scam (unchecked)'];
 
-
 // Language selection
-$I = [];
+$I = $T = [];
+$language = LANG;
 $L=[
 	'de' => 'Deutsch',
 	'en' => 'English',
 	'ja' => '日本語',
 	'tr' => 'Türkçe',
 ];
-if(isSet($_REQUEST['lang']) && isSet($L[$_REQUEST['lang']])){
+if(isset($_REQUEST['lang']) && isset($L[$_REQUEST['lang']])){
 	$language=$_REQUEST['lang'];
-	if(!isSet($_COOKIE['language']) || $_COOKIE['language']!==$language){
+	if(!isset($_COOKIE['language']) || $_COOKIE['language']!==$language){
 		set_secure_cookie('language', $language);
 	}
-}elseif(isSet($_COOKIE['language']) && isSet($L[$_COOKIE['language']])){
+}elseif(isset($_COOKIE['language']) && isset($L[$_COOKIE['language']])){
 	$language=$_COOKIE['language'];
-}else{
-	$language=LANG;
 }
 require_once(__DIR__.'/lang_en.php'); //always include English
 if($language!=='en'){
@@ -81,7 +79,7 @@ function print_langs(){
 	echo '</small>';
 }
 
-function blacklist_scams($address, $content){
+function blacklist_scams(string $address, string $content){
 	global $db;
 	$scams = ['Black&White Cards :: Index', 'Shadow guide | The ultimate guide of dark web ', 'ONIONLIST - SAFE .ONION LINKS LISTING', 'Dir ', 'netAuth', 'POPBUY MARKET', 'Digital Goods - Verified by GoDark Search, Hidden Links, Wiki, Escrow', 'Delta - Secure Black Market', 'DeDope', 'Unlocker - iCloud Activation Services', '222LOTTO!', 'STREAMING SERVICES ACCOUNTS', 'Red Room', 'Digital Cash'];
 	$cp_scams = ['Wonderful shop', '~ DROP BY TARYAXX ~', 'Magic CP', 'Lolita Club', 'Daft Tadjikskiy Sex Video _ Inductively Fiberless Porno Qom Along With Post Porn Com Numb _ Porn Zdarma', 'xPlay - hosting service for porn videos', 'DARK PRIVATE PACK', 'Good Porn'];
@@ -132,7 +130,7 @@ function send_headers(array $styles = []){
 	}
 }
 
-function set_secure_cookie($name, $value){
+function set_secure_cookie(string $name, string $value){
 	if (version_compare(PHP_VERSION, '7.3.0') >= 0) {
 		setcookie($name, $value, ['expires' => 0, 'path' => '/', 'domain' => '', 'secure' => is_definitely_ssl(), 'httponly' => true, 'samesite' => 'Strict']);
 	}else{
@@ -140,7 +138,7 @@ function set_secure_cookie($name, $value){
 	}
 }
 
-function is_definitely_ssl() {
+function is_definitely_ssl() : bool {
 	if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
 		return true;
 	}
