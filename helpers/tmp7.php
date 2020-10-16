@@ -10,12 +10,7 @@ $move=$db->prepare("UPDATE onions SET category=18, locked=1, description=CONCAT(
 $insert=$db->prepare('INSERT INTO onions (address, md5sum, timeadded, locked, description, category) VALUES (?, ?, ?, 1, "Part of scam network - SCAM", 18);');
 for($i = 1; $i < 213; ++$i){
 	$ch=curl_init();
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:9050');
-	curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+	set_curl_options($ch);
 	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_NOBODY, true);
 	curl_setopt($ch, CURLOPT_URL, "http://kenimar6g7h2z75m.onion/go.php?id=$i");

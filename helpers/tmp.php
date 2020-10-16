@@ -8,10 +8,7 @@ try{
 $stmt=$db->query("SELECT onions.address FROM onions LEFT JOIN phishing ON (phishing.onion_id=onions.id) WHERE onions.address!='' AND onions.category!=15 AND onions.category!=18 AND isnull(phishing.onion_id) LIMIT 2100,10000;");
 $move=$db->prepare("UPDATE onions SET category=18, locked=1 WHERE address=?;");
 $ch=curl_init();
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
-curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+set_curl_options($ch);
 curl_setopt($ch, CURLOPT_HEADER, true);
 while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
 curl_setopt($ch, CURLOPT_URL, "http://".gethostbyname("$tmp[0].onion"));

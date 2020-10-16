@@ -7,12 +7,7 @@ try{
 	die($I['nodb']);
 }
 $ch=curl_init();
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
-curl_setopt($ch, CURLOPT_PROXY, PROXY);
-curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 25);
-curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+set_curl_options($ch);
 curl_setopt($ch, CURLOPT_ENCODING, '');
 $onions=[];
 $scanned_onions=[];

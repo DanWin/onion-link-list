@@ -8,11 +8,7 @@ try{
 	die($I['nodb']);
 }
 $ch=curl_init();
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_PROXY, PROXY);
-curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 25);
-curl_setopt($ch, CURLOPT_TIMEOUT, 40);
+set_curl_options($ch);
 
 //check('http://tt3j2x4k5ycaa5zt.onion/onions.php?cat=15&pg=0', 'http://tt3j277rncfaqmj7.onion/onions.php?cat=15&pg=0');
 //check('http://skunksworkedp2cg.onion/sites.html', 'http://skunkrdunsylcfqd.onion/sites.html');

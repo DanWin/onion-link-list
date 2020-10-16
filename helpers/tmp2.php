@@ -9,12 +9,7 @@ $stmt=$db->query("SELECT onions.address FROM onions LEFT JOIN phishing ON (phish
 $move=$db->prepare("UPDATE onions SET category=15, locked=1, description='WARNING - This site will crash your browser with infinite iframes.' WHERE address=?;");
 while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
 $ch=curl_init();
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:9050');
-curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+set_curl_options($ch);
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_NOBODY, true);
 curl_setopt($ch, CURLOPT_URL, "http://".gethostbyname("$tmp[0].onion"));

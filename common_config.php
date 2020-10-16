@@ -150,3 +150,13 @@ function is_definitely_ssl() : bool {
 	}
 	return false;
 }
+
+function set_curl_options(CurlHandle $ch){
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
+	curl_setopt($ch, CURLOPT_PROXY, PROXY);
+	curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+}

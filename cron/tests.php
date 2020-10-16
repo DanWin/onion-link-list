@@ -16,13 +16,7 @@ $curl_handles = [];
 //do tests
 foreach($onions as $onion){
 	$ch=curl_init();
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
-	curl_setopt($ch, CURLOPT_PROXY, PROXY);
-	curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 50);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+	set_curl_options($ch);
 	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
@@ -81,11 +75,7 @@ foreach($curl_handles as $handle){
 		}
 		if(preg_match('~window\.location\.replace\("http://'.$onion['address'].'.onion/(.*?)"\)~', $content, $matches)){
 			$ch=curl_init();
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
-			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 50);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+			set_curl_options($ch);
 			curl_setopt($ch, CURLOPT_HEADER, true);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
@@ -96,11 +86,7 @@ foreach($curl_handles as $handle){
 		}
 		if(preg_match('~^refresh:.*url=(https?://[^;\s]+).*?$~m', $header, $matches)){
 			$ch=curl_init();
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
-			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 50);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+			set_curl_options($ch);
 			curl_setopt($ch, CURLOPT_HEADER, true);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
@@ -119,11 +105,7 @@ foreach($curl_handles as $handle){
 				}
 			}
 			$ch=curl_init();
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);
-			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 50);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+			set_curl_options($ch);
 			curl_setopt($ch, CURLOPT_HEADER, true);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
