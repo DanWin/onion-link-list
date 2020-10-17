@@ -123,7 +123,7 @@ function send_headers(array $styles = []){
 	}
 	header("Content-Security-Policy: base-uri 'self'; default-src 'none'; form-action 'self'; frame-ancestors 'none'; img-src data:; style-src $style_hashes");
 	header('X-Content-Type-Options: nosniff');
-	header('X-Frame-Options: sameorigin');
+	header('X-Frame-Options: deny');
 	header('X-XSS-Protection: 1; mode=block');
 	if($_SERVER['REQUEST_METHOD'] === 'HEAD'){
 		exit; // headers sent, no further processing needed
