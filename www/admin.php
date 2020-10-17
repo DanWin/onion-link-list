@@ -205,10 +205,10 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 					echo "<p class=\"green\">$I[succrmphish]</p>";
 				} elseif ( $_POST[ 'action' ] === $I[ 'reject' ] ) { //lock editing
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=-1 WHERE md5sum=?;' )->execute( [ $md5 ] );
-					echo "<p class=\"green\">$I[succlock]</p>";
+					echo "<p class=\"green\">$I[succreject]</p>";
 				} elseif ( $_POST[ 'action' ] === $I[ 'approve' ] ) { //lock editing
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=1 WHERE md5sum=?;' )->execute( [ $md5 ] );
-					echo "<p class=\"green\">$I[succlock]</p>";
+					echo "<p class=\"green\">$I[succapprove]</p>";
 				} else { //no specific button was pressed
 					echo "<p class=\"red\">$I[noaction]</p>";
 				}
