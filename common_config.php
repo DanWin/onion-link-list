@@ -74,7 +74,7 @@ function print_langs(){
 		}else{
 			$uri='?'.htmlspecialchars($query)."&amp;lang=$code";
 		}
-		echo " <a href=\"$uri\" target='_self'>$name</a>";
+		echo " <a href=\"$uri\" target='_self' hreflang=\"$code\">$name</a>";
 	}
 	echo '</small>';
 }

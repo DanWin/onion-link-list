@@ -8,7 +8,7 @@ try{
 	die($I['nodb']);
 }
 asort($categories);
-echo '<!DOCTYPE html><html><head>';
+echo '<!DOCTYPE html><html lang="'.$language.'><head>';
 echo "<title>$I[admintitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name=viewport content="width=device-width, initial-scale=1">';

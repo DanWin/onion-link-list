@@ -2,7 +2,7 @@
 require_once(__DIR__.'/../common_config.php');
 $style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}';
 send_headers([$style]);
-echo '<!DOCTYPE html><html><head>';
+echo '<!DOCTYPE html><html lang="'.$language.'"><head>';
 echo "<title>$I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name="author" content="Daniel Winzen">';
