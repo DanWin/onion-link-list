@@ -33,7 +33,7 @@ if(!empty($_REQUEST['addr'])){
 		die('No DB connection');
 	}
 	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
-		echo "<p class=\"red\">$I[invalonion]</p>";
+		echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
 	}else{
 		$ch=curl_init();
 		set_curl_options($ch);
@@ -49,17 +49,17 @@ if(!empty($_REQUEST['addr'])){
 		$phishing=$db->prepare('SELECT original FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE address=? AND onion_id=' . PREFIX . 'onions.id;');
 		$phishing->execute([$addr]);
 		if($orig=$phishing->fetch(PDO::FETCH_NUM)){
-			printf("<p class=\"red\">$I[testphishing]</p>", "<a href=\"http://$orig[0].onion\">$orig[0].onion</a>");
+			printf("<p class=\"red\" role=\"alert\">$I[testphishing]</p>", "<a href=\"http://$orig[0].onion\">$orig[0].onion</a>");
 		}
 		$scam=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=? AND category=15 AND locked=1;');
 		$scam->execute([$md5]);
 		if($scam->fetch(PDO::FETCH_NUM)){
-			echo "<p class=\"red\">Warning: This is a known scam!</p>";
+			echo "<p class=\"red\" role=\"alert\">Warning: This is a known scam!</p>";
 		}
 		$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=? AND timediff=0 AND lasttest>?;');
 		$stmt->execute([$md5, time()-60]);
 		if($stmt->fetch(PDO::FETCH_NUM)){
-			echo "<p class=\"green\">$I[testonline]</p>";
+			echo "<p class=\"green\" role=\"alert\">$I[testonline]</p>";
 		}elseif(($content=curl_exec($ch))!==false){
 			$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 			$header = substr($content, 0, $header_size);
@@ -94,16 +94,17 @@ if(!empty($_REQUEST['addr'])){
 				}
 				blacklist_scams($addr, $content);
 			}
-			echo "<p class=\"green\">$I[testonline]</p>";
+			echo "<p class=\"green\" role=\"alert\">$I[testonline]</p>";
 		}else{
 			if(isset($db)){
 				$time=time();
 				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, timediff=lasttest-lastup WHERE md5sum=? AND lasttest<?;')->execute([$time, $md5, $time]);
 			}
-			echo "<p class=\"red\">$I[testoffline]</p>";
+			echo "<p class=\"red\" role=\"alert\">$I[testoffline]</p>";
 		}
 		curl_close($ch);
 	}
 }
-echo '<br><p class="software-link"><a target="_blank" href="https://github.com/DanWin/onion-link-list" rel="noopener">Onion Link List - ' . VERSION . '</a></p>';
-echo '</body></html>';
+?>
+<br><p class="software-link"><a target="_blank" href="https://github.com/DanWin/onion-link-list" rel="noopener">Onion Link List - <?php echo VERSION; ?></a></p>
+</body></html>

@@ -208,7 +208,7 @@ function send_html(){
 	echo '</ul><br><br>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
 		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
-			echo "<p class=\"red\">$I[invalonion]</p>";
+			echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
 			echo "<p>$I[valid]: http://tt3j2x4k5ycaa5zt.onion</p>";
 		}else{
 			if(!isset($_REQUEST['challenge'])){
@@ -246,19 +246,19 @@ function send_html(){
 			if(!$stmt->fetch(PDO::FETCH_BOUND)){//new link, add to database
 				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded) VALUES (?, ?, ?, ?, ?);');
 				$stmt->execute([$addr, $desc, $md5, $category, time()]);
-				echo "<p class=\"green\">$I[succadd]</p>";
+				echo "<p class=\"green\" role=\"alert\">$I[succadd]</p>";
 			}elseif($locked==1){//locked, not editable
-				echo "<p class=\"red\">$I[faillocked]</p>";
+				echo "<p class=\"red\" role=\"alert\">$I[faillocked]</p>";
 			}elseif($desc!==''){//update description
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=? WHERE md5sum=?;');
 				$stmt->execute([$desc, $category, $md5]);
-				echo "<p class=\"green\">$I[succupddesc]</p>";
+				echo "<p class=\"green\" role=\"alert\">$I[succupddesc]</p>";
 			}elseif($category!=0){//update category only
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=? WHERE md5sum=?;');
 				$stmt->execute([$category, $md5]);
-				echo "<p class=\"green\">$I[succupdcat]</p>";
+				echo "<p class=\"green\" role=\"alert\">$I[succupdcat]</p>";
 			}else{//nothing changed and already known
-				echo "<p class=\"green\">$I[alreadyknown]</p>";
+				echo "<p class=\"green\" role=\"alert\">$I[alreadyknown]</p>";
 			}
 		}
 	}
@@ -524,5 +524,5 @@ function send_captcha(){
 }
 
 function send_error(string $msg){
-	die("<p class=\"red\">$msg</p></div></body></html>");
+	die("<p class=\"red\" role=\"alert\">$msg</p></div></body></html>");
 }
