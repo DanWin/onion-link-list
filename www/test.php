@@ -15,7 +15,7 @@ print_langs();
 echo "<p>$I[testdesc]</p>";
 echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
 echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-echo "<p>$I[link]: <br><input name=\"addr\" size=\"30\" value=\"";
+echo "<p><label for=\"addr\">$I[link]:</label><br><input id=\"addr\" name=\"addr\" size=\"30\" value=\"";
 if(isset($_REQUEST['addr'])){
 	echo htmlspecialchars($_REQUEST['addr']);
 }else{
