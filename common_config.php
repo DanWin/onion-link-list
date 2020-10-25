@@ -151,7 +151,7 @@ function is_definitely_ssl() : bool {
 	return false;
 }
 
-function set_curl_options(CurlHandle $ch){
+function set_curl_options($ch){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_USERAGENT, USERAGENT);

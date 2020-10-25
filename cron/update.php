@@ -32,7 +32,7 @@ add_onions($onions, $db);
 //delete links that were not seen within a month
 $db->exec('DELETE FROM ' . PREFIX . "onions WHERE address!='' AND timediff>2419200 AND lasttest-timeadded>2419200;");
 
-function check_links(array &$onions, CurlHandle &$ch, string $link_to_check, bool $scan_children = false, array &$scanned_onoins = []){
+function check_links(array &$onions, $ch, string $link_to_check, bool $scan_children = false, array &$scanned_onoins = []){
 	curl_setopt($ch, CURLOPT_URL, $link_to_check);
 	$links=curl_exec($ch);
 	if(preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $links, $addr)){
