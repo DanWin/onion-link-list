@@ -48,13 +48,7 @@ function check_links(array &$onions, CurlHandle &$ch, string $link_to_check, boo
 			if($scan_children && empty($scanned_onions[$md5])){
 				$scanned_onions[$md5]=$link;
 				$ch_child=curl_init();
-				curl_setopt($ch_child, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch_child, CURLOPT_USERAGENT, USERAGENT);
-				curl_setopt($ch_child, CURLOPT_PROXY, PROXY);
-				curl_setopt($ch_child, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
-				curl_setopt($ch_child, CURLOPT_CONNECTTIMEOUT, 25);
-				curl_setopt($ch_child, CURLOPT_TIMEOUT, 30);
-				curl_setopt($ch_child, CURLOPT_ENCODING, '');
+				set_curl_options($ch_child);
 				curl_setopt($ch_child, CURLOPT_URL, "http://$link.onion");
 				curl_multi_add_handle($mh, $ch_child);
 				$curl_handles []= $ch_child;

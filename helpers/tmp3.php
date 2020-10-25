@@ -9,7 +9,6 @@ $stmt=$db->query("SELECT onions.address FROM onions LEFT JOIN phishing ON (phish
 $move=$db->prepare("UPDATE onions SET category=18, locked=1, description='Add injecting phishing clone of an existing site - SCAM' WHERE address=?;");
 $ch=curl_init();
 set_curl_options($ch);
-//curl_setopt($ch, CURLOPT_HEADER, true);
 while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
 	curl_setopt($ch, CURLOPT_URL, "http://".gethostbyname("$tmp[0].onion"));
 	$response=curl_exec($ch);

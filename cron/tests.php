@@ -20,7 +20,6 @@ foreach($onions as $onion){
 	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
-	curl_setopt($ch, CURLOPT_ENCODING, '');
 	curl_setopt($ch, CURLOPT_HTTPHEADER, ["Host: $onion[address].onion", 'User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language: en-US,en;q=0.5', 'Accept-Encoding: gzip, deflate', 'Connection: keep-alive', 'Upgrade-Insecure-Requests: 1']);
 	curl_setopt($ch, CURLOPT_URL, "http://$onion[address].onion/");
 	curl_multi_add_handle($mh, $ch);
@@ -79,7 +78,6 @@ foreach($curl_handles as $handle){
 			curl_setopt($ch, CURLOPT_HEADER, true);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
-			curl_setopt($ch, CURLOPT_ENCODING, '');
 			curl_setopt($ch, CURLOPT_HTTPHEADER, ["Host: $onion[address].onion", 'User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language: en-US,en;q=0.5', 'Accept-Encoding: gzip, deflate', 'Connection: keep-alive', 'Upgrade-Insecure-Requests: 1']);
 			curl_setopt($ch, CURLOPT_URL, "http://$onion[address].onion/".$matches[1]);
 			$content=curl_exec($ch);
@@ -90,7 +88,6 @@ foreach($curl_handles as $handle){
 			curl_setopt($ch, CURLOPT_HEADER, true);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
-			curl_setopt($ch, CURLOPT_ENCODING, '');
 			curl_setopt($ch, CURLOPT_HTTPHEADER, ["Host: $onion[address].onion", 'User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language: en-US,en;q=0.5', 'Accept-Encoding: gzip, deflate', 'Connection: keep-alive', 'Upgrade-Insecure-Requests: 1']);
 			curl_setopt($ch, CURLOPT_URL, $matches[1]);
 			$content=curl_exec($ch);
@@ -109,7 +106,6 @@ foreach($curl_handles as $handle){
 			curl_setopt($ch, CURLOPT_HEADER, true);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
-			curl_setopt($ch, CURLOPT_ENCODING, '');
 			curl_setopt($ch, CURLOPT_HTTPHEADER, ["Host: $onion[address].onion", 'User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language: en-US,en;q=0.5', 'Accept-Encoding: gzip, deflate', 'Connection: keep-alive', 'Upgrade-Insecure-Requests: 1']);
 			curl_setopt($ch, CURLOPT_URL, $link_to_check);
 			$content=curl_exec($ch);

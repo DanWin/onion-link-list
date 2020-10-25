@@ -24,7 +24,7 @@ print_langs();
 if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<p><label>$I[password]: <input type=\"password\" name=\"pass\" size=\"30\" required></label></p>";
+	echo "<p><label>$I[password]: <input type=\"password\" name=\"pass\" size=\"30\" required autocomplete=\"current-password\"></label></p>";
 	echo "<input type=\"submit\" name=\"action\" value=\"$I[login]\">";
 	echo '</form>';
 	if(isset($_POST['pass'])){
