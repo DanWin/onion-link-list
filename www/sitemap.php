@@ -16,6 +16,7 @@ if(REQUIRE_APPROVAL){
 	$admin_approval = PREFIX . 'onions.approved = 1 AND';
 }
 foreach ($L as $lang_code => $lang){
+	$links []= ['loc' => CANONICAL_URL . "/test.php?lang=$lang_code", 'changefreq' => 'weekly', 'priority' => '0.4'];
 	$links []= ['loc' => CANONICAL_URL . "/onions.php?lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.5'];
 	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
 	foreach($categories as $cat => $name){
