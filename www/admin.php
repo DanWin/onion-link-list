@@ -5,6 +5,7 @@ send_headers([$style]);
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
+	http_send_status(500);
 	die($I['nodb']);
 }
 asort($categories);
@@ -14,6 +15,7 @@ asort($categories);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="canonical" href="<?php echo CANONICAL_URL . $_SERVER['SCRIPT_NAME']; ?>">
 <style type="text/css"><?php echo $style; ?></style>
 </head><body>
 <h1><?php echo $I['admintitle']; ?></h1>

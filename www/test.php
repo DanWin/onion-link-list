@@ -8,6 +8,7 @@ echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name="author" content="Daniel Winzen">';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 echo '<meta name="description" content="Test whether a Tor hidden service onion is online or offline">';
+echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '">';
 echo '<style type="text/css">'.$style.'</style>';
 echo '</head><body>';
 echo '<h1>Online-Test</h1>';
@@ -30,7 +31,8 @@ if(!empty($_REQUEST['addr'])){
 	try{
 		$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 	}catch(PDOException $e){
-		die('No DB connection');
+		http_send_status(500);
+		die($I['nodb']);
 	}
 	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 		echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";

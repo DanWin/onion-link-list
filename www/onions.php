@@ -25,6 +25,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
+	http_send_status(500);
 }
 date_default_timezone_set('UTC');
 //select output format
@@ -70,6 +71,7 @@ function send_html(){
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 	echo '<meta name="description" content="Huge link list of Tor hidden service onions. All the darknet links you need in one place.">';
+	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']) . '">';
 	echo '<style type="text/css">'.$style.'</style>';
 	echo '<base rel="noopener" target="_blank">';
 	echo '</head><body>';
