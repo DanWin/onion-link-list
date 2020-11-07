@@ -67,7 +67,7 @@ if($language!=='en'){
 
 function print_langs(){
 	global $I, $L;
-	echo "<small>$I[language]: ";
+	echo "<ul class=\"list\"><li>$I[language]:</li>";
 	$query=ltrim(preg_replace('/&?lang=[a-z_\-]*/i', '', $_SERVER['QUERY_STRING']), '&');
 	foreach($L as $code=>$name){
 		if($query===''){
@@ -75,9 +75,9 @@ function print_langs(){
 		}else{
 			$uri='?'.htmlspecialchars($query)."&amp;lang=$code";
 		}
-		echo " <a href=\"$uri\" target='_self' hreflang=\"$code\">$name</a>";
+		echo "<li><a href=\"$uri\" target='_self' hreflang=\"$code\">$name</a></li>";
 	}
-	echo '</small>';
+	echo '</ul>';
 }
 
 function blacklist_scams(string $address, string $content){
@@ -122,7 +122,7 @@ function send_headers(array $styles = []){
 	foreach($styles as $style) {
 		$style_hashes .= " 'sha256-".base64_encode(hash('sha256', $style, true))."'";
 	}
-	header("Content-Security-Policy: base-uri 'self'; default-src 'none'; form-action 'self'; frame-ancestors 'none'; img-src data:; style-src $style_hashes");
+	header("Content-Security-Policy: base-uri 'self'; default-src 'none'; form-action 'self'; frame-ancestors 'none'; img-src data: 'self'; style-src $style_hashes");
 	header('X-Content-Type-Options: nosniff');
 	header('X-Frame-Options: deny');
 	header('X-XSS-Protection: 1; mode=block');

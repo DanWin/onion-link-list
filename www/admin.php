@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__.'/../common_config.php');
-$style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small} #maintable ,#maintable th,#maintable td{border: 1px solid black}';
+$style = '.row{display:flex;flex-wrap:wrap}.headerrow{font-weight:bold}.col{display:flex;flex:1;padding:3px 3px;flex-direction:column}.button_table{max-width:500px}';
+$style .= '.list{padding:0;}.list li{display:inline-block;padding:0.35em}#maintable .col{min-width:5em}#maintable .col:first-child{max-width:5em}';
+$style .= '.red{color:red}.green{color:green}.software-link{text-align:center;font-size:small}#maintable,#maintable .col{border: 1px solid black}';
 send_headers([$style]);
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
@@ -53,13 +55,13 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		}
 		echo '" required autofocus></label></p>';
 	} else {
-		echo '<table id="maintable"><tr><th>Select</th><th>Address</th><th>Description</th><th>Category</th><th>Status</th></tr>';
+		echo '<br><div class="table" id="maintable"><div class="headerrow row"><div class="col">Select</div><div class="col">Address</div class="col"><div class="col">Description</div><div class="col">Category</div><div class="col">Status</div></div>';
 		$stmt=$db->query('SELECT address, description, category, approved, locked FROM ' . PREFIX . "onions WHERE address!='';");
 		while($onion = $stmt->fetch(PDO::FETCH_ASSOC)){
-			echo '<tr><td><input type="checkbox" name="addr[]" value="'.$onion['address'].'"></td><td><a href="http://'.$onion['address'].'.onion" rel="noopener">'.$onion['address'].'.onion</a></td>';
-			echo "<td>$onion[description]</td><td>{$categories[$onion['category']]}</td><td>Approved: $onion[approved]<br>Locked: $onion[locked]</td></tr>";
+			echo '<div class="row"><div class="col"><input type="checkbox" name="addr[]" value="'.$onion['address'].'"></div><div class="col"><a href="http://'.$onion['address'].'.onion" rel="noopener">'.$onion['address'].'.onion</a></div>';
+			echo "<div class=\"col\">$onion[description]</div><div class=\"col\">{$categories[$onion['category']]}</div><div class=\"col\">Approved: $onion[approved]<br>Locked: $onion[locked]</div></div>";
 		}
-		echo '</table>';
+		echo '</div>';
 	}
 	echo "<p><label>$I[cloneof]: <input type=\"text\" name=\"original\" size=\"30\"";
 	if(isset($_REQUEST['original'])){
@@ -103,23 +105,23 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	}
 	echo '</select></label></p>';
 	echo '<input type="submit" name="action" value="None" hidden>';
-	echo '<table><tr>';
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[remove]\"></td>";
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[lock]\"></td>";
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[promote]\"></td>";
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[phishing]\"></td>";
-	echo '</tr><tr>';
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[readd]\"></td>";
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[unlock]\"></td>";
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[unpromote]\"></td>";
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[unphishing]\"></td>";
-	echo '</tr><tr>';
-	echo "<td><input type=\"submit\" name=\"action\" value=\"$I[update]\"></td>";
+	echo '<div class="table button_table"><div class="row">';
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[remove]\"></div>";
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[lock]\"></div>";
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[promote]\"></div>";
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[phishing]\"></div>";
+	echo '</div><div class="row">';
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[readd]\"></div>";
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[unlock]\"></div>";
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[unpromote]\"></div>";
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[unphishing]\"></div>";
+	echo '</div><div class="row">';
+	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[update]\"></div>";
 	if(REQUIRE_APPROVAL) {
-		echo "<td><input type=\"submit\" name=\"action\" value=\"$I[reject]\"></td>";
-		echo "<td><input type=\"submit\" name=\"action\" value=\"$I[approve]\"></td>";
+		echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[reject]\"></div class=\"col\">";
+		echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\"$I[approve]\"></div class=\"col\">";
 	}
-	echo '</tr></table>';
+	echo '</div></div>';
 	echo '</form><br>';
 
 	if(!empty($_POST['addr'])){

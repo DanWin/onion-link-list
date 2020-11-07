@@ -42,11 +42,11 @@ if(!isset($_REQUEST['format'])){
 function send_html(){
 	global $I, $categories, $db, $language;
 	$numrows = 0;
-	$style = '.red{color:red} .green{color:green} .up td+td+td{background-color:#aaff88} .down td+td+td{background-color:#ff4444}';
-	$style .= '.promo{outline:medium solid #FFD700} .list{display: inline-block; padding: 0; margin: 0} .list li{display:inline}';
-	$style .= '.active{font-weight:bold} .down td+td+td+td+td,.up td+td+td+td+td{background-color:unset} #maintable td{word-break:break-all}';
-	$style .= '#maintable td+td+td{word-break:unset} #maintable tr td:first-child{min-width:16em} .software-link{text-align:center;font-size:small}';
-	$style .= '#maintable ,#maintable th,#maintable td{border: 1px solid black} #edit-search td{vertical-align:top}';
+	$style = '.row{display:flex;flex-wrap:wrap}.headerrow{font-weight:bold}.col{display:flex;flex:1;padding:3px 3px;flex-direction:column}';
+	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3),.up .col:nth-child(0n+4){background-color:#aaff88}.down .col:nth-child(0n+3),.down .col:nth-child(0n+4){background-color:#ff4444}';
+	$style .= '.promo{outline:medium solid #FFD700}.list{padding:0;}.list li{display:inline-block;padding:0.35em}.pagination{font-size:1.2em}';
+	$style .= '.active{font-weight:bold}#maintable .col{word-break:break-all;min-width:5em}#maintable,#maintable .col{border: 1px solid black}#edit-search .col{vertical-align:top}';
+	$style .= '#maintable .col:nth-child:(0n+3){word-break:unset}#maintable .col:last-child{max-width:5em}.software-link{text-align:center;font-size:small}';
 	send_headers([$style]);
 	asort($categories);
 	//sql for special categories
@@ -76,8 +76,6 @@ function send_html(){
 	echo '<base rel="noopener" target="_blank">';
 	echo '</head><body>';
 	echo "<h1>$I[title]</h1>";
-	print_langs();
-	echo "<br><small>$I[format]: <a href=\"?format=text\" target=\"_self\">Text</a> <a href=\"?format=json\" target=\"_self\">JSON</a></small>";
 	if(!isset($db)){
 		echo "<p><b class=\"red\">$I[error]:</b> $I[nodb]</p>";
 		echo '</body></html>';
@@ -85,7 +83,7 @@ function send_html(){
 	}
 	echo '<p>I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. Every week I get 2-5 E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!</p>';
 	//update onions description form
-	echo "<table id=\"edit-search\"><tr><td><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"POST\">";
+	echo "<div class=\"table\" id=\"edit-search\"><div class=\"row\"><div class=\"col\"><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p><label>$I[addonion]: <br><input name=\"addr\" size=\"30\" placeholder=\"http://$_SERVER[HTTP_HOST]\" value=\"";
@@ -126,9 +124,9 @@ function send_html(){
 	}
 	echo '</select></label></p>';
 	send_captcha();
-	echo "<input type=\"submit\" name=\"action\" value=\"$I[update]\"></form></td>";
+	echo "<input type=\"submit\" name=\"action\" value=\"$I[update]\"></form></div>";
 	//search from
-	echo "<td><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"post\">";
+	echo "<div class=\"col\"><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"post\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p><label>$I[search]: <br><input name=\"q\" size=\"30\" placeholder=\"$I[searchterm]\" value=\"";
@@ -155,8 +153,10 @@ function send_html(){
 		echo ' checked';
 	}
 	echo ">$I[hidelocked]</label></p>";
-	echo "<input type=\"submit\" name=\"action\" value=\"$I[search]\"></form></td>";
-	echo '</tr></table><br>';
+	echo "<input type=\"submit\" name=\"action\" value=\"$I[search]\"></form></div>";
+	echo '</div></div>';
+	echo "<ul class=\"list\"><li>$I[format]:</li><li><a href=\"?format=text\" target=\"_self\">Text</a></li><li><a href=\"?format=json\" target=\"_self\">JSON</a></li></ul>";
+	print_langs();
 	//List special categories
 	echo "<ul class=\"list\"><li>$I[specialcat]:</li>";
 	$cat=count($categories);
@@ -193,7 +193,7 @@ function send_html(){
 		$num = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = -1 AND address!='';" )->fetch( PDO::FETCH_NUM );
 		echo " <li>$I[rejected] ($num[0])</li>";
 	}
-	echo '</ul><br><br>';
+	echo '</ul>';
 	//List normal categories
 	echo "<ul class=\"list\"><li>$I[categories]:</li>";
 	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
@@ -207,7 +207,7 @@ function send_html(){
 			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
 		}
 	}
-	echo '</ul><br><br>';
+	echo '</ul>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
 		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
@@ -333,7 +333,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		$admin_approval = PREFIX . 'onions.approved = 1 AND';
 	}
 	ob_start();
-	echo "<table id=\"maintable\"><tr><th>$I[link]</th><th>$I[description]</th><th>$I[lasttested]</th><th>$I[lastup]</th><th>$I[timeadded]</th><th>$I[actions]</th></tr>";
+	echo "<div class=\"table\" id=\"maintable\"><div class=\"row headerrow\"><div class=\"col\">$I[link]</div><div class=\"col\">$I[description]</div><div class=\"col\">$I[lasttested]</div><div class=\"col\">$I[lastup]</div><div class=\"col\">$I[timeadded]</div><div class=\"col\">$I[actions]</div></div>";
 	if($promoted){//print promoted links at the top
 		$time=time();
 		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
@@ -355,7 +355,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 				$lasttest=date('Y-m-d H:i:s', $link['lasttest']);
 			}
 			$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
-			echo "<tr class=\"$class promo\"><td><a href=\"http://$link[address].onion\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input name=\"lang\" value=\"$language\" type=\"hidden\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
+			echo "<div class=\"$class row promo\"><div class=\"col\"><a href=\"http://$link[address].onion\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\"><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input name=\"lang\" value=\"$language\" type=\"hidden\"><input value=\"$I[test]\" type=\"submit\"></form></div></div>";
 		}
 	}
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -384,10 +384,10 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		}else{
 			$edit="<form><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[edit]\" type=\"submit\"></form>";
 		}
-		echo "<tr class=\"$class\"><td><a href=\"http://$link[address].onion\">$link[address].onion</a></td><td>$link[description]</td><td>$lasttest</td><td>$lastup</td><td>$timeadded</td><td>$edit <form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></td></tr>";
+		echo "<div class=\"row $class\"><div class=\"col\"><a href=\"http://$link[address].onion\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\">$edit <form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></div></div>";
 		++$numrows;
 	}
-	echo '</table>';
+	echo '</div>';
 	return ob_get_clean();
 }
 
@@ -397,7 +397,7 @@ function print_phishing_table(){
 	if(REQUIRE_APPROVAL){
 		$admin_approval = 'approved = 1 AND';
 	}
-	echo "<table id=\"maintable\"><tr><th>$I[link]</th><th>$I[cloneof]</th><th>$I[lastup]</th></tr>";
+	echo "<div class=\"table\" id=\"maintable\"><div class=\"row headerrow\"><div class=\"col\">$I[link]</div><div class=\"col\">$I[cloneof]</div><div class=\"col\">$I[lastup]</div></div>";
 	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800 ORDER BY address;");
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
 		if($link['lastup']===$link['lasttest']){
@@ -415,9 +415,9 @@ function print_phishing_table(){
 		}else{
 			$orig=$I['unknown'];
 		}
-		echo "<tr class=\"$class\"><td>$link[address].onion</td><td>$orig</td><td>$lastup</td></tr>";
+		echo "<div class=\"row $class\"><div class=\"col\">$link[address].onion</div><div class=\"col\">$orig</div><div class=\"col\">$lastup</div></div>";
 	}
-	echo '</table>';
+	echo '</div>';
 }
 
 function send_text(){
@@ -461,7 +461,7 @@ function send_json(){
 function get_pagination(int $category, int $pages) : string {
 	global $I, $language;
 	ob_start();
-	echo "<ul class=\"list\"><li>$I[pages]:</li>";
+	echo "<ul class=\"list pagination\"><li>$I[pages]:</li>";
 	if($_REQUEST['pg']==0){
 		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all]</a></li>";
 	}else{
@@ -474,7 +474,7 @@ function get_pagination(int $category, int $pages) : string {
 			echo " <li><a href=\"?cat=$category&amp;pg=$i&amp;lang=$language\" target=\"_self\">$i</a></li>";
 		}
 	}
-	echo "</ul><br><br>";
+	echo "</ul>";
 	return ob_get_clean();
 }
 

@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/../common_config.php');
-$style = '.red{color:red} .green{color:green} .software-link{text-align:center;font-size:small}';
+$style = '.red{color:red}.green{color:green}.software-link{text-align:center;font-size:small}.list{padding:0;}.list li{display:inline-block;padding:0.35em}';
 send_headers([$style]);
 echo '<!DOCTYPE html><html lang="'.$language.'"><head>';
 echo "<title>$I[testtitle]</title>";
@@ -11,7 +11,7 @@ echo '<meta name="description" content="Test whether a Tor hidden service onion 
 echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '">';
 echo '<style type="text/css">'.$style.'</style>';
 echo '</head><body>';
-echo '<h1>Online-Test</h1>';
+echo "<h1>$I[testtitle]</h1>";
 print_langs();
 echo "<p>$I[testdesc]</p>";
 echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
