@@ -35,11 +35,13 @@ do {
 } while ($active && $status == CURLM_OK);
 $online_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, lastup=lasttest, timediff=0 WHERE md5sum=?');
 $offline_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, timediff=lasttest-lastup WHERE md5sum=? AND lasttest<?');
-$desc_online_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=0, locked=0 WHERE md5sum=?');
-$desc_empty_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=13, locked=1 WHERE md5sum=?');
-$error_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=13 WHERE md5sum=?'); //in case of error, move the address to an error category - edit the category id to fit yours!
+$desc_online_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=0, locked=0, timechanged=? WHERE md5sum=?');
+$desc_empty_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=13, locked=1, timechanged=? WHERE md5sum=?');
+$error_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=13, timechanged=? WHERE md5sum=?'); //in case of error, move the address to an error category - edit the category id to fit yours!
 $phishing_stmt=$db->prepare('INSERT INTO ' . PREFIX . 'phishing (onion_id, original) VALUES (?, ?);');
+$update_phishing_stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET locked=1, timechanged=? WHERE md5sum=?;');
 $db->beginTransaction();
+$time = time();
 foreach($curl_handles as $handle){
 	$content = curl_multi_getcontent($handle['handle']);
 	curl_multi_remove_handle($mh, $handle['handle']);
@@ -54,22 +56,24 @@ foreach($curl_handles as $handle){
 		if(($onion['description']==='' || $onion['description']==='Site hosted by Daniel\'s hosting service') && preg_match('~<title>([^<]+)</title>~i', $content, $match)){
 			$desc=preg_replace("/(\r?\n|\r\n?)/", '<br>', htmlspecialchars(html_entity_decode(trim($match[1]))));
 			if($desc!=='Site hosted by Daniel\'s hosting service'){
-				$desc_online_stmt->execute([$desc, $onion['md5sum']]);
+				$desc_online_stmt->execute([$desc, $onion['md5sum'], $time]);
 			}else{
-				$desc_empty_stmt->execute([$desc, $onion['md5sum']]);
+				$desc_empty_stmt->execute([$desc, $onion['md5sum'], $time]);
 			}
 		}
-		$online_stmt->execute([time(), $onion['md5sum']]);
+		$online_stmt->execute([$time, $onion['md5sum']]);
 		// checks for server errors, to move the address to a dedicated error category
 		if($onion['category']==0 && $http_code>=400){
-			$error_stmt->execute([$onion['md5sum']]);
+			$error_stmt->execute([$onion['md5sum'], $time]);
 		}
 		$stmt->execute([$onion['id']]);
 		if(!$stmt->fetch(PDO::FETCH_NUM)){
 			if(preg_match('~^HTTP/1\.[10] 504 Connect to ([a-z2-7]{16}|[a-z2-7]{56})\.onion(:80)? failed: SOCKS error: host unreachable~', $content, $match)){
 				$phishing_stmt->execute([$onion['id'], $match[2]]);
+				$update_phishing_stmt->execute([$time, $onion['md5sum']]);
 			}elseif(strpos($content, "<body>HttpReadDisconnect('Server disconnected',)</body>")!==false){
 				$phishing_stmt->execute([$onion['id'], '']);
+				$update_phishing_stmt->execute([$time, $onion['md5sum']]);
 			}
 		}
 		if(preg_match('~window\.location\.replace\("http://'.$onion['address'].'.onion/(.*?)"\)~', $content, $matches)){
@@ -93,11 +97,11 @@ foreach($curl_handles as $handle){
 			$content=curl_exec($ch);
 		}
 		if(preg_match_all('~<meta[^>]+http-equiv="refresh"[^>]+content="(\d+);[^>]*url=([^>"]+)">~', $content, $matches, PREG_SET_ORDER)){
-			$time = null;
+			$wait_time = null;
 			$link_to_check = '';
 			foreach($matches as $match){
-				if($time === null || $time > $match[1]){
-					$time = $match[1];
+				if($wait_time === null || $wait_time > $match[1]){
+					$wait_time = $match[1];
 					$link_to_check = $match[2];
 				}
 			}
@@ -112,7 +116,7 @@ foreach($curl_handles as $handle){
 		}
 		blacklist_scams($onion['address'], $content);
 	}else{
-		$offline_stmt->execute([time(), $onion['md5sum'], time()]);
+		$offline_stmt->execute([$time, $onion['md5sum'], $time]);
 	}
 }
 $db->commit();

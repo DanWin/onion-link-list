@@ -10,7 +10,7 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 echo '<meta name="description" content="Test whether a Tor hidden service onion is online or offline">';
 echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '">';
 echo '<style type="text/css">'.$style.'</style>';
-echo '</head><body>';
+echo '</head><body><main>';
 echo "<h1>$I[testtitle]</h1>";
 print_langs();
 echo "<p>$I[testdesc]</p>";
@@ -108,4 +108,4 @@ if(!empty($_REQUEST['addr'])){
 }
 ?>
 <br><p class="software-link"><a target="_blank" href="https://github.com/DanWin/onion-link-list" rel="noopener">Onion Link List - <?php echo VERSION; ?></a></p>
-</body></html>
+</main></body></html>

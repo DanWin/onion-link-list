@@ -23,12 +23,13 @@ function check(string $link, string $phishing_link){
 	if(!empty($links) && !empty($phishing_links)){
 		$phishings=$db->prepare('INSERT IGNORE INTO ' . PREFIX . 'phishing (onion_id, original) VALUES ((SELECT id FROM onions WHERE md5sum=?), ?);');
 		$select=$db->prepare('SELECT id FROM ' . PREFIX . 'onions WHERE md5sum=?;');
-		$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);');
-		$update=$db->prepare('UPDATE ' . PREFIX . 'onions SET locked=1 WHERE md5sum=?;');
+		$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, timechanged) VALUES (?, ?, ?, ?);');
+		$update=$db->prepare('UPDATE ' . PREFIX . 'onions SET locked=1, timechanged=? WHERE md5sum=?;');
 		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $links, $addr);
 		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $phishing_links, $phishing_addr);
 		$count=count($addr[3]);
 		if($count===count($phishing_addr[3])){ //only run with same data set
+			$time = time();
 			for($i=0; $i<$count; ++$i){
 				if($addr[3][$i]!==$phishing_addr[3][$i]){
 					$address=strtolower($addr[3][$i]);
@@ -36,10 +37,10 @@ function check(string $link, string $phishing_link){
 					$md5=md5($phishing_address, true);
 					$select->execute([$md5]);
 					if(!$select->fetch(PDO::FETCH_NUM)){
-						$insert->execute([$phishing_address, $md5, time()]);
+						$insert->execute([$phishing_address, $md5, $time, $time]);
 					}
 					$phishings->execute([$md5, $address]);
-					$update->execute([$md5]);
+					$update->execute([$time, $md5]);
 				}
 			}
 		}

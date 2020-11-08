@@ -19,7 +19,7 @@ asort($categories);
 <meta name="robots" content="noindex">
 <link rel="canonical" href="<?php echo CANONICAL_URL . $_SERVER['SCRIPT_NAME']; ?>">
 <style type="text/css"><?php echo $style; ?></style>
-</head><body>
+</head><body><main>
 <h1><?php echo $I['admintitle']; ?></h1>
 <?php
 print_langs();
@@ -35,6 +35,110 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		echo "<p class=\"red\" role=\"alert\">$I[wrongpass]</p>";
 	}
 }else{
+    $msg = '';
+	$category=count($categories);
+	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<count($categories) && $_REQUEST['cat']>=0){
+		$category=$_REQUEST['cat'];
+	}
+	if(!empty($_POST['addr'])){
+		$addrs = is_array($_POST['addr']) ? $_POST['addr'] : [$_POST['addr']];
+		foreach ($addrs as $addr_single) {
+			if ( ! preg_match( '~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim( $addr_single ), $addr ) ) {
+				$msg .= "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
+			} else {
+				$addr = strtolower( $addr[ 3 ] );
+				$md5 = md5( $addr, true );
+				if ( $_POST[ 'action' ] === $I[ 'remove' ] ) { //remove address from public display
+					$db->prepare( 'UPDATE ' . PREFIX . "onions SET address='', locked=1, approved=-1, timechanged=? WHERE md5sum=?;" )->execute( [ time(), $md5 ] );
+					$msg .= "<p class=\"green\" role=\"alert\">$I[succremove]</p>";
+				} elseif ( $_POST[ 'action' ] === $I[ 'lock' ] ) { //lock editing
+					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
+					$msg .= "<p class=\"green\"> role=\"alert\"$I[succlock]</p>";
+				} elseif ( $_POST[ 'action' ] === $I[ 'readd' ] ) { //add onion back, if previously removed
+					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET address=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ $addr, time(), $md5 ] );
+					$msg .= "<p class=\"green\" role=\"alert\">$I[succreadd]</p>";
+				} elseif ( $_POST[ 'action' ] === $I[ 'unlock' ] ) { //unlock editing
+					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=0, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
+					$msg .= "<p class=\"green\" role=\"alert\">$I[succunlock]</p>";
+				} elseif ( $_POST[ 'action' ] === $I[ 'promote' ] ) { //promote link for payed time
+					$stmt = $db->prepare( 'SELECT special FROM ' . PREFIX . 'onions WHERE md5sum=?;' );
+					$stmt->execute( [ $md5 ] );
+					$specialtime = $stmt->fetch( PDO::FETCH_NUM );
+					if ( $specialtime[ 0 ] < time() ) {
+						$time = time() + ( ( $_POST[ 'btc' ] / PROMOTEPRICE ) * PROMOTETIME );
+					} else {
+						$time = $specialtime[ 0 ] + ( ( $_POST[ 'btc' ] / PROMOTEPRICE ) * PROMOTETIME );
+					}
+					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET special=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ $time, time(), $md5 ] );
+					$msg .= sprintf( "<p class=\"green\" role=\"alert\">$I[succpromote]</p>", date( 'Y-m-d H:i', $time ) );
+				} elseif ( $_POST[ 'action' ] === $I[ 'unpromote' ] ) { //remove promoted status
+					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET special=0, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
+					$msg .= "<p class=\"green\" role=\"alert\">$I[succunpromote]</p>";
+				} elseif ( $_POST[ 'action' ] === $I[ 'update' ] ) { //update description
+					$stmt = $db->prepare( 'SELECT * FROM ' . PREFIX . 'onions WHERE md5sum=?;' );
+					$stmt->execute( [ $md5 ] );
+					if ( $category === count( $categories ) ) {
+						$category = 0;
+					}
+					if ( ! isset( $_POST[ 'desc' ] ) ) {
+						$desc = '';
+					} else {
+						$desc = trim( $_POST[ 'desc' ] );
+						$desc = htmlspecialchars( $desc );
+						$desc = preg_replace( "/(\r?\n|\r\n?)/", '<br>', $desc );
+					}
+					if ( ! $stmt->fetch( PDO::FETCH_ASSOC ) ) { //not yet there, add it
+						$stmt = $db->prepare( 'INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded, locked, approved, timechanged) VALUES (?, ?, ?, ?, ?, 1, 1, ?);' );
+						$stmt->execute( [ $addr, $desc, $md5, $category, time(), time() ] );
+						$msg .= "<p class=\"green\" role=\"alert\">$I[succadd]</p>";
+					} elseif ( $desc != '' ) { //update description+category
+						$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET description=?, category=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' );
+						$stmt->execute( [ $desc, $category, time(), $md5 ] );
+						$msg .= "<p class=\"green\" role=\"alert\">$I[succupddesc]</p>";
+					} elseif ( $category != 0 ) { //only update category
+						$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET category=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' );
+						$stmt->execute( [ $category, time(), $md5 ] );
+						$msg .= "<p class=\"green\" role=\"alert\">$I[succupdcat]!</p>";
+					} else { //no description or category change and already known
+						$msg .= "<p class=\"green\" role=\"alert\">$I[alreadyknown]</p>";
+					}
+				} elseif ( $_POST[ 'action' ] === $I[ 'phishing' ] ) {//mark as phishing clone
+					if ( $_POST[ 'original' ] !== '' && ! preg_match( '~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', $_POST[ 'original' ], $orig ) ) {
+						$msg .= "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
+					} else {
+						if ( isset( $orig[ 3 ] ) ) {
+							$orig = strtolower( $orig[ 3 ] );
+						} else {
+							$orig = '';
+						}
+						if ( $orig !== $addr ) {
+							$stmt = $db->prepare( 'INSERT INTO ' . PREFIX . 'phishing (onion_id, original) VALUES ((SELECT id FROM ' . PREFIX . 'onions WHERE address=?), ?);' );
+							$stmt->execute( [ $addr, $orig ] );
+							$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1, timechanged=? WHERE address=?;' );
+							$stmt->execute( [ time(), $addr ] );
+							$msg .= "<p class=\"green\" role=\"alert\">$I[succaddphish]</p>";
+						} else {
+							$msg .= "<p class=\"red\" role=\"alert\">$I[samephish]</p>";
+						}
+					}
+				} elseif ( $_POST[ 'action' ] === $I[ 'unphishing' ] ) { //remove phishing clone status
+					$stmt = $db->prepare( 'DELETE FROM ' . PREFIX . 'phishing WHERE onion_id=(SELECT id FROM ' . PREFIX . 'onions WHERE address=?);' );
+					$stmt->execute( [ $addr ] );
+					$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1, timechanged=? WHERE address=?;' );
+					$stmt->execute( [ time(), $addr ] );
+					$msg .= "<p class=\"green\" role=\"alert\">$I[succrmphish]</p>";
+				} elseif ( $_POST[ 'action' ] === $I[ 'reject' ] ) { //lock editing
+					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=-1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
+					$msg .= "<p class=\"green\" role=\"alert\">$I[succreject]</p>";
+				} elseif ( $_POST[ 'action' ] === $I[ 'approve' ] ) { //lock editing
+					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
+					$msg .= "<p class=\"green\" role=\"alert\">$I[succapprove]</p>";
+				} else { //no specific button was pressed
+					$msg .= "<p class=\"red\" role=\"alert\">$I[noaction]</p>";
+				}
+			}
+		}
+	}
 	$view_mode = isset($_POST['view_mode']) ? $_POST['view_mode'] : 'single';
 	if(isset($_POST['switch_view_mode'])){
 		$view_mode = $view_mode === 'single' ? 'multi' : 'single';
@@ -89,12 +193,6 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		}
 	}
 	echo '</textarea></p>';
-	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<count($categories) && $_REQUEST['cat']>=0){
-		$category=$_REQUEST['cat'];
-	}
-	if(!isset($category)){
-		$category=count($categories);
-	}
 	echo "<p><label>$I[category]: <select name=\"cat\">";
 	foreach($categories as $cat=>$name){
 		echo "<option value=\"$cat\"";
@@ -123,105 +221,8 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	}
 	echo '</div></div>';
 	echo '</form><br>';
-
-	if(!empty($_POST['addr'])){
-		$addrs = is_array($_POST['addr']) ? $_POST['addr'] : [$_POST['addr']];
-		foreach ($addrs as $addr_single) {
-			if ( ! preg_match( '~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim( $addr_single ), $addr ) ) {
-				echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
-			} else {
-				$addr = strtolower( $addr[ 3 ] );
-				$md5 = md5( $addr, true );
-				if ( $_POST[ 'action' ] === $I[ 'remove' ] ) { //remove address from public display
-					$db->prepare( 'UPDATE ' . PREFIX . "onions SET address='', locked=1, approved=-1 WHERE md5sum=?;" )->execute( [ $md5 ] );
-					echo "<p class=\"green\" role=\"alert\">$I[succremove]</p>";
-				} elseif ( $_POST[ 'action' ] === $I[ 'lock' ] ) { //lock editing
-					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1 WHERE md5sum=?;' )->execute( [ $md5 ] );
-					echo "<p class=\"green\"> role=\"alert\"$I[succlock]</p>";
-				} elseif ( $_POST[ 'action' ] === $I[ 'readd' ] ) { //add onion back, if previously removed
-					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET address=?, locked=1, approved=1 WHERE md5sum=?;' )->execute( [ $addr, $md5 ] );
-					echo "<p class=\"green\" role=\"alert\">$I[succreadd]</p>";
-				} elseif ( $_POST[ 'action' ] === $I[ 'unlock' ] ) { //unlock editing
-					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=0, approved=1 WHERE md5sum=?;' )->execute( [ $md5 ] );
-					echo "<p class=\"green\" role=\"alert\">$I[succunlock]</p>";
-				} elseif ( $_POST[ 'action' ] === $I[ 'promote' ] ) { //promote link for payed time
-					$stmt = $db->prepare( 'SELECT special FROM ' . PREFIX . 'onions WHERE md5sum=?;' );
-					$stmt->execute( [ $md5 ] );
-					$specialtime = $stmt->fetch( PDO::FETCH_NUM );
-					if ( $specialtime[ 0 ] < time() ) {
-						$time = time() + ( ( $_POST[ 'btc' ] / PROMOTEPRICE ) * PROMOTETIME );
-					} else {
-						$time = $specialtime[ 0 ] + ( ( $_POST[ 'btc' ] / PROMOTEPRICE ) * PROMOTETIME );
-					}
-					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET special=?, locked=1, approved=1 WHERE md5sum=?;' )->execute( [ $time, $md5 ] );
-					printf( "<p class=\"green\" role=\"alert\">$I[succpromote]</p>", date( 'Y-m-d H:i', $time ) );
-				} elseif ( $_POST[ 'action' ] === $I[ 'unpromote' ] ) { //remove promoted status
-					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET special=0 WHERE md5sum=?;' )->execute( [ $md5 ] );
-					echo "<p class=\"green\" role=\"alert\">$I[succunpromote]</p>";
-				} elseif ( $_POST[ 'action' ] === $I[ 'update' ] ) { //update description
-					$stmt = $db->prepare( 'SELECT * FROM ' . PREFIX . 'onions WHERE md5sum=?;' );
-					$stmt->execute( [ $md5 ] );
-					if ( $category === count( $categories ) ) {
-						$category = 0;
-					}
-					if ( ! isset( $_POST[ 'desc' ] ) ) {
-						$desc = '';
-					} else {
-						$desc = trim( $_POST[ 'desc' ] );
-						$desc = htmlspecialchars( $desc );
-						$desc = preg_replace( "/(\r?\n|\r\n?)/", '<br>', $desc );
-					}
-					if ( ! $stmt->fetch( PDO::FETCH_ASSOC ) ) { //not yet there, add it
-						$stmt = $db->prepare( 'INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded, locked, approved) VALUES (?, ?, ?, ?, ?, 1, 1);' );
-						$stmt->execute( [ $addr, $desc, $md5, $category, time() ] );
-						echo "<p class=\"green\" role=\"alert\">$I[succadd]</p>";
-					} elseif ( $desc != '' ) { //update description+category
-						$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET description=?, category=?, locked=1, approved=1 WHERE md5sum=?;' );
-						$stmt->execute( [ $desc, $category, $md5 ] );
-						echo "<p class=\"green\" role=\"alert\">$I[succupddesc]</p>";
-					} elseif ( $category != 0 ) { //only update category
-						$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET category=?, locked=1, approved=1 WHERE md5sum=?;' );
-						$stmt->execute( [ $category, $md5 ] );
-						echo "<p class=\"green\" role=\"alert\">$I[succupdcat]!</p>";
-					} else { //no description or category change and already known
-						echo "<p class=\"green\" role=\"alert\">$I[alreadyknown]</p>";
-					}
-				} elseif ( $_POST[ 'action' ] === $I[ 'phishing' ] ) {//mark as phishing clone
-					if ( $_POST[ 'original' ] !== '' && ! preg_match( '~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', $_POST[ 'original' ], $orig ) ) {
-						echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
-					} else {
-						if ( isset( $orig[ 3 ] ) ) {
-							$orig = strtolower( $orig[ 3 ] );
-						} else {
-							$orig = '';
-						}
-						if ( $orig !== $addr ) {
-							$stmt = $db->prepare( 'INSERT INTO ' . PREFIX . 'phishing (onion_id, original) VALUES ((SELECT id FROM ' . PREFIX . 'onions WHERE address=?), ?);' );
-							$stmt->execute( [ $addr, $orig ] );
-							$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1 WHERE address=?;' );
-							$stmt->execute( [ $addr ] );
-							echo "<p class=\"green\" role=\"alert\">$I[succaddphish]</p>";
-						} else {
-							echo "<p class=\"red\" role=\"alert\">$I[samephish]</p>";
-						}
-					}
-				} elseif ( $_POST[ 'action' ] === $I[ 'unphishing' ] ) { //remove phishing clone status
-					$stmt = $db->prepare( 'DELETE FROM ' . PREFIX . 'phishing WHERE onion_id=(SELECT id FROM ' . PREFIX . 'onions WHERE address=?);' );
-					$stmt->execute( [ $addr ] );
-					echo "<p class=\"green\" role=\"alert\">$I[succrmphish]</p>";
-				} elseif ( $_POST[ 'action' ] === $I[ 'reject' ] ) { //lock editing
-					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=-1 WHERE md5sum=?;' )->execute( [ $md5 ] );
-					echo "<p class=\"green\" role=\"alert\">$I[succreject]</p>";
-				} elseif ( $_POST[ 'action' ] === $I[ 'approve' ] ) { //lock editing
-					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=1 WHERE md5sum=?;' )->execute( [ $md5 ] );
-					echo "<p class=\"green\" role=\"alert\">$I[succapprove]</p>";
-				} else { //no specific button was pressed
-					echo "<p class=\"red\" role=\"alert\">$I[noaction]</p>";
-				}
-			}
-		}
-	}
+    echo $msg;
 }
 ?>
 <br><p class="software-link"><a target="_blank" href="https://github.com/DanWin/onion-link-list" rel="noopener">Onion Link List - <?php echo VERSION; ?></a></p>
-</body></html>
+</main></body></html>

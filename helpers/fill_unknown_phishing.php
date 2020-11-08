@@ -14,7 +14,7 @@ $stmt=$db->prepare("SELECT address FROM onions INNER JOIN phishing ON (phishing.
 $stmt->execute([time()]);
 $onions=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt=$db->prepare('UPDATE phishing, onions SET phishing.original=? WHERE phishing.onion_id=onions.id AND onions.address=?;');
+$stmt=$db->prepare('UPDATE phishing, onions SET phishing.original=?, onions.timechanged=? WHERE phishing.onion_id=onions.id AND onions.address=?;');
 
 //do tests
 foreach($onions as $onion){
@@ -23,7 +23,7 @@ foreach($onions as $onion){
 		preg_match('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $site, $addr);
 		if($addr[3]!='' && $addr[3]!==$onion['address']){
 			echo "scam: $onion[address] - original: $addr[3]\n";
-			$stmt->execute([$addr[3], $onion['address']]);
+			$stmt->execute([$addr[3], time(), $onion['address']]);
 		}
 	}
 }

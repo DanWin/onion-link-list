@@ -83,19 +83,17 @@ function check_links(array &$onions, $ch, string $link_to_check, bool $scan_chil
 }
 
 function add_onions(&$onions, $db){
-//	$update=$db->prepare('UPDATE ' . PREFIX . "onions SET address = '', locked=1, description=CONCAT(description, ' - SCAM'), category=15 WHERE md5sum=? AND address!='';");
 	$stmt=$db->query('SELECT md5sum FROM ' . PREFIX . 'onions;');
 	while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
 		if(isset($onions[$tmp[0]])){
 			unset($onions[$tmp[0]]);
-//			$update->execute($tmp);
 		}
 	}
 	$time=time();
-	$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);');
+	$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, timechanged) VALUES (?, ?, ?, ?);');
 	$db->beginTransaction();
 	foreach($onions as $md5=>$addr){
-		$insert->execute([$addr, $md5, $time]);
+		$insert->execute([$addr, $md5, $time, $time]);
 	}
 	$db->commit();
 }
