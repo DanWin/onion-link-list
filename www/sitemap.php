@@ -3,7 +3,7 @@ require_once __DIR__.'/../common_config.php';
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
-	http_send_status(500);
+	http_response_code(500);
 	die($I['nodb']);
 }
 $links = [];

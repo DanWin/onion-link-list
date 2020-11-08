@@ -31,7 +31,7 @@ if(!empty($_REQUEST['addr'])){
 	try{
 		$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 	}catch(PDOException $e){
-		http_send_status(500);
+		http_response_code(500);
 		die($I['nodb']);
 	}
 	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){

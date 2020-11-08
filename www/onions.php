@@ -25,7 +25,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
-	http_send_status(500);
+	http_response_code(500);
 }
 date_default_timezone_set('UTC');
 //select output format
@@ -65,6 +65,46 @@ function send_html(){
 	}else{
 		$_REQUEST['newpg']=0;
 	}
+	$category=count($categories);
+	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
+		settype($_REQUEST['cat'], 'int');
+		$category=$_REQUEST['cat'];
+	}
+	$pages=1;
+	$admin_approval = '';
+	if(REQUIRE_APPROVAL){
+		$admin_approval = PREFIX . 'onions.approved = 1 AND';
+	}
+	$category_count = [];
+	$cat=count($categories);
+	foreach($special as $name=>$query){
+		if($name===$I['lastadded']){
+			$category_count[$cat] = PER_PAGE;
+		}else{
+			$category_count[$cat] = $db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval $query;")->fetch(PDO::FETCH_NUM)[0];
+		}
+		if($category==$cat){
+			$pages=ceil($category_count[$cat]/PER_PAGE);
+		}
+		++$cat;
+	}
+	$category_count[$cat] = $db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;")->fetch(PDO::FETCH_NUM)[0];
+	$category_count['removed'] = $db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE address='';")->fetch(PDO::FETCH_NUM)[0];
+	if(REQUIRE_APPROVAL) {
+		$category_count['pending'] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = 0 AND address!='';" )->fetch( PDO::FETCH_NUM )[0];
+		$category_count['rejected'] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = -1 AND address!='';" )->fetch( PDO::FETCH_NUM )[0];
+	}
+	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
+	foreach($categories as $cat=>$name){
+		$stmt->execute([$cat]);
+		$category_count[$cat] = $stmt->fetch(PDO::FETCH_NUM)[0];
+		if($category==$cat){
+			$pages=ceil($category_count[$cat]/PER_PAGE);
+		}
+	}
+	if($_REQUEST['pg']>$pages){
+		http_response_code(404);
+	}
 	echo '<!DOCTYPE html><html lang="'.$language.'"><head>';
 	echo "<title>$I[title]</title>";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
@@ -99,19 +139,11 @@ function send_html(){
 			$stmt=$db->prepare('SELECT description, category FROM ' . PREFIX . 'onions WHERE md5sum=?;');
 			$stmt->execute([$md5]);
 			if($desc=$stmt->fetch(PDO::FETCH_ASSOC)){
-				$category=$desc['category'];
 				echo str_replace('<br>', "\n", $desc['description']);
 			}
 		}
 	}
 	echo '</textarea></label></p>';
-	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
-		settype($_REQUEST['cat'], 'int');
-		$category=$_REQUEST['cat'];
-	}
-	if(!isset($category)){
-		$category=count($categories);
-	}
 	echo "<p><label>$I[category]: <select name=\"cat\">";
 	foreach($categories as $cat=>$name){
 		echo "<option value=\"$cat\"";
@@ -158,51 +190,32 @@ function send_html(){
 	//List special categories
 	echo "<ul class=\"list\"><li>$I[specialcat]:</li>";
 	$cat=count($categories);
-	$pages=1;
-	$admin_approval = '';
-	if(REQUIRE_APPROVAL){
-		$admin_approval = PREFIX . 'onions.approved = 1 AND';
-	}
 	foreach($special as $name=>$query){
-		if($cat===count($categories)+1){
-			$num[0]=PER_PAGE;
-		}else{
-			$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval $query;")->fetch(PDO::FETCH_NUM);
-		}
 		if($category==$cat){
-			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
-			$pages=ceil($num[0]/PER_PAGE);
+			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
 		}else{
-			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
+			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
 		}
 		++$cat;
 	}
-	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;")->fetch(PDO::FETCH_NUM);
 	if($category==$cat){
-		echo " <li class=\"active\"><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($num[0])</a></li>";
+		echo " <li class=\"active\"><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($category_count[$cat])</a></li>";
 	}else{
-		echo " <li><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($num[0])</a></li>";
+		echo " <li><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">$I[phishingclones] ($category_count[$cat])</a></li>";
 	}
-	$num=$db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE address='';")->fetch(PDO::FETCH_NUM);
-	echo " <li>$I[removed] ($num[0])</li>";
+	echo " <li>$I[removed] ($category_count[removed])</li>";
 	if(REQUIRE_APPROVAL) {
-		$num = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = 0 AND address!='';" )->fetch( PDO::FETCH_NUM );
-		echo " <li>$I[pendingapproval] ($num[0])</li>";
-		$num = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = -1 AND address!='';" )->fetch( PDO::FETCH_NUM );
-		echo " <li>$I[rejected] ($num[0])</li>";
+		echo " <li>$I[pendingapproval] ($category_count[pending])</li>";
+		echo " <li>$I[rejected] ($category_count[rejected])</li>";
 	}
 	echo '</ul>';
 	//List normal categories
 	echo "<ul class=\"list\"><li>$I[categories]:</li>";
-	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
 	foreach($categories as $cat=>$name){
-		$stmt->execute([$cat]);
-		$num=$stmt->fetch(PDO::FETCH_NUM);
 		if($category==$cat){
-			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
-			$pages=ceil($num[0]/PER_PAGE);
+			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
 		}else{
-			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($num[0])</a></li>";
+			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
 		}
 	}
 	echo '</ul>';
