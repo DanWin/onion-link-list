@@ -33,7 +33,7 @@ const PROMOTEPRICE = 0.025; // Price to promote a site for PROMOTETIME long
 const PROMOTETIME = 2592000; // Time (in seconds) to promote a site payed with PROMOTEPRICE - 864000 equals 10 days
 const PER_PAGE = 50; // Sites listed per page
 const VERSION = '1.1'; // Script version
-const DBVERSION = 6; // Database layout version
+const DBVERSION = 7; // Database layout version
 const REQUIRE_APPROVAL = false; // require admin approval of new sites? true/false
 const CANONICAL_URL = 'https://onions.danwin1210.me'; // our preferred domain for search engines
 //Categories - new links will always be put into the first one, leave it to Unsorted
@@ -86,27 +86,27 @@ function blacklist_scams(string $address, string $content){
 	$cp_scams = ['Wonderful shop', '~ DROP BY TARYAXX ~', 'Magic CP', 'Lolita Club', 'Daft Tadjikskiy Sex Video _ Inductively Fiberless Porno Qom Along With Post Porn Com Numb _ Porn Zdarma', 'xPlay - hosting service for porn videos', 'DARK PRIVATE PACK', 'Good Porn'];
 	//xonions
 	if(strpos($content, '<p class="title"><a href="account.html" title="Asia Holiday">Asia Holiday</a></p>')){
-			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM') WHERE address = ? AND locked=0;");
-			$move->execute([$address]);
+			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM'), timechanged=? WHERE address = ? AND locked=0;");
+			$move->execute([time(), $address]);
 	}
 	//raped bitch
 	if(strpos($content, 'rape material uploaded on highspeed servers that don\'t require')){
-			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM') WHERE address = ? AND locked=0;");
-			$move->execute([$address]);
+			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM'), timechanged=? WHERE address = ? AND locked=0;");
+			$move->execute([time(), $address]);
 	}
 	//underage cam girl
 	if(strpos($content, 'also have some real underage prostitutes for you')){
-			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM') WHERE address = ? AND locked=0;");
-			$move->execute([$address]);
+			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM'), timechanged=? WHERE address = ? AND locked=0;");
+			$move->execute([time(), $address]);
 	}
 	if(preg_match('~<title>(.*?)</title>~s', $content, $matches)){
 		if(in_array($matches[1], $scams, true) || preg_match('~(paypal|weed store|credit card|western union|Market Guns|weedstore|banknotes|porn hacker|hack facebook|hack twitter|hack insta|^amazin(\s|$)|Transfers?|btc generat|counterfeit|Cocaine|gift card|BITCOIN ADDRESS MARKET|mastercard|hidden\swiki|CCShop|bitcoin exploit|Bitcoin Generat|bitcoin x200|bitcoin x100|bitcoin x3|bitxoin x10|stolen bitcoin|galaxyshop|icloudremove|icloud activat|netflix|spotify|clone cc|clone card|cloned card|Preloaded|prepaid|moneygram|Financial Service|Delta Marketplace|apple product|apple shop|apple store|samsung product|apple market|samsung shop|hitman|hitmen|samsung store|samsung phone|Marijuana|deepmarket|drugs? store)~i', $matches[1])){
-			$move=$db->prepare("UPDATE onions SET category=15, locked=1, description=CONCAT(description, ' - SCAM') WHERE address = ? AND locked=0;");
-			$move->execute([$address]);
+			$move=$db->prepare("UPDATE onions SET category=15, locked=1, description=CONCAT(description, ' - SCAM'), timechanged=? WHERE address = ? AND locked=0;");
+			$move->execute([time(), $address]);
 		}
 		if(in_array($matches[1], $cp_scams, true) || preg_match('~(PTHC|Family Porn|Animal Porno|Child Porn|^CP|^Pedo|Underage|^baby|Little Girls|porno child|porn child|loliporn|H.M.M.|preteen|illegal sex|kids? porn|love cp|dog sex|zoo porn|daddy i love you|family love|xonions|best onion porn|onion link porn|^rape|young cam| cp |yespedo|little daughter|OnionDir - Adult|destroyed daughter|Deep-Pedo|hurt boy|child forbidden)~i', $matches[1])){
-			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM') WHERE address = ? AND locked=0;");
-			$move->execute([$address]);
+			$move=$db->prepare("UPDATE onions SET address='', category=15, locked=1, description=CONCAT(description, ' - SCAM'), timechanged=? WHERE address = ? AND locked=0;");
+			$move->execute([time(), $address]);
 		}
 	}
 }

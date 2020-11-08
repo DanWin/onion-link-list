@@ -74,12 +74,10 @@ function send_html(){
 	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']) . '">';
 	echo '<style type="text/css">'.$style.'</style>';
 	echo '<base rel="noopener" target="_blank">';
-	echo '</head><body>';
+	echo '</head><body><main>';
 	echo "<h1>$I[title]</h1>";
 	if(!isset($db)){
-		echo "<p><b class=\"red\">$I[error]:</b> $I[nodb]</p>";
-		echo '</body></html>';
-		exit;
+		send_error("<b>$I[error]:</b> $I[nodb]");
 	}
 	echo '<p>I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. Every week I get 2-5 E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!</p>';
 	//update onions description form
@@ -246,18 +244,18 @@ function send_html(){
 				$desc=preg_replace("/(\r?\n|\r\n?)/", '<br>', $desc);
 			}
 			if(!$stmt->fetch(PDO::FETCH_BOUND)){//new link, add to database
-				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded) VALUES (?, ?, ?, ?, ?);');
-				$stmt->execute([$addr, $desc, $md5, $category, time()]);
+				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded, timechanged) VALUES (?, ?, ?, ?, ?, ?);');
+				$stmt->execute([$addr, $desc, $md5, $category, time(), time()]);
 				echo "<p class=\"green\" role=\"alert\">$I[succadd]</p>";
 			}elseif($locked==1){//locked, not editable
 				echo "<p class=\"red\" role=\"alert\">$I[faillocked]</p>";
 			}elseif($desc!==''){//update description
-				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=? WHERE md5sum=?;');
-				$stmt->execute([$desc, $category, $md5]);
+				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=?, timechanged=? WHERE md5sum=?;');
+				$stmt->execute([$desc, $category, time(), $md5]);
 				echo "<p class=\"green\" role=\"alert\">$I[succupddesc]</p>";
 			}elseif($category!=0){//update category only
-				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=? WHERE md5sum=?;');
-				$stmt->execute([$category, $md5]);
+				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=?, timechanged=? WHERE md5sum=?;');
+				$stmt->execute([$category, time(), $md5]);
 				echo "<p class=\"green\" role=\"alert\">$I[succupdcat]</p>";
 			}else{//nothing changed and already known
 				echo "<p class=\"green\" role=\"alert\">$I[alreadyknown]</p>";
@@ -322,7 +320,7 @@ function send_html(){
 	echo '<br>';
 	echo $pagination;
 	echo '<br><p class="software-link"><a href="https://github.com/DanWin/onion-link-list" target="_blank" rel="noopener">Onion Link List - ' . VERSION . '</a></p>';
-	echo '</body></html>';
+	echo '</main></body></html>';
 }
 
 function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false) : string {
@@ -447,7 +445,7 @@ function send_json(){
 		$admin_approval = PREFIX . 'onions.approved = 1 AND';
 	}
 	$data=['categories'=>$categories];
-	$stmt=$db->query('SELECT address, category, description, locked, lastup, lasttest, timeadded FROM ' . PREFIX . "onions WHERE $admin_approval address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
+	$stmt=$db->query('SELECT address, category, description, locked, lastup, lasttest, timeadded, timechanged FROM ' . PREFIX . "onions WHERE $admin_approval address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
 	$data['onions']=$stmt->fetchALL(PDO::FETCH_ASSOC);
 	$stmt=$db->query('SELECT md5sum FROM ' . PREFIX . "onions WHERE address='';");
 	while($tmp=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -526,5 +524,5 @@ function send_captcha(){
 }
 
 function send_error(string $msg){
-	die("<p class=\"red\" role=\"alert\">$msg</p></div></body></html>");
+	die("<p class=\"red\" role=\"alert\">$msg</p></div></main></body></html>");
 }
