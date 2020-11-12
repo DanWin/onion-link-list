@@ -102,7 +102,7 @@ function send_html(){
 			$pages=ceil($category_count[$cat]/PER_PAGE);
 		}
 	}
-	if($_REQUEST['pg']>$pages){
+	if($_REQUEST['pg'] > $pages && $_REQUEST['pg'] > 1){
 		http_response_code(404);
 	}
 	echo '<!DOCTYPE html><html lang="'.$language.'"><head>';
