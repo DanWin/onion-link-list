@@ -56,10 +56,10 @@ function send_html(){
 		$I['offline']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
 	$canonical_query = [];
-	if(!empty($_REQUEST['cat'])) {
+	if(isset($_REQUEST['cat'])) {
 		$canonical_query['cat'] = $_REQUEST['cat'];
 	}
-	if(!empty($_REQUEST['pg'])) {
+	if(isset($_REQUEST['pg'])) {
 		$canonical_query['pg'] = $_REQUEST['pg'];
 	}
 	if(!empty($_REQUEST['lang'])) {
