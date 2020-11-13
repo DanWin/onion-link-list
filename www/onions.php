@@ -55,6 +55,16 @@ function send_html(){
 		$I['lastadded']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
 		$I['offline']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
+	$canonical_query = [];
+	if(!empty($_REQUEST['cat'])) {
+		$canonical_query['cat'] = $_REQUEST['cat'];
+	}
+	if(!empty($_REQUEST['pg'])) {
+		$canonical_query['pg'] = $_REQUEST['pg'];
+	}
+	if(!empty($_REQUEST['lang'])) {
+		$canonical_query['lang'] = $_REQUEST['lang'];
+	}
 	if(!isset($_REQUEST['pg'])){
 		$_REQUEST['pg']=1;
 	}else{
@@ -111,7 +121,7 @@ function send_html(){
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 	echo '<meta name="description" content="Huge link list of Tor hidden service onions. All the darknet links you need in one place.">';
-	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']) . '">';
+	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 	echo '<style type="text/css">'.$style.'</style>';
 	echo '<base rel="noopener" target="_blank">';
 	echo '</head><body><main>';

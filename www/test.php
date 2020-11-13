@@ -2,13 +2,17 @@
 require_once(__DIR__.'/../common_config.php');
 $style = '.red{color:red}.green{color:green}.software-link{text-align:center;font-size:small}.list{padding:0;}.list li{display:inline-block;padding:0.35em}';
 send_headers([$style]);
+$canonical_query = [];
+if(!empty($_REQUEST['lang'])) {
+	$canonical_query['lang'] = $_REQUEST['lang'];
+}
 echo '<!DOCTYPE html><html lang="'.$language.'"><head>';
 echo "<title>$I[testtitle]</title>";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name="author" content="Daniel Winzen">';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 echo '<meta name="description" content="Test whether a Tor hidden service onion is online or offline">';
-echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '">';
+echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 echo '<style type="text/css">'.$style.'</style>';
 echo '</head><body><main>';
 echo "<h1>$I[testtitle]</h1>";
