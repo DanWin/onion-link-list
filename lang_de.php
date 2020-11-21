@@ -72,4 +72,5 @@ $T=[
 	'reject'    =>  'Ablehnen',
 	'approve'   =>  'Akzeptieren',
 	'switchviewmode' => 'Ansichtsmodus wechseln',
+	'statusok'  => 'Status: OK',
 ];

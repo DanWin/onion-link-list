@@ -74,4 +74,5 @@ $I=[
 	'succreject'    =>  'Successfully rejected onion address',
 	'succapprove'   =>  'Successfully approved onion address',
 	'switchviewmode' => 'Switch view mode',
+	'statusok'  => 'Status: OK',
 ];
