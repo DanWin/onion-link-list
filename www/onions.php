@@ -46,7 +46,7 @@ function send_html(){
 	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3),.up .col:nth-child(0n+4){background-color:#aaff88}.down .col:nth-child(0n+3),.down .col:nth-child(0n+4){background-color:#ff4444}';
 	$style .= '.promo{outline:medium solid #FFD700}.list{padding:0;}.list li{display:inline-block;padding:0.35em}.pagination{font-size:1.2em}';
 	$style .= '.active{font-weight:bold}#maintable .col{word-break:break-all;min-width:5em}#maintable,#maintable .col{border: 1px solid black}#edit-search .col{vertical-align:top}';
-	$style .= '#maintable .col:nth-child:(0n+3){word-break:unset}#maintable .col:last-child{max-width:5em}.software-link{text-align:center;font-size:small}';
+	$style .= '#maintable .col:nth-child(0n+3){word-break:unset}#maintable .col:last-child{max-width:5em}.software-link{text-align:center;font-size:small}';
 	send_headers([$style]);
 	asort($categories);
 	//sql for special categories
