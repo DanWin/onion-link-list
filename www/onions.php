@@ -87,33 +87,35 @@ function send_html(){
 	}
 	$category_count = [];
 	$cat=count($categories);
-	foreach($special as $name=>$query){
-		if($name===$I['lastadded']){
-			$category_count[$cat] = PER_PAGE;
-		}else{
-			$category_count[$cat] = $db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval $query;")->fetch(PDO::FETCH_NUM)[0];
+	if($db instanceof PDO) {
+		foreach ( $special as $name => $query ) {
+			if ( $name === $I[ 'lastadded' ] ) {
+				$category_count[ $cat ] = PER_PAGE;
+			} else {
+				$category_count[ $cat ] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval $query;" )->fetch( PDO::FETCH_NUM )[ 0 ];
+			}
+			if ( $category == $cat ) {
+				$pages = ceil( $category_count[ $cat ] / PER_PAGE );
+			}
+			++$cat;
 		}
-		if($category==$cat){
-			$pages=ceil($category_count[$cat]/PER_PAGE);
+		$category_count[ $cat ] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;" )->fetch( PDO::FETCH_NUM )[ 0 ];
+		$category_count[ 'removed' ] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE address='';" )->fetch( PDO::FETCH_NUM )[ 0 ];
+		if ( REQUIRE_APPROVAL ) {
+			$category_count[ 'pending' ] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = 0 AND address!='';" )->fetch( PDO::FETCH_NUM )[ 0 ];
+			$category_count[ 'rejected' ] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = -1 AND address!='';" )->fetch( PDO::FETCH_NUM )[ 0 ];
 		}
-		++$cat;
-	}
-	$category_count[$cat] = $db->query('SELECT COUNT(*) FROM ' . PREFIX . 'phishing, ' . PREFIX . 'onions WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800;")->fetch(PDO::FETCH_NUM)[0];
-	$category_count['removed'] = $db->query('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE address='';")->fetch(PDO::FETCH_NUM)[0];
-	if(REQUIRE_APPROVAL) {
-		$category_count['pending'] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = 0 AND address!='';" )->fetch( PDO::FETCH_NUM )[0];
-		$category_count['rejected'] = $db->query( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE approved = -1 AND address!='';" )->fetch( PDO::FETCH_NUM )[0];
-	}
-	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
-	foreach($categories as $cat=>$name){
-		$stmt->execute([$cat]);
-		$category_count[$cat] = $stmt->fetch(PDO::FETCH_NUM)[0];
-		if($category==$cat){
-			$pages=ceil($category_count[$cat]/PER_PAGE);
+		$stmt = $db->prepare( 'SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;' );
+		foreach ( $categories as $cat => $name ) {
+			$stmt->execute( [ $cat ] );
+			$category_count[ $cat ] = $stmt->fetch( PDO::FETCH_NUM )[ 0 ];
+			if ( $category == $cat ) {
+				$pages = ceil( $category_count[ $cat ] / PER_PAGE );
+			}
 		}
-	}
-	if($_REQUEST['pg'] > $pages && $_REQUEST['pg'] > 1){
-		http_response_code(404);
+		if ( $_REQUEST[ 'pg' ] > $pages && $_REQUEST[ 'pg' ] > 1 ) {
+			http_response_code( 404 );
+		}
 	}
 	echo '<!DOCTYPE html><html lang="'.$language.'"><head>';
 	echo "<title>$I[title]</title>";
@@ -123,7 +125,7 @@ function send_html(){
 	echo '<meta name="description" content="Huge link list of Tor hidden service onions. All the darknet links you need in one place.">';
 	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 	echo '<style type="text/css">'.$style.'</style>';
-	echo '<base rel="noopener" target="_blank">';
+	echo '<base target="_blank">';
 	echo '</head><body><main>';
 	echo "<h1>$I[title]</h1>";
 	if(!isset($db)){
@@ -376,7 +378,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 				$lasttest=date('Y-m-d H:i:s', $link['lasttest']);
 			}
 			$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
-			echo "<div class=\"$class row promo\"><div class=\"col\"><a href=\"http://$link[address].onion\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\"><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input name=\"lang\" value=\"$language\" type=\"hidden\"><input value=\"$I[test]\" type=\"submit\"></form></div></div>";
+			echo "<div class=\"$class row promo\"><div class=\"col\"><a href=\"http://$link[address].onion\" rel=\"noopener\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\"><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input name=\"lang\" value=\"$language\" type=\"hidden\"><input value=\"$I[test]\" type=\"submit\"></form></div></div>";
 		}
 	}
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -405,7 +407,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		}else{
 			$edit="<form><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[edit]\" type=\"submit\"></form>";
 		}
-		echo "<div class=\"row $class\"><div class=\"col\"><a href=\"http://$link[address].onion\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\">$edit <form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></div></div>";
+		echo "<div class=\"row $class\"><div class=\"col\"><a href=\"http://$link[address].onion\" rel=\"noopener\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\">$edit <form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\"$I[test]\" type=\"submit\"></form></div></div>";
 		++$numrows;
 	}
 	echo '</div>';
@@ -432,7 +434,7 @@ function print_phishing_table(){
 			$lastup=date('Y-m-d H:i:s', $link['lastup']);
 		}
 		if($link['original']!==''){
-			$orig="<a href=\"http://$link[original].onion\">$link[original].onion</a>";
+			$orig="<a href=\"http://$link[original].onion\" rel=\"noopener\">$link[original].onion</a>";
 		}else{
 			$orig=$I['unknown'];
 		}
@@ -547,5 +549,5 @@ function send_captcha(){
 }
 
 function send_error(string $msg){
-	die("<p class=\"red\" role=\"alert\">$msg</p></div></main></body></html>");
+	die("<p class=\"red\" role=\"alert\">$msg</p></main></body></html>");
 }
