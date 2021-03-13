@@ -47,6 +47,7 @@ $L=[
 	'de' => 'Deutsch',
 	'en' => 'English',
 	'ja' => '日本語',
+	'pt' => 'Português',
 	'tr' => 'Türkçe',
 ];
 if(isset($_REQUEST['lang']) && isset($L[$_REQUEST['lang']])){
