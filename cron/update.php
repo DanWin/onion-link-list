@@ -13,19 +13,18 @@ $onions=[];
 $scanned_onions=[];
 
 //sources to get links from
-check_links($onions, $ch, 'http://q3lgwxinynjxkor6wghr6hrhlix7fquja3t25phbagqizkpju36fwdyd.onion/list.php');
 check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.link/antanistaticmap/stats/yesterday');
-check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.sh/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.tor2web.io/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'http://visitorfi5kl7q7i.onion/address/');
-check_links($onions, $ch, 'http://dhosting4xxoydyaivckq7tsmtgi4wfs3flpeyitekkmqwu4v4r46syd.onion/list.php');
-check_links($onions, $ch, 'http://3bbaaaccczcbdddz.onion/discover');
-check_links($onions, $ch, 'http://tor66sezptuu2nta.onion/fresh');
+check_links($onions, $ch, 'http://3bbad7fauom4d6sgppalyqddsqbf5u5p56b5k5uk2zxsy3d6ey2jobad.onion/discover');
+check_links($onions, $ch, 'http://tor66sewebgixwhcqfnp5inzp5x5uohhdy3kvtnyfxc2e5mxiuh34iid.onion/fresh');
 check_links($onions, $ch, 'https://crt.sh/?q=.onion&exclude=expired&deduplicate=Y');
-check_links($onions, $ch, 'http://darkeyeb643f2syd.onion/');
-check_links($onions, $ch, 'http://darktorhvabc652txfc575oendhykqcllb7bh7jhhsjduocdlyzdbmqd.onion/hidden-wiki-onion-deepweb-tor-links-darknet.html');
-check_links($onions, $ch, 'http://vladhz5tmikfgxzfa2nk7nxah7x5msa5z5ygb75xb5nsizmeht2dazyd.onion/list.php');
-check_links($onions, $ch, 'http://raptortiabg7uyez.onion/');
+check_links($onions, $ch, 'http://darkeyepxw7cuu2cppnjlgqaav6j42gyt43clcn4vjjf7llfyly5cxid.onion/');
+check_links($onions, $ch, 'http://raptora2y6r3bxmjcd3xglr3tcakc6ezq3omyzbnvwahhpi27l3w4yad.onion/');
+check_links($onions, $ch, 'http://darkeyepxw7cuu2cppnjlgqaav6j42gyt43clcn4vjjf7llfyly5cxid.onion/');
+check_links($onions, $ch, 'https://onionlandsearchengine.com/discover');
+check_links($onions, $ch, 'https://godnotaba.fun/');
+check_links($onions, $ch, 'http://links.communzyxz3qfpum5tnvrfvvrr4jlosbq4mzeskigoionqqdylmlhmid.onion/?format=text');
 
 //add them to the database
 add_onions($onions, $db);

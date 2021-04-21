@@ -53,12 +53,12 @@ foreach($curl_handles as $handle){
 		$header = substr($content, 0, $header_size);
 		$content = substr($content, $header_size);
 		// update description to title, if not yet set
-		if(($onion['description']==='' || $onion['description']==='Site hosted by Daniel\'s hosting service') && preg_match('~<title>([^<]+)</title>~i', $content, $match)){
+		if(in_array($onion['description'], ['', 'Site hosted by Daniel\'s hosting service', ' - SCAM']) && preg_match('~<title>([^<]+)</title>~i', $content, $match)){
 			$desc=preg_replace("/(\r?\n|\r\n?)/", '<br>', htmlspecialchars(html_entity_decode(trim($match[1]))));
 			if($desc!=='Site hosted by Daniel\'s hosting service'){
-				$desc_online_stmt->execute([$desc, $onion['md5sum'], $time]);
+				$desc_online_stmt->execute([$desc, $time, $onion['md5sum']]);
 			}else{
-				$desc_empty_stmt->execute([$desc, $onion['md5sum'], $time]);
+				$desc_empty_stmt->execute([$desc, $time, $onion['md5sum']]);
 			}
 		}
 		$online_stmt->execute([$time, $onion['md5sum']]);

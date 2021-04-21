@@ -1,6 +1,7 @@
 <?php
 $T=[
 	'all'		=>	'Alle',
+	'all_legitimate'=>	'Alle legitimen',
 	'lastadded'	=>	'Zuletzt hinzugefügt',
 	'offline'	=>	'Offline > 1 Woche',
 	'removed'	=>	'Entfernt/Kinderporno',

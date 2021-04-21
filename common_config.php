@@ -38,7 +38,7 @@ const REQUIRE_APPROVAL = false; // require admin approval of new sites? true/fal
 const CANONICAL_URL = 'https://onions.danwin1210.me'; // our preferred domain for search engines
 //Categories - new links will always be put into the first one, leave it to Unsorted
 //once configured, only add new categories at the end or you have to manually adjust the database.
-$categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Forums', 'Hacking/Programming/Software', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Security/Privacy/Encryption', 'Whistleblowing', 'Empty/Error/Unknown', 'Cryptocurrencies', 'Scams', 'Fun/Games/Joke', 'Search', 'Autodetected scam (unchecked)'];
+$categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Forums', 'Hacking/Programming/Software', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Security/Privacy/Encryption', 'Whistleblowing', 'Empty/Error/Unknown', 'Cryptocurrencies', 'Scams', 'Fun/Games/Joke', 'Search'];
 
 // Language selection
 $I = $T = [];

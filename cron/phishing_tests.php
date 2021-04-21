@@ -12,7 +12,7 @@ set_curl_options($ch);
 
 //check('http://tt3j2x4k5ycaa5zt.onion/onions.php?cat=15&pg=0', 'http://tt3j277rncfaqmj7.onion/onions.php?cat=15&pg=0');
 //check('http://skunksworkedp2cg.onion/sites.html', 'http://skunkrdunsylcfqd.onion/sites.html');
-check('http://dhosting4xxoydyaivckq7tsmtgi4wfs3flpeyitekkmqwu4v4r46syd.onion/list.php', 'http://dhostingwwafxyuaxhs6bkhzo5e2mueztbmhqe6wsng547ucvzfuh2ad.onion/list.php');
+//check('http://dhosting4xxoydyaivckq7tsmtgi4wfs3flpeyitekkmqwu4v4r46syd.onion/list.php', 'http://dhostingwwafxyuaxhs6bkhzo5e2mueztbmhqe6wsng547ucvzfuh2ad.onion/list.php');
 
 function check(string $link, string $phishing_link){
 	global $ch, $db;

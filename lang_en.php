@@ -1,6 +1,7 @@
 <?php
 $I=[
 	'all'		=>	'All',
+	'all_legitimate'=>	'All legitimate',
 	'lastadded'	=>	'Last added',
 	'offline'	=>	'Offline > 1 week',
 	'removed'	=>	'Removed/Child porn',

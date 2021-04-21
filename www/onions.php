@@ -51,7 +51,7 @@ function send_html(){
 	asort($categories);
 	//sql for special categories
 	$special=[
-		$I['all']=>"address!='' AND category!=15 AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800',
+		$I['all_legitimate']=>"address!='' AND category!=15 AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800',
 		$I['lastadded']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
 		$I['offline']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
@@ -173,7 +173,7 @@ function send_html(){
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p><label>$I[search]: <br><input name=\"q\" size=\"30\" placeholder=\"$I[searchterm]\" value=\"";
 	if(isset($_REQUEST['q'])){
-		echo htmlspecialchars($_REQUEST['q']);
+		echo trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q'])));
 	}
 	echo '"></label></p>';
 	echo "<p><label>$I[category]: <select name=\"cat\">";
@@ -294,7 +294,7 @@ function send_html(){
 		$pagination='';
 	}
 	if(isset($_REQUEST['q'])){//run search query
-		$query=htmlspecialchars($_REQUEST['q']);
+		$query=trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q'])));
 		$query="%$query%";
 		if(isset($_REQUEST['hidelocked'])){
 			$hidelocked='AND locked=0';
@@ -309,7 +309,7 @@ function send_html(){
 			$stmt->execute([$category, $query, $query]);
 		}
 		$table=get_table($stmt, $numrows);
-		printf("<p><b>$I[searchresult]</b></p>", $_REQUEST['q'], $numrows);
+		printf("<p><b>$I[searchresult]</b></p>", trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q']))), $numrows);
 		echo $table;
 	}elseif($category>=count($categories)+count($special)){//show phishing clones
 		print_phishing_table();
@@ -486,9 +486,9 @@ function get_pagination(int $category, int $pages) : string {
 	ob_start();
 	echo "<ul class=\"list pagination\"><li>$I[pages]:</li>";
 	if($_REQUEST['pg']==0){
-		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all]</a></li>";
+		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all_legitimate]</a></li>";
 	}else{
-		echo " <li><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all]</a></li>";
+		echo " <li><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all_legitimate]</a></li>";
 	}
 	for($i=1; $i<=$pages; ++$i){
 		if($_REQUEST['pg']==$i){
