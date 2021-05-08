@@ -46,6 +46,7 @@ $language = LANG;
 $L=[
 	'de' => 'Deutsch',
 	'en' => 'English',
+	'fa' => 'فارسی',
 	'ja' => '日本語',
 	'pt' => 'Português',
 	'tr' => 'Türkçe',
