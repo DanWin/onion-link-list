@@ -43,7 +43,7 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	if(!empty($_POST['addr'])){
 		$addrs = is_array($_POST['addr']) ? $_POST['addr'] : [$_POST['addr']];
 		foreach ($addrs as $addr_single) {
-			if ( ! preg_match( '~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim( $addr_single ), $addr ) ) {
+			if ( ! preg_match( '~(^(https?://)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim( $addr_single ), $addr ) ) {
 				$msg .= "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
 			} else {
 				$addr = strtolower( $addr[ 3 ] );
@@ -103,7 +103,7 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 						$msg .= "<p class=\"green\" role=\"alert\">$I[alreadyknown]</p>";
 					}
 				} elseif ( $_POST[ 'action' ] === $I[ 'phishing' ] ) {//mark as phishing clone
-					if ( $_POST[ 'original' ] !== '' && ! preg_match( '~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', $_POST[ 'original' ], $orig ) ) {
+					if ( $_POST[ 'original' ] !== '' && ! preg_match( '~(^(https?://)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', $_POST[ 'original' ], $orig ) ) {
 						$msg .= "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
 					} else {
 						if ( isset( $orig[ 3 ] ) ) {
@@ -181,7 +181,7 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	if(!empty($_REQUEST['desc'])){
 		echo htmlspecialchars(trim($_REQUEST['desc']));
 	}elseif(isset($_REQUEST['addr']) && is_string($_REQUEST['addr'])){
-		if(preg_match('~(^(https?://)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+		if(preg_match('~(^(https?://)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			$addr=strtolower($addr[3]);
 			$md5=md5($addr, true);
 			$stmt=$db->prepare('SELECT description, category FROM ' . PREFIX . 'onions WHERE md5sum=?;');

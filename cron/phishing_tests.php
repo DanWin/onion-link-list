@@ -25,8 +25,8 @@ function check(string $link, string $phishing_link){
 		$select=$db->prepare('SELECT id FROM ' . PREFIX . 'onions WHERE md5sum=?;');
 		$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, timechanged) VALUES (?, ?, ?, ?);');
 		$update=$db->prepare('UPDATE ' . PREFIX . 'onions SET locked=1, timechanged=? WHERE md5sum=?;');
-		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $links, $addr);
-		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $phishing_links, $phishing_addr);
+		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $links, $addr);
+		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $phishing_links, $phishing_addr);
 		$count=count($addr[3]);
 		if($count===count($phishing_addr[3])){ //only run with same data set
 			$time = time();

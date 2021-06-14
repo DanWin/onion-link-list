@@ -20,7 +20,7 @@ for($i = 1; $i < 213; ++$i){
 	$header = substr($response, 0, $header_size);
 	$body = substr($response, $header_size);
 	curl_close($ch);
-	if(preg_match('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $header, $addr)){
+	if(preg_match('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $header, $addr)){
 		$time = time();
 		$onion_addr = strtolower($addr[3]);
 		$md5 = md5($onion_addr, true);

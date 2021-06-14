@@ -38,7 +38,7 @@ if(!empty($_REQUEST['addr'])){
 		http_response_code(500);
 		die($I['nodb']);
 	}
-	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+	if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 		echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
 	}else{
 		$ch=curl_init();

@@ -15,7 +15,6 @@ $scanned_onions=[];
 //sources to get links from
 check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.link/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.tor2web.io/antanistaticmap/stats/yesterday');
-check_links($onions, $ch, 'http://visitorfi5kl7q7i.onion/address/');
 check_links($onions, $ch, 'http://3bbad7fauom4d6sgppalyqddsqbf5u5p56b5k5uk2zxsy3d6ey2jobad.onion/discover');
 check_links($onions, $ch, 'http://tor66sewebgixwhcqfnp5inzp5x5uohhdy3kvtnyfxc2e5mxiuh34iid.onion/fresh');
 check_links($onions, $ch, 'https://crt.sh/?q=.onion&exclude=expired&deduplicate=Y');
@@ -34,7 +33,7 @@ $db->exec('DELETE FROM ' . PREFIX . "onions WHERE address!='' AND timediff>24192
 function check_links(array &$onions, $ch, string $link_to_check, bool $scan_children = false, array &$scanned_onoins = []){
 	curl_setopt($ch, CURLOPT_URL, $link_to_check);
 	$links=curl_exec($ch);
-	if(preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $links, $addr)){
+	if(preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $links, $addr)){
 		$mh = null;
 		$curl_handles = [];
 		if($scan_children){
@@ -65,7 +64,7 @@ function check_links(array &$onions, $ch, string $link_to_check, bool $scan_chil
 			} while ($active && $status == CURLM_OK);
 			foreach($curl_handles as $handle){
 				$content = curl_multi_getcontent($handle);
-				if(preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $content, $addr)){
+				if(preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $content, $addr)){
 					foreach($addr[3] as $link){
 						$link=strtolower($link);
 						$md5=md5($link, true);

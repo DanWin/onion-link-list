@@ -145,7 +145,7 @@ function send_html(){
 	if(!empty($_REQUEST['desc'])){//use posted description
 		echo htmlspecialchars(trim($_REQUEST['desc']));
 	}elseif(!empty($_REQUEST['addr'])){//fetch description from database
-		if(preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+		if(preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			$addr=strtolower($addr[4]);
 			$md5=md5($addr, true);
 			$stmt=$db->prepare('SELECT description, category FROM ' . PREFIX . 'onions WHERE md5sum=?;');
@@ -232,7 +232,7 @@ function send_html(){
 	}
 	echo '</ul>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
-		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56})(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
+		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			echo "<p class=\"red\" role=\"alert\">$I[invalonion]</p>";
 			echo "<p>$I[valid]: http://tt3j2x4k5ycaa5zt.onion</p>";
 		}else{

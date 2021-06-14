@@ -20,7 +20,7 @@ $stmt=$db->prepare('UPDATE phishing, onions SET phishing.original=?, onions.time
 foreach($onions as $onion){
 	curl_setopt($ch, CURLOPT_URL, "http://$onion[address].onion/");
 	if(($site=curl_exec($ch))!==false){
-		preg_match('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{16}|[a-z2-7]{56}).onion(/[^\s><"]*)?~i', $site, $addr);
+		preg_match('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $site, $addr);
 		if($addr[3]!='' && $addr[3]!==$onion['address']){
 			echo "scam: $onion[address] - original: $addr[3]\n";
 			$stmt->execute([$addr[3], time(), $onion['address']]);
