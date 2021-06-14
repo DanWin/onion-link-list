@@ -486,9 +486,9 @@ function get_pagination(int $category, int $pages) : string {
 	ob_start();
 	echo "<ul class=\"list pagination\"><li>$I[pages]:</li>";
 	if($_REQUEST['pg']==0){
-		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all_legitimate]</a></li>";
+		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all]</a></li>";
 	}else{
-		echo " <li><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all_legitimate]</a></li>";
+		echo " <li><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">$I[all]</a></li>";
 	}
 	for($i=1; $i<=$pages; ++$i){
 		if($_REQUEST['pg']==$i){
