@@ -53,7 +53,7 @@ if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
 	$db->exec('CREATE TABLE ' . PREFIX . "captcha (id int(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, time int(10) UNSIGNED NOT NULL, code char(5) NOT NULL) ENGINE=MEMORY;");
 	$db->exec('CREATE TABLE ' . PREFIX . "onions (id int(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, address varchar(56) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL, md5sum binary(16) NOT NULL UNIQUE, lasttest int(10) UNSIGNED NOT NULL DEFAULT '0', lastup int(10) UNSIGNED NOT NULL DEFAULT '0', timediff int(10) UNSIGNED NOT NULL DEFAULT '0', timeadded int(10) UNSIGNED NOT NULL DEFAULT '0', description text CHARACTER SET utf8mb4 NOT NULL, category smallint(6) NOT NULL DEFAULT '0', locked smallint(6) NOT NULL DEFAULT '0', special int(10) UNSIGNED NOT NULL DEFAULT '0', approved smallint(6) NOT NULL DEFAULT '0', timechanged int(10) UNSIGNED NOT NULL DEFAULT '0', INDEX(address), INDEX(lasttest), INDEX(timediff), INDEX(category), INDEX(special), INDEX(timechanged));");
 	$db->exec('CREATE TABLE ' . PREFIX . 'phishing (onion_id int(10) UNSIGNED NOT NULL PRIMARY KEY, original varchar(56) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL, FOREIGN KEY (onion_id) REFERENCES onions(id) ON DELETE CASCADE ON UPDATE CASCADE);');
-	$db->exec('CREATE TABLE ' . PREFIX . 'settings (setting varchar(50) NOT NULL PRIMARY KEY, value varchar(20000) NOT NULL);');
+	$db->exec('CREATE TABLE ' . PREFIX . 'settings (setting varchar(50) NOT NULL PRIMARY KEY, value varchar(255) NOT NULL);');
 	$stmt=$db->prepare('INSERT INTO ' . PREFIX . "settings (setting, value) VALUES ('version', ?);");
 	$stmt->execute([DBVERSION]);
 	echo "$I[succdbcreate]\n";
@@ -94,6 +94,9 @@ if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
 	}
 	if($version < 7){
 		$db->exec('ALTER TABLE ' . PREFIX . "onions ADD timechanged int(10) UNSIGNED NOT NULL DEFAULT '0';");
+	}
+	if($version < 8){
+		$db->exec('ALTER TABLE ' . PREFIX . "settings CHANGE `value` `value` varchar(255) NOT NULL;");
 	}
 	$stmt=$db->prepare('UPDATE ' . PREFIX . "settings SET value=? WHERE setting='version';");
 	$stmt->execute([DBVERSION]);
