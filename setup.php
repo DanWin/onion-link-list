@@ -56,7 +56,6 @@ if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
 	$db->exec('CREATE TABLE ' . PREFIX . 'settings (setting varchar(50) NOT NULL PRIMARY KEY, value varchar(255) NOT NULL);');
 	$stmt=$db->prepare('INSERT INTO ' . PREFIX . "settings (setting, value) VALUES ('version', ?);");
 	$stmt->execute([DBVERSION]);
-	echo "$I[succdbcreate]\n";
 }else{
 	$res=$db->query('SELECT value FROM ' . PREFIX . "settings WHERE setting='version';");
 	$version=$res->fetch(PDO::FETCH_NUM)[0];
@@ -100,5 +99,5 @@ if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
 	}
 	$stmt=$db->prepare('UPDATE ' . PREFIX . "settings SET value=? WHERE setting='version';");
 	$stmt->execute([DBVERSION]);
-	echo "$I[statusok]\n";
 }
+echo "$I[statusok]\n";
