@@ -36,4 +36,4 @@ To update your translation, you can copy each new string to your translation fil
 Live Demo:
 ----------
 
-If you want to see the scripts in action, you can visit my Tor hidden service http://donionsixbjtiohce24abfgsffo2l4tk26qx464zylumgejukfq2vead.onion/onions.php or via my clearnet proxy https://onions.danwin1210.me/onions.php if you don't have Tor installed.
+If you want to see the scripts in action, you can visit my Tor hidden service http://donionsixbjtiohce24abfgsffo2l4tk26qx464zylumgejukfq2vead.onion/onions.php or via my clearnet proxy https://onions.danwin1210.de/onions.php if you don't have Tor installed.
