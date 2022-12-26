@@ -121,6 +121,7 @@ function send_html(): void
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 	echo '<meta name="description" content="Huge link list of Tor hidden service onions. All the darknet links you need in one place.">';
+	echo '<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.php" title="'._('Onion link list').'"/>';
 	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 	echo '<link rel="alternate" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '" hreflang="x-default">';
 	alt_links();
@@ -168,7 +169,7 @@ function send_html(): void
 	send_captcha();
 	echo "<input type=\"submit\" name=\"action\" value=\""._('Update')."\"></form></div>";
 	//search from
-	echo "<div class=\"col\"><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"post\">";
+	echo "<div class=\"col\"><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"post\" role=\"search\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
 	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
 	echo "<p><label>"._('Search:')." <br><input name=\"q\" size=\"30\" placeholder=\""._('Search term')."\" value=\"";
