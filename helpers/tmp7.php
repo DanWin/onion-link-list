@@ -3,7 +3,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>true]);
 }catch(PDOException $e){
-	die('No Connection to MySQL database!');
+	die(_('No database connection!'));
 }
 $stmt=$db->prepare("SELECT null FROM onions WHERE md5sum = ?;");
 $move=$db->prepare("UPDATE onions SET category=18, locked=1, description=CONCAT(description, ' - Part of scam network - SCAM'), timechanged=? WHERE md5sum = ? AND locked=0;");

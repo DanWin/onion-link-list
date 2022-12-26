@@ -4,7 +4,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME, DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
-	die($I['nodb']);
+	die(_('No database connection!'));
 }
 $ch=curl_init();
 set_curl_options($ch);
@@ -30,7 +30,8 @@ add_onions($onions, $db);
 //delete links that were not seen within a month
 $db->exec('DELETE FROM ' . PREFIX . "onions WHERE address!='' AND timediff>2419200 AND lasttest-timeadded>2419200;");
 
-function check_links(array &$onions, $ch, string $link_to_check, bool $scan_children = false, array &$scanned_onoins = []){
+function check_links(array &$onions, $ch, string $link_to_check, bool $scan_children = false, array &$scanned_onoins = []): void
+{
 	curl_setopt($ch, CURLOPT_URL, $link_to_check);
 	$links=curl_exec($ch);
 	if(preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $links, $addr)){
@@ -80,7 +81,8 @@ function check_links(array &$onions, $ch, string $link_to_check, bool $scan_chil
 	}
 }
 
-function add_onions(&$onions, $db){
+function add_onions(&$onions, $db): void
+{
 	$stmt=$db->query('SELECT md5sum FROM ' . PREFIX . 'onions;');
 	while($tmp=$stmt->fetch(PDO::FETCH_NUM)){
 		if(isset($onions[$tmp[0]])){

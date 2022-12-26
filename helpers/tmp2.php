@@ -3,7 +3,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>true]);
 }catch(PDOException $e){
-	die('No Connection to MySQL database!');
+	die(_('No database connection!'));
 }
 $stmt=$db->query("SELECT onions.address FROM onions LEFT JOIN phishing ON (phishing.onion_id=onions.id) WHERE onions.address!='' AND onions.category!=15 AND isnull(phishing.onion_id) AND timeadded>1506800000;");
 $move=$db->prepare("UPDATE onions SET category=15, locked=1, description='WARNING - This site will crash your browser with infinite iframes.', timechanged=? WHERE address=?;");

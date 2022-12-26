@@ -1,0 +1,375 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-26 13:53+0100\n"
+"PO-Revision-Date: 2022-12-26 14:14+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: www/test.php:7 www/test.php:15
+msgid "Online-Test"
+msgstr "Online-Teste"
+
+#: www/test.php:17
+msgid "Here an onion address can be tested, for whether it is online or not."
+msgstr "Aqui um endereço onion pode ser testado, para saber se está online ou não."
+
+#: www/test.php:20 www/admin.php:157
+msgid "Onion link:"
+msgstr ""
+
+#: www/test.php:27 www/onions.php:379 www/onions.php:408
+msgid "Test"
+msgstr "Testar"
+
+#: www/test.php:36 www/admin.php:12 www/sitemap.php:7 cron/update.php:7
+#: cron/phishing_tests.php:8 helpers/tmp5.php:6 helpers/tmp6.php:6
+#: helpers/fill_unknown_phishing.php:6 helpers/tmp3.php:6 helpers/tmp7.php:6
+#: helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6 setup.php:48
+#: setup.php:51
+msgid "No database connection!"
+msgstr "Sem conexão com a database!"
+
+#: www/test.php:39 www/onions.php:234 www/admin.php:48 www/admin.php:108
+msgid "Invalid onion address!"
+msgstr "Endereço onion inválido!"
+
+#: www/test.php:54
+#, php-format
+msgid "Warning, this is a known phishing clone. The original site is located at %s."
+msgstr "Aviso, este é um clone para phishing conhecido. O site original está localizado em %s."
+
+#: www/test.php:59
+msgid "Warning: This is a known scam!"
+msgstr ""
+
+#: www/test.php:64 www/test.php:99
+msgid "Yes, the service is online!"
+msgstr "Sim, o serviço está online!"
+
+#: www/test.php:105
+msgid "No, the service is offline!"
+msgstr "Não, o serviço está offline!"
+
+#: www/onions.php:55
+msgid "All legitimate"
+msgstr ""
+
+#: www/onions.php:56 www/onions.php:90
+msgid "Last added"
+msgstr "Últimos adicionados"
+
+#: www/onions.php:57
+msgid "Offline > 1 week"
+msgstr "Offline > 1 semana"
+
+#: www/onions.php:119 www/onions.php:128
+msgid "Onion link list"
+msgstr "Lista de links onion"
+
+#: www/onions.php:130 www/onions.php:449 www/onions.php:466
+msgid "Error: No database connection!"
+msgstr "Erro: Sem conexão com a database!"
+
+#: www/onions.php:137
+msgid "Onion address:"
+msgstr "Endereço onion:"
+
+#: www/onions.php:142 www/admin.php:181
+msgid "Description:"
+msgstr "Descrição:"
+
+#: www/onions.php:157 www/onions.php:177 www/admin.php:197
+msgid "Category:"
+msgstr "Categoria:"
+
+#: www/onions.php:167 www/admin.php:78 www/admin.php:218
+msgid "Update"
+msgstr "Atualizar"
+
+#: www/onions.php:172
+msgid "Search:"
+msgstr "Pesquisar:"
+
+#: www/onions.php:172
+msgid "Search term"
+msgstr "Termo de pesquisa"
+
+#: www/onions.php:182 www/onions.php:490 www/onions.php:492
+msgid "All"
+msgstr "Todos"
+
+#: www/onions.php:195
+msgid "Hide locked"
+msgstr "Esconder bloqueado"
+
+#: www/onions.php:196
+msgid "Search"
+msgstr "Pesquisar"
+
+#: www/onions.php:198
+msgid "Format:"
+msgstr "Formato:"
+
+#: www/onions.php:201
+msgid "Special categories:"
+msgstr "Categorias especiais:"
+
+#: www/onions.php:212 www/onions.php:214
+msgid "Phishing Clones"
+msgstr "Clone com phishing"
+
+#: www/onions.php:216
+msgid "Removed/Child porn"
+msgstr "Removidos/Pornografia infantil"
+
+#: www/onions.php:218
+msgid "Pending approval"
+msgstr "Aprovação pendente"
+
+#: www/onions.php:219
+msgid "Rejected"
+msgstr ""
+
+#: www/onions.php:223
+msgid "Categories:"
+msgstr "Categorias:"
+
+#: www/onions.php:235
+msgid "A valid address looks like this"
+msgstr "Um endereço válido é parecido com este"
+
+#: www/onions.php:238 www/onions.php:251
+msgid "Error: Wrong captcha"
+msgstr ""
+
+#: www/onions.php:244
+msgid "Error: Captcha expired"
+msgstr ""
+
+#: www/onions.php:272 www/admin.php:94
+msgid "Successfully added onion address!"
+msgstr "Endereço onion adicionado com sucesso!"
+
+#: www/onions.php:274
+msgid "Sorry, editing this onion address has been locked!"
+msgstr "Desculpe, a edição deste endereço onion foi bloqueada!"
+
+#: www/onions.php:278 www/admin.php:98
+msgid "Successfully updated description!"
+msgstr "Descrição atualizada com sucesso!"
+
+#: www/onions.php:282 www/admin.php:102
+msgid "Successfully updated category!"
+msgstr "Categoria atualizada com sucesso!"
+
+#: www/onions.php:284 www/admin.php:104
+msgid "Thanks, but I already knew this address!"
+msgstr "Obrigado, mas já conhecia este endereço!"
+
+#: www/onions.php:310
+#, php-format
+msgid "Searching for \"%1$s\", %2$d results found:"
+msgstr "Procurando por \"%1$s\", %2$d resultados encontrados:"
+
+#: www/onions.php:357 www/onions.php:422
+msgid "Onion link"
+msgstr "Onion link"
+
+#: www/onions.php:357
+msgid "Description"
+msgstr "Descrição"
+
+#: www/onions.php:357
+msgid "Last tested"
+msgstr "Testado pela última vez"
+
+#: www/onions.php:357 www/onions.php:422
+msgid "Last seen"
+msgstr "Visto pela última vez"
+
+#: www/onions.php:357
+msgid "Added at"
+msgstr "Adicionado em"
+
+#: www/onions.php:357
+msgid "Actions"
+msgstr "Ações"
+
+#: www/onions.php:369 www/onions.php:374 www/onions.php:389 www/onions.php:394
+#: www/onions.php:431
+msgid "Never"
+msgstr "Nunca"
+
+#: www/onions.php:406
+msgid "Edit"
+msgstr "Editar"
+
+#: www/onions.php:422
+msgid "Clone of"
+msgstr "Clone de"
+
+#: www/onions.php:438
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: www/onions.php:488
+msgid "Pages:"
+msgstr "Páginas:"
+
+#: www/admin.php:17 www/admin.php:24
+msgid "Admin interface"
+msgstr "Interface do administrador"
+
+#: www/admin.php:32
+msgid "Password:"
+msgstr "Senha:"
+
+#: www/admin.php:33
+msgid "Login"
+msgstr "Login"
+
+#: www/admin.php:36
+msgid "Wrong Password!"
+msgstr "Senha errada!"
+
+#: www/admin.php:52 www/admin.php:208
+msgid "Remove"
+msgstr "Remover"
+
+#: www/admin.php:54
+msgid "Successfully removed onion address!"
+msgstr "Endereço onion removido com sucesso!"
+
+#: www/admin.php:55 www/admin.php:209
+msgid "Lock"
+msgstr "Bloquear"
+
+#: www/admin.php:57
+msgid "Successfully locked onion address!"
+msgstr "Endereço onion bloqueado com sucesso!"
+
+#: www/admin.php:58 www/admin.php:213
+msgid "Re-add"
+msgstr "Re-adicionar"
+
+#: www/admin.php:60
+msgid "Successfully re-added onion address!"
+msgstr "Endereço onion adicionado com sucesso!"
+
+#: www/admin.php:61 www/admin.php:214
+msgid "Unlock"
+msgstr "Desbloquear"
+
+#: www/admin.php:63
+msgid "Successfully unlocked onion address!"
+msgstr "Endereço onion desbloqueado com sucesso!"
+
+#: www/admin.php:64 www/admin.php:210
+msgid "Promote"
+msgstr "Promover"
+
+#: www/admin.php:74
+#, php-format
+msgid "Successfully promoted onion address until %1$s!"
+msgstr ""
+
+#: www/admin.php:75 www/admin.php:215
+msgid "Un-promote"
+msgstr "Despromover"
+
+#: www/admin.php:77
+msgid "Successfully un-promoted onion address!"
+msgstr "Endereço onion despromovido com sucesso!"
+
+#: www/admin.php:106 www/admin.php:211
+msgid "Phishing"
+msgstr "Phishing"
+
+#: www/admin.php:120
+msgid "Successfully added Phishing clone!"
+msgstr "Clone com phishing adicionado com sucesso!"
+
+#: www/admin.php:122
+msgid "Not added Phishing clone! Phishing and original have the same address."
+msgstr "Clone com phishing não adicionado! Phishing e original têm o mesmo endereço."
+
+#: www/admin.php:125 www/admin.php:216
+msgid "No phishing"
+msgstr "Sem phishing"
+
+#: www/admin.php:130
+msgid "Successfully removed Phishing clone!"
+msgstr "Clone para phishing removido com sucesso!"
+
+#: www/admin.php:131 www/admin.php:220
+msgid "Reject"
+msgstr "Rejeitar"
+
+#: www/admin.php:133
+msgid "Successfully rejected onion address"
+msgstr "Endereço onion rejeitado com sucesso"
+
+#: www/admin.php:134 www/admin.php:221
+msgid "Approve"
+msgstr "Aprovar"
+
+#: www/admin.php:136
+msgid "Successfully approved onion address"
+msgstr "Endereço onion aprovado com sucesso"
+
+#: www/admin.php:138
+msgid "No action taken!"
+msgstr "Nenhuma ação tomada!"
+
+#: www/admin.php:151
+msgid "Switch view mode"
+msgstr "Alternar modo de visualização"
+
+#: www/admin.php:171
+msgid "Clone of:"
+msgstr "Clone de:"
+
+#: www/admin.php:176
+msgid "Bitcoins:"
+msgstr "Bitcoins:"
+
+#: common_config.php:93
+msgid "Language:"
+msgstr "Linguagem:"
+
+#: setup.php:25
+msgid "The pdo_mysql extension of PHP is required. Please install it first."
+msgstr ""
+
+#: setup.php:28
+msgid "The pcre extension of PHP is required. Please install it first."
+msgstr ""
+
+#: setup.php:31
+msgid "The json extension of PHP is required. Please install it first."
+msgstr ""
+
+#: setup.php:34
+msgid "The curl extension of PHP is required. Please install it first."
+msgstr ""
+
+#: setup.php:37
+msgid "The date extension of PHP is required. Please install it first."
+msgstr ""
+
+#: setup.php:106
+msgid "Status: OK"
+msgstr ""

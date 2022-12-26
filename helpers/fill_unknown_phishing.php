@@ -3,7 +3,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME, DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
-	die('No Connection to MySQL database!');
+	die(_('No database connection!'));
 }
 $ch=curl_init();
 set_curl_options($ch);

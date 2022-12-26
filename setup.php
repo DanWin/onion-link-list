@@ -2,7 +2,7 @@
 /*
 * Onion Link List - Setup
 *
-* Copyright (C) 2016-2020 Daniel Winzen <daniel@danwin1210.me>
+* Copyright (C) 2016-2020 Daniel Winzen <daniel@danwin1210.de>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,21 +17,24 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+if(!extension_loaded('gettext')){
+	die('The gettext extension of PHP is required. Please install it first.');
+}
 require_once(__DIR__.'/common_config.php');
 if(!extension_loaded('pdo_mysql')){
-	die($I['pdo_mysqlextrequired']);
+	die(_('The pdo_mysql extension of PHP is required. Please install it first.'));
 }
 if(!extension_loaded('pcre')){
-	die($I['pcreextrequired']);
+	die(_('The pcre extension of PHP is required. Please install it first.'));
 }
 if(!extension_loaded('json')){
-	die($I['jsonextrequired']);
+	die(_('The json extension of PHP is required. Please install it first.'));
 }
 if(!extension_loaded('curl')){
-	die($I['curlextrequired']);
+	die(_('The curl extension of PHP is required. Please install it first.'));
 }
 if(!extension_loaded('date')){
-	die($I['dateextrequired']);
+	die(_('The date extension of PHP is required. Please install it first.'));
 }
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
@@ -42,10 +45,10 @@ try{
 		if(false!==$db->exec('CREATE DATABASE ' . DBNAME)){
 			$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 		}else{
-			die($I['nodb']);
+			die(_('No database connection!'));
 		}
 	}catch(PDOException $e){
-		die($I['nodb']);
+		die(_('No database connection!'));
 	}
 }
 if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
@@ -100,4 +103,4 @@ if(!@$db->query('SELECT * FROM ' . PREFIX . 'settings LIMIT 1;')){
 	$stmt=$db->prepare('UPDATE ' . PREFIX . "settings SET value=? WHERE setting='version';");
 	$stmt->execute([DBVERSION]);
 }
-echo "$I[statusok]\n";
+echo _('Status: OK').PHP_EOL;

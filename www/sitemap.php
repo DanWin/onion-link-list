@@ -4,7 +4,7 @@ try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
 	http_response_code(500);
-	die($I['nodb']);
+	die(_('No database connection!'));
 }
 $links = [];
 $links []= ['loc' => CANONICAL_URL . '/test.php', 'changefreq' => 'weekly', 'priority' => '0.8'];
@@ -15,7 +15,7 @@ $admin_approval = '';
 if(REQUIRE_APPROVAL){
 	$admin_approval = PREFIX . 'onions.approved = 1 AND';
 }
-foreach ($L as $lang_code => $lang){
+foreach (LANGUAGES as $lang_code => $data){
 	$links []= ['loc' => CANONICAL_URL . "/test.php?lang=$lang_code", 'changefreq' => 'weekly', 'priority' => '0.4'];
 	$links []= ['loc' => CANONICAL_URL . "/onions.php?lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.5'];
 	$stmt=$db->prepare('SELECT COUNT(*) FROM ' . PREFIX . "onions WHERE $admin_approval category=? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800;');
@@ -32,12 +32,12 @@ foreach ($L as $lang_code => $lang){
 		}
 	}
 	$special=[
-		$I['all']=>"address!='' AND category!=15 AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800',
-		$I['lastadded']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
-		$I['offline']=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
+		'all'=>"address!='' AND category!=15 AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800',
+		'lastadded'=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
+		'offline'=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
 	$cat=count($categories);
-	foreach($special as $name=>$query){
+	foreach($special as $query){
 		$links []= ['loc' => CANONICAL_URL . "/onions.php?cat=$cat&lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3'];
 		if($cat===count($categories)+1){
 			$num[0]=PER_PAGE;

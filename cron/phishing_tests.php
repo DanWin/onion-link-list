@@ -5,7 +5,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
-	die($I['nodb']);
+	die(_('No database connection!'));
 }
 $ch=curl_init();
 set_curl_options($ch);
@@ -14,7 +14,8 @@ set_curl_options($ch);
 //check('http://skunksworkedp2cg.onion/sites.html', 'http://skunkrdunsylcfqd.onion/sites.html');
 //check('http://dhosting4xxoydyaivckq7tsmtgi4wfs3flpeyitekkmqwu4v4r46syd.onion/list.php', 'http://dhostingwwafxyuaxhs6bkhzo5e2mueztbmhqe6wsng547ucvzfuh2ad.onion/list.php');
 
-function check(string $link, string $phishing_link){
+function check(string $link, string $phishing_link): void
+{
 	global $ch, $db;
 	curl_setopt($ch, CURLOPT_URL, $link);
 	$links=curl_exec($ch);
