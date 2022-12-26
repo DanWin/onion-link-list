@@ -19,6 +19,8 @@ asort($categories);
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="<?php echo CANONICAL_URL . $_SERVER['SCRIPT_NAME']; ?>">
+<link rel="alternate" href="<?php echo CANONICAL_URL . $_SERVER['SCRIPT_NAME']; ?>" hreflang="x-default">
+<?php alt_links(); ?>
 <style><?php echo $style; ?></style>
 </head><body><main>
 <h1><?php echo _('Admin interface'); ?></h1>

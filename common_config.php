@@ -170,3 +170,23 @@ function set_curl_options($ch): void
 	curl_setopt($ch, CURLOPT_TIMEOUT, 120);
 	curl_setopt($ch, CURLOPT_ENCODING, '');
 }
+
+function alt_links(): void
+{
+	global $language;
+	$canonical_query = [];
+	if(isset($_REQUEST['cat'])) {
+		$canonical_query['cat'] = $_REQUEST['cat'];
+	}
+	if(isset($_REQUEST['pg'])) {
+		$canonical_query['pg'] = $_REQUEST['pg'];
+	}
+	foreach(LANGUAGES as $lang => $data) {
+		if($lang === $language){
+			continue;
+		}
+		$canonical_query['lang'] = $lang;
+		$link = CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '?' . http_build_query($canonical_query);
+		echo '<link rel="alternate" href="'.$link.'" hreflang="'.$lang.'" />';
+	}
+}

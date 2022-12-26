@@ -10,6 +10,8 @@ echo '<meta name="author" content="Daniel Winzen">';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 echo '<meta name="description" content="Test whether a Tor hidden service onion is online or offline">';
 echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '">';
+echo '<link rel="alternate" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '" hreflang="x-default">';
+alt_links();
 echo '<style>'.$style.'</style>';
 echo '</head><body><main>';
 echo "<h1>"._('Online-Test')."</h1>";
