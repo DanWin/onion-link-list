@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 20:20+0100\n"
-"PO-Revision-Date: 2022-12-26 13:53+0100\n"
+"POT-Creation-Date: 2022-12-28 00:27+0100\n"
+"PO-Revision-Date: 2022-12-28 00:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -24,7 +24,7 @@ msgstr "Online-Test"
 
 #: www/test.php:11 www/test.php:19
 msgid "Test whether a Tor hidden service onion is online or offline"
-msgstr ""
+msgstr "Teste ob ein Tor hidden service onion link online oder offline is"
 
 #: www/test.php:22 www/admin.php:159
 msgid "Onion link:"
@@ -88,6 +88,8 @@ msgid ""
 "Huge link list of Tor hidden service onions. All the darknet links you need "
 "in one place."
 msgstr ""
+"Große Liste von Tor hidden service onion links. Alle Darknet Links, die du "
+"brauchst, in einem Ort."
 
 #: www/onions.php:114 www/onions.php:433 www/onions.php:450
 msgid "Error: No database connection!"
@@ -101,6 +103,11 @@ msgid ""
 "receive E-Mails from people that were desperate to make money and fell for "
 "scammers, don't be one of them!"
 msgstr ""
+"Ich bin nicht für irgend einen Inhalt der hier verlinkten Seiten "
+"verantwortlich. 99% der Darknweb Seiten, die etwas verkaufen, sind Betrug. "
+"Sei vorsichtig und benutze deinen Verstand. Ich bekomme regelmäßig E-Mails "
+"von Menschen, die verzweifelt versuchten Geld zu machen, und stattdessen auf "
+"Betrüger hereingefallen sind. Sei nicht auch einer von denen!"
 
 #: www/onions.php:121
 msgid "Onion address:"
@@ -167,9 +174,9 @@ msgid "Categories:"
 msgstr "Kategorien:"
 
 #: www/onions.php:219
-#, fuzzy, php-format
+#, php-format
 msgid "A valid address looks like this: %s"
-msgstr "Eine gültige Adresse sieht so aus"
+msgstr "Eine gültige Adresse sieht so aus: %s"
 
 #: www/onions.php:222 www/onions.php:235
 msgid "Error: Wrong captcha"
@@ -208,7 +215,7 @@ msgstr "Suche nach \"%1$s\", %2$d Ergebnisse gefunden:"
 msgid "Onion link"
 msgstr "Onion-Adresse"
 
-#: www/onions.php:341
+#: www/onions.php:341 www/admin.php:165
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -248,6 +255,10 @@ msgstr "Unbekannt"
 #: www/onions.php:472
 msgid "Pages:"
 msgstr "Seiten:"
+
+#: www/onions.php:506
+msgid "Copy:"
+msgstr "Kopiere:"
 
 #: www/admin.php:17 www/admin.php:26
 msgid "Admin interface"
@@ -360,6 +371,32 @@ msgstr "Keine Aktion ausgeführt!"
 msgid "Switch view mode"
 msgstr "Ansichtsmodus wechseln"
 
+#: www/admin.php:165
+msgid "Select"
+msgstr "Auswählen"
+
+#: www/admin.php:165
+msgid "Address"
+msgstr "Adresse"
+
+#: www/admin.php:165
+msgid "Category"
+msgstr "Kategorie"
+
+#: www/admin.php:165
+msgid "Status"
+msgstr "Status"
+
+#: www/admin.php:169
+#, php-format
+msgid "Approved: %d"
+msgstr "Akzeptiert: %d"
+
+#: www/admin.php:169
+#, php-format
+msgid "Locked: %d"
+msgstr "Gesperrt: %d"
+
 #: www/admin.php:173
 msgid "Clone of:"
 msgstr "Klon von:"
@@ -370,12 +407,11 @@ msgstr "Bitcoins:"
 
 #: www/sitemap.php:77
 msgid "Error creating the sitemap!"
-msgstr ""
+msgstr "Fehler beim Erstellen der Sitemap!"
 
 #: www/opensearch.php:7
-#, fuzzy
 msgid "Search the onion link list"
-msgstr "Onion Linkliste"
+msgstr "Durchsuche die Onion Linkliste"
 
 #: common_config.php:93
 msgid "Language:"

@@ -115,15 +115,15 @@ function send_html(): void
 	}
 	echo '<p>'._('I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. I regularly receive E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!').'</p>';
 	//update onions description form
-	echo "<div class=\"table\" id=\"edit-search\"><div class=\"row\"><div class=\"col\"><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"POST\">";
-	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
-	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<p><label>"._('Onion address:')." <br><input name=\"addr\" size=\"30\" placeholder=\"http://$_SERVER[HTTP_HOST]\" value=\"";
+	echo '<div class="table" id="edit-search"><div class="row"><div class="col"><form action="'.$_SERVER['SCRIPT_NAME'].'" target="_self" method="POST">';
+	echo '<input type="hidden" name="pg" value="'.htmlspecialchars($_REQUEST['newpg']).'">';
+	echo '<input type="hidden" name="lang" value="'.$language.'">';
+	echo '<p><label>'._('Onion address:').'<br><input name="addr" size="30" placeholder="http://'.$_SERVER['HTTP_HOST'].'" value="';
 	if(isset($_REQUEST['addr'])){
 		echo htmlspecialchars($_REQUEST['addr']);
 	}
 	echo '" required></label></p>';
-	echo "<p><label>"._('Description:')." <br><textarea name=\"desc\" rows=\"2\" cols=\"30\">";
+	echo '<p><label>'._('Description:').'<br><textarea name="desc" rows="2" cols="30">';
 	if(!empty($_REQUEST['desc'])){//use posted description
 		echo htmlspecialchars(trim($_REQUEST['desc']));
 	}elseif(!empty($_REQUEST['addr'])){//fetch description from database
@@ -138,9 +138,9 @@ function send_html(): void
 		}
 	}
 	echo '</textarea></label></p>';
-	echo "<p><label>"._('Category:')." <select name=\"cat\">";
+	echo '<p><label>'._('Category:').' <select name="cat">';
 	foreach($categories as $cat=>$name){
-		echo "<option value=\"$cat\"";
+		echo '<option value="'.$cat.'"';
 		if($category==$cat || ($cat===0 && $category>=count($categories))){
 			echo ' selected';
 		}
@@ -148,12 +148,12 @@ function send_html(): void
 	}
 	echo '</select></label></p>';
 	send_captcha();
-	echo "<input type=\"submit\" name=\"action\" value=\""._('Update')."\"></form></div>";
+	echo '<input type="submit" name="action" value="'._('Update').'"></form></div>';
 	//search from
-	echo "<div class=\"col\"><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"post\" role=\"search\">";
-	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
-	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<p><label>"._('Search:')." <br><input name=\"q\" size=\"30\" placeholder=\""._('Search term')."\" value=\"";
+	echo '<div class="col"><form action="'.$_SERVER['SCRIPT_NAME'].'" target="_self" method="post" role="search">';
+	echo '<input type="hidden" name="pg" value="'.htmlspecialchars($_REQUEST['newpg']).'">';
+	echo '<input type="hidden" name="lang" value="'.$language.'">';
+	echo '<p><label>'._('Search:').' <br><input name="q" size="30" placeholder="'._('Search term').'" value="';
 	if(isset($_REQUEST['q'])){
 		echo trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q'])));
 	}
@@ -163,9 +163,9 @@ function send_html(): void
 	if($category>=count($categories)){
 		echo ' selected';
 	}
-	echo ">"._('All')."</option>";
+	echo '>'._('All').'</option>';
 	foreach($categories as $cat=>$name){
-		echo "<option value=\"$cat\"";
+		echo '<option value="'.$cat.'"';
 		if($category==$cat){
 			echo ' selected';
 		}
@@ -176,47 +176,47 @@ function send_html(): void
 	if(isset($_REQUEST['hidelocked'])){
 		echo ' checked';
 	}
-	echo ">"._('Hide locked')."</label></p>";
-	echo "<input type=\"submit\" name=\"action\" value=\""._('Search')."\"></form></div>";
+	echo '>'._('Hide locked').'</label></p>';
+	echo '<input type="submit" name="action" value="'._('Search').'"></form></div>';
 	echo '</div></div>';
-	echo "<ul class=\"list\"><li>"._('Format:')."</li><li><a href=\"?format=text\" target=\"_self\">Text</a></li><li><a href=\"?format=json\" target=\"_self\">JSON</a></li></ul>";
+	echo '<ul class="list"><li>'._('Format:').'</li><li><a href="?format=text" target="_self">Text</a></li><li><a href="?format=json" target="_self">JSON</a></li></ul>';
 	print_langs();
 	//List special categories
-	echo "<ul class=\"list\"><li>"._('Special categories:')."</li>";
+	echo '<ul class="list"><li>'._('Special categories:').'</li>';
 	$cat=count($categories);
 	foreach($special as $name=>$query){
 		if($category==$cat){
-			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
+			echo ' <li class="active"><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		}else{
-			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
+			echo ' <li><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		}
 		++$cat;
 	}
 	if($category==$cat){
-		echo " <li class=\"active\"><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">"._('Phishing Clones')." ($category_count[$cat])</a></li>";
+		echo ' <li class="active"><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
 	}else{
-		echo " <li><a href=\"?cat=$cat&amp;lang=$language\" target=\"_self\">"._('Phishing Clones')." ($category_count[$cat])</a></li>";
+		echo ' <li><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
 	}
-	echo " <li>"._('Removed/Child porn')." ($category_count[removed])</li>";
+	echo ' <li>'._('Removed/Child porn')." ($category_count[removed])</li>";
 	if(REQUIRE_APPROVAL) {
-		echo " <li>"._('Pending approval')." ($category_count[pending])</li>";
-		echo " <li>"._('Rejected')." ($category_count[rejected])</li>";
+		echo ' <li>'._('Pending approval')." ($category_count[pending])</li>";
+		echo ' <li>'._('Rejected')." ($category_count[rejected])</li>";
 	}
 	echo '</ul>';
 	//List normal categories
-	echo "<ul class=\"list\"><li>"._('Categories:')."</li>";
+	echo '<ul class="list"><li>'._('Categories:').'</li>';
 	foreach($categories as $cat=>$name){
 		if($category==$cat){
-			echo " <li class=\"active\"><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
+			echo ' <li class="active"><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		}else{
-			echo " <li><a href=\"?cat=$cat&amp;pg=$_REQUEST[newpg]&amp;lang=$language\" target=\"_self\">$name ($category_count[$cat])</a></li>";
+			echo ' <li><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		}
 	}
 	echo '</ul>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
 		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
-			echo "<p class=\"red\" role=\"alert\">"._('Invalid onion address!')."</p>";
-			echo "<p>".sprintf(_('A valid address looks like this: %s'), 'http://danielas3rtn54uwmofdo3x2bsdifr47huasnmbgqzfrec5ubupvtpid.onion') ."</p>";
+			echo '<p class="red" role="alert">'._('Invalid onion address!').'</p>';
+			echo '<p>'.sprintf(_('A valid address looks like this: %s'), 'http://danielas3rtn54uwmofdo3x2bsdifr47huasnmbgqzfrec5ubupvtpid.onion') .'</p>';
 		}else{
 			if(!isset($_REQUEST['challenge'])){
 				send_error(_('Error: Wrong captcha'));
@@ -253,19 +253,19 @@ function send_html(): void
 			if(!$stmt->fetch(PDO::FETCH_BOUND)){//new link, add to database
 				$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded, timechanged) VALUES (?, ?, ?, ?, ?, ?);');
 				$stmt->execute([$addr, $desc, $md5, $category, time(), time()]);
-				echo "<p class=\"green\" role=\"alert\">"._('Successfully added onion address!')."</p>";
+				echo '<p class="green" role="alert">'._('Successfully added onion address!').'</p>';
 			}elseif($locked==1){//locked, not editable
-				echo "<p class=\"red\" role=\"alert\">"._('Sorry, editing this onion address has been locked!')."</p>";
+				echo '<p class="red" role="alert">'._('Sorry, editing this onion address has been locked!').'</p>';
 			}elseif($desc!==''){//update description
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET description=?, category=?, timechanged=? WHERE md5sum=?;');
 				$stmt->execute([$desc, $category, time(), $md5]);
-				echo "<p class=\"green\" role=\"alert\">"._('Successfully updated description!')."</p>";
+				echo '<p class="green" role="alert">'._('Successfully updated description!').'</p>';
 			}elseif($category!=0){//update category only
 				$stmt=$db->prepare('UPDATE ' . PREFIX . 'onions SET category=?, timechanged=? WHERE md5sum=?;');
 				$stmt->execute([$category, time(), $md5]);
-				echo "<p class=\"green\" role=\"alert\">"._('Successfully updated category!')."</p>";
+				echo '<p class="green" role="alert">'._('Successfully updated category!').'</p>';
 			}else{//nothing changed and already known
-				echo "<p class=\"green\" role=\"alert\">"._('Thanks, but I already knew this address!')."</p>";
+				echo '<p class="green" role="alert">'._('Thanks, but I already knew this address!').'</p>';
 			}
 		}
 	}
@@ -291,14 +291,14 @@ function send_html(): void
 			$stmt->execute([$category, $query, $query]);
 		}
 		$table=get_table($stmt, $numrows);
-		printf("<p><b>"._('Searching for "%1$s", %2$d results found:')."</b></p>", trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q']))), $numrows);
+		printf('<p><b>'._('Searching for "%1$s", %2$d results found:').'</b></p>', trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q']))), $numrows);
 		echo $table;
 	}elseif($category>=count($categories)+count($special)){//show phishing clones
 		print_phishing_table();
 	}elseif($category>=count($categories)){//show special categories
 		$tmp=$category-count($categories);
 		$query = '';
-		foreach($special as $name=>$query){
+		foreach($special as $query){
 			if($tmp===0) break;
 			--$tmp;
 		}
@@ -338,7 +338,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		$admin_approval = PREFIX . 'onions.approved = 1 AND';
 	}
 	ob_start();
-	echo "<div class=\"table\" id=\"maintable\"><div class=\"row headerrow\"><div class=\"col\">"._('Onion link')."</div><div class=\"col\">"._('Description')."</div><div class=\"col\">"._('Last tested')."</div><div class=\"col\">"._('Last seen')."</div><div class=\"col\">"._('Added at')."</div><div class=\"col\">"._('Actions')."</div></div>";
+	echo '<div class="table" id="maintable"><div class="row headerrow"><div class="col">'._('Onion link').'</div><div class="col">'._('Description').'</div><div class="col">'._('Last tested').'</div><div class="col">'._('Last seen').'</div><div class="col">'._('Added at').'</div><div class="col">'._('Actions').'</div></div>';
 	if($promoted){//print promoted links at the top
 		$time=time();
 		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
@@ -360,7 +360,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 				$lasttest=date('Y-m-d H:i:s', $link['lasttest']);
 			}
 			$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
-			echo "<div class=\"$class row promo\"><div class=\"col\"><a href=\"http://$link[address].onion\" rel=\"noopener\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\"><form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input name=\"lang\" value=\"$language\" type=\"hidden\"><input value=\""._('Test')."\" type=\"submit\"></form></div></div>";
+			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lasttest.'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input name="lang" value="'.$language.'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
 		}
 	}
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -387,9 +387,9 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		if($link['locked']==1){
 			$edit='-';
 		}else{
-			$edit="<form><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\""._('Edit')."\" type=\"submit\"></form>";
+			$edit='<form><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="pg" value="'.$_REQUEST['newpg'].'"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Edit').'" type="submit"></form>';
 		}
-		echo "<div class=\"row $class\"><div class=\"col\"><a href=\"http://$link[address].onion\" rel=\"noopener\">$link[address].onion</a></div><div class=\"col\">$link[description]</div><div class=\"col\">$lasttest</div><div class=\"col\">$lastup</div><div class=\"col\">$timeadded</div><div class=\"col\">$edit <form method=\"post\" action=\"test.php\"><input name=\"addr\" value=\"$link[address]\" type=\"hidden\"><input type=\"hidden\" name=\"lang\" value=\"$language\"><input value=\""._('Test')."\" type=\"submit\"></form></div></div>";
+		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lasttest.'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Test').'" type="submit"></form></div></div>';
 		++$numrows;
 	}
 	echo '</div>';
@@ -403,7 +403,7 @@ function print_phishing_table(): void
 	if(REQUIRE_APPROVAL){
 		$admin_approval = 'approved = 1 AND';
 	}
-	echo "<div class=\"table\" id=\"maintable\"><div class=\"row headerrow\"><div class=\"col\">"._('Onion link')."</div><div class=\"col\">"._('Clone of')."</div><div class=\"col\">"._('Last seen')."</div></div>";
+	echo '<div class="table" id="maintable"><div class="row headerrow"><div class="col">'._('Onion link').'</div><div class="col">'._('Clone of').'</div><div class="col">'._('Last seen').'</div></div>';
 	$stmt=$db->query('SELECT address, original, lasttest, lastup FROM ' . PREFIX . 'onions, ' . PREFIX . 'phishing WHERE ' . "$admin_approval " . PREFIX . "onions.id=onion_id AND address!='' AND timediff<604800 ORDER BY address;");
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
 		if($link['lastup']===$link['lasttest']){
@@ -417,11 +417,11 @@ function print_phishing_table(): void
 			$lastup=date('Y-m-d H:i:s', $link['lastup']);
 		}
 		if($link['original']!==''){
-			$orig="<a href=\"http://$link[original].onion\" rel=\"noopener\">$link[original].onion</a>";
+			$orig='<a href="http://'.$link['original'].'.onion" rel="noopener">'.$link['original'].'.onion</a>';
 		}else{
 			$orig=_('Unknown');
 		}
-		echo "<div class=\"row $class\"><div class=\"col\">$link[address].onion</div><div class=\"col\">$orig</div><div class=\"col\">$lastup</div></div>";
+		echo '<div class="row '.$class.'"><div class="col">'.$link['address'].'.onion</div><div class="col">'.$orig.'</div><div class="col">'.$lastup.'</div></div>';
 	}
 	echo '</div>';
 }
@@ -469,17 +469,17 @@ function send_json(): void
 function get_pagination(int $category, int $pages) : string {
 	global $language;
 	ob_start();
-	echo "<ul class=\"list pagination\"><li>"._('Pages:')."</li>";
+	echo '<ul class="list pagination"><li>'._('Pages:').'</li>';
 	if($_REQUEST['pg']==0){
-		echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">"._('All')."</a></li>";
+		echo ' <li class="active"><a href="?cat='.$category.'&amp;pg=0&amp;lang='.$language.'" target="_self">'._('All').'</a></li>';
 	}else{
-		echo " <li><a href=\"?cat=$category&amp;pg=0&amp;lang=$language\" target=\"_self\">"._('All')."</a></li>";
+		echo ' <li><a href="?cat='.$category.'&amp;pg=0&amp;lang='.$language.'" target="_self">'._('All').'</a></li>';
 	}
 	for($i=1; $i<=$pages; ++$i){
 		if($_REQUEST['pg']==$i){
-			echo " <li class=\"active\"><a href=\"?cat=$category&amp;pg=$i&amp;lang=$language\" target=\"_self\">$i</a></li>";
+			echo ' <li class="active"><a href="?cat=$category&amp;pg='.$i.'&amp;lang='.$language.'" target="_self">'.$i.'</a></li>';
 		}else{
-			echo " <li><a href=\"?cat=$category&amp;pg=$i&amp;lang=$language\" target=\"_self\">$i</a></li>";
+			echo ' <li><a href="?cat='.$category.'&amp;pg='.$i.'&amp;lang='.$language.'" target="_self">'.$i.'</a></li>';
 		}
 	}
 	echo "</ul>";
@@ -503,14 +503,14 @@ function send_captcha(): void
 	$time=time();
 	$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'captcha (id, time, code) VALUES (?, ?, ?);');
 	$stmt->execute([$randid, $time, $code]);
-	echo "<p><label>Copy: ";
+	echo '<p><label>'._('Copy:');
 	if($difficulty===1){
 		$im=imagecreatetruecolor(55, 24);
 		$bg=imagecolorallocate($im, 0, 0, 0);
 		$fg=imagecolorallocate($im, 255, 255, 255);
 		imagefill($im, 0, 0, $bg);
 		imagestring($im, 5, 5, 5, $code, $fg);
-		echo '<img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
+		echo ' <img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
 	}else{
 		$im=imagecreatetruecolor(55, 24);
 		$bg=imagecolorallocate($im, 0, 0, 0);
@@ -525,16 +525,16 @@ function send_captcha(): void
 		for($i=0;$i<100;++$i){
 			imagesetpixel($im, mt_rand(0, 55), mt_rand(0, 24), $dots);
 		}
-		echo '<img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
+		echo ' <img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
 	}
 	ob_start();
 	imagegif($im);
 	imagedestroy($im);
 	echo base64_encode(ob_get_clean()).'">';
-	echo "<input type=\"hidden\" name=\"challenge\" value=\"$randid\"><input type=\"text\" name=\"captcha\" size=\"15\" autocomplete=\"off\"></label></p>";
+	echo '<input type="hidden" name="challenge" value="'.$randid.'"><input type="text" name="captcha" size="15" autocomplete="off"></label></p>';
 }
 
 function send_error(string $msg): void
 {
-	die("<p class=\"red\" role=\"alert\">$msg</p></main></body></html>");
+	die('<p class="red" role="alert">'.$msg.'</p></main></body></html>');
 }

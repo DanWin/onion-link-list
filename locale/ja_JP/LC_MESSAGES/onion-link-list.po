@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 20:20+0100\n"
+"POT-Creation-Date: 2022-12-28 00:27+0100\n"
 "PO-Revision-Date: 2022-12-26 14:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,7 +206,7 @@ msgstr "検索キーワード \"%1$s\"　-　%2$d 件見つかりました："
 msgid "Onion link"
 msgstr "Onion リンク"
 
-#: www/onions.php:341
+#: www/onions.php:341 www/admin.php:165
 msgid "Description"
 msgstr "説明"
 
@@ -246,6 +246,10 @@ msgstr "不明"
 #: www/onions.php:472
 msgid "Pages:"
 msgstr "ページ："
+
+#: www/onions.php:506
+msgid "Copy:"
+msgstr ""
 
 #: www/admin.php:17 www/admin.php:26
 msgid "Admin interface"
@@ -354,6 +358,34 @@ msgstr "何も操作していません！"
 
 #: www/admin.php:153
 msgid "Switch view mode"
+msgstr ""
+
+#: www/admin.php:165
+msgid "Select"
+msgstr ""
+
+#: www/admin.php:165
+msgid "Address"
+msgstr ""
+
+#: www/admin.php:165
+#, fuzzy
+msgid "Category"
+msgstr "カテゴリ："
+
+#: www/admin.php:165
+#, fuzzy
+msgid "Status"
+msgstr "状態：　良好"
+
+#: www/admin.php:169
+#, php-format
+msgid "Approved: %d"
+msgstr ""
+
+#: www/admin.php:169
+#, php-format
+msgid "Locked: %d"
 msgstr ""
 
 #: www/admin.php:173

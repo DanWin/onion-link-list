@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 20:20+0100\n"
-"PO-Revision-Date: 2022-12-26 14:30+0100\n"
+"POT-Creation-Date: 2022-12-28 00:27+0100\n"
+"PO-Revision-Date: 2022-12-27 22:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -166,9 +166,9 @@ msgid "Categories:"
 msgstr "Kategoriler:"
 
 #: www/onions.php:219
-#, fuzzy, php-format
+#, php-format
 msgid "A valid address looks like this: %s"
-msgstr "Geçerli bir adres şöyle gözükür:"
+msgstr "Geçerli bir adres şöyle gözükür: %s"
 
 #: www/onions.php:222 www/onions.php:235
 msgid "Error: Wrong captcha"
@@ -207,7 +207,7 @@ msgstr "\"%1$s\" için aranıyor, %2$d sonuç bulundu:"
 msgid "Onion link"
 msgstr "Onion bağlantısı"
 
-#: www/onions.php:341
+#: www/onions.php:341 www/admin.php:165
 msgid "Description"
 msgstr "Açıklama"
 
@@ -247,6 +247,10 @@ msgstr "Bilinmiyor"
 #: www/onions.php:472
 msgid "Pages:"
 msgstr "Sayfalar:"
+
+#: www/onions.php:506
+msgid "Copy:"
+msgstr ""
 
 #: www/admin.php:17 www/admin.php:26
 msgid "Admin interface"
@@ -355,6 +359,33 @@ msgstr "İşlem yapılmadı!"
 
 #: www/admin.php:153
 msgid "Switch view mode"
+msgstr ""
+
+#: www/admin.php:165
+msgid "Select"
+msgstr ""
+
+#: www/admin.php:165
+msgid "Address"
+msgstr ""
+
+#: www/admin.php:165
+#, fuzzy
+msgid "Category"
+msgstr "Kategori:"
+
+#: www/admin.php:165
+msgid "Status"
+msgstr ""
+
+#: www/admin.php:169
+#, php-format
+msgid "Approved: %d"
+msgstr ""
+
+#: www/admin.php:169
+#, php-format
+msgid "Locked: %d"
 msgstr ""
 
 #: www/admin.php:173

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 20:20+0100\n"
-"PO-Revision-Date: 2022-12-26 15:08+0100\n"
+"POT-Creation-Date: 2022-12-28 00:27+0100\n"
+"PO-Revision-Date: 2022-12-27 22:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -40,7 +40,7 @@ msgstr "آزمون"
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
 #: setup.php:48 setup.php:51
 msgid "No database connection!"
-msgstr "مشکل در اتصال به دیتابیس"
+msgstr "مشکل در اتصال به دیتابیس!"
 
 #: www/test.php:41 www/onions.php:218 www/admin.php:50 www/admin.php:110
 msgid "Invalid onion address!"
@@ -89,7 +89,7 @@ msgstr ""
 
 #: www/onions.php:114 www/onions.php:433 www/onions.php:450
 msgid "Error: No database connection!"
-msgstr "خطا: مشکل در اتصال به دیتابیس"
+msgstr "خطا: مشکل در اتصال به دیتابیس!"
 
 #: www/onions.php:116
 #, php-format
@@ -165,9 +165,9 @@ msgid "Categories:"
 msgstr "دسته بندی ها:"
 
 #: www/onions.php:219
-#, fuzzy, php-format
+#, php-format
 msgid "A valid address looks like this: %s"
-msgstr "آدرس معتبری به این شکل است"
+msgstr "آدرس معتبری به این شکل است: %s"
 
 #: www/onions.php:222 www/onions.php:235
 msgid "Error: Wrong captcha"
@@ -206,7 +206,7 @@ msgstr "جستجو برای  \"%1$s\", %2$d نتیجه یافت شد:"
 msgid "Onion link"
 msgstr "پیوند پیازی"
 
-#: www/onions.php:341
+#: www/onions.php:341 www/admin.php:165
 msgid "Description"
 msgstr "توضیح"
 
@@ -246,6 +246,10 @@ msgstr "ناشناخته"
 #: www/onions.php:472
 msgid "Pages:"
 msgstr "صفحه:"
+
+#: www/onions.php:506
+msgid "Copy:"
+msgstr ""
 
 #: www/admin.php:17 www/admin.php:26
 msgid "Admin interface"
@@ -356,6 +360,34 @@ msgstr "اقدامی انجام نشده است!"
 msgid "Switch view mode"
 msgstr "نغییر حالت مشاهده"
 
+#: www/admin.php:165
+msgid "Select"
+msgstr ""
+
+#: www/admin.php:165
+msgid "Address"
+msgstr ""
+
+#: www/admin.php:165
+#, fuzzy
+msgid "Category"
+msgstr "دسته بندی:"
+
+#: www/admin.php:165
+#, fuzzy
+msgid "Status"
+msgstr "وضعیت: خوب"
+
+#: www/admin.php:169
+#, fuzzy, php-format
+msgid "Approved: %d"
+msgstr "تایید"
+
+#: www/admin.php:169
+#, php-format
+msgid "Locked: %d"
+msgstr ""
+
 #: www/admin.php:173
 msgid "Clone of:"
 msgstr "کلون از:"
@@ -369,9 +401,8 @@ msgid "Error creating the sitemap!"
 msgstr ""
 
 #: www/opensearch.php:7
-#, fuzzy
 msgid "Search the onion link list"
-msgstr "پیوندهای پیازی"
+msgstr ""
 
 #: common_config.php:93
 msgid "Language:"

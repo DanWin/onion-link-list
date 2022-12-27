@@ -29,13 +29,13 @@ print_langs();
 
 //check password
 if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
-	echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
-	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<p><label>"._('Password:')." <input type=\"password\" name=\"pass\" size=\"30\" required autocomplete=\"current-password\"></label></p>";
-	echo "<input type=\"submit\" name=\"action\" value=\""._('Login')."\">";
+	echo '<form action="'.$_SERVER['SCRIPT_NAME'].'" method="POST">';
+	echo '<input type="hidden" name="lang" value="'.$language.'">';
+	echo '<p><label>'._('Password:').' <input type="password" name="pass" size="30" required autocomplete="current-password"></label></p>';
+	echo '<input type="submit" name="action" value="'._('Login').'">';
 	echo '</form>';
 	if(isset($_POST['pass'])){
-		echo "<p class=\"red\" role=\"alert\">"._('Wrong Password!')."</p>";
+		echo '<p class="red" role="alert">'._('Wrong Password!').'</p>';
 	}
 }else{
     $msg = '';
@@ -47,22 +47,22 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		$addrs = is_array($_POST['addr']) ? $_POST['addr'] : [$_POST['addr']];
 		foreach ($addrs as $addr_single) {
 			if ( ! preg_match( '~(^(https?://)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim( $addr_single ), $addr ) ) {
-				$msg .= "<p class=\"red\" role=\"alert\">"._('Invalid onion address!')."</p>";
+				$msg .= '<p class="red" role="alert">'._('Invalid onion address!').'</p>';
 			} else {
 				$addr = strtolower( $addr[ 3 ] );
 				$md5 = md5( $addr, true );
 				if ( $_POST[ 'action' ] === _('Remove') ) { //remove address from public display
 					$db->prepare( 'UPDATE ' . PREFIX . "onions SET address='', locked=1, approved=-1, timechanged=? WHERE md5sum=?;" )->execute( [ time(), $md5 ] );
-					$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully removed onion address!')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully removed onion address!').'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Lock') ) { //lock editing
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
-					$msg .= "<p class=\"green\"> role=\"alert\">"._('Successfully locked onion address!')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully locked onion address!').'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Re-add') ) { //add onion back, if previously removed
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET address=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ $addr, time(), $md5 ] );
-					$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully re-added onion address!')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully re-added onion address!').'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Unlock') ) { //unlock editing
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=0, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
-					$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully unlocked onion address!')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully unlocked onion address!').'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Promote') ) { //promote link for paid time
 					$stmt = $db->prepare( 'SELECT special FROM ' . PREFIX . 'onions WHERE md5sum=?;' );
 					$stmt->execute( [ $md5 ] );
@@ -73,10 +73,10 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 						$time = $specialtime[ 0 ] + ( ( $_POST[ 'btc' ] / PROMOTEPRICE ) * PROMOTETIME );
 					}
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET special=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ $time, time(), $md5 ] );
-					$msg .= "<p class=\"green\" role=\"alert\">".sprintf(_('Successfully promoted onion address until %1$s!'), date( 'Y-m-d H:i', $time ))."</p>";
+					$msg .= '<p class="green" role="alert">'.sprintf(_('Successfully promoted onion address until %1$s!'), date( 'Y-m-d H:i', $time )).'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Un-promote') ) { //remove promoted status
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET special=0, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
-					$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully un-promoted onion address!')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully un-promoted onion address!').'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Update') ) { //update description
 					$stmt = $db->prepare( 'SELECT * FROM ' . PREFIX . 'onions WHERE md5sum=?;' );
 					$stmt->execute( [ $md5 ] );
@@ -93,21 +93,21 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 					if ( ! $stmt->fetch( PDO::FETCH_ASSOC ) ) { //not yet there, add it
 						$stmt = $db->prepare( 'INSERT INTO ' . PREFIX . 'onions (address, description, md5sum, category, timeadded, locked, approved, timechanged) VALUES (?, ?, ?, ?, ?, 1, 1, ?);' );
 						$stmt->execute( [ $addr, $desc, $md5, $category, time(), time() ] );
-						$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully added onion address!')."</p>";
+						$msg .= '<p class="green" role="alert">'._('Successfully added onion address!').'</p>';
 					} elseif ( $desc != '' ) { //update description+category
 						$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET description=?, category=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' );
 						$stmt->execute( [ $desc, $category, time(), $md5 ] );
-						$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully updated description!')."</p>";
+						$msg .= '<p class="green" role="alert">'._('Successfully updated description!').'</p>';
 					} elseif ( $category != 0 ) { //only update category
 						$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET category=?, locked=1, approved=1, timechanged=? WHERE md5sum=?;' );
 						$stmt->execute( [ $category, time(), $md5 ] );
-						$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully updated category!')."</p>";
+						$msg .= '<p class="green" role="alert">'._('Successfully updated category!').'</p>';
 					} else { //no description or category change and already known
-						$msg .= "<p class=\"green\" role=\"alert\">"._('Thanks, but I already knew this address!')."</p>";
+						$msg .= '<p class="green" role="alert">'._('Thanks, but I already knew this address!').'</p>';
 					}
 				} elseif ( $_POST[ 'action' ] === _('Phishing') ) {//mark as phishing clone
 					if ( $_POST[ 'original' ] !== '' && ! preg_match( '~(^(https?://)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', $_POST[ 'original' ], $orig ) ) {
-						$msg .= "<p class=\"red\" role=\"alert\">"._('Invalid onion address!')."</p>";
+						$msg .= '<p class="red" role="alert">'._('Invalid onion address!').'</p>';
 					} else {
 						if ( isset( $orig[ 3 ] ) ) {
 							$orig = strtolower( $orig[ 3 ] );
@@ -119,9 +119,9 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 							$stmt->execute( [ $addr, $orig ] );
 							$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1, timechanged=? WHERE address=?;' );
 							$stmt->execute( [ time(), $addr ] );
-							$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully added Phishing clone!')."</p>";
+							$msg .= '<p class="green" role="alert">'._('Successfully added Phishing clone!').'</p>';
 						} else {
-							$msg .= "<p class=\"red\" role=\"alert\">"._('Not added Phishing clone! Phishing and original have the same address.')."</p>";
+							$msg .= '<p class="red" role="alert">'._('Not added Phishing clone! Phishing and original have the same address.').'</p>';
 						}
 					}
 				} elseif ( $_POST[ 'action' ] === _('No phishing') ) { //remove phishing clone status
@@ -129,15 +129,15 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 					$stmt->execute( [ $addr ] );
 					$stmt = $db->prepare( 'UPDATE ' . PREFIX . 'onions SET locked=1, approved=1, timechanged=? WHERE address=?;' );
 					$stmt->execute( [ time(), $addr ] );
-					$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully removed Phishing clone!')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully removed Phishing clone!').'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Reject') ) { //lock editing
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=-1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
-					$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully rejected onion address')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully rejected onion address').'</p>';
 				} elseif ( $_POST[ 'action' ] === _('Approve') ) { //lock editing
 					$db->prepare( 'UPDATE ' . PREFIX . 'onions SET approved=1, timechanged=? WHERE md5sum=?;' )->execute( [ time(), $md5 ] );
-					$msg .= "<p class=\"green\" role=\"alert\">"._('Successfully approved onion address')."</p>";
+					$msg .= '<p class="green" role="alert">'._('Successfully approved onion address').'</p>';
 				} else { //no specific button was pressed
-					$msg .= "<p class=\"red\" role=\"alert\">"._('No action taken!')."</p>";
+					$msg .= '<p class="green" role="alert">'._('No action taken!').'</p>';
 				}
 			}
 		}
@@ -146,41 +146,41 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	if(isset($_POST['switch_view_mode'])){
 		$view_mode = $view_mode === 'single' ? 'multi' : 'single';
 	}
-	echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
-	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<input type=\"hidden\" name=\"pass\" value=\"$_POST[pass]\">";
-	echo "<input type=\"hidden\" name=\"view_mode\" value=\"$view_mode\">";
-	echo "<br><input type=\"submit\" name=\"switch_view_mode\" value=\""._('Switch view mode')."\"></form>";
-	echo "<form action=\"$_SERVER[SCRIPT_NAME]\" method=\"POST\">";
-	echo "<input type=\"hidden\" name=\"lang\" value=\"$language\">";
-	echo "<input type=\"hidden\" name=\"pass\" value=\"$_POST[pass]\">";
-	echo "<input type=\"hidden\" name=\"view_mode\" value=\"$view_mode\">";
+	echo '<form action="'.$_SERVER['SCRIPT_NAME'].'" method="POST">';
+	echo '<input type="hidden" name="lang" value="'.$language.'">';
+	echo '<input type="hidden" name="pass" value="'.htmlspecialchars($_POST['pass']).'">';
+	echo '<input type="hidden" name="view_mode" value="'.$view_mode.'">';
+	echo '<br><input type="submit" name="switch_view_mode" value="'._('Switch view mode').'"></form>';
+	echo '<form action="'.$_SERVER['SCRIPT_NAME'].'" method="POST">';
+	echo '<input type="hidden" name="lang" value="'.$language.'">';
+	echo '<input type="hidden" name="pass" value="'.htmlspecialchars($_POST['pass']).'">';
+	echo '<input type="hidden" name="view_mode" value="'.$view_mode.'">';
 	if($view_mode === 'single') {
-		echo "<p><label>"._('Onion link:')." <input name=\"addr\" size=\"30\" value=\"";
+		echo '<p><label>'._('Onion link:').' <input name="addr" size="30" value="';
 		if ( isset( $_REQUEST[ 'addr' ] ) ) {
 			echo htmlspecialchars( $_REQUEST[ 'addr' ] );
 		}
 		echo '" required autofocus></label></p>';
 	} else {
-		echo '<br><div class="table" id="maintable"><div class="headerrow row"><div class="col">Select</div><div class="col">Address</div class="col"><div class="col">Description</div><div class="col">Category</div><div class="col">Status</div></div>';
+		echo '<br><div class="table" id="maintable"><div class="headerrow row"><div class="col">'._('Select').'</div><div class="col">'._('Address').'</div class="col"><div class="col">'._('Description').'</div><div class="col">'._('Category').'</div><div class="col">'._('Status').'</div></div>';
 		$stmt=$db->query('SELECT address, description, category, approved, locked FROM ' . PREFIX . "onions WHERE address!='';");
 		while($onion = $stmt->fetch(PDO::FETCH_ASSOC)){
 			echo '<div class="row"><div class="col"><input type="checkbox" name="addr[]" value="'.$onion['address'].'"></div><div class="col"><a href="http://'.$onion['address'].'.onion" rel="noopener">'.$onion['address'].'.onion</a></div>';
-			echo "<div class=\"col\">$onion[description]</div><div class=\"col\">{$categories[$onion['category']]}</div><div class=\"col\">Approved: $onion[approved]<br>Locked: $onion[locked]</div></div>";
+			echo '<div class="col">'.$onion['description'].'</div><div class="col">'.$categories[$onion['category']].'</div><div class="col">'.sprintf(_('Approved: %d'),$onion['approved']).'<br>'.sprintf(_('Locked: %d'), $onion['locked']).'</div></div>';
 		}
 		echo '</div>';
 	}
-	echo "<p><label>"._('Clone of:')." <input type=\"text\" name=\"original\" size=\"30\"";
+	echo '<p><label>'._('Clone of:').' <input type="text" name="original" size="30"';
 	if(isset($_REQUEST['original'])){
 		echo ' value="'.htmlspecialchars($_REQUEST['original']).'"';
 	}
 	echo '></label></p>';
-	echo "<p><label>"._('Bitcoins:')." <input type=\"text\" name=\"btc\" size=\"30\"";
+	echo '<p><label>'._('Bitcoins:').' <input type="text" name="btc" size="30"';
 	if(isset($_REQUEST['btc'])){
 		echo ' value="'.htmlspecialchars($_REQUEST['btc']).'"';
 	}
 	echo '></label></p>';
-	echo "<p><label for=\"desc\">"._('Description:')."</label> <br><textarea id=\"desc\" name=\"desc\" rows=\"2\" cols=\"30\">";
+	echo '<p><label for="desc">'._('Description:').'</label> <br><textarea id="desc" name="desc" rows="2" cols="30">';
 	if(!empty($_REQUEST['desc'])){
 		echo htmlspecialchars(trim($_REQUEST['desc']));
 	}elseif(isset($_REQUEST['addr']) && is_string($_REQUEST['addr'])){
@@ -196,9 +196,9 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 		}
 	}
 	echo '</textarea></p>';
-	echo "<p><label>"._('Category:')." <select name=\"cat\">";
+	echo '<p><label>'._('Category:').' <select name="cat">';
 	foreach($categories as $cat=>$name){
-		echo "<option value=\"$cat\"";
+		echo '<option value="'.$cat.'"';
 		if($category==$cat || ($cat===0 && $category>=count($categories))){
 			echo ' selected';
 		}
@@ -207,20 +207,20 @@ if(!isset($_POST['pass']) || $_POST['pass']!==ADMINPASS){
 	echo '</select></label></p>';
 	echo '<input type="submit" name="action" value="None" hidden>';
 	echo '<div class="table button_table"><div class="row">';
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Remove')."\"></div>";
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Lock')."\"></div>";
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Promote')."\"></div>";
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Phishing')."\"></div>";
+	echo '<div class="col"><input type="submit" name="action" value="'._('Remove').'"></div>';
+	echo '<div class="col"><input type="submit" name="action" value="'._('Lock').'"></div>';
+	echo '<div class="col"><input type="submit" name="action" value="'._('Promote').'"></div>';
+	echo '<div class="col"><input type="submit" name="action" value="'._('Phishing').'"></div>';
 	echo '</div><div class="row">';
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Re-add')."\"></div>";
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Unlock')."\"></div>";
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Un-promote')."\"></div>";
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('No phishing')."\"></div>";
+	echo '<div class="col"><input type="submit" name="action" value="'._('Re-add').'"></div>';
+	echo '<div class="col"><input type="submit" name="action" value="'._('Unlock').'"></div>';
+	echo '<div class="col"><input type="submit" name="action" value="'._('Un-promote').'"></div>';
+	echo '<div class="col"><input type="submit" name="action" value="'._('No phishing').'"></div>';
 	echo '</div><div class="row">';
-	echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Update')."\"></div>";
+	echo '<div class="col"><input type="submit" name="action" value="'._('Update').'"></div>';
 	if(REQUIRE_APPROVAL) {
-		echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Reject')."\"></div class=\"col\">";
-		echo "<div class=\"col\"><input type=\"submit\" name=\"action\" value=\""._('Approve')."\"></div class=\"col\">";
+		echo '<div class="col"><input type="submit" name="action" value="'._('Reject').'"></div class="col">';
+		echo '<div class="col"><input type="submit" name="action" value="'._('Approve').'"></div class="col">';
 	}
 	echo '</div></div>';
 	echo '</form><br>';
