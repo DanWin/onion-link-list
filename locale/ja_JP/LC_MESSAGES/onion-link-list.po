@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-26 13:53+0100\n"
+"POT-Creation-Date: 2022-12-27 20:20+0100\n"
 "PO-Revision-Date: 2022-12-26 14:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,333 +18,360 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: www/test.php:7 www/test.php:15
+#: www/test.php:7 www/test.php:17
 msgid "Online-Test"
 msgstr "オンラインテスト"
 
-#: www/test.php:17
-msgid "Here an onion address can be tested, for whether it is online or not."
-msgstr "ここで、Onionアドレスが「オンライン」かどうかを試すことができます。"
+#: www/test.php:11 www/test.php:19
+msgid "Test whether a Tor hidden service onion is online or offline"
+msgstr ""
 
-#: www/test.php:20 www/admin.php:157
+#: www/test.php:22 www/admin.php:159
 msgid "Onion link:"
 msgstr "Onion リンク："
 
-#: www/test.php:27 www/onions.php:379 www/onions.php:408
+#: www/test.php:29 www/onions.php:363 www/onions.php:392
 msgid "Test"
 msgstr "テスト"
 
-#: www/test.php:36 www/admin.php:12 www/sitemap.php:7 cron/update.php:7
-#: cron/phishing_tests.php:8 helpers/tmp5.php:6 helpers/tmp6.php:6
-#: helpers/fill_unknown_phishing.php:6 helpers/tmp3.php:6 helpers/tmp7.php:6
-#: helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6 setup.php:48
-#: setup.php:51
+#: www/test.php:38 www/admin.php:12 www/sitemap.php:7 cron/update.php:7
+#: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
+#: helpers/tmp6.php:6 helpers/fill_unknown_phishing.php:6 helpers/tmp3.php:6
+#: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
+#: setup.php:48 setup.php:51
 msgid "No database connection!"
 msgstr "データベースの接続がありません！"
 
-#: www/test.php:39 www/onions.php:234 www/admin.php:48 www/admin.php:108
+#: www/test.php:41 www/onions.php:218 www/admin.php:50 www/admin.php:110
 msgid "Invalid onion address!"
 msgstr "Onionアドレスが不正です！"
 
-#: www/test.php:54
+#: www/test.php:56
 #, php-format
-msgid "Warning, this is a known phishing clone. The original site is located at %s."
+msgid ""
+"Warning, this is a known phishing clone. The original site is located at %s."
 msgstr "警告。これは知られた詐欺サイト（クローン）です。オリジナルは %s です。"
 
-#: www/test.php:59
+#: www/test.php:61
 msgid "Warning: This is a known scam!"
 msgstr ""
 
-#: www/test.php:64 www/test.php:99
+#: www/test.php:66 www/test.php:101
 msgid "Yes, the service is online!"
 msgstr "対象はオンラインです！"
 
-#: www/test.php:105
+#: www/test.php:107
 msgid "No, the service is offline!"
 msgstr "対象はオフラインです！"
 
-#: www/onions.php:55
+#: www/onions.php:36
 msgid "All legitimate"
 msgstr ""
 
-#: www/onions.php:56 www/onions.php:90
+#: www/onions.php:37 www/onions.php:71
 msgid "Last added"
 msgstr "最近の追加"
 
-#: www/onions.php:57
+#: www/onions.php:38
 msgid "Offline > 1 week"
 msgstr "1週間以上オフライン"
 
-#: www/onions.php:119 www/onions.php:128
+#: www/onions.php:100 www/onions.php:105 www/onions.php:112
+#: www/opensearch.php:6
 msgid "Onion link list"
 msgstr "Onionリンクの一覧"
 
-#: www/onions.php:130 www/onions.php:449 www/onions.php:466
+#: www/onions.php:104
+msgid ""
+"Huge link list of Tor hidden service onions. All the darknet links you need "
+"in one place."
+msgstr ""
+
+#: www/onions.php:114 www/onions.php:433 www/onions.php:450
 msgid "Error: No database connection!"
 msgstr "エラー：データベースの接続がありません！"
 
-#: www/onions.php:137
+#: www/onions.php:116
+#, php-format
+msgid ""
+"I'm not responsible for any content of websites linked here. 99% of darkweb "
+"sites selling anything are scams. Be careful and use your brain. I regularly "
+"receive E-Mails from people that were desperate to make money and fell for "
+"scammers, don't be one of them!"
+msgstr ""
+
+#: www/onions.php:121
 msgid "Onion address:"
 msgstr "Onion アドレス："
 
-#: www/onions.php:142 www/admin.php:181
+#: www/onions.php:126 www/admin.php:183
 msgid "Description:"
 msgstr "詳細："
 
-#: www/onions.php:157 www/onions.php:177 www/admin.php:197
+#: www/onions.php:141 www/onions.php:161 www/admin.php:199
 msgid "Category:"
 msgstr "カテゴリ："
 
-#: www/onions.php:167 www/admin.php:78 www/admin.php:218
+#: www/onions.php:151 www/admin.php:80 www/admin.php:220
 msgid "Update"
 msgstr "更新"
 
-#: www/onions.php:172
+#: www/onions.php:156
 msgid "Search:"
 msgstr "検索："
 
-#: www/onions.php:172
+#: www/onions.php:156
 msgid "Search term"
 msgstr "検索キーワード"
 
-#: www/onions.php:182 www/onions.php:490 www/onions.php:492
+#: www/onions.php:166 www/onions.php:474 www/onions.php:476
 msgid "All"
 msgstr "全て"
 
-#: www/onions.php:195
+#: www/onions.php:179
 msgid "Hide locked"
 msgstr ""
 
-#: www/onions.php:196
+#: www/onions.php:180
 msgid "Search"
 msgstr "検索"
 
-#: www/onions.php:198
+#: www/onions.php:182
 msgid "Format:"
 msgstr "形式："
 
-#: www/onions.php:201
+#: www/onions.php:185
 msgid "Special categories:"
 msgstr "特別な分類："
 
-#: www/onions.php:212 www/onions.php:214
+#: www/onions.php:196 www/onions.php:198
 msgid "Phishing Clones"
 msgstr "詐欺サイト（クローン）"
 
-#: www/onions.php:216
+#: www/onions.php:200
 msgid "Removed/Child porn"
 msgstr "削除済"
 
-#: www/onions.php:218
+#: www/onions.php:202
 msgid "Pending approval"
 msgstr ""
 
-#: www/onions.php:219
+#: www/onions.php:203
 msgid "Rejected"
 msgstr ""
 
-#: www/onions.php:223
+#: www/onions.php:207
 msgid "Categories:"
 msgstr "カテゴリ："
 
-#: www/onions.php:235
-msgid "A valid address looks like this"
+#: www/onions.php:219
+#, fuzzy, php-format
+msgid "A valid address looks like this: %s"
 msgstr "正しいアドレスはこんな感じのはず："
 
-#: www/onions.php:238 www/onions.php:251
+#: www/onions.php:222 www/onions.php:235
 msgid "Error: Wrong captcha"
 msgstr ""
 
-#: www/onions.php:244
+#: www/onions.php:228
 msgid "Error: Captcha expired"
 msgstr ""
 
-#: www/onions.php:272 www/admin.php:94
+#: www/onions.php:256 www/admin.php:96
 msgid "Successfully added onion address!"
 msgstr "Onionアドレスを追加しました！"
 
-#: www/onions.php:274
+#: www/onions.php:258
 msgid "Sorry, editing this onion address has been locked!"
 msgstr "ごめん、このOnionアドレスはロックされていて編集できない！"
 
-#: www/onions.php:278 www/admin.php:98
+#: www/onions.php:262 www/admin.php:100
 msgid "Successfully updated description!"
 msgstr "説明の更新に成功しました！"
 
-#: www/onions.php:282 www/admin.php:102
+#: www/onions.php:266 www/admin.php:104
 msgid "Successfully updated category!"
 msgstr "カテゴリの変更に成功しました！"
 
-#: www/onions.php:284 www/admin.php:104
+#: www/onions.php:268 www/admin.php:106
 msgid "Thanks, but I already knew this address!"
 msgstr "ありがとう、でも、このアドレスはもう知ってるんだ！"
 
-#: www/onions.php:310
+#: www/onions.php:294
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
 msgstr "検索キーワード \"%1$s\"　-　%2$d 件見つかりました："
 
-#: www/onions.php:357 www/onions.php:422
+#: www/onions.php:341 www/onions.php:406
 msgid "Onion link"
 msgstr "Onion リンク"
 
-#: www/onions.php:357
+#: www/onions.php:341
 msgid "Description"
 msgstr "説明"
 
-#: www/onions.php:357
+#: www/onions.php:341
 msgid "Last tested"
 msgstr "接続試験日"
 
-#: www/onions.php:357 www/onions.php:422
+#: www/onions.php:341 www/onions.php:406
 msgid "Last seen"
 msgstr "最後に見た日"
 
-#: www/onions.php:357
+#: www/onions.php:341
 msgid "Added at"
 msgstr "追加された日"
 
-#: www/onions.php:357
+#: www/onions.php:341
 msgid "Actions"
 msgstr "操作"
 
-#: www/onions.php:369 www/onions.php:374 www/onions.php:389 www/onions.php:394
-#: www/onions.php:431
+#: www/onions.php:353 www/onions.php:358 www/onions.php:373 www/onions.php:378
+#: www/onions.php:415
 msgid "Never"
 msgstr "なし"
 
-#: www/onions.php:406
+#: www/onions.php:390
 msgid "Edit"
 msgstr "編集"
 
-#: www/onions.php:422
+#: www/onions.php:406
 msgid "Clone of"
 msgstr "クローン元（オリジナル）"
 
-#: www/onions.php:438
+#: www/onions.php:422
 msgid "Unknown"
 msgstr "不明"
 
-#: www/onions.php:488
+#: www/onions.php:472
 msgid "Pages:"
 msgstr "ページ："
 
-#: www/admin.php:17 www/admin.php:24
+#: www/admin.php:17 www/admin.php:26
 msgid "Admin interface"
 msgstr "管理者の操作画面"
 
-#: www/admin.php:32
+#: www/admin.php:34
 msgid "Password:"
 msgstr "パスワード："
 
-#: www/admin.php:33
+#: www/admin.php:35
 msgid "Login"
 msgstr "ログイン"
 
-#: www/admin.php:36
+#: www/admin.php:38
 msgid "Wrong Password!"
 msgstr "パスワードが違います！"
 
-#: www/admin.php:52 www/admin.php:208
+#: www/admin.php:54 www/admin.php:210
 msgid "Remove"
 msgstr ""
 
-#: www/admin.php:54
+#: www/admin.php:56
 msgid "Successfully removed onion address!"
 msgstr "Onionアドレスを削除しました！"
 
-#: www/admin.php:55 www/admin.php:209
+#: www/admin.php:57 www/admin.php:211
 msgid "Lock"
 msgstr "施錠"
 
-#: www/admin.php:57
+#: www/admin.php:59
 msgid "Successfully locked onion address!"
 msgstr "Onionアドレスをロックしました！"
 
-#: www/admin.php:58 www/admin.php:213
+#: www/admin.php:60 www/admin.php:215
 msgid "Re-add"
 msgstr "再追加"
 
-#: www/admin.php:60
+#: www/admin.php:62
 msgid "Successfully re-added onion address!"
 msgstr "Onionアドレスを再度追加しました！"
 
-#: www/admin.php:61 www/admin.php:214
+#: www/admin.php:63 www/admin.php:216
 msgid "Unlock"
 msgstr "解錠"
 
-#: www/admin.php:63
+#: www/admin.php:65
 msgid "Successfully unlocked onion address!"
 msgstr "Onionアドレスのロックを解除しました！"
 
-#: www/admin.php:64 www/admin.php:210
+#: www/admin.php:66 www/admin.php:212
 msgid "Promote"
 msgstr "宣伝"
 
-#: www/admin.php:74
+#: www/admin.php:76
 #, php-format
 msgid "Successfully promoted onion address until %1$s!"
 msgstr "Onionアドレスを次の日まで宣伝します： %1$s!"
 
-#: www/admin.php:75 www/admin.php:215
+#: www/admin.php:77 www/admin.php:217
 msgid "Un-promote"
 msgstr "宣伝解除"
 
-#: www/admin.php:77
+#: www/admin.php:79
 msgid "Successfully un-promoted onion address!"
 msgstr "Onionアドレスの宣伝をやめました！"
 
-#: www/admin.php:106 www/admin.php:211
+#: www/admin.php:108 www/admin.php:213
 msgid "Phishing"
 msgstr "詐欺サイト"
 
-#: www/admin.php:120
+#: www/admin.php:122
 msgid "Successfully added Phishing clone!"
 msgstr "詐欺サイトを追加しました！"
 
-#: www/admin.php:122
+#: www/admin.php:124
 msgid "Not added Phishing clone! Phishing and original have the same address."
 msgstr "追加できませんでした。詐欺サイトとオリジナルのアドレスが同一です。"
 
-#: www/admin.php:125 www/admin.php:216
+#: www/admin.php:127 www/admin.php:218
 msgid "No phishing"
 msgstr "詐欺サイトではない"
 
-#: www/admin.php:130
+#: www/admin.php:132
 msgid "Successfully removed Phishing clone!"
 msgstr "詐欺サイトを削除しました！"
 
-#: www/admin.php:131 www/admin.php:220
+#: www/admin.php:133 www/admin.php:222
 msgid "Reject"
 msgstr ""
 
-#: www/admin.php:133
+#: www/admin.php:135
 msgid "Successfully rejected onion address"
 msgstr ""
 
-#: www/admin.php:134 www/admin.php:221
+#: www/admin.php:136 www/admin.php:223
 msgid "Approve"
 msgstr ""
 
-#: www/admin.php:136
+#: www/admin.php:138
 msgid "Successfully approved onion address"
 msgstr ""
 
-#: www/admin.php:138
+#: www/admin.php:140
 msgid "No action taken!"
 msgstr "何も操作していません！"
 
-#: www/admin.php:151
+#: www/admin.php:153
 msgid "Switch view mode"
 msgstr ""
 
-#: www/admin.php:171
+#: www/admin.php:173
 msgid "Clone of:"
 msgstr "クローン元（オリジナル）："
 
-#: www/admin.php:176
+#: www/admin.php:178
 msgid "Bitcoins:"
 msgstr "ビットコイン："
+
+#: www/sitemap.php:77
+msgid "Error creating the sitemap!"
+msgstr ""
+
+#: www/opensearch.php:7
+#, fuzzy
+msgid "Search the onion link list"
+msgstr "Onionリンクの一覧"
 
 #: common_config.php:93
 msgid "Language:"
@@ -373,3 +400,7 @@ msgstr "PHPのdate拡張が必要です。先にインストールしてくだ�
 #: setup.php:106
 msgid "Status: OK"
 msgstr "状態：　良好"
+
+#~ msgid ""
+#~ "Here an onion address can be tested, for whether it is online or not."
+#~ msgstr "ここで、Onionアドレスが「オンライン」かどうかを試すことができます。"

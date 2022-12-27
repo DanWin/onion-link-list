@@ -56,20 +56,25 @@ foreach (LANGUAGES as $lang_code => $data){
 	$links []= ['loc' => CANONICAL_URL . "/onions.php?cat=$cat&lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3'];
 }
 $dom = new DOMDocument('1.0', 'UTF-8');
-$urlset= $dom->createElement('urlset');
-$urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-$urlset->setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-$urlset->setAttribute('xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd');
-$dom->appendChild($urlset);
-foreach ($links as $link) {
-	$url = $dom->createElement('url');
-	$urlset->appendChild($url);
-	$loc = $dom->createElement('loc', htmlspecialchars($link['loc']));
-	$url->appendChild($loc);
-	$changefreq = $dom->createElement('changefreq', $link['changefreq']);
-	$url->appendChild($changefreq);
-	$priority = $dom->createElement('priority', $link['priority']);
-	$url->appendChild($priority);
+try {
+	$urlset = $dom->createElement( 'urlset' );
+	$urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+	$urlset->setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+	$urlset->setAttribute('xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd');
+	$dom->appendChild($urlset);
+	foreach ($links as $link) {
+		$url = $dom->createElement('url');
+		$urlset->appendChild($url);
+		$loc = $dom->createElement('loc', htmlspecialchars($link['loc']));
+		$url->appendChild($loc);
+		$changefreq = $dom->createElement('changefreq', $link['changefreq']);
+		$url->appendChild($changefreq);
+		$priority = $dom->createElement('priority', $link['priority']);
+		$url->appendChild($priority);
+	}
+} catch ( DOMException $e ) {
+	http_response_code(500);
+	die(_('Error creating the sitemap!'));
 }
 header('Content-Type: text/xml; charset=UTF-8');
 echo $dom->saveXML();

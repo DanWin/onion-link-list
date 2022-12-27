@@ -13,15 +13,15 @@ $onions=[];
 $scanned_onions=[];
 
 //sources to get links from
-check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.onion.link/antanistaticmap/stats/yesterday');
-check_links($onions, $ch, 'https://tt3j2x4k5ycaa5zt.tor2web.io/antanistaticmap/stats/yesterday');
 check_links($onions, $ch, 'http://3bbad7fauom4d6sgppalyqddsqbf5u5p56b5k5uk2zxsy3d6ey2jobad.onion/discover');
 check_links($onions, $ch, 'http://tor66sewebgixwhcqfnp5inzp5x5uohhdy3kvtnyfxc2e5mxiuh34iid.onion/fresh');
 check_links($onions, $ch, 'https://crt.sh/?q=.onion&exclude=expired&deduplicate=Y');
 check_links($onions, $ch, 'http://darkeyepxw7cuu2cppnjlgqaav6j42gyt43clcn4vjjf7llfyly5cxid.onion/');
 check_links($onions, $ch, 'http://raptora2y6r3bxmjcd3xglr3tcakc6ezq3omyzbnvwahhpi27l3w4yad.onion/');
 check_links($onions, $ch, 'http://darkeyepxw7cuu2cppnjlgqaav6j42gyt43clcn4vjjf7llfyly5cxid.onion/');
-check_links($onions, $ch, 'https://onionlandsearchengine.com/discover');
+for($i=11; $i > 0; --$i){
+	check_links($onions, $ch, 'https://onionlandsearchengine.com/discover?p='.$i);
+}
 check_links($onions, $ch, 'https://godnotaba.fun/');
 check_links($onions, $ch, 'http://links.communzyxz3qfpum5tnvrfvvrr4jlosbq4mzeskigoionqqdylmlhmid.onion/?format=text');
 

@@ -4,7 +4,7 @@ require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME, DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
-	die('No Connection to MySQL database!');
+	die(_('No database connection!'));
 }
 $stmt=$db->prepare('SELECT address, category, md5sum, description, id FROM ' . PREFIX . "onions WHERE address!='' AND lasttest<(?-86400) ORDER BY lasttest LIMIT 75;");
 $stmt->execute([time()]);

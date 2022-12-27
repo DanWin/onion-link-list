@@ -1,23 +1,4 @@
 <?php
-/*
-* Onion Link List - Main listing script
-*
-* Copyright (C) 2016-2020 Daniel Winzen <daniel@danwin1210.de>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // ignore headers, no further processing needed
 }
@@ -120,7 +101,7 @@ function send_html(): void
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-	echo '<meta name="description" content="Huge link list of Tor hidden service onions. All the darknet links you need in one place.">';
+	echo '<meta name="description" content="'._('Huge link list of Tor hidden service onions. All the darknet links you need in one place.').'">';
 	echo '<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.php" title="'._('Onion link list').'"/>';
 	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 	echo '<link rel="alternate" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '" hreflang="x-default">';
@@ -132,7 +113,7 @@ function send_html(): void
 	if(!isset($db)){
 		send_error(_('Error: No database connection!'));
 	}
-	echo '<p>I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. Every week I get 2-5 E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!</p>';
+	echo '<p>'._('I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. I regularly receive E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!').'</p>';
 	//update onions description form
 	echo "<div class=\"table\" id=\"edit-search\"><div class=\"row\"><div class=\"col\"><form action=\"$_SERVER[SCRIPT_NAME]\" target=\"_self\" method=\"POST\">";
 	echo "<input type=\"hidden\" name=\"pg\" value=\"$_REQUEST[newpg]\">";
@@ -235,7 +216,7 @@ function send_html(): void
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
 		if(!preg_match('~(^(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d)(\.onion(/.*)?)?$)~i', trim($_REQUEST['addr']), $addr)){
 			echo "<p class=\"red\" role=\"alert\">"._('Invalid onion address!')."</p>";
-			echo "<p>"._('A valid address looks like this')." http://tt3j2x4k5ycaa5zt.onion</p>";
+			echo "<p>".sprintf(_('A valid address looks like this: %s'), 'http://danielas3rtn54uwmofdo3x2bsdifr47huasnmbgqzfrec5ubupvtpid.onion') ."</p>";
 		}else{
 			if(!isset($_REQUEST['challenge'])){
 				send_error(_('Error: Wrong captcha'));
