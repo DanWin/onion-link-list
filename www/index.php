@@ -27,8 +27,8 @@ function send_html(): void
 	$style = '.row{display:flex;flex-wrap:wrap}.headerrow{font-weight:bold}.col{display:flex;flex:1;padding:3px 3px;flex-direction:column}';
 	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3){background-color:#aaff88}.down .col:nth-child(0n+3){background-color:#ff4444}';
 	$style .= '.promo{outline:medium solid #FFD700}.list{padding:0;}.list li{display:inline-block;padding:0.35em}.pagination{font-size:1.2em}';
-	$style .= '.active{font-weight:bold}#maintable .col{word-break:break-all;min-width:5em}#maintable,#maintable .col{border: 1px solid black}#edit-search .col{vertical-align:top}';
-	$style .= '#maintable .col:nth-child(0n+3){word-break:unset}#maintable .col:last-child{max-width:5em}.software-link{text-align:center;font-size:small}';
+	$style .= '.active{font-weight:bold}#maintable .col{word-break:break-all;min-width:6em}#maintable,#maintable .col{border: 1px solid black}';
+	$style .= '#maintable .col:nth-child(0n+2){flex-grow:3;min-width:12em} #maintable .col:nth-child(0n+3){word-break:unset}#maintable .col:last-child{max-width:6em}.software-link{text-align:center;font-size:small}';
 	send_headers([$style]);
 	asort($categories);
 	//sql for special categories
