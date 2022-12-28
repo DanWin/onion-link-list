@@ -97,7 +97,7 @@ function send_html(): void
 		}
 	}
 	echo '<!DOCTYPE html><html lang="'.$language.'" dir="'.$dir.'"><head>';
-	echo "<title>"._('Onion link list')."</title>";
+	echo '<title>'._('Onion link list').'</title>';
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
@@ -109,7 +109,7 @@ function send_html(): void
 	echo '<style>'.$style.'</style>';
 	echo '<base target="_blank">';
 	echo '</head><body><main>';
-	echo "<h1>"._('Onion link list')."</h1>";
+	echo '<h1>'._('Onion link list').'</h1>';
 	if(!isset($db)){
 		send_error(_('Error: No database connection!'));
 	}
@@ -354,12 +354,12 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 			if($link['lastup']==0){
 				$lastup=_('Never');
 			}else{
-				$lastup=date('Y-m-d H:i:s', $link['lastup']);
+				$lastup=date('Y-m-d H:i', $link['lastup']);
 			}
 			if($link['lasttest']==0){
 				$class='';
 			}
-			$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
+			$timeadded=date('Y-m-d', $link['timeadded']);
 			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input name="lang" value="'.$language.'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
 		}
 	}
@@ -372,12 +372,12 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		if($link['lastup']==0){
 			$lastup=_('Never');
 		}else{
-			$lastup=date('Y-m-d H:i:s', $link['lastup']);
+			$lastup=date('Y-m-d H:i', $link['lastup']);
 		}
 		if($link['lasttest']==0){
 			$class='';
 		}
-		$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
+		$timeadded=date('Y-m-d', $link['timeadded']);
 		if($link['special']>$time){
 			$class.=' promo';
 		}
@@ -411,7 +411,7 @@ function print_phishing_table(): void
 		if($link['lastup']==0){
 			$lastup=_('Never');
 		}else{
-			$lastup=date('Y-m-d H:i:s', $link['lastup']);
+			$lastup=date('Y-m-d H:i', $link['lastup']);
 		}
 		if($link['original']!==''){
 			$orig='<a href="http://'.$link['original'].'.onion" rel="noopener">'.$link['original'].'.onion</a>';
