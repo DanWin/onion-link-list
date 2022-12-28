@@ -218,21 +218,23 @@ function send_html(): void
 			echo '<p class="red" role="alert">'._('Invalid onion address!').'</p>';
 			echo '<p>'.sprintf(_('A valid address looks like this: %s'), 'http://danielas3rtn54uwmofdo3x2bsdifr47huasnmbgqzfrec5ubupvtpid.onion') .'</p>';
 		}else{
-			if(!isset($_REQUEST['challenge'])){
-				send_error(_('Error: Wrong captcha'));
-			}
-			$stmt=$db->prepare('SELECT code FROM ' . PREFIX . 'captcha WHERE id=?;');
-			$stmt->execute([$_REQUEST['challenge']]);
-			$stmt->bindColumn(1, $code);
-			if(!$stmt->fetch(PDO::FETCH_BOUND)){
-				send_error(_('Error: Captcha expired'));
-			}
-			$time=time();
-			$stmt=$db->prepare('DELETE FROM ' . PREFIX . 'captcha WHERE id=? OR time<?;');
-			$stmt->execute([$_REQUEST['challenge'], $time-3600]);
-			if($_REQUEST['captcha']!==$code){
-				if(strrev($_REQUEST['captcha'])!==$code){
-					send_error(_('Error: Wrong captcha'));
+			if(CAPTCHA !== 0) {
+				if ( ! isset( $_REQUEST[ 'challenge' ] ) ) {
+					send_error( _( 'Error: Wrong captcha' ) );
+				}
+				$stmt = $db->prepare( 'SELECT code FROM ' . PREFIX . 'captcha WHERE id=?;' );
+				$stmt->execute( [ $_REQUEST[ 'challenge' ] ] );
+				$stmt->bindColumn( 1, $code );
+				if ( ! $stmt->fetch( PDO::FETCH_BOUND ) ) {
+					send_error( _( 'Error: Captcha expired' ) );
+				}
+				$time = time();
+				$stmt = $db->prepare( 'DELETE FROM ' . PREFIX . 'captcha WHERE id=? OR time<?;' );
+				$stmt->execute( [ $_REQUEST[ 'challenge' ], $time - 3600 ] );
+				if ( $_REQUEST[ 'captcha' ] !== $code ) {
+					if ( strrev( $_REQUEST[ 'captcha' ] ) !== $code ) {
+						send_error( _( 'Error: Wrong captcha' ) );
+					}
 				}
 			}
 			$addr=strtolower($addr[4]);
@@ -489,8 +491,7 @@ function get_pagination(int $category, int $pages) : string {
 function send_captcha(): void
 {
 	global $db;
-	$difficulty=1;
-	if($difficulty===0 || !extension_loaded('gd')){
+	if(CAPTCHA === 0 || !extension_loaded('gd')){
 		return;
 	}
 	$captchachars='ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
@@ -504,28 +505,80 @@ function send_captcha(): void
 	$stmt=$db->prepare('INSERT INTO ' . PREFIX . 'captcha (id, time, code) VALUES (?, ?, ?);');
 	$stmt->execute([$randid, $time, $code]);
 	echo '<p><label>'._('Copy:');
-	if($difficulty===1){
-		$im=imagecreatetruecolor(55, 24);
-		$bg=imagecolorallocate($im, 0, 0, 0);
-		$fg=imagecolorallocate($im, 255, 255, 255);
+	if(CAPTCHA === 1){
+		$im = imagecreatetruecolor(55, 24);
+		$bg = imagecolorallocate($im, 0, 0, 0);
+		$fg = imagecolorallocate($im, 255, 255, 255);
 		imagefill($im, 0, 0, $bg);
 		imagestring($im, 5, 5, 5, $code, $fg);
-		echo ' <img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
-	}else{
-		$im=imagecreatetruecolor(55, 24);
-		$bg=imagecolorallocate($im, 0, 0, 0);
-		$fg=imagecolorallocate($im, 255, 255, 255);
+		echo ' <img width="55" height="24" alt="'._('captcha image').'" src="data:image/gif;base64,';
+	}elseif(CAPTCHA === 2){
+		$im = imagecreatetruecolor(55, 24);
+		$bg = imagecolorallocate($im, 0, 0, 0);
+		$fg = imagecolorallocate($im, 255, 255, 255);
 		imagefill($im, 0, 0, $bg);
 		imagestring($im, 5, 5, 5, $code, $fg);
-		$line=imagecolorallocate($im, 255, 255, 255);
-		for($i=0;$i<2;++$i){
+		$line = imagecolorallocate($im, 255, 255, 255);
+		for($i = 0; $i < 2; ++$i){
 			imageline($im, 0, mt_rand(0, 24), 55, mt_rand(0, 24), $line);
 		}
-		$dots=imagecolorallocate($im, 255, 255, 255);
-		for($i=0;$i<100;++$i){
+		$dots = imagecolorallocate($im, 255, 255, 255);
+		for($i = 0; $i < 100; ++$i){
 			imagesetpixel($im, mt_rand(0, 55), mt_rand(0, 24), $dots);
 		}
-		echo ' <img width="55" height="24" alt="captcha image" src="data:image/gif;base64,';
+		echo ' <img width="55" height="24" alt="'._('captcha image').'" src="data:image/gif;base64,';
+	}else{
+		$im = imagecreatetruecolor(150, 200);
+		$bg = imagecolorallocate($im, 0, 0, 0);
+		$fg = imagecolorallocate($im, 255, 255, 255);
+		imagefill($im, 0, 0, $bg);
+		$line = imagecolorallocate($im, 100, 100, 100);
+		for($i = 0; $i < 5; ++$i){
+			imageline($im, 0, mt_rand(0, 200), 150, mt_rand(0, 200), $line);
+		}
+		$dots = imagecolorallocate($im, 200, 200, 200);
+		for($i = 0; $i < 1000; ++$i){
+			imagesetpixel($im, mt_rand(0, 150), mt_rand(0, 200), $dots);
+		}
+		$chars = [];
+		for($i = 0; $i < 10; ++$i){
+			$found = false;
+			while(!$found){
+				$x = mt_rand(10, 140);
+				$y = mt_rand(10, 180);
+				$found = true;
+				foreach($chars as $char){
+					if($char['x'] >= $x && ($char['x'] - $x) < 25){
+						$found = false;
+					}elseif($char['x'] < $x && ($x - $char['x']) < 25){
+						$found = false;
+					}
+					if(!$found){
+						if($char['y'] >= $y && ($char['y'] - $y) < 25){
+							break;
+						}elseif($char['y'] < $y && ($y - $char['y']) < 25){
+							break;
+						}else{
+							$found = true;
+						}
+					}
+				}
+			}
+			$chars []= ['x', 'y'];
+			$chars[$i]['x'] = $x;
+			$chars[$i]['y'] = $y;
+			if($i < 5){
+				imagechar($im, 5, $chars[$i]['x'], $chars[$i]['y'], $captchachars[mt_rand(0, $length)], $fg);
+			}else{
+				imagechar($im, 5, $chars[$i]['x'], $chars[$i]['y'], $code[$i-5], $fg);
+			}
+		}
+		$follow=imagecolorallocate($im, 200, 0, 0);
+		imagearc($im, $chars[5]['x']+4, $chars[5]['y']+8, 16, 16, 0, 360, $follow);
+		for($i = 5; $i < 9; ++$i){
+			imageline($im, $chars[$i]['x']+4, $chars[$i]['y']+8, $chars[$i+1]['x']+4, $chars[$i+1]['y']+8, $follow);
+		}
+		echo ' <img width="150" height="200" alt="'._('captcha image').'" src="data:image/gif;base64,';
 	}
 	ob_start();
 	imagegif($im);

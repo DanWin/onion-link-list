@@ -1,23 +1,4 @@
 <?php
-/*
-* Onion Link List - Configuration
-*
-* Copyright (C) 2016-2020 Daniel Winzen <daniel@danwin1210.de>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 // Configuration
 const DBHOST = 'localhost'; // Database host
 const DBUSER = 'www-data'; // Database user
@@ -36,6 +17,7 @@ const VERSION = '1.1'; // Script version
 const DBVERSION = 8; // Database layout version
 const REQUIRE_APPROVAL = false; // require admin approval of new sites? true/false
 const CANONICAL_URL = 'https://onions.danwin1210.de'; // our preferred domain for search engines
+const CAPTCHA = 0; // Captcha difficulty (0=off, 1=simple, 2=moderate, 3=extreme)
 //Categories - new links will always be put into the first one, leave it to Unsorted
 //once configured, only add new categories at the end or you have to manually adjust the database.
 $categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Forums', 'Hacking/Programming/Software', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Security/Privacy/Encryption', 'Whistleblowing', 'Empty/Error/Unknown', 'Cryptocurrencies', 'Scams', 'Fun/Games/Joke', 'Search'];
