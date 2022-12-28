@@ -25,7 +25,7 @@ function send_html(): void
 	global $categories, $db, $language, $dir;
 	$numrows = 0;
 	$style = '.row{display:flex;flex-wrap:wrap}.headerrow{font-weight:bold}.col{display:flex;flex:1;padding:3px 3px;flex-direction:column}';
-	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3),.up .col:nth-child(0n+4){background-color:#aaff88}.down .col:nth-child(0n+3),.down .col:nth-child(0n+4){background-color:#ff4444}';
+	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3){background-color:#aaff88}.down .col:nth-child(0n+3){background-color:#ff4444}';
 	$style .= '.promo{outline:medium solid #FFD700}.list{padding:0;}.list li{display:inline-block;padding:0.35em}.pagination{font-size:1.2em}';
 	$style .= '.active{font-weight:bold}#maintable .col{word-break:break-all;min-width:5em}#maintable,#maintable .col{border: 1px solid black}#edit-search .col{vertical-align:top}';
 	$style .= '#maintable .col:nth-child(0n+3){word-break:unset}#maintable .col:last-child{max-width:5em}.software-link{text-align:center;font-size:small}';
@@ -340,7 +340,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		$admin_approval = PREFIX . 'onions.approved = 1 AND';
 	}
 	ob_start();
-	echo '<div class="table" id="maintable"><div class="row headerrow"><div class="col">'._('Onion link').'</div><div class="col">'._('Description').'</div><div class="col">'._('Last tested').'</div><div class="col">'._('Last seen').'</div><div class="col">'._('Added at').'</div><div class="col">'._('Actions').'</div></div>';
+	echo '<div class="table" id="maintable"><div class="row headerrow"><div class="col">'._('Onion link').'</div><div class="col">'._('Description').'</div><div class="col">'._('Last seen').'</div><div class="col">'._('Added at').'</div><div class="col">'._('Actions').'</div></div>';
 	if($promoted){//print promoted links at the top
 		$time=time();
 		$promo=$db->prepare('SELECT address, lasttest, lastup, timeadded, description, locked, special FROM ' . PREFIX . "onions WHERE $admin_approval special>? AND address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff<604800 ORDER BY address;');
@@ -357,12 +357,10 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 				$lastup=date('Y-m-d H:i:s', $link['lastup']);
 			}
 			if($link['lasttest']==0){
-				$lasttest=_('Never');
-			}else{
-				$lasttest=date('Y-m-d H:i:s', $link['lasttest']);
+				$class='';
 			}
 			$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
-			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lasttest.'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input name="lang" value="'.$language.'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
+			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input name="lang" value="'.$language.'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
 		}
 	}
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -377,10 +375,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 			$lastup=date('Y-m-d H:i:s', $link['lastup']);
 		}
 		if($link['lasttest']==0){
-			$lasttest=_('Never');
 			$class='';
-		}else{
-			$lasttest=date('Y-m-d H:i:s', $link['lasttest']);
 		}
 		$timeadded=date('Y-m-d H:i:s', $link['timeadded']);
 		if($link['special']>$time){
@@ -391,7 +386,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		}else{
 			$edit='<form><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="pg" value="'.$_REQUEST['newpg'].'"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Edit').'" type="submit"></form>';
 		}
-		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lasttest.'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Test').'" type="submit"></form></div></div>';
+		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Test').'" type="submit"></form></div></div>';
 		++$numrows;
 	}
 	echo '</div>';
