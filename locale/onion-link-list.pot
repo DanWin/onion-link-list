@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-28 00:27+0100\n"
+"POT-Creation-Date: 2022-12-28 19:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,200 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: www/index.php:36
+msgid "All legitimate"
+msgstr ""
+
+#: www/index.php:37 www/index.php:71
+msgid "Last added"
+msgstr ""
+
+#: www/index.php:38
+msgid "Offline > 1 week"
+msgstr ""
+
+#: www/index.php:100 www/index.php:105 www/index.php:112 www/opensearch.php:6
+msgid "Onion link list"
+msgstr ""
+
+#: www/index.php:104
+msgid ""
+"Huge link list of Tor hidden service onions. All the darknet links you need "
+"in one place."
+msgstr ""
+
+#: www/index.php:114 www/index.php:433 www/index.php:450
+msgid "Error: No database connection!"
+msgstr ""
+
+#: www/index.php:116
+#, php-format
+msgid ""
+"I'm not responsible for any content of websites linked here. 99% of darkweb "
+"sites selling anything are scams. Be careful and use your brain. I regularly "
+"receive E-Mails from people that were desperate to make money and fell for "
+"scammers, don't be one of them!"
+msgstr ""
+
+#: www/index.php:121
+msgid "Onion address:"
+msgstr ""
+
+#: www/index.php:126 www/admin.php:183
+msgid "Description:"
+msgstr ""
+
+#: www/index.php:141 www/index.php:161 www/admin.php:199
+msgid "Category:"
+msgstr ""
+
+#: www/index.php:151 www/admin.php:80 www/admin.php:220
+msgid "Update"
+msgstr ""
+
+#: www/index.php:156
+msgid "Search:"
+msgstr ""
+
+#: www/index.php:156
+msgid "Search term"
+msgstr ""
+
+#: www/index.php:166 www/index.php:474 www/index.php:476
+msgid "All"
+msgstr ""
+
+#: www/index.php:179
+msgid "Hide locked"
+msgstr ""
+
+#: www/index.php:180
+msgid "Search"
+msgstr ""
+
+#: www/index.php:182
+msgid "Format:"
+msgstr ""
+
+#: www/index.php:185
+msgid "Special categories:"
+msgstr ""
+
+#: www/index.php:196 www/index.php:198
+msgid "Phishing Clones"
+msgstr ""
+
+#: www/index.php:200
+msgid "Removed/Child porn"
+msgstr ""
+
+#: www/index.php:202
+msgid "Pending approval"
+msgstr ""
+
+#: www/index.php:203
+msgid "Rejected"
+msgstr ""
+
+#: www/index.php:207
+msgid "Categories:"
+msgstr ""
+
+#: www/index.php:218 www/test.php:41 www/admin.php:50 www/admin.php:110
+msgid "Invalid onion address!"
+msgstr ""
+
+#: www/index.php:219
+#, php-format
+msgid "A valid address looks like this: %s"
+msgstr ""
+
+#: www/index.php:222 www/index.php:235
+msgid "Error: Wrong captcha"
+msgstr ""
+
+#: www/index.php:228
+msgid "Error: Captcha expired"
+msgstr ""
+
+#: www/index.php:256 www/admin.php:96
+msgid "Successfully added onion address!"
+msgstr ""
+
+#: www/index.php:258
+msgid "Sorry, editing this onion address has been locked!"
+msgstr ""
+
+#: www/index.php:262 www/admin.php:100
+msgid "Successfully updated description!"
+msgstr ""
+
+#: www/index.php:266 www/admin.php:104
+msgid "Successfully updated category!"
+msgstr ""
+
+#: www/index.php:268 www/admin.php:106
+msgid "Thanks, but I already knew this address!"
+msgstr ""
+
+#: www/index.php:294
+#, php-format
+msgid "Searching for \"%1$s\", %2$d results found:"
+msgstr ""
+
+#: www/index.php:341 www/index.php:406
+msgid "Onion link"
+msgstr ""
+
+#: www/index.php:341 www/admin.php:165
+msgid "Description"
+msgstr ""
+
+#: www/index.php:341
+msgid "Last tested"
+msgstr ""
+
+#: www/index.php:341 www/index.php:406
+msgid "Last seen"
+msgstr ""
+
+#: www/index.php:341
+msgid "Added at"
+msgstr ""
+
+#: www/index.php:341
+msgid "Actions"
+msgstr ""
+
+#: www/index.php:353 www/index.php:358 www/index.php:373 www/index.php:378
+#: www/index.php:415
+msgid "Never"
+msgstr ""
+
+#: www/index.php:363 www/index.php:392 www/test.php:29
+msgid "Test"
+msgstr ""
+
+#: www/index.php:390
+msgid "Edit"
+msgstr ""
+
+#: www/index.php:406
+msgid "Clone of"
+msgstr ""
+
+#: www/index.php:422
+msgid "Unknown"
+msgstr ""
+
+#: www/index.php:472
+msgid "Pages:"
+msgstr ""
+
+#: www/index.php:506
+msgid "Copy:"
+msgstr ""
 
 #: www/test.php:7 www/test.php:17
 msgid "Online-Test"
@@ -29,20 +223,12 @@ msgstr ""
 msgid "Onion link:"
 msgstr ""
 
-#: www/test.php:29 www/onions.php:363 www/onions.php:392
-msgid "Test"
-msgstr ""
-
 #: www/test.php:38 www/admin.php:12 www/sitemap.php:7 cron/update.php:7
 #: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
 #: helpers/tmp6.php:6 helpers/fill_unknown_phishing.php:6 helpers/tmp3.php:6
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
 #: setup.php:48 setup.php:51
 msgid "No database connection!"
-msgstr ""
-
-#: www/test.php:41 www/onions.php:218 www/admin.php:50 www/admin.php:110
-msgid "Invalid onion address!"
 msgstr ""
 
 #: www/test.php:56
@@ -61,193 +247,6 @@ msgstr ""
 
 #: www/test.php:107
 msgid "No, the service is offline!"
-msgstr ""
-
-#: www/onions.php:36
-msgid "All legitimate"
-msgstr ""
-
-#: www/onions.php:37 www/onions.php:71
-msgid "Last added"
-msgstr ""
-
-#: www/onions.php:38
-msgid "Offline > 1 week"
-msgstr ""
-
-#: www/onions.php:100 www/onions.php:105 www/onions.php:112
-#: www/opensearch.php:6
-msgid "Onion link list"
-msgstr ""
-
-#: www/onions.php:104
-msgid ""
-"Huge link list of Tor hidden service onions. All the darknet links you need "
-"in one place."
-msgstr ""
-
-#: www/onions.php:114 www/onions.php:433 www/onions.php:450
-msgid "Error: No database connection!"
-msgstr ""
-
-#: www/onions.php:116
-#, php-format
-msgid ""
-"I'm not responsible for any content of websites linked here. 99% of darkweb "
-"sites selling anything are scams. Be careful and use your brain. I regularly "
-"receive E-Mails from people that were desperate to make money and fell for "
-"scammers, don't be one of them!"
-msgstr ""
-
-#: www/onions.php:121
-msgid "Onion address:"
-msgstr ""
-
-#: www/onions.php:126 www/admin.php:183
-msgid "Description:"
-msgstr ""
-
-#: www/onions.php:141 www/onions.php:161 www/admin.php:199
-msgid "Category:"
-msgstr ""
-
-#: www/onions.php:151 www/admin.php:80 www/admin.php:220
-msgid "Update"
-msgstr ""
-
-#: www/onions.php:156
-msgid "Search:"
-msgstr ""
-
-#: www/onions.php:156
-msgid "Search term"
-msgstr ""
-
-#: www/onions.php:166 www/onions.php:474 www/onions.php:476
-msgid "All"
-msgstr ""
-
-#: www/onions.php:179
-msgid "Hide locked"
-msgstr ""
-
-#: www/onions.php:180
-msgid "Search"
-msgstr ""
-
-#: www/onions.php:182
-msgid "Format:"
-msgstr ""
-
-#: www/onions.php:185
-msgid "Special categories:"
-msgstr ""
-
-#: www/onions.php:196 www/onions.php:198
-msgid "Phishing Clones"
-msgstr ""
-
-#: www/onions.php:200
-msgid "Removed/Child porn"
-msgstr ""
-
-#: www/onions.php:202
-msgid "Pending approval"
-msgstr ""
-
-#: www/onions.php:203
-msgid "Rejected"
-msgstr ""
-
-#: www/onions.php:207
-msgid "Categories:"
-msgstr ""
-
-#: www/onions.php:219
-#, php-format
-msgid "A valid address looks like this: %s"
-msgstr ""
-
-#: www/onions.php:222 www/onions.php:235
-msgid "Error: Wrong captcha"
-msgstr ""
-
-#: www/onions.php:228
-msgid "Error: Captcha expired"
-msgstr ""
-
-#: www/onions.php:256 www/admin.php:96
-msgid "Successfully added onion address!"
-msgstr ""
-
-#: www/onions.php:258
-msgid "Sorry, editing this onion address has been locked!"
-msgstr ""
-
-#: www/onions.php:262 www/admin.php:100
-msgid "Successfully updated description!"
-msgstr ""
-
-#: www/onions.php:266 www/admin.php:104
-msgid "Successfully updated category!"
-msgstr ""
-
-#: www/onions.php:268 www/admin.php:106
-msgid "Thanks, but I already knew this address!"
-msgstr ""
-
-#: www/onions.php:294
-#, php-format
-msgid "Searching for \"%1$s\", %2$d results found:"
-msgstr ""
-
-#: www/onions.php:341 www/onions.php:406
-msgid "Onion link"
-msgstr ""
-
-#: www/onions.php:341 www/admin.php:165
-msgid "Description"
-msgstr ""
-
-#: www/onions.php:341
-msgid "Last tested"
-msgstr ""
-
-#: www/onions.php:341 www/onions.php:406
-msgid "Last seen"
-msgstr ""
-
-#: www/onions.php:341
-msgid "Added at"
-msgstr ""
-
-#: www/onions.php:341
-msgid "Actions"
-msgstr ""
-
-#: www/onions.php:353 www/onions.php:358 www/onions.php:373 www/onions.php:378
-#: www/onions.php:415
-msgid "Never"
-msgstr ""
-
-#: www/onions.php:390
-msgid "Edit"
-msgstr ""
-
-#: www/onions.php:406
-msgid "Clone of"
-msgstr ""
-
-#: www/onions.php:422
-msgid "Unknown"
-msgstr ""
-
-#: www/onions.php:472
-msgid "Pages:"
-msgstr ""
-
-#: www/onions.php:506
-msgid "Copy:"
 msgstr ""
 
 #: www/admin.php:17 www/admin.php:26

@@ -103,8 +103,8 @@ function send_html(): void
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 	echo '<meta name="description" content="'._('Huge link list of Tor hidden service onions. All the darknet links you need in one place.').'">';
 	echo '<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.php" title="'._('Onion link list').'"/>';
-	echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
-	echo '<link rel="alternate" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '" hreflang="x-default">';
+	echo '<link rel="canonical" href="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
+	echo '<link rel="alternate" href="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '" hreflang="x-default">';
 	alt_links();
 	echo '<style>'.$style.'</style>';
 	echo '<base target="_blank">';
@@ -115,7 +115,7 @@ function send_html(): void
 	}
 	echo '<p>'._('I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. I regularly receive E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!').'</p>';
 	//update onions description form
-	echo '<div class="table" id="edit-search"><div class="row"><div class="col"><form action="'.$_SERVER['SCRIPT_NAME'].'" target="_self" method="POST">';
+	echo '<div class="table" id="edit-search"><div class="row"><div class="col"><form target="_self" method="POST">';
 	echo '<input type="hidden" name="pg" value="'.htmlspecialchars($_REQUEST['newpg']).'">';
 	echo '<input type="hidden" name="lang" value="'.$language.'">';
 	echo '<p><label>'._('Onion address:').'<br><input name="addr" size="30" placeholder="http://'.$_SERVER['HTTP_HOST'].'" value="';
@@ -150,7 +150,7 @@ function send_html(): void
 	send_captcha();
 	echo '<input type="submit" name="action" value="'._('Update').'"></form></div>';
 	//search from
-	echo '<div class="col"><form action="'.$_SERVER['SCRIPT_NAME'].'" target="_self" method="post" role="search">';
+	echo '<div class="col"><form target="_self" method="post" role="search">';
 	echo '<input type="hidden" name="pg" value="'.htmlspecialchars($_REQUEST['newpg']).'">';
 	echo '<input type="hidden" name="lang" value="'.$language.'">';
 	echo '<p><label>'._('Search:').' <br><input name="q" size="30" placeholder="'._('Search term').'" value="';

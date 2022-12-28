@@ -8,5 +8,5 @@ header('Content-Type: application/opensearchdescription+xml');
   <Contact>daniel@danwin1210.de</Contact>
   <Developer>Daniel Winzen</Developer>
   <Image width="192" height="192" type="image/gif"><?php echo CANONICAL_URL; ?>/favicon.ico</Image>
-  <Url type="text/html" method="get" template="<?php echo CANONICAL_URL; ?>/onions.php?q={searchTerms}" />
+  <Url type="text/html" method="get" template="<?php echo CANONICAL_URL; ?>/?q={searchTerms}" />
 </OpenSearchDescription>
