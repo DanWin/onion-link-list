@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/../common_config.php');
-global $language, $dir;
+global $language, $dir, $locale;
 $style = '.red{color:red}.green{color:green}.software-link{text-align:center;font-size:small}.list{padding:0;}.list li{display:inline-block;padding:0.35em}';
 send_headers([$style]);
 echo '<!DOCTYPE html><html lang="'.$language.'" dir="'.$dir.'"><head>';
@@ -12,6 +12,11 @@ echo '<meta name="description" content="'._('Test whether a Tor hidden service o
 echo '<link rel="canonical" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '">';
 echo '<link rel="alternate" href="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '" hreflang="x-default">';
 alt_links();
+echo '<meta property="og:type" content="website">';
+echo '<meta property="og:title" content="' . _('Online-Test') . '">';
+echo '<meta property="og:description" content="' . _('Test whether a Tor hidden service onion is online or offline') . '">';
+echo '<meta property="og:url" content="' . CANONICAL_URL . $_SERVER['SCRIPT_NAME'] . '">';
+echo '<meta property="og:locale" content="' . $locale . '">';
 echo '<style>'.$style.'</style>';
 echo '</head><body><main>';
 echo '<h1>'._('Online-Test').'</h1>';

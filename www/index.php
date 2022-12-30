@@ -22,7 +22,7 @@ if(!isset($_REQUEST['format'])){
 
 function send_html(): void
 {
-	global $categories, $db, $language, $dir;
+	global $categories, $db, $language, $dir, $locale;
 	$numrows = 0;
 	$style = '.row{display:flex;flex-wrap:wrap}.headerrow{font-weight:bold}.col{display:flex;flex:1;padding:3px 3px;flex-direction:column}';
 	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3){background-color:#aaff88}.down .col:nth-child(0n+3){background-color:#ff4444}';
@@ -106,6 +106,11 @@ function send_html(): void
 	echo '<link rel="canonical" href="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 	echo '<link rel="alternate" href="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '" hreflang="x-default">';
 	alt_links();
+	echo '<meta property="og:type" content="website">';
+	echo '<meta property="og:title" content="' . _('Onion link list') . '">';
+	echo '<meta property="og:description" content="' . _('Huge link list of Tor hidden service onions. All the darknet links you need in one place.') . '">';
+	echo '<meta property="og:url" content="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
+	echo '<meta property="og:locale" content="' . $locale . '">';
 	echo '<style>'.$style.'</style>';
 	echo '<base target="_blank">';
 	echo '</head><body><main>';

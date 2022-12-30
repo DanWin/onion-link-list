@@ -170,5 +170,6 @@ function alt_links(): void
 		$canonical_query['lang'] = $lang;
 		$link = CANONICAL_URL . ($_SERVER['SCRIPT_NAME'] === '/index.php' ? '/' : $_SERVER['SCRIPT_NAME']) . '?' . http_build_query($canonical_query);
 		echo '<link rel="alternate" href="'.$link.'" hreflang="'.$lang.'" />';
+		echo '<meta property="og:locale:alternate" content="'.$data['locale'].'">';
 	}
 }
