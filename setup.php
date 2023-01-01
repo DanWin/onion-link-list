@@ -1,40 +1,12 @@
 <?php
-/*
-* Onion Link List - Setup
-*
-* Copyright (C) 2016-2020 Daniel Winzen <daniel@danwin1210.de>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 if(!extension_loaded('gettext')){
-	die('The gettext extension of PHP is required. Please install it first.');
+	die('The gettext extension of PHP is required. Please install it first.' . PHP_EOL);
 }
 require_once(__DIR__.'/common_config.php');
-if(!extension_loaded('pdo_mysql')){
-	die(_('The pdo_mysql extension of PHP is required. Please install it first.'));
-}
-if(!extension_loaded('pcre')){
-	die(_('The pcre extension of PHP is required. Please install it first.'));
-}
-if(!extension_loaded('json')){
-	die(_('The json extension of PHP is required. Please install it first.'));
-}
-if(!extension_loaded('curl')){
-	die(_('The curl extension of PHP is required. Please install it first.'));
-}
-if(!extension_loaded('date')){
-	die(_('The date extension of PHP is required. Please install it first.'));
+foreach(['pdo_mysql', 'json', 'pcre', 'curl', 'intl'] as $required_extension) {
+	if ( ! extension_loaded( 'pdo_mysql' ) ) {
+		die( sprintf(_( 'The %s extension of PHP is required. Please install it first.' ), $required_extension) . PHP_EOL );
+	}
 }
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);

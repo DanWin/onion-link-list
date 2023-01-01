@@ -16,6 +16,7 @@ asort($categories);
 <!DOCTYPE html><html lang="<?php echo $language; ?>" dir="<?php echo $dir; ?>"><head>
 <title><?php echo _('Admin interface'); ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Daniel Winzen">
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="<?php echo CANONICAL_URL . $_SERVER['SCRIPT_NAME']; ?>">

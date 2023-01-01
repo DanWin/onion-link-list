@@ -111,6 +111,7 @@ function send_html(): void
 	echo '<meta property="og:description" content="' . _('Huge link list of Tor hidden service onions. All the darknet links you need in one place.') . '">';
 	echo '<meta property="og:url" content="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 	echo '<meta property="og:locale" content="' . $locale . '">';
+	echo '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"'.CANONICAL_URL.'","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"'.CANONICAL_URL.'/?q={search_term_string}"},"query-input":"required name=search_term_string","url":"'.CANONICAL_URL.'"}}</script>';
 	echo '<style>'.$style.'</style>';
 	echo '<base target="_blank">';
 	echo '</head><body><main>';
