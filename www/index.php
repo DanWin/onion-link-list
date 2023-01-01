@@ -37,13 +37,6 @@ function send_html(): void
 		_('Last added')=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
 		_('Offline > 1 week')=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
-	$canonical_query = [];
-	if(isset($_REQUEST['cat'])) {
-		$canonical_query['cat'] = $_REQUEST['cat'];
-	}
-	if(isset($_REQUEST['pg'])) {
-		$canonical_query['pg'] = $_REQUEST['pg'];
-	}
 	if(!isset($_REQUEST['pg'])){
 		$_REQUEST['pg']=1;
 	}else{
@@ -58,6 +51,13 @@ function send_html(): void
 	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
 		settype($_REQUEST['cat'], 'int');
 		$category=$_REQUEST['cat'];
+	}
+	$canonical_query = [];
+	if(isset($_REQUEST['cat'])) {
+		$canonical_query['cat'] = intval($_REQUEST['cat']);
+	}
+	if(isset($_REQUEST['pg'])) {
+		$canonical_query['pg'] = $_REQUEST['pg'];
 	}
 	$pages=1;
 	$admin_approval = '';
