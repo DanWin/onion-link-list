@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-28 19:40+0100\n"
-"PO-Revision-Date: 2022-12-27 22:34+0100\n"
+"POT-Creation-Date: 2023-01-01 17:54+0100\n"
+"PO-Revision-Date: 2023-01-01 17:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -30,21 +30,22 @@ msgstr "Son eklenen"
 msgid "Offline > 1 week"
 msgstr "Çevrimdışı > 1 hafta"
 
-#: www/index.php:100 www/index.php:105 www/index.php:112 www/opensearch.php:6
+#: www/index.php:100 www/index.php:105 www/index.php:110 www/index.php:118
+#: www/opensearch.php:6
 msgid "Onion link list"
 msgstr "Onion bağlantı listesi"
 
-#: www/index.php:104
+#: www/index.php:104 www/index.php:111
 msgid ""
 "Huge link list of Tor hidden service onions. All the darknet links you need "
 "in one place."
 msgstr ""
 
-#: www/index.php:114 www/index.php:433 www/index.php:450
+#: www/index.php:120 www/index.php:436 www/index.php:453
 msgid "Error: No database connection!"
 msgstr "Hata: Veritabanı bağlantısı yok!"
 
-#: www/index.php:116
+#: www/index.php:122
 #, php-format
 msgid ""
 "I'm not responsible for any content of websites linked here. 99% of darkweb "
@@ -53,345 +54,343 @@ msgid ""
 "scammers, don't be one of them!"
 msgstr ""
 
-#: www/index.php:121
+#: www/index.php:127
 msgid "Onion address:"
 msgstr "Onion-Adresi:"
 
-#: www/index.php:126 www/admin.php:183
+#: www/index.php:132 www/admin.php:184
 msgid "Description:"
 msgstr "Açıklama:"
 
-#: www/index.php:141 www/index.php:161 www/admin.php:199
+#: www/index.php:147 www/index.php:167 www/admin.php:200
 msgid "Category:"
 msgstr "Kategori:"
 
-#: www/index.php:151 www/admin.php:80 www/admin.php:220
+#: www/index.php:157 www/admin.php:81 www/admin.php:221
 msgid "Update"
 msgstr "Güncelle"
 
-#: www/index.php:156
+#: www/index.php:162
 msgid "Search:"
 msgstr "Ara:"
 
-#: www/index.php:156
+#: www/index.php:162
 msgid "Search term"
 msgstr "Arama terimi"
 
-#: www/index.php:166 www/index.php:474 www/index.php:476
+#: www/index.php:172 www/index.php:477 www/index.php:479
 msgid "All"
 msgstr "Tümü"
 
-#: www/index.php:179
+#: www/index.php:185
 msgid "Hide locked"
 msgstr "Kilitlileri gizle"
 
-#: www/index.php:180
+#: www/index.php:186
 msgid "Search"
 msgstr "Ara"
 
-#: www/index.php:182
+#: www/index.php:188
 msgid "Format:"
 msgstr "Biçim:"
 
-#: www/index.php:185
+#: www/index.php:191
 msgid "Special categories:"
 msgstr "Özel kategoriler:"
 
-#: www/index.php:196 www/index.php:198
+#: www/index.php:202 www/index.php:204
 msgid "Phishing Clones"
 msgstr "Phishing Klonları"
 
-#: www/index.php:200
+#: www/index.php:206
 msgid "Removed/Child porn"
 msgstr "Kaldırıldı/Çocuk pornografisi"
 
-#: www/index.php:202
+#: www/index.php:208
 msgid "Pending approval"
 msgstr ""
 
-#: www/index.php:203
+#: www/index.php:209
 msgid "Rejected"
 msgstr ""
 
-#: www/index.php:207
+#: www/index.php:213
 msgid "Categories:"
 msgstr "Kategoriler:"
 
-#: www/index.php:218 www/test.php:41 www/admin.php:50 www/admin.php:110
+#: www/index.php:224 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
 msgstr "Geçersiz onion-Adresi!"
 
-#: www/index.php:219
+#: www/index.php:225
 #, php-format
 msgid "A valid address looks like this: %s"
 msgstr "Geçerli bir adres şöyle gözükür: %s"
 
-#: www/index.php:222 www/index.php:235
+#: www/index.php:229 www/index.php:242
 msgid "Error: Wrong captcha"
 msgstr ""
 
-#: www/index.php:228
+#: www/index.php:235
 msgid "Error: Captcha expired"
 msgstr ""
 
-#: www/index.php:256 www/admin.php:96
+#: www/index.php:264 www/admin.php:97
 msgid "Successfully added onion address!"
 msgstr "Onion-Adresi başarıyla eklendi!"
 
-#: www/index.php:258
+#: www/index.php:266
 msgid "Sorry, editing this onion address has been locked!"
 msgstr "Üzgünüm, bu onion-Adresini düzenlemek kilitli!"
 
-#: www/index.php:262 www/admin.php:100
+#: www/index.php:270 www/admin.php:101
 msgid "Successfully updated description!"
 msgstr "Açıklama başarılı bir şekilde güncellendi!"
 
-#: www/index.php:266 www/admin.php:104
+#: www/index.php:274 www/admin.php:105
 msgid "Successfully updated category!"
 msgstr "Kategori başarılı bir şekilde güncellendi!"
 
-#: www/index.php:268 www/admin.php:106
+#: www/index.php:276 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
 msgstr "Teşekkürler, ama bu adresi zaten biliyorum!"
 
-#: www/index.php:294
+#: www/index.php:302
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
 msgstr "\"%1$s\" için aranıyor, %2$d sonuç bulundu:"
 
-#: www/index.php:341 www/index.php:406
+#: www/index.php:349 www/index.php:409
 msgid "Onion link"
 msgstr "Onion bağlantısı"
 
-#: www/index.php:341 www/admin.php:165
+#: www/index.php:349 www/admin.php:166
 msgid "Description"
 msgstr "Açıklama"
 
-#: www/index.php:341
-msgid "Last tested"
-msgstr "Son denenme"
-
-#: www/index.php:341 www/index.php:406
+#: www/index.php:349 www/index.php:409
 msgid "Last seen"
 msgstr "Son görülme"
 
-#: www/index.php:341
+#: www/index.php:349
 msgid "Added at"
 msgstr "Şu tarihte eklendi"
 
-#: www/index.php:341
+#: www/index.php:349
 msgid "Actions"
 msgstr "Eylemler"
 
-#: www/index.php:353 www/index.php:358 www/index.php:373 www/index.php:378
-#: www/index.php:415
+#: www/index.php:361 www/index.php:379 www/index.php:418
 msgid "Never"
 msgstr "Asla"
 
-#: www/index.php:363 www/index.php:392 www/test.php:29
+#: www/index.php:369 www/index.php:395 www/test.php:34
 msgid "Test"
 msgstr "Dene"
 
-#: www/index.php:390
+#: www/index.php:393
 msgid "Edit"
 msgstr "Düzenle"
 
-#: www/index.php:406
+#: www/index.php:409
 msgid "Clone of"
 msgstr "Klonu"
 
-#: www/index.php:422
+#: www/index.php:425
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: www/index.php:472
+#: www/index.php:475
 msgid "Pages:"
 msgstr "Sayfalar:"
 
-#: www/index.php:506
+#: www/index.php:508
 msgid "Copy:"
 msgstr ""
 
-#: www/test.php:7 www/test.php:17
+#: www/index.php:515 www/index.php:530 www/index.php:582
+msgid "captcha image"
+msgstr ""
+
+#: www/test.php:7 www/test.php:16 www/test.php:22
 msgid "Online-Test"
 msgstr "Çevrimiçi-Deneme"
 
-#: www/test.php:11 www/test.php:19
+#: www/test.php:11 www/test.php:17 www/test.php:24
 msgid "Test whether a Tor hidden service onion is online or offline"
 msgstr ""
 
-#: www/test.php:22 www/admin.php:159
+#: www/test.php:27 www/admin.php:160
 msgid "Onion link:"
 msgstr ""
 
-#: www/test.php:38 www/admin.php:12 www/sitemap.php:7 cron/update.php:7
+#: www/test.php:43 www/admin.php:12 www/sitemap.php:7 cron/update.php:7
 #: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
 #: helpers/tmp6.php:6 helpers/fill_unknown_phishing.php:6 helpers/tmp3.php:6
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
-#: setup.php:48 setup.php:51
+#: setup.php:20 setup.php:23
 msgid "No database connection!"
 msgstr "Veritabanı bağlantısı yok!"
 
-#: www/test.php:56
+#: www/test.php:61
 #, php-format
 msgid ""
 "Warning, this is a known phishing clone. The original site is located at %s."
 msgstr ""
 "Uyarı, bu bilinen bir phishing klonu. Gerçek site %s adresinde bulunuyor."
 
-#: www/test.php:61
+#: www/test.php:66
 msgid "Warning: This is a known scam!"
 msgstr ""
 
-#: www/test.php:66 www/test.php:101
+#: www/test.php:71 www/test.php:106
 msgid "Yes, the service is online!"
 msgstr "Evet, bu servis çevrimiçi!"
 
-#: www/test.php:107
+#: www/test.php:112
 msgid "No, the service is offline!"
 msgstr "Hayır, bu servis çevrimdışı!"
 
-#: www/admin.php:17 www/admin.php:26
+#: www/admin.php:17 www/admin.php:27
 msgid "Admin interface"
 msgstr "Yönetici arayüzü"
 
-#: www/admin.php:34
+#: www/admin.php:35
 msgid "Password:"
 msgstr "Şifre:"
 
-#: www/admin.php:35
+#: www/admin.php:36
 msgid "Login"
 msgstr "Giriş"
 
-#: www/admin.php:38
+#: www/admin.php:39
 msgid "Wrong Password!"
 msgstr "Yanlış şifre!"
 
-#: www/admin.php:54 www/admin.php:210
+#: www/admin.php:55 www/admin.php:211
 msgid "Remove"
 msgstr "Kaldır"
 
-#: www/admin.php:56
+#: www/admin.php:57
 msgid "Successfully removed onion address!"
 msgstr "Onion-Adresi başarıyla kaldırıldı!"
 
-#: www/admin.php:57 www/admin.php:211
+#: www/admin.php:58 www/admin.php:212
 msgid "Lock"
 msgstr "Kilitle"
 
-#: www/admin.php:59
+#: www/admin.php:60
 msgid "Successfully locked onion address!"
 msgstr "Onion-Adresi başarılı bir şekilde kilitlendi!"
 
-#: www/admin.php:60 www/admin.php:215
+#: www/admin.php:61 www/admin.php:216
 msgid "Re-add"
 msgstr "Yeniden-ekle"
 
-#: www/admin.php:62
+#: www/admin.php:63
 msgid "Successfully re-added onion address!"
 msgstr "Onion-Adresi başarılı bir şekilde okundu!"
 
-#: www/admin.php:63 www/admin.php:216
+#: www/admin.php:64 www/admin.php:217
 msgid "Unlock"
 msgstr "Kilidi aç"
 
-#: www/admin.php:65
+#: www/admin.php:66
 msgid "Successfully unlocked onion address!"
 msgstr "Onion-Adresi'nin kilidi başarılı bir şekilde açıldı!"
 
-#: www/admin.php:66 www/admin.php:212
+#: www/admin.php:67 www/admin.php:213
 msgid "Promote"
 msgstr "Destekle"
 
-#: www/admin.php:76
+#: www/admin.php:77
 #, php-format
 msgid "Successfully promoted onion address until %1$s!"
 msgstr "%1$s tarihine kadar onion-Adresi başarılı bir şekilde desteklendi!"
 
-#: www/admin.php:77 www/admin.php:217
+#: www/admin.php:78 www/admin.php:218
 msgid "Un-promote"
 msgstr "Destekleme"
 
-#: www/admin.php:79
+#: www/admin.php:80
 msgid "Successfully un-promoted onion address!"
 msgstr "Onion-Adresine destek başarılı bir şekilde bırakıldı!"
 
-#: www/admin.php:108 www/admin.php:213
+#: www/admin.php:109 www/admin.php:214
 msgid "Phishing"
 msgstr "Phishing"
 
-#: www/admin.php:122
+#: www/admin.php:123
 msgid "Successfully added Phishing clone!"
 msgstr "Phishing klonu eklendi!"
 
-#: www/admin.php:124
+#: www/admin.php:125
 msgid "Not added Phishing clone! Phishing and original have the same address."
 msgstr "Phishing klonu eklenemedi! Phishing ve orijinal aynı adrese sahip."
 
-#: www/admin.php:127 www/admin.php:218
+#: www/admin.php:128 www/admin.php:219
 msgid "No phishing"
 msgstr "Phishing değil"
 
-#: www/admin.php:132
+#: www/admin.php:133
 msgid "Successfully removed Phishing clone!"
 msgstr "Phishing klonu başarılı bir şekilde kaldırıldı!"
 
-#: www/admin.php:133 www/admin.php:222
+#: www/admin.php:134 www/admin.php:223
 msgid "Reject"
 msgstr ""
 
-#: www/admin.php:135
+#: www/admin.php:136
 msgid "Successfully rejected onion address"
 msgstr ""
 
-#: www/admin.php:136 www/admin.php:223
+#: www/admin.php:137 www/admin.php:224
 msgid "Approve"
 msgstr ""
 
-#: www/admin.php:138
+#: www/admin.php:139
 msgid "Successfully approved onion address"
 msgstr ""
 
-#: www/admin.php:140
+#: www/admin.php:141
 msgid "No action taken!"
 msgstr "İşlem yapılmadı!"
 
-#: www/admin.php:153
+#: www/admin.php:154
 msgid "Switch view mode"
 msgstr ""
 
-#: www/admin.php:165
+#: www/admin.php:166
 msgid "Select"
 msgstr ""
 
-#: www/admin.php:165
+#: www/admin.php:166
 msgid "Address"
 msgstr ""
 
-#: www/admin.php:165
-#, fuzzy
+#: www/admin.php:166
 msgid "Category"
-msgstr "Kategori:"
+msgstr "Kategori"
 
-#: www/admin.php:165
+#: www/admin.php:166
 msgid "Status"
 msgstr ""
 
-#: www/admin.php:169
+#: www/admin.php:170
 #, php-format
 msgid "Approved: %d"
 msgstr ""
 
-#: www/admin.php:169
+#: www/admin.php:170
 #, php-format
 msgid "Locked: %d"
 msgstr ""
 
-#: www/admin.php:173
+#: www/admin.php:174
 msgid "Clone of:"
 msgstr "Klonu:"
 
-#: www/admin.php:178
+#: www/admin.php:179
 msgid "Bitcoins:"
 msgstr "Bitcoinler:"
 
@@ -400,37 +399,24 @@ msgid "Error creating the sitemap!"
 msgstr ""
 
 #: www/opensearch.php:7
-#, fuzzy
 msgid "Search the onion link list"
-msgstr "Onion bağlantı listesi"
+msgstr ""
 
-#: common_config.php:93
+#: common_config.php:75
 msgid "Language:"
 msgstr "Dil:"
 
-#: setup.php:25
-msgid "The pdo_mysql extension of PHP is required. Please install it first."
+#: setup.php:8
+#, php-format
+msgid "The %s extension of PHP is required. Please install it first."
 msgstr ""
 
-#: setup.php:28
-msgid "The pcre extension of PHP is required. Please install it first."
-msgstr ""
-
-#: setup.php:31
-msgid "The json extension of PHP is required. Please install it first."
-msgstr ""
-
-#: setup.php:34
-msgid "The curl extension of PHP is required. Please install it first."
-msgstr ""
-
-#: setup.php:37
-msgid "The date extension of PHP is required. Please install it first."
-msgstr ""
-
-#: setup.php:106
+#: setup.php:78
 msgid "Status: OK"
 msgstr ""
+
+#~ msgid "Last tested"
+#~ msgstr "Son denenme"
 
 #~ msgid ""
 #~ "Here an onion address can be tested, for whether it is online or not."
