@@ -191,18 +191,10 @@ function send_html(): void
 	echo '<ul class="list"><li>'._('Special categories:').'</li>';
 	$cat=count($categories);
 	foreach($special as $name=>$query){
-		if($category==$cat){
-			echo ' <li class="active"><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
-		}else{
-			echo ' <li><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
-		}
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		++$cat;
 	}
-	if($category==$cat){
-		echo ' <li class="active"><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
-	}else{
-		echo ' <li><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
-	}
+	echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
 	echo ' <li>'._('Removed/Child porn')." ($category_count[removed])</li>";
 	if(REQUIRE_APPROVAL) {
 		echo ' <li>'._('Pending approval')." ($category_count[pending])</li>";
@@ -212,11 +204,7 @@ function send_html(): void
 	//List normal categories
 	echo '<ul class="list"><li>'._('Categories:').'</li>';
 	foreach($categories as $cat=>$name){
-		if($category==$cat){
-			echo ' <li class="active"><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
-		}else{
-			echo ' <li><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
-		}
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 	}
 	echo '</ul>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
@@ -473,17 +461,9 @@ function get_pagination(int $category, int $pages) : string {
 	global $language;
 	ob_start();
 	echo '<ul class="list pagination"><li>'._('Pages:').'</li>';
-	if($_REQUEST['pg']==0){
-		echo ' <li class="active"><a href="?cat='.$category.'&amp;pg=0&amp;lang='.$language.'" target="_self">'._('All').'</a></li>';
-	}else{
-		echo ' <li><a href="?cat='.$category.'&amp;pg=0&amp;lang='.$language.'" target="_self">'._('All').'</a></li>';
-	}
+	echo ' <li'.($_REQUEST['pg']==0 ? ' class="active"' : '').'><a href="?cat='.$category.'&amp;pg=0&amp;lang='.$language.'" target="_self">'._('All').'</a></li>';
 	for($i=1; $i<=$pages; ++$i){
-		if($_REQUEST['pg']==$i){
-			echo ' <li class="active"><a href="?cat=$category&amp;pg='.$i.'&amp;lang='.$language.'" target="_self">'.$i.'</a></li>';
-		}else{
-			echo ' <li><a href="?cat='.$category.'&amp;pg='.$i.'&amp;lang='.$language.'" target="_self">'.$i.'</a></li>';
-		}
+		echo ' <li'.($_REQUEST['pg']==$i ? ' class="active"' : '').'><a href="?cat='.$category.'&amp;pg='.$i.'&amp;lang='.$language.'" target="_self">'.$i.'</a></li>';
 	}
 	echo "</ul>";
 	return ob_get_clean();
