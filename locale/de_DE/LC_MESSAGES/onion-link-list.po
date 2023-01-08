@@ -6,11 +6,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-01 17:54+0100\n"
-"PO-Revision-Date: 2023-01-06 20:36+0000\n"
-"Last-Translator: Daniel Winzen <daniel@danwin1210.de>\n"
-"Language-Team: German <https://weblate.danwin1210.de/projects/main-website/"
+"PO-Revision-Date: 2023-01-08 18:29+0000\n"
+"Last-Translator: Weblate Admin <daniel@danwin1210.de>\n"
+"Language-Team: German <https://weblate.danwin1210.de/projects/DanWin/"
 "onion-link-list/de/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -420,9 +420,7 @@ msgstr "Sprache:"
 #: setup.php:8
 #, php-format
 msgid "The %s extension of PHP is required. Please install it first."
-msgstr ""
-"Die %s Erweiterung von PHP wird benötigt. Bitte installieren Sie diese "
-"zuerst."
+msgstr "Die %s PHP-Erweiterung wird benötigt. Bitte installiere diese zuerst."
 
 #: setup.php:78
 msgid "Status: OK"
