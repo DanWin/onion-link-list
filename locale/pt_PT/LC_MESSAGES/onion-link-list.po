@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-01 17:54+0100\n"
+"POT-Creation-Date: 2023-01-13 14:54+0100\n"
 "PO-Revision-Date: 2023-01-01 17:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,7 +41,7 @@ msgid ""
 "in one place."
 msgstr ""
 
-#: www/index.php:120 www/index.php:436 www/index.php:453
+#: www/index.php:120 www/index.php:424 www/index.php:441
 msgid "Error: No database connection!"
 msgstr "Erro: Sem conexão com a database!"
 
@@ -78,7 +78,7 @@ msgstr "Pesquisar:"
 msgid "Search term"
 msgstr "Termo de pesquisa"
 
-#: www/index.php:172 www/index.php:477 www/index.php:479
+#: www/index.php:172 www/index.php:464
 msgid "All"
 msgstr "Todos"
 
@@ -98,117 +98,117 @@ msgstr "Formato:"
 msgid "Special categories:"
 msgstr "Categorias especiais:"
 
-#: www/index.php:202 www/index.php:204
+#: www/index.php:197
 msgid "Phishing Clones"
 msgstr "Clone com phishing"
 
-#: www/index.php:206
+#: www/index.php:198
 msgid "Removed/Child porn"
 msgstr "Removidos/Pornografia infantil"
 
-#: www/index.php:208
+#: www/index.php:200
 msgid "Pending approval"
 msgstr "Aprovação pendente"
 
-#: www/index.php:209
+#: www/index.php:201
 msgid "Rejected"
 msgstr ""
 
-#: www/index.php:213
+#: www/index.php:205
 msgid "Categories:"
 msgstr "Categorias:"
 
-#: www/index.php:224 www/test.php:46 www/admin.php:51 www/admin.php:111
+#: www/index.php:212 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
 msgstr "Endereço onion inválido!"
 
-#: www/index.php:225
+#: www/index.php:213
 #, php-format
 msgid "A valid address looks like this: %s"
 msgstr "Um endereço válido é parecido com este: %s"
 
-#: www/index.php:229 www/index.php:242
+#: www/index.php:217 www/index.php:230
 msgid "Error: Wrong captcha"
 msgstr ""
 
-#: www/index.php:235
+#: www/index.php:223
 msgid "Error: Captcha expired"
 msgstr ""
 
-#: www/index.php:264 www/admin.php:97
+#: www/index.php:252 www/admin.php:97
 msgid "Successfully added onion address!"
 msgstr "Endereço onion adicionado com sucesso!"
 
-#: www/index.php:266
+#: www/index.php:254
 msgid "Sorry, editing this onion address has been locked!"
 msgstr "Desculpe, a edição deste endereço onion foi bloqueada!"
 
-#: www/index.php:270 www/admin.php:101
+#: www/index.php:258 www/admin.php:101
 msgid "Successfully updated description!"
 msgstr "Descrição atualizada com sucesso!"
 
-#: www/index.php:274 www/admin.php:105
+#: www/index.php:262 www/admin.php:105
 msgid "Successfully updated category!"
 msgstr "Categoria atualizada com sucesso!"
 
-#: www/index.php:276 www/admin.php:107
+#: www/index.php:264 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
 msgstr "Obrigado, mas já conhecia este endereço!"
 
-#: www/index.php:302
+#: www/index.php:290
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
 msgstr "Procurando por \"%1$s\", %2$d resultados encontrados:"
 
-#: www/index.php:349 www/index.php:409
+#: www/index.php:337 www/index.php:397
 msgid "Onion link"
 msgstr "Onion link"
 
-#: www/index.php:349 www/admin.php:166
+#: www/index.php:337 www/admin.php:166
 msgid "Description"
 msgstr "Descrição"
 
-#: www/index.php:349 www/index.php:409
+#: www/index.php:337 www/index.php:397
 msgid "Last seen"
 msgstr "Visto pela última vez"
 
-#: www/index.php:349
+#: www/index.php:337
 msgid "Added at"
 msgstr "Adicionado em"
 
-#: www/index.php:349
+#: www/index.php:337
 msgid "Actions"
 msgstr "Ações"
 
-#: www/index.php:361 www/index.php:379 www/index.php:418
+#: www/index.php:349 www/index.php:367 www/index.php:406
 msgid "Never"
 msgstr "Nunca"
 
-#: www/index.php:369 www/index.php:395 www/test.php:34
+#: www/index.php:357 www/index.php:383 www/test.php:34
 msgid "Test"
 msgstr "Testar"
 
-#: www/index.php:393
+#: www/index.php:381
 msgid "Edit"
 msgstr "Editar"
 
-#: www/index.php:409
+#: www/index.php:397
 msgid "Clone of"
 msgstr "Clone de"
 
-#: www/index.php:425
+#: www/index.php:413
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: www/index.php:475
+#: www/index.php:463
 msgid "Pages:"
 msgstr "Páginas:"
 
-#: www/index.php:508
+#: www/index.php:488
 msgid "Copy:"
 msgstr ""
 
-#: www/index.php:515 www/index.php:530 www/index.php:582
+#: www/index.php:495 www/index.php:510 www/index.php:562
 msgid "captcha image"
 msgstr ""
 
@@ -404,7 +404,7 @@ msgstr ""
 msgid "Search the onion link list"
 msgstr ""
 
-#: common_config.php:75
+#: common_config.php:76
 msgid "Language:"
 msgstr "Linguagem:"
 

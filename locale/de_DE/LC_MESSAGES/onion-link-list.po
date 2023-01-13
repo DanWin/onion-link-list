@@ -6,11 +6,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
-"POT-Creation-Date: 2023-01-01 17:54+0100\n"
-"PO-Revision-Date: 2023-01-08 18:29+0000\n"
-"Last-Translator: Weblate Admin <daniel@danwin1210.de>\n"
-"Language-Team: German <https://weblate.danwin1210.de/projects/DanWin/"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-13 14:54+0100\n"
+"PO-Revision-Date: 2023-01-06 20:36+0000\n"
+"Last-Translator: Daniel Winzen <daniel@danwin1210.de>\n"
+"Language-Team: German <https://weblate.danwin1210.de/projects/main-website/"
 "onion-link-list/de/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr ""
 "Große Liste von Tor hidden service onion links. Alle Darknet Links, die du "
 "brauchst, in einem Ort."
 
-#: www/index.php:120 www/index.php:436 www/index.php:453
+#: www/index.php:120 www/index.php:424 www/index.php:441
 msgid "Error: No database connection!"
 msgstr "Fehler: Keine Datenbankverbindung!"
 
@@ -86,7 +86,7 @@ msgstr "Suchen:"
 msgid "Search term"
 msgstr "Suchwort"
 
-#: www/index.php:172 www/index.php:477 www/index.php:479
+#: www/index.php:172 www/index.php:464
 msgid "All"
 msgstr "Alle"
 
@@ -106,117 +106,117 @@ msgstr "Format:"
 msgid "Special categories:"
 msgstr "Spezielle Kategorien:"
 
-#: www/index.php:202 www/index.php:204
+#: www/index.php:197
 msgid "Phishing Clones"
 msgstr "Phishingklone"
 
-#: www/index.php:206
+#: www/index.php:198
 msgid "Removed/Child porn"
 msgstr "Entfernt/Kinderporno"
 
-#: www/index.php:208
+#: www/index.php:200
 msgid "Pending approval"
 msgstr "Genehmigung ausstehend"
 
-#: www/index.php:209
+#: www/index.php:201
 msgid "Rejected"
 msgstr "Abgelehnt"
 
-#: www/index.php:213
+#: www/index.php:205
 msgid "Categories:"
 msgstr "Kategorien:"
 
-#: www/index.php:224 www/test.php:46 www/admin.php:51 www/admin.php:111
+#: www/index.php:212 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
 msgstr "Ungültige Onion-Adresse!"
 
-#: www/index.php:225
+#: www/index.php:213
 #, php-format
 msgid "A valid address looks like this: %s"
 msgstr "Eine gültige Adresse sieht so aus: %s"
 
-#: www/index.php:229 www/index.php:242
+#: www/index.php:217 www/index.php:230
 msgid "Error: Wrong captcha"
 msgstr "Fehler: Falsches Captcha"
 
-#: www/index.php:235
+#: www/index.php:223
 msgid "Error: Captcha expired"
 msgstr "Fehler: Captcha abgelaufen"
 
-#: www/index.php:264 www/admin.php:97
+#: www/index.php:252 www/admin.php:97
 msgid "Successfully added onion address!"
 msgstr "Onion-Adresse erfolgreich hinzugefügt!"
 
-#: www/index.php:266
+#: www/index.php:254
 msgid "Sorry, editing this onion address has been locked!"
 msgstr "Entschuldigung, das Bearbeiten dieser Onion-Adresse wurde gesperrt!"
 
-#: www/index.php:270 www/admin.php:101
+#: www/index.php:258 www/admin.php:101
 msgid "Successfully updated description!"
 msgstr "Beschreibung erfolgreich aktualisiert!"
 
-#: www/index.php:274 www/admin.php:105
+#: www/index.php:262 www/admin.php:105
 msgid "Successfully updated category!"
 msgstr "Kategorie erfolgreich aktualisiert!"
 
-#: www/index.php:276 www/admin.php:107
+#: www/index.php:264 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
 msgstr "Danke, aber ich kannte diese Adresse bereits!"
 
-#: www/index.php:302
+#: www/index.php:290
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
 msgstr "Suche nach \"%1$s\", %2$d Ergebnisse gefunden:"
 
-#: www/index.php:349 www/index.php:409
+#: www/index.php:337 www/index.php:397
 msgid "Onion link"
 msgstr "Onion-Adresse"
 
-#: www/index.php:349 www/admin.php:166
+#: www/index.php:337 www/admin.php:166
 msgid "Description"
 msgstr "Beschreibung"
 
-#: www/index.php:349 www/index.php:409
+#: www/index.php:337 www/index.php:397
 msgid "Last seen"
 msgstr "Zuletzt online"
 
-#: www/index.php:349
+#: www/index.php:337
 msgid "Added at"
 msgstr "Hinzugefügt am"
 
-#: www/index.php:349
+#: www/index.php:337
 msgid "Actions"
 msgstr "Aktionen"
 
-#: www/index.php:361 www/index.php:379 www/index.php:418
+#: www/index.php:349 www/index.php:367 www/index.php:406
 msgid "Never"
 msgstr "Nie"
 
-#: www/index.php:369 www/index.php:395 www/test.php:34
+#: www/index.php:357 www/index.php:383 www/test.php:34
 msgid "Test"
 msgstr "Testen"
 
-#: www/index.php:393
+#: www/index.php:381
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: www/index.php:409
+#: www/index.php:397
 msgid "Clone of"
 msgstr "Klon von"
 
-#: www/index.php:425
+#: www/index.php:413
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: www/index.php:475
+#: www/index.php:463
 msgid "Pages:"
 msgstr "Seiten:"
 
-#: www/index.php:508
+#: www/index.php:488
 msgid "Copy:"
 msgstr "Kopiere:"
 
-#: www/index.php:515 www/index.php:530 www/index.php:582
+#: www/index.php:495 www/index.php:510 www/index.php:562
 msgid "captcha image"
 msgstr "Captcha Bild"
 
@@ -413,7 +413,7 @@ msgstr "Fehler beim Erstellen der Sitemap!"
 msgid "Search the onion link list"
 msgstr "Durchsuche die Onion Linkliste"
 
-#: common_config.php:75
+#: common_config.php:76
 msgid "Language:"
 msgstr "Sprache:"
 
