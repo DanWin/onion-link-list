@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-13 14:54+0100\n"
-"PO-Revision-Date: 2023-01-15 15:15+0000\n"
+"PO-Revision-Date: 2023-01-16 20:05+0000\n"
 "Last-Translator: Goatli <goatli@porcod.io>\n"
 "Language-Team: Russian <https://weblate.danwin1210.de/projects/DanWin/"
 "onion-link-list/ru/>\n"
@@ -338,27 +338,27 @@ msgstr "Фишинговый сайт не добавлен! Фишинг и о�
 
 #: www/admin.php:128 www/admin.php:219
 msgid "No phishing"
-msgstr ""
+msgstr "Не является фишингом"
 
 #: www/admin.php:133
 msgid "Successfully removed Phishing clone!"
-msgstr ""
+msgstr "Фишинговый сайт удален!"
 
 #: www/admin.php:134 www/admin.php:223
 msgid "Reject"
-msgstr ""
+msgstr "Отклонить"
 
 #: www/admin.php:136
 msgid "Successfully rejected onion address"
-msgstr ""
+msgstr "Адрес отклонен"
 
 #: www/admin.php:137 www/admin.php:224
 msgid "Approve"
-msgstr ""
+msgstr "Одобрить"
 
 #: www/admin.php:139
 msgid "Successfully approved onion address"
-msgstr ""
+msgstr "Адрес одобрен"
 
 #: www/admin.php:141
 msgid "No action taken!"
@@ -382,17 +382,17 @@ msgstr "Категория"
 
 #: www/admin.php:166
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: www/admin.php:170
 #, php-format
 msgid "Approved: %d"
-msgstr ""
+msgstr "Одобрено: %d"
 
 #: www/admin.php:170
 #, php-format
 msgid "Locked: %d"
-msgstr ""
+msgstr "Заблокировано: %d"
 
 #: www/admin.php:174
 msgid "Clone of:"
@@ -404,7 +404,7 @@ msgstr "Биткоин:"
 
 #: www/sitemap.php:77
 msgid "Error creating the sitemap!"
-msgstr ""
+msgstr "Ошибка при создании карты сайта!"
 
 #: www/opensearch.php:7
 msgid "Search the onion link list"
