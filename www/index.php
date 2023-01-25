@@ -47,11 +47,6 @@ function send_html(): void
 			$canonical_query[ 'pg' ] = $_REQUEST[ 'pg' ];
 		}
 	}
-	if($_REQUEST['pg']>0){
-		$_REQUEST['newpg']=1;
-	}else{
-		$_REQUEST['newpg']=0;
-	}
 	$category=count($categories);
 	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
 		settype($_REQUEST['cat'], 'int');
@@ -121,7 +116,6 @@ function send_html(): void
 	echo '<p>'._('I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. I regularly receive E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!').'</p>';
 	//update onions description form
 	echo '<div class="table" id="edit-search"><div class="row"><div class="col"><form target="_self" method="POST">';
-	echo '<input type="hidden" name="pg" value="'.htmlspecialchars($_REQUEST['newpg']).'">';
 	echo '<input type="hidden" name="lang" value="'.$language.'">';
 	echo '<p><label>'._('Onion address:').'<br><input name="addr" size="30" placeholder="http://'.$_SERVER['HTTP_HOST'].'" value="';
 	if(isset($_REQUEST['addr'])){
@@ -156,7 +150,6 @@ function send_html(): void
 	echo '<input type="submit" name="action" value="'._('Update').'"></form></div>';
 	//search from
 	echo '<div class="col"><form target="_self" method="post" role="search">';
-	echo '<input type="hidden" name="pg" value="'.htmlspecialchars($_REQUEST['newpg']).'">';
 	echo '<input type="hidden" name="lang" value="'.$language.'">';
 	echo '<p><label>'._('Search:').' <br><input name="q" size="30" placeholder="'._('Search term').'" value="';
 	if(isset($_REQUEST['q'])){
@@ -190,7 +183,7 @@ function send_html(): void
 	echo '<ul class="list"><li>'._('Special categories:').'</li>';
 	$cat=count($categories);
 	foreach($special as $name=>$query){
-		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		++$cat;
 	}
 	echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
@@ -203,7 +196,7 @@ function send_html(): void
 	//List normal categories
 	echo '<ul class="list"><li>'._('Categories:').'</li>';
 	foreach($categories as $cat=>$name){
-		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;pg='.rawurlencode($_REQUEST['newpg']).'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 	}
 	echo '</ul>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
@@ -377,7 +370,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		if($link['locked']==1){
 			$edit='-';
 		}else{
-			$edit='<form><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="pg" value="'.$_REQUEST['newpg'].'"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Edit').'" type="submit"></form>';
+			$edit='<form><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Edit').'" type="submit"></form>';
 		}
 		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Test').'" type="submit"></form></div></div>';
 		++$numrows;

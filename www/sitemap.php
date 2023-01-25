@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../common_config.php';
+global $categories;
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
 }catch(PDOException $e){
@@ -25,10 +26,11 @@ foreach (LANGUAGES as $lang_code => $data){
 		$num=$stmt->fetch(PDO::FETCH_NUM);
 		$pages=ceil($num[0]/PER_PAGE);
 		if($pages > 1) {
-			while ( $pages > -1 ) {
+			while ( $pages > 1 ) {
 				$links [] = [ 'loc' => CANONICAL_URL . "/?cat=$cat&pg=$pages&lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3' ];
 				--$pages;
 			}
+			$links [] = [ 'loc' => CANONICAL_URL . "/?cat=$cat&pg=0&lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3' ];
 		}
 	}
 	$special=[
@@ -46,10 +48,11 @@ foreach (LANGUAGES as $lang_code => $data){
 		}
 		$pages=ceil($num[0]/PER_PAGE);
 		if($pages > 1) {
-			while ( $pages > -1 ) {
+			while ( $pages > 1 ) {
 				$links [] = [ 'loc' => CANONICAL_URL . "/?cat=$cat&pg=$pages&lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3' ];
 				--$pages;
 			}
+			$links [] = [ 'loc' => CANONICAL_URL . "/?cat=$cat&pg=0&lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3' ];
 		}
 		++$cat;
 	}
