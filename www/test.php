@@ -105,10 +105,8 @@ if(!empty($_REQUEST['addr'])){
 			}
 			echo '<p class="green" role="alert">'._('Yes, the service is online!').'</p>';
 		}else{
-			if(isset($db)){
-				$time=time();
-				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, timediff=lasttest-lastup WHERE md5sum=? AND lasttest<?;')->execute([$time, $md5, $time]);
-			}
+            $time=time();
+            $db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, timediff=lasttest-lastup WHERE md5sum=? AND lasttest<?;')->execute([$time, $md5, $time]);
 			echo '<p class="red" role="alert">'._('No, the service is offline!').'</p>';
 		}
 		curl_close($ch);

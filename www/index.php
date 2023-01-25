@@ -2,6 +2,7 @@
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // ignore headers, no further processing needed
 }
+global $canonical_query;
 require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
@@ -37,10 +38,14 @@ function send_html(): void
 		_('Last added')=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing)',
 		_('Offline > 1 week')=>"address!='' AND id NOT IN (SELECT onion_id FROM " . PREFIX . 'phishing) AND timediff>604800'
 	];
+	$canonical_query = [];
 	if(!isset($_REQUEST['pg'])){
 		$_REQUEST['pg']=1;
 	}else{
 		settype($_REQUEST['pg'], 'int');
+		if($_REQUEST['pg'] !== 1) {
+			$canonical_query[ 'pg' ] = $_REQUEST[ 'pg' ];
+		}
 	}
 	if($_REQUEST['pg']>0){
 		$_REQUEST['newpg']=1;
@@ -51,13 +56,7 @@ function send_html(): void
 	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
 		settype($_REQUEST['cat'], 'int');
 		$category=$_REQUEST['cat'];
-	}
-	$canonical_query = [];
-	if(isset($_REQUEST['cat'])) {
-		$canonical_query['cat'] = intval($_REQUEST['cat']);
-	}
-	if(isset($_REQUEST['pg'])) {
-		$canonical_query['pg'] = $_REQUEST['pg'];
+		$canonical_query['cat'] = $category;
 	}
 	$pages=1;
 	$admin_approval = '';

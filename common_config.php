@@ -20,7 +20,26 @@ const CANONICAL_URL = 'https://onions.danwin1210.de'; // our preferred domain fo
 const CAPTCHA = 0; // Captcha difficulty (0=off, 1=simple, 2=moderate, 3=extreme)
 //Categories - new links will always be put into the first one, leave it to Unsorted
 //once configured, only add new categories at the end or you have to manually adjust the database.
-$categories=['Unsorted', 'Adult/Porn', 'Communication/Social', 'Forums', 'Hacking/Programming/Software', 'Hosting', 'Libraries/Wikis', 'Link Lists', 'Market/Shop/Store', 'Other', 'Personal Sites/Blogs', 'Security/Privacy/Encryption', 'Whistleblowing', 'Empty/Error/Unknown', 'Cryptocurrencies', 'Scams', 'Fun/Games/Joke', 'Search'];
+$categories=[
+	0 => _('Unsorted'),
+	1 => _('Adult/Porn'),
+	2 => _('Communication/Social'),
+	3 => _('Forums'),
+	4 => _('Hacking/Programming/Software'),
+	5 => _('Hosting'),
+	6 => _('Libraries/Wikis'),
+	7 => _('Link Lists'),
+	8 => _('Market/Shop/Store'),
+	9 => _('Other'),
+	10 => _('Personal Sites/Blogs'),
+	11 => _('Security/Privacy/Encryption'),
+	12 => _('Whistleblowing'),
+	13 => _('Empty/Error/Unknown'),
+	14 => _('Cryptocurrencies'),
+	15 => _('Scams'),
+	16 => _('Fun/Games/Joke'),
+	17 => _('Search'),
+];
 
 // Language selection
 const LANGUAGES = [
@@ -156,14 +175,7 @@ function set_curl_options($ch): void
 
 function alt_links(): void
 {
-	global $language;
-	$canonical_query = [];
-	if(isset($_REQUEST['cat'])) {
-		$canonical_query['cat'] = $_REQUEST['cat'];
-	}
-	if(isset($_REQUEST['pg'])) {
-		$canonical_query['pg'] = $_REQUEST['pg'];
-	}
+	global $language, $canonical_query;
 	foreach(LANGUAGES as $lang => $data) {
 		if($lang === $language){
 			continue;
