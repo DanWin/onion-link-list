@@ -6,17 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-25 19:12+0100\n"
-"PO-Revision-Date: 2023-01-01 17:58+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-01-25 18:25+0000\n"
+"Last-Translator: Weblate Admin <daniel@danwin1210.de>\n"
+"Language-Team: Turkish <https://weblate.danwin1210.de/projects/DanWin/"
+"onion-link-list/tr/>\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15\n"
 
 #: www/index.php:37
 msgid "All legitimate"
@@ -206,7 +207,7 @@ msgstr "Sayfalar:"
 
 #: www/index.php:487
 msgid "Copy:"
-msgstr ""
+msgstr "Kopyala:"
 
 #: www/index.php:494 www/index.php:509 www/index.php:561
 msgid "captcha image"
