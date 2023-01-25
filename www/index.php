@@ -51,7 +51,9 @@ function send_html(): void
 	if(isset($_REQUEST['cat']) && $_REQUEST['cat']<(count($categories)+count($special)+1) && $_REQUEST['cat']>=0){
 		settype($_REQUEST['cat'], 'int');
 		$category=$_REQUEST['cat'];
-		$canonical_query['cat'] = $category;
+		if($category !== count($categories)) {
+			$canonical_query[ 'cat' ] = $category;
+		}
 	}
 	$pages=1;
 	$admin_approval = '';
@@ -116,7 +118,6 @@ function send_html(): void
 	echo '<p>'._('I\'m not responsible for any content of websites linked here. 99% of darkweb sites selling anything are scams. Be careful and use your brain. I regularly receive E-Mails from people that were desperate to make money and fell for scammers, don\'t be one of them!').'</p>';
 	//update onions description form
 	echo '<div class="table" id="edit-search"><div class="row"><div class="col"><form target="_self" method="POST">';
-	echo '<input type="hidden" name="lang" value="'.$language.'">';
 	echo '<p><label>'._('Onion address:').'<br><input name="addr" size="30" placeholder="http://'.$_SERVER['HTTP_HOST'].'" value="';
 	if(isset($_REQUEST['addr'])){
 		echo htmlspecialchars($_REQUEST['addr']);
@@ -150,7 +151,6 @@ function send_html(): void
 	echo '<input type="submit" name="action" value="'._('Update').'"></form></div>';
 	//search from
 	echo '<div class="col"><form target="_self" method="post" role="search">';
-	echo '<input type="hidden" name="lang" value="'.$language.'">';
 	echo '<p><label>'._('Search:').' <br><input name="q" size="30" placeholder="'._('Search term').'" value="';
 	if(isset($_REQUEST['q'])){
 		echo trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q'])));
@@ -183,10 +183,10 @@ function send_html(): void
 	echo '<ul class="list"><li>'._('Special categories:').'</li>';
 	$cat=count($categories);
 	foreach($special as $name=>$query){
-		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		++$cat;
 	}
-	echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
+	echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
 	echo ' <li>'._('Removed/Child porn')." ($category_count[removed])</li>";
 	if(REQUIRE_APPROVAL) {
 		echo ' <li>'._('Pending approval')." ($category_count[pending])</li>";
@@ -196,7 +196,7 @@ function send_html(): void
 	//List normal categories
 	echo '<ul class="list"><li>'._('Categories:').'</li>';
 	foreach($categories as $cat=>$name){
-		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'&amp;lang='.$language.'" target="_self">'."$name ($category_count[$cat])</a></li>";
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'" target="_self">'."$name ($category_count[$cat])</a></li>";
 	}
 	echo '</ul>';
 	if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_REQUEST['addr'])){
@@ -257,12 +257,8 @@ function send_html(): void
 			}
 		}
 	}
-	if($pages>1 && !isset($_REQUEST['q'])){
-		$pagination=get_pagination($category, $pages);
-		echo $pagination;
-	}else{
-		$pagination='';
-	}
+	$pagination=get_pagination($category, $pages);
+	echo $pagination;
 	if(isset($_REQUEST['q'])){//run search query
 		$query=trim(str_replace(['http://', 'https://', '.onion', '/'], '', htmlspecialchars($_REQUEST['q'])));
 		$query="%$query%";
@@ -319,7 +315,7 @@ function send_html(): void
 }
 
 function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false) : string {
-	global $db, $language;
+	global $db;
 	$time=time();
 	$admin_approval = '';
 	if(REQUIRE_APPROVAL){
@@ -346,7 +342,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 				$class='';
 			}
 			$timeadded=date('Y-m-d', $link['timeadded']);
-			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input name="lang" value="'.$language.'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
+			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
 		}
 	}
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -370,9 +366,9 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 		if($link['locked']==1){
 			$edit='-';
 		}else{
-			$edit='<form><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Edit').'" type="submit"></form>';
+			$edit='<form><input name="addr" value="'.$link['address'].'" type="hidden"><input value="'._('Edit').'" type="submit"></form>';
 		}
-		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input type="hidden" name="lang" value="'.$language.'"><input value="'._('Test').'" type="submit"></form></div></div>';
+		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
 		++$numrows;
 	}
 	echo '</div>';
@@ -450,15 +446,31 @@ function send_json(): void
 }
 
 function get_pagination(int $category, int $pages) : string {
-	global $language;
-	ob_start();
-	echo '<ul class="list pagination"><li>'._('Pages:').'</li>';
-	echo ' <li'.($_REQUEST['pg']==0 ? ' class="active"' : '').'><a href="?cat='.$category.'&amp;pg=0&amp;lang='.$language.'" target="_self">'._('All').'</a></li>';
-	for($i=1; $i<=$pages; ++$i){
-		echo ' <li'.($_REQUEST['pg']==$i ? ' class="active"' : '').'><a href="?cat='.$category.'&amp;pg='.$i.'&amp;lang='.$language.'" target="_self">'.$i.'</a></li>';
+	$pagination = '';
+	if($pages<=1 || isset($_REQUEST['q'])){
+		return $pagination;
 	}
-	echo "</ul>";
-	return ob_get_clean();
+	$pagination .= '<ul class="list pagination"><li>'._('Pages:').'</li>';
+	$pagination .= ' <li'.($_REQUEST['pg']===0 ? ' class="active"' : '').'><a href="?cat='.$category.'&amp;pg=0" target="_self">'._('All').'</a></li>';
+	$pagination .= ' <li'.($_REQUEST['pg']===1 ? ' class="active"' : '').'><a href="?cat='.$category.'" target="_self">1</a></li>';
+	$i = $_REQUEST['pg'] - 5;
+	if($i < 2 ){
+		$i = 2;
+	} else {
+		$pagination .= '<li>…</li>';
+	}
+	$j = 0;
+	for(; $i<=$pages && ++$j < 12; ++$i){
+		$pagination .= ' <li'.($_REQUEST['pg']===$i ? ' class="active"' : '').'><a href="?cat='.$category.'&amp;pg='.$i.'" target="_self">'.$i.'</a></li>';
+	}
+	if($i<=$pages){
+		if($i<$pages){
+			$pagination .= '<li>…</li>';
+		}
+		$pagination .= ' <li><a href="?cat='.$category.'&amp;pg='.$pages.'" target="_self">'.$pages.'</a></li>';
+	}
+	$pagination .= '</ul>';
+	return $pagination;
 }
 
 function send_captcha(): void
