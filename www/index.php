@@ -2,7 +2,6 @@
 if($_SERVER['REQUEST_METHOD']==='HEAD'){
 	exit; // ignore headers, no further processing needed
 }
-global $canonical_query;
 require_once(__DIR__.'/../common_config.php');
 try{
 	$db=new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4', DBUSER, DBPASS, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::ATTR_PERSISTENT=>PERSISTENT]);
@@ -23,7 +22,7 @@ if(!isset($_REQUEST['format'])){
 
 function send_html(): void
 {
-	global $categories, $db, $language, $dir, $locale;
+	global $categories, $db, $language, $dir, $locale, $canonical_query;
 	$numrows = 0;
 	$style = '.row{display:flex;flex-wrap:wrap}.headerrow{font-weight:bold}.col{display:flex;flex:1;padding:3px 3px;flex-direction:column}';
 	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3){background-color:#aaff88}.down .col:nth-child(0n+3){background-color:#ff4444}';
