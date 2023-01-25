@@ -342,7 +342,7 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 				$class='';
 			}
 			$timeadded=date('Y-m-d', $link['timeadded']);
-			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
+			echo '<div class="'.$class.' row promo"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col"><form method="post" action="test.php"><button name="addr" value="'.$link['address'].'" type="submit">'._('Test').'</button></form></div></div>';
 		}
 	}
 	while($link=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -364,11 +364,11 @@ function get_table(PDOStatement $stmt, int &$numrows = 0, bool $promoted = false
 			$class.=' promo';
 		}
 		if($link['locked']==1){
-			$edit='-';
+			$edit='';
 		}else{
-			$edit='<form><input name="addr" value="'.$link['address'].'" type="hidden"><input value="'._('Edit').'" type="submit"></form>';
+			$edit='<form><button name="addr" value="'.$link['address'].'" type="submit">'._('Edit').'</button></form>';
 		}
-		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><input name="addr" value="'.$link['address'].'" type="hidden"><input value="'._('Test').'" type="submit"></form></div></div>';
+		echo '<div class="row '.$class.'"><div class="col"><a href="http://'.$link['address'].'.onion" rel="noopener">'.$link['address'].'.onion</a></div><div class="col">'.$link['description'].'</div><div class="col">'.$lastup.'</div><div class="col">'.$timeadded.'</div><div class="col">'.$edit.' <form method="post" action="test.php"><button name="addr" value="'.$link['address'].'" type="submit">'._('Test').'</button></form></div></div>';
 		++$numrows;
 	}
 	echo '</div>';
