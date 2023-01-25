@@ -18,29 +18,6 @@ const DBVERSION = 8; // Database layout version
 const REQUIRE_APPROVAL = false; // require admin approval of new sites? true/false
 const CANONICAL_URL = 'https://onions.danwin1210.de'; // our preferred domain for search engines
 const CAPTCHA = 0; // Captcha difficulty (0=off, 1=simple, 2=moderate, 3=extreme)
-//Categories - new links will always be put into the first one, leave it to Unsorted
-//once configured, only add new categories at the end or you have to manually adjust the database.
-$categories=[
-	0 => _('Unsorted'),
-	1 => _('Adult/Porn'),
-	2 => _('Communication/Social'),
-	3 => _('Forums'),
-	4 => _('Hacking/Programming/Software'),
-	5 => _('Hosting'),
-	6 => _('Libraries/Wikis'),
-	7 => _('Link Lists'),
-	8 => _('Market/Shop/Store'),
-	9 => _('Other'),
-	10 => _('Personal Sites/Blogs'),
-	11 => _('Security/Privacy/Encryption'),
-	12 => _('Whistleblowing'),
-	13 => _('Empty/Error/Unknown'),
-	14 => _('Cryptocurrencies'),
-	15 => _('Scams'),
-	16 => _('Fun/Games/Joke'),
-	17 => _('Search'),
-];
-
 // Language selection
 const LANGUAGES = [
 	'de' => ['name' => 'Deutsch', 'locale' => 'de_DE', 'flag' => '🇩🇪', 'show_in_menu' => true, 'dir' => 'ltr'],
@@ -89,6 +66,29 @@ setlocale(LC_ALL, $locale);
 bindtextdomain('onion-link-list', __DIR__.'/locale');
 bind_textdomain_codeset('onion-link-list', 'UTF-8');
 textdomain('onion-link-list');
+
+//Categories - new links will always be put into the first one, leave it to Unsorted
+//once configured, only add new categories at the end, or you have to manually adjust the database.
+$categories=[
+	0 => _('Unsorted'),
+	1 => _('Adult/Porn'),
+	2 => _('Communication/Social'),
+	3 => _('Forums'),
+	4 => _('Hacking/Programming/Software'),
+	5 => _('Hosting'),
+	6 => _('Libraries/Wikis'),
+	7 => _('Link Lists'),
+	8 => _('Market/Shop/Store'),
+	9 => _('Other'),
+	10 => _('Personal Sites/Blogs'),
+	11 => _('Security/Privacy/Encryption'),
+	12 => _('Whistleblowing'),
+	13 => _('Empty/Error/Unknown'),
+	14 => _('Cryptocurrencies'),
+	15 => _('Scams'),
+	16 => _('Fun/Games/Joke'),
+	17 => _('Search'),
+];
 
 function print_langs(): void
 {
