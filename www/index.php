@@ -24,6 +24,7 @@ function send_html(): void
 {
 	global $categories, $db, $language, $dir, $locale, $canonical_query;
 	$numrows = 0;
+	$not_found = false;
 	$style = '.row{display:flex;flex-wrap:wrap}.headerrow{font-weight:bold}.col{display:flex;flex:1;padding:3px 3px;flex-direction:column}';
 	$style .= '.red{color:red}.green{color:green}.up .col:nth-child(0n+3){background-color:#aaff88}.down .col:nth-child(0n+3){background-color:#ff4444}';
 	$style .= '.promo{outline:medium solid #FFD700}.list{padding:0;}.list li{display:inline-block;padding:0.35em}.pagination{font-size:1.2em}';
@@ -89,10 +90,32 @@ function send_html(): void
 		}
 		if ( $_REQUEST[ 'pg' ] > $pages && $_REQUEST[ 'pg' ] > 1 ) {
 			http_response_code( 404 );
+			$not_found = true;
 		}
 	}
+	if($not_found) {
+		$title = _( 'Onion link list - Not found');
+	}elseif(!empty($_REQUEST['q'])) {
+		$title = sprintf(_( 'Onion link list - Searching for %s' ), htmlspecialchars($_REQUEST['q']));
+	} elseif ($cat === count($categories) && $_REQUEST[ 'pg' ] > 1){
+		$title = sprintf(_( 'Onion link list - Page %d' ), $_REQUEST[ 'pg' ]);
+	} elseif ($cat < count($categories) && $_REQUEST[ 'pg' ] > 1){
+		$title = sprintf(_( 'Onion link list - %1$s - Page %2$d' ), $categories[$cat], $_REQUEST[ 'pg' ]);
+	} elseif ($cat < count($categories)){
+		$title = sprintf(_( 'Onion link list - %s' ), $categories[$cat]);
+	} elseif ($cat === count($categories) + 3){
+		$title = sprintf(_( 'Onion link list - %s' ), _('Phishing Clones'));
+	} elseif ($cat === count($categories) + 2 && $_REQUEST[ 'pg' ] > 1){
+		$title = sprintf(_( 'Onion link list - %1$s - Page %2$d' ), _('Offline > 1 week'), $_REQUEST['pg']);
+	} elseif ($cat === count($categories) + 2){
+		$title = sprintf(_( 'Onion link list - %s' ), _('Offline > 1 week'));
+	} elseif ($cat === count($categories) + 1){
+		$title = sprintf(_( 'Onion link list - %s' ), _('Last added'));
+	} else {
+		$title = _( 'Onion link list' );
+	}
 	echo '<!DOCTYPE html><html lang="'.$language.'" dir="'.$dir.'"><head>';
-	echo '<title>'._('Onion link list').'</title>';
+	echo '<title>'.$title.'</title>';
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	echo '<meta name="author" content="Daniel Winzen">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
@@ -102,15 +125,17 @@ function send_html(): void
 	echo '<link rel="alternate" href="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '" hreflang="x-default">';
 	alt_links();
 	echo '<meta property="og:type" content="website">';
-	echo '<meta property="og:title" content="' . _('Onion link list') . '">';
+	echo '<meta property="og:title" content="' . $title . '">';
 	echo '<meta property="og:description" content="' . _('Huge link list of Tor hidden service onions. All the darknet links you need in one place.') . '">';
 	echo '<meta property="og:url" content="' . CANONICAL_URL . (empty($canonical_query) ? '' : '?' . http_build_query($canonical_query)) . '">';
 	echo '<meta property="og:locale" content="' . $locale . '">';
-	echo '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"'.CANONICAL_URL.'","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"'.CANONICAL_URL.'/?q={search_term_string}"},"query-input":"required name=search_term_string","url":"'.CANONICAL_URL.'"}}</script>';
+	if(empty($_SERVER['QUERY_STRING'])) {
+		echo '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"' . CANONICAL_URL . '","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"' . CANONICAL_URL . '/?q={search_term_string}"},"query-input":"required name=search_term_string","url":"' . CANONICAL_URL . '"}}</script>';
+	}
 	echo '<style>'.$style.'</style>';
 	echo '<base target="_blank">';
 	echo '</head><body><main>';
-	echo '<h1>'._('Onion link list').'</h1>';
+	echo '<h1>'.$title.'</h1>';
 	if(!isset($db)){
 		send_error(_('Error: No database connection!'));
 	}
@@ -182,7 +207,7 @@ function send_html(): void
 	echo '<ul class="list"><li>'._('Special categories:').'</li>';
 	$cat=count($categories);
 	foreach($special as $name=>$query){
-		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'" target="_self">'."$name ($category_count[$cat])</a></li>";
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="'.($cat === count($categories) ? '' : '?cat='.$cat).'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		++$cat;
 	}
 	echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";

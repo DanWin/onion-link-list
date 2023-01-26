@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /*?*addr=
+Disallow: /*?*q=
 Allow: *
 Sitemap: /sitemap.php

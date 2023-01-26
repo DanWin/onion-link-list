@@ -40,7 +40,7 @@ foreach (LANGUAGES as $lang_code => $data){
 	];
 	$cat=count($categories);
 	foreach($special as $query){
-		$links []= ['loc' => CANONICAL_URL . "/?cat=$cat&lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3'];
+		$links []= ['loc' => CANONICAL_URL . "/?".($cat===count($categories) ? '' : "cat=$cat&")."lang=$lang_code", 'changefreq' => 'daily', 'priority' => '0.3'];
 		if($cat===count($categories)+1){
 			$num[0]=PER_PAGE;
 		}else{
