@@ -97,19 +97,19 @@ function send_html(): void
 		$title = _( 'Onion link list - Not found');
 	}elseif(!empty($_REQUEST['q'])) {
 		$title = sprintf(_( 'Onion link list - Searching for %s' ), htmlspecialchars($_REQUEST['q']));
-	} elseif ($cat === count($categories) && $_REQUEST[ 'pg' ] > 1){
+	} elseif ($category === count($categories) && $_REQUEST[ 'pg' ] > 1){
 		$title = sprintf(_( 'Onion link list - Page %d' ), $_REQUEST[ 'pg' ]);
-	} elseif ($cat < count($categories) && $_REQUEST[ 'pg' ] > 1){
-		$title = sprintf(_( 'Onion link list - %1$s - Page %2$d' ), $categories[$cat], $_REQUEST[ 'pg' ]);
-	} elseif ($cat < count($categories)){
-		$title = sprintf(_( 'Onion link list - %s' ), $categories[$cat]);
-	} elseif ($cat === count($categories) + 3){
+	} elseif ($category < count($categories) && $_REQUEST[ 'pg' ] > 1){
+		$title = sprintf(_( 'Onion link list - %1$s - Page %2$d' ), $categories[$category], $_REQUEST[ 'pg' ]);
+	} elseif ($category < count($categories)){
+		$title = sprintf(_( 'Onion link list - %s' ), $categories[$category]);
+	} elseif ($category === count($categories) + 3){
 		$title = sprintf(_( 'Onion link list - %s' ), _('Phishing Clones'));
-	} elseif ($cat === count($categories) + 2 && $_REQUEST[ 'pg' ] > 1){
+	} elseif ($category === count($categories) + 2 && $_REQUEST[ 'pg' ] > 1){
 		$title = sprintf(_( 'Onion link list - %1$s - Page %2$d' ), _('Offline > 1 week'), $_REQUEST['pg']);
-	} elseif ($cat === count($categories) + 2){
+	} elseif ($category === count($categories) + 2){
 		$title = sprintf(_( 'Onion link list - %s' ), _('Offline > 1 week'));
-	} elseif ($cat === count($categories) + 1){
+	} elseif ($category === count($categories) + 1){
 		$title = sprintf(_( 'Onion link list - %s' ), _('Last added'));
 	} else {
 		$title = _( 'Onion link list' );
