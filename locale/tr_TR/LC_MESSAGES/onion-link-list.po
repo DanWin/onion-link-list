@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
-"POT-Creation-Date: 2023-01-25 19:12+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-26 21:02+0100\n"
 "PO-Revision-Date: 2023-01-25 18:25+0000\n"
 "Last-Translator: Weblate Admin <daniel@danwin1210.de>\n"
-"Language-Team: Turkish <https://weblate.danwin1210.de/projects/DanWin/"
-"onion-link-list/tr/>\n"
+"Language-Team: Turkish <https://weblate.danwin1210.de/projects/DanWin/onion-"
+"link-list/tr/>\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,30 +23,63 @@ msgstr ""
 msgid "All legitimate"
 msgstr ""
 
-#: www/index.php:38 www/index.php:70
+#: www/index.php:38 www/index.php:67 www/index.php:113
 msgid "Last added"
 msgstr "Son eklenen"
 
-#: www/index.php:39
+#: www/index.php:39 www/index.php:109 www/index.php:111
 msgid "Offline > 1 week"
 msgstr "Çevrimdışı > 1 hafta"
 
-#: www/index.php:99 www/index.php:104 www/index.php:109 www/index.php:117
-#: www/opensearch.php:6
+#: www/index.php:97
+#, fuzzy
+#| msgid "Onion link list"
+msgid "Onion link list - Not found"
+msgstr "Onion bağlantı listesi"
+
+#: www/index.php:99
+#, fuzzy, php-format
+#| msgid "Onion link list"
+msgid "Onion link list - Searching for %s"
+msgstr "Onion bağlantı listesi"
+
+#: www/index.php:101
+#, fuzzy, php-format
+#| msgid "Onion link list"
+msgid "Onion link list - Page %d"
+msgstr "Onion bağlantı listesi"
+
+#: www/index.php:103 www/index.php:109
+#, fuzzy, php-format
+#| msgid "Onion link list"
+msgid "Onion link list - %1$s - Page %2$d"
+msgstr "Onion bağlantı listesi"
+
+#: www/index.php:105 www/index.php:107 www/index.php:111 www/index.php:113
+#, fuzzy, php-format
+#| msgid "Onion link list"
+msgid "Onion link list - %s"
+msgstr "Onion bağlantı listesi"
+
+#: www/index.php:107 www/index.php:213
+msgid "Phishing Clones"
+msgstr "Phishing Klonları"
+
+#: www/index.php:115 www/index.php:123 www/opensearch.php:6
 msgid "Onion link list"
 msgstr "Onion bağlantı listesi"
 
-#: www/index.php:103 www/index.php:110
+#: www/index.php:122 www/index.php:129
 msgid ""
 "Huge link list of Tor hidden service onions. All the darknet links you need "
 "in one place."
 msgstr ""
 
-#: www/index.php:119 www/index.php:423 www/index.php:440
+#: www/index.php:140 www/index.php:436 www/index.php:453
 msgid "Error: No database connection!"
 msgstr "Hata: Veritabanı bağlantısı yok!"
 
-#: www/index.php:121
+#: www/index.php:142
 #, php-format
 msgid ""
 "I'm not responsible for any content of websites linked here. 99% of darkweb "
@@ -55,161 +88,157 @@ msgid ""
 "scammers, don't be one of them!"
 msgstr ""
 
-#: www/index.php:126
+#: www/index.php:145
 msgid "Onion address:"
 msgstr "Onion-Adresi:"
 
-#: www/index.php:131 www/admin.php:184
+#: www/index.php:150 www/admin.php:184
 msgid "Description:"
 msgstr "Açıklama:"
 
-#: www/index.php:146 www/index.php:166 www/admin.php:200
+#: www/index.php:165 www/index.php:183 www/admin.php:200
 msgid "Category:"
 msgstr "Kategori:"
 
-#: www/index.php:156 www/admin.php:81 www/admin.php:221
+#: www/index.php:175 www/admin.php:81 www/admin.php:221
 msgid "Update"
 msgstr "Güncelle"
 
-#: www/index.php:161
+#: www/index.php:178
 msgid "Search:"
 msgstr "Ara:"
 
-#: www/index.php:161
+#: www/index.php:178
 msgid "Search term"
 msgstr "Arama terimi"
 
-#: www/index.php:171 www/index.php:463
+#: www/index.php:188 www/index.php:478
 msgid "All"
 msgstr "Tümü"
 
-#: www/index.php:184
+#: www/index.php:201
 msgid "Hide locked"
 msgstr "Kilitlileri gizle"
 
-#: www/index.php:185 common_config.php:41
+#: www/index.php:202 common_config.php:90
 msgid "Search"
 msgstr "Ara"
 
-#: www/index.php:187
+#: www/index.php:204
 msgid "Format:"
 msgstr "Biçim:"
 
-#: www/index.php:190
+#: www/index.php:207
 msgid "Special categories:"
 msgstr "Özel kategoriler:"
 
-#: www/index.php:196
-msgid "Phishing Clones"
-msgstr "Phishing Klonları"
-
-#: www/index.php:197
+#: www/index.php:214
 msgid "Removed/Child porn"
 msgstr "Kaldırıldı/Çocuk pornografisi"
 
-#: www/index.php:199
+#: www/index.php:216
 msgid "Pending approval"
 msgstr ""
 
-#: www/index.php:200
+#: www/index.php:217
 msgid "Rejected"
 msgstr ""
 
-#: www/index.php:204
+#: www/index.php:221
 msgid "Categories:"
 msgstr "Kategoriler:"
 
-#: www/index.php:211 www/test.php:46 www/admin.php:51 www/admin.php:111
+#: www/index.php:228 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
 msgstr "Geçersiz onion-Adresi!"
 
-#: www/index.php:212
+#: www/index.php:229
 #, php-format
 msgid "A valid address looks like this: %s"
 msgstr "Geçerli bir adres şöyle gözükür: %s"
 
-#: www/index.php:216 www/index.php:229
+#: www/index.php:233 www/index.php:246
 msgid "Error: Wrong captcha"
 msgstr ""
 
-#: www/index.php:222
+#: www/index.php:239
 msgid "Error: Captcha expired"
 msgstr ""
 
-#: www/index.php:251 www/admin.php:97
+#: www/index.php:268 www/admin.php:97
 msgid "Successfully added onion address!"
 msgstr "Onion-Adresi başarıyla eklendi!"
 
-#: www/index.php:253
+#: www/index.php:270
 msgid "Sorry, editing this onion address has been locked!"
 msgstr "Üzgünüm, bu onion-Adresini düzenlemek kilitli!"
 
-#: www/index.php:257 www/admin.php:101
+#: www/index.php:274 www/admin.php:101
 msgid "Successfully updated description!"
 msgstr "Açıklama başarılı bir şekilde güncellendi!"
 
-#: www/index.php:261 www/admin.php:105
+#: www/index.php:278 www/admin.php:105
 msgid "Successfully updated category!"
 msgstr "Kategori başarılı bir şekilde güncellendi!"
 
-#: www/index.php:263 www/admin.php:107
+#: www/index.php:280 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
 msgstr "Teşekkürler, ama bu adresi zaten biliyorum!"
 
-#: www/index.php:289
+#: www/index.php:302
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
 msgstr "\"%1$s\" için aranıyor, %2$d sonuç bulundu:"
 
-#: www/index.php:336 www/index.php:396
+#: www/index.php:349 www/index.php:409
 msgid "Onion link"
 msgstr "Onion bağlantısı"
 
-#: www/index.php:336 www/admin.php:166
+#: www/index.php:349 www/admin.php:166
 msgid "Description"
 msgstr "Açıklama"
 
-#: www/index.php:336 www/index.php:396
+#: www/index.php:349 www/index.php:409
 msgid "Last seen"
 msgstr "Son görülme"
 
-#: www/index.php:336
+#: www/index.php:349
 msgid "Added at"
 msgstr "Şu tarihte eklendi"
 
-#: www/index.php:336
+#: www/index.php:349
 msgid "Actions"
 msgstr "Eylemler"
 
-#: www/index.php:348 www/index.php:366 www/index.php:405
+#: www/index.php:361 www/index.php:379 www/index.php:418
 msgid "Never"
 msgstr "Asla"
 
-#: www/index.php:356 www/index.php:382 www/test.php:34
+#: www/index.php:369 www/index.php:395 www/test.php:34
 msgid "Test"
 msgstr "Dene"
 
-#: www/index.php:380
+#: www/index.php:393
 msgid "Edit"
 msgstr "Düzenle"
 
-#: www/index.php:396
+#: www/index.php:409
 msgid "Clone of"
 msgstr "Klonu"
 
-#: www/index.php:412
+#: www/index.php:425
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: www/index.php:462
+#: www/index.php:477
 msgid "Pages:"
 msgstr "Sayfalar:"
 
-#: www/index.php:487
+#: www/index.php:516
 msgid "Copy:"
 msgstr "Kopyala:"
 
-#: www/index.php:494 www/index.php:509 www/index.php:561
+#: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
 msgstr ""
 
@@ -225,7 +254,7 @@ msgstr ""
 msgid "Onion link:"
 msgstr ""
 
-#: www/test.php:43 www/admin.php:12 www/sitemap.php:7 cron/update.php:7
+#: www/test.php:43 www/admin.php:12 www/sitemap.php:8 cron/update.php:7
 #: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
 #: helpers/tmp6.php:6 helpers/fill_unknown_phishing.php:6 helpers/tmp3.php:6
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
@@ -395,7 +424,7 @@ msgstr "Klonu:"
 msgid "Bitcoins:"
 msgstr "Bitcoinler:"
 
-#: www/sitemap.php:77
+#: www/sitemap.php:80
 msgid "Error creating the sitemap!"
 msgstr ""
 
@@ -403,71 +432,71 @@ msgstr ""
 msgid "Search the onion link list"
 msgstr ""
 
-#: common_config.php:24
+#: common_config.php:73
 msgid "Unsorted"
 msgstr ""
 
-#: common_config.php:25
+#: common_config.php:74
 msgid "Adult/Porn"
 msgstr ""
 
-#: common_config.php:26
+#: common_config.php:75
 msgid "Communication/Social"
 msgstr ""
 
-#: common_config.php:27
+#: common_config.php:76
 msgid "Forums"
 msgstr ""
 
-#: common_config.php:28
+#: common_config.php:77
 msgid "Hacking/Programming/Software"
 msgstr ""
 
-#: common_config.php:29
+#: common_config.php:78
 msgid "Hosting"
 msgstr ""
 
-#: common_config.php:30
+#: common_config.php:79
 msgid "Libraries/Wikis"
 msgstr ""
 
-#: common_config.php:31
+#: common_config.php:80
 msgid "Link Lists"
 msgstr ""
 
-#: common_config.php:32
+#: common_config.php:81
 msgid "Market/Shop/Store"
 msgstr ""
 
-#: common_config.php:33
+#: common_config.php:82
 msgid "Other"
 msgstr ""
 
-#: common_config.php:34
+#: common_config.php:83
 msgid "Personal Sites/Blogs"
 msgstr ""
 
-#: common_config.php:35
+#: common_config.php:84
 msgid "Security/Privacy/Encryption"
 msgstr ""
 
-#: common_config.php:36
+#: common_config.php:85
 msgid "Whistleblowing"
 msgstr ""
 
-#: common_config.php:37
+#: common_config.php:86
 msgid "Empty/Error/Unknown"
 msgstr ""
 
-#: common_config.php:38
+#: common_config.php:87
 msgid "Cryptocurrencies"
 msgstr ""
 
-#: common_config.php:39
+#: common_config.php:88
 msgid "Scams"
 msgstr ""
 
-#: common_config.php:40
+#: common_config.php:89
 msgid "Fun/Games/Joke"
 msgstr ""
 
