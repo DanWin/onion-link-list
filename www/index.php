@@ -207,7 +207,7 @@ function send_html(): void
 	echo '<ul class="list"><li>'._('Special categories:').'</li>';
 	$cat=count($categories);
 	foreach($special as $name=>$query){
-		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="'.($cat === count($categories) ? '' : '?cat='.$cat).'" target="_self">'."$name ($category_count[$cat])</a></li>";
+		echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="'.($cat === count($categories) ? '/' : '?cat='.$cat).'" target="_self">'."$name ($category_count[$cat])</a></li>";
 		++$cat;
 	}
 	echo ' <li'.($category==$cat ? ' class="active"' : '').'><a href="?cat='.$cat.'" target="_self">'._('Phishing Clones')." ($category_count[$cat])</a></li>";
