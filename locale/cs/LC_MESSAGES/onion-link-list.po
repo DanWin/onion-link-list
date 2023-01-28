@@ -6,69 +6,74 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-01-28 11:17+0000\n"
+"Last-Translator: Zdeněk Grůza <me@zgruza.me>\n"
+"Language-Team: Czech <https://weblate.danwin1210.de/projects/DanWin/"
+"onion-link-list/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.15.1\n"
 
 #: www/index.php:37
 msgid "All legitimate"
-msgstr ""
+msgstr "Vše legitimní"
 
 #: www/index.php:38 www/index.php:67 www/index.php:113
 msgid "Last added"
-msgstr ""
+msgstr "Naposledy přidáno"
 
 #: www/index.php:39 www/index.php:109 www/index.php:111
 msgid "Offline > 1 week"
-msgstr ""
+msgstr "Offline > 1 týden"
 
 #: www/index.php:97
 msgid "Onion link list - Not found"
-msgstr ""
+msgstr "Seznam odkazů – nenalezeno"
 
 #: www/index.php:99
 #, php-format
 msgid "Onion link list - Searching for %s"
-msgstr ""
+msgstr "Seznam cibulových odkazů - Hledání %s"
 
 #: www/index.php:101
 #, php-format
 msgid "Onion link list - Page %d"
-msgstr ""
+msgstr "Seznam cibulových odkazů - Stránka %d"
 
 #: www/index.php:103 www/index.php:109
 #, php-format
 msgid "Onion link list - %1$s - Page %2$d"
-msgstr ""
+msgstr "Seznam cibulových odkazů - %1$s - Stránka %2$d"
 
 #: www/index.php:105 www/index.php:107 www/index.php:111 www/index.php:113
 #, php-format
 msgid "Onion link list - %s"
-msgstr ""
+msgstr "Seznam cibulových odkazů - %s"
 
 #: www/index.php:107 www/index.php:213
 msgid "Phishing Clones"
-msgstr ""
+msgstr "Phishingové klony"
 
 #: www/index.php:115 www/index.php:123 www/opensearch.php:6
 msgid "Onion link list"
-msgstr ""
+msgstr "Seznam cibulových odkazů"
 
 #: www/index.php:122 www/index.php:129
 msgid ""
 "Huge link list of Tor hidden service onions. All the darknet links you need "
 "in one place."
 msgstr ""
+"Obrovský seznam odkazů na skryté servisní cibule Tor. Všechny potřebné "
+"odkazy na darknet na jednom místě."
 
 #: www/index.php:140 www/index.php:436 www/index.php:453
 msgid "Error: No database connection!"
-msgstr ""
+msgstr "Chyba: Žádné připojení k databázi!"
 
 #: www/index.php:142
 #, php-format
@@ -78,172 +83,176 @@ msgid ""
 "receive E-Mails from people that were desperate to make money and fell for "
 "scammers, don't be one of them!"
 msgstr ""
+"Nenesu odpovědnost za žádný obsah zde odkazovaných webových stránek. 99% "
+"dark net stránek prodávajících cokoli jsou podvody. Buďte opatrní a "
+"používejte mozek. Pravidelně dostávám e-maily od lidí, kteří se zoufale "
+"snažili vydělat peníze a propadli podvodníkům, nebuďte jedním z nich!"
 
 #: www/index.php:145
 msgid "Onion address:"
-msgstr ""
+msgstr "Cibulová adresa:"
 
 #: www/index.php:150 www/admin.php:184
 msgid "Description:"
-msgstr ""
+msgstr "Popis:"
 
 #: www/index.php:165 www/index.php:183 www/admin.php:200
 msgid "Category:"
-msgstr ""
+msgstr "Kategorie:"
 
 #: www/index.php:175 www/admin.php:81 www/admin.php:221
 msgid "Update"
-msgstr ""
+msgstr "Aktualizace"
 
 #: www/index.php:178
 msgid "Search:"
-msgstr ""
+msgstr "Vyhledat:"
 
 #: www/index.php:178
 msgid "Search term"
-msgstr ""
+msgstr "Hledaný výraz"
 
 #: www/index.php:188 www/index.php:478
 msgid "All"
-msgstr ""
+msgstr "Vše"
 
 #: www/index.php:201
 msgid "Hide locked"
-msgstr ""
+msgstr "Skrýt zamčeno"
 
 #: www/index.php:202 common_config.php:90
 msgid "Search"
-msgstr ""
+msgstr "Vyhledat"
 
 #: www/index.php:204
 msgid "Format:"
-msgstr ""
+msgstr "Formát:"
 
 #: www/index.php:207
 msgid "Special categories:"
-msgstr ""
+msgstr "Speciální kategorie:"
 
 #: www/index.php:214
 msgid "Removed/Child porn"
-msgstr ""
+msgstr "Odebráno/dětské porno"
 
 #: www/index.php:216
 msgid "Pending approval"
-msgstr ""
+msgstr "Čeká na schválení"
 
 #: www/index.php:217
 msgid "Rejected"
-msgstr ""
+msgstr "Zamítnuto"
 
 #: www/index.php:221
 msgid "Categories:"
-msgstr ""
+msgstr "Kategorie:"
 
 #: www/index.php:228 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
-msgstr ""
+msgstr "Neplatná adresa cibule!"
 
 #: www/index.php:229
 #, php-format
 msgid "A valid address looks like this: %s"
-msgstr ""
+msgstr "Platná adresa vypadá takto: %s"
 
 #: www/index.php:233 www/index.php:246
 msgid "Error: Wrong captcha"
-msgstr ""
+msgstr "Chyba: Chybný obrázek captcha"
 
 #: www/index.php:239
 msgid "Error: Captcha expired"
-msgstr ""
+msgstr "Chyba: Platnost Captcha vypršela"
 
 #: www/index.php:268 www/admin.php:97
 msgid "Successfully added onion address!"
-msgstr ""
+msgstr "Adresa cibule byla úspěšně přidána!"
 
 #: www/index.php:270
 msgid "Sorry, editing this onion address has been locked!"
-msgstr ""
+msgstr "Omlouvám se, úprava této cibulové adresy byla zamknuta!"
 
 #: www/index.php:274 www/admin.php:101
 msgid "Successfully updated description!"
-msgstr ""
+msgstr "Popis byl úspěšně aktualizován!"
 
 #: www/index.php:278 www/admin.php:105
 msgid "Successfully updated category!"
-msgstr ""
+msgstr "Kategorie byla úspěšně aktualizována!"
 
 #: www/index.php:280 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
-msgstr ""
+msgstr "Díky, ale tuhle adresu už znám!"
 
 #: www/index.php:302
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
-msgstr ""
+msgstr "Při vyhledávání výrazu „%1$s“ bylo nalezeno %2$d výsledků:"
 
 #: www/index.php:349 www/index.php:409
 msgid "Onion link"
-msgstr ""
+msgstr "Cibulový odkaz"
 
 #: www/index.php:349 www/admin.php:166
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: www/index.php:349 www/index.php:409
 msgid "Last seen"
-msgstr ""
+msgstr "Naposledy viděn"
 
 #: www/index.php:349
 msgid "Added at"
-msgstr ""
+msgstr "Přidáno v"
 
 #: www/index.php:349
 msgid "Actions"
-msgstr ""
+msgstr "Akce"
 
 #: www/index.php:361 www/index.php:379 www/index.php:418
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #: www/index.php:369 www/index.php:395 www/test.php:34
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: www/index.php:393
 msgid "Edit"
-msgstr ""
+msgstr "Upravit"
 
 #: www/index.php:409
 msgid "Clone of"
-msgstr ""
+msgstr "Klon"
 
 #: www/index.php:425
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámý"
 
 #: www/index.php:477
 msgid "Pages:"
-msgstr ""
+msgstr "Stránky:"
 
 #: www/index.php:516
 msgid "Copy:"
-msgstr ""
+msgstr "Zkopíruj:"
 
 #: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
-msgstr ""
+msgstr "obrázek captcha"
 
 #: www/test.php:7 www/test.php:16 www/test.php:22
 msgid "Online-Test"
-msgstr ""
+msgstr "Online-Test"
 
 #: www/test.php:11 www/test.php:17 www/test.php:24
 msgid "Test whether a Tor hidden service onion is online or offline"
-msgstr ""
+msgstr "Otestuj, zda je cibule skryté služby Tor online nebo offline"
 
 #: www/test.php:27 www/admin.php:160
 msgid "Onion link:"
-msgstr ""
+msgstr "Odkaz na cibuli:"
 
 #: www/test.php:43 www/admin.php:12 www/sitemap.php:8 cron/update.php:7
 #: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
@@ -251,254 +260,255 @@ msgstr ""
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
 #: setup.php:20 setup.php:23
 msgid "No database connection!"
-msgstr ""
+msgstr "Žádné připojení k databázi!"
 
 #: www/test.php:61
 #, php-format
 msgid ""
 "Warning, this is a known phishing clone. The original site is located at %s."
 msgstr ""
+"Upozornění, toto je známý phishingový klon. Původní web se nachází na %s."
 
 #: www/test.php:66
 msgid "Warning: This is a known scam!"
-msgstr ""
+msgstr "Upozornění: Toto je známý podvod!"
 
 #: www/test.php:71 www/test.php:106
 msgid "Yes, the service is online!"
-msgstr ""
+msgstr "Ano, služba je online!"
 
 #: www/test.php:110
 msgid "No, the service is offline!"
-msgstr ""
+msgstr "Ne, služba je offline!"
 
 #: www/admin.php:17 www/admin.php:27
 msgid "Admin interface"
-msgstr ""
+msgstr "Administrátorské rozhraní"
 
 #: www/admin.php:35
 msgid "Password:"
-msgstr ""
+msgstr "Heslo:"
 
 #: www/admin.php:36
 msgid "Login"
-msgstr ""
+msgstr "Přihlásit se"
 
 #: www/admin.php:39
 msgid "Wrong Password!"
-msgstr ""
+msgstr "Špatné heslo!"
 
 #: www/admin.php:55 www/admin.php:211
 msgid "Remove"
-msgstr ""
+msgstr "Odstranit"
 
 #: www/admin.php:57
 msgid "Successfully removed onion address!"
-msgstr ""
+msgstr "Adresa cibule byla úspěšně odstraněna!"
 
 #: www/admin.php:58 www/admin.php:212
 msgid "Lock"
-msgstr ""
+msgstr "Zamknout"
 
 #: www/admin.php:60
 msgid "Successfully locked onion address!"
-msgstr ""
+msgstr "Cibulová adresa byla úspěšně uzamčena!"
 
 #: www/admin.php:61 www/admin.php:216
 msgid "Re-add"
-msgstr ""
+msgstr "Znovu přidat"
 
 #: www/admin.php:63
 msgid "Successfully re-added onion address!"
-msgstr ""
+msgstr "Adresa cibule byla úspěšně znovu přidána!"
 
 #: www/admin.php:64 www/admin.php:217
 msgid "Unlock"
-msgstr ""
+msgstr "Odemknout"
 
 #: www/admin.php:66
 msgid "Successfully unlocked onion address!"
-msgstr ""
+msgstr "Cibulová adresa byla úspěšně odemčena!"
 
 #: www/admin.php:67 www/admin.php:213
 msgid "Promote"
-msgstr ""
+msgstr "Podporovat"
 
 #: www/admin.php:77
 #, php-format
 msgid "Successfully promoted onion address until %1$s!"
-msgstr ""
+msgstr "Cibulová adresa byla úspěšně povýšena do %1$s!"
 
 #: www/admin.php:78 www/admin.php:218
 msgid "Un-promote"
-msgstr ""
+msgstr "Zrušit propagaci"
 
 #: www/admin.php:80
 msgid "Successfully un-promoted onion address!"
-msgstr ""
+msgstr "Propagace cibulové adresy byla úspěšně zrušena!"
 
 #: www/admin.php:109 www/admin.php:214
 msgid "Phishing"
-msgstr ""
+msgstr "Phishing"
 
 #: www/admin.php:123
 msgid "Successfully added Phishing clone!"
-msgstr ""
+msgstr "Phishingový klon byl úspěšně přidán!"
 
 #: www/admin.php:125
 msgid "Not added Phishing clone! Phishing and original have the same address."
-msgstr ""
+msgstr "Nebyl přidán phishingový klon! Phishing a originál mají stejnou adresu."
 
 #: www/admin.php:128 www/admin.php:219
 msgid "No phishing"
-msgstr ""
+msgstr "Žádný phishing"
 
 #: www/admin.php:133
 msgid "Successfully removed Phishing clone!"
-msgstr ""
+msgstr "Phishingový klon byl úspěšně odstraněn!"
 
 #: www/admin.php:134 www/admin.php:223
 msgid "Reject"
-msgstr ""
+msgstr "Odmítnout"
 
 #: www/admin.php:136
 msgid "Successfully rejected onion address"
-msgstr ""
+msgstr "Cibulová adresa byla úspěšně odmítnuta"
 
 #: www/admin.php:137 www/admin.php:224
 msgid "Approve"
-msgstr ""
+msgstr "Schválit"
 
 #: www/admin.php:139
 msgid "Successfully approved onion address"
-msgstr ""
+msgstr "Adresa cibule byla úspěšně schválena"
 
 #: www/admin.php:141
 msgid "No action taken!"
-msgstr ""
+msgstr "Nebyla provedena žádná akce!"
 
 #: www/admin.php:154
 msgid "Switch view mode"
-msgstr ""
+msgstr "Přepnout režim zobrazení"
 
 #: www/admin.php:166
 msgid "Select"
-msgstr ""
+msgstr "Vybrat"
 
 #: www/admin.php:166
 msgid "Address"
-msgstr ""
+msgstr "Adresa"
 
 #: www/admin.php:166
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: www/admin.php:166
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: www/admin.php:170
 #, php-format
 msgid "Approved: %d"
-msgstr ""
+msgstr "Schváleno: %d"
 
 #: www/admin.php:170
 #, php-format
 msgid "Locked: %d"
-msgstr ""
+msgstr "Uzamčeno: %d"
 
 #: www/admin.php:174
 msgid "Clone of:"
-msgstr ""
+msgstr "Klon:"
 
 #: www/admin.php:179
 msgid "Bitcoins:"
-msgstr ""
+msgstr "Bitcoiny:"
 
 #: www/sitemap.php:80
 msgid "Error creating the sitemap!"
-msgstr ""
+msgstr "Chyba při vytváření souboru Sitemap!"
 
 #: www/opensearch.php:7
 msgid "Search the onion link list"
-msgstr ""
+msgstr "Prohledejte seznam odkazů cibule"
 
 #: common_config.php:73
 msgid "Unsorted"
-msgstr ""
+msgstr "Neřazeno"
 
 #: common_config.php:74
 msgid "Adult/Porn"
-msgstr ""
+msgstr "Dospělý/Porno"
 
 #: common_config.php:75
 msgid "Communication/Social"
-msgstr ""
+msgstr "Komunikace/Sociální"
 
 #: common_config.php:76
 msgid "Forums"
-msgstr ""
+msgstr "Fóra"
 
 #: common_config.php:77
 msgid "Hacking/Programming/Software"
-msgstr ""
+msgstr "Hacking/Programování/Software"
 
 #: common_config.php:78
 msgid "Hosting"
-msgstr ""
+msgstr "Hosting"
 
 #: common_config.php:79
 msgid "Libraries/Wikis"
-msgstr ""
+msgstr "Knihovny/Wiki"
 
 #: common_config.php:80
 msgid "Link Lists"
-msgstr ""
+msgstr "Seznamy odkazů"
 
 #: common_config.php:81
 msgid "Market/Shop/Store"
-msgstr ""
+msgstr "Trh/Obchod"
 
 #: common_config.php:82
 msgid "Other"
-msgstr ""
+msgstr "Jiné"
 
 #: common_config.php:83
 msgid "Personal Sites/Blogs"
-msgstr ""
+msgstr "Osobní stránky/Blogy"
 
 #: common_config.php:84
 msgid "Security/Privacy/Encryption"
-msgstr ""
+msgstr "Zabezpečení/Soukromí/Šifrování"
 
 #: common_config.php:85
 msgid "Whistleblowing"
-msgstr ""
+msgstr "Whistleblowing"
 
 #: common_config.php:86
 msgid "Empty/Error/Unknown"
-msgstr ""
+msgstr "Prázdné/Chyba/Neznámé"
 
 #: common_config.php:87
 msgid "Cryptocurrencies"
-msgstr ""
+msgstr "Kryptoměny"
 
 #: common_config.php:88
 msgid "Scams"
-msgstr ""
+msgstr "Podvody"
 
 #: common_config.php:89
 msgid "Fun/Games/Joke"
-msgstr ""
+msgstr "Zábava/Hry/Vtipy"
 
 #: common_config.php:95
 msgid "Language:"
-msgstr ""
+msgstr "Jazyk:"
 
 #: setup.php:8
 #, php-format
 msgid "The %s extension of PHP is required. Please install it first."
-msgstr ""
+msgstr "Je vyžadováno rozšíření %s PHP. Nejprve jej prosím nainstalujte."
 
 #: setup.php:78
 msgid "Status: OK"
-msgstr ""
+msgstr "Stav: OK"
