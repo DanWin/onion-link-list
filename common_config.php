@@ -20,6 +20,7 @@ const CANONICAL_URL = 'https://onions.danwin1210.de'; // our preferred domain fo
 const CAPTCHA = 0; // Captcha difficulty (0=off, 1=simple, 2=moderate, 3=extreme)
 // Language selection
 const LANGUAGES = [
+	'cs' => ['name' => 'čeština', 'locale' => 'cs_CZ', 'flag' => '🇨🇿', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'de' => ['name' => 'Deutsch', 'locale' => 'de_DE', 'flag' => '🇩🇪', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'en' => ['name' => 'English', 'locale' => 'en_GB', 'flag' => '🇬🇧', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'fa' => ['name' => 'فارسی', 'locale' => 'fa_IR', 'flag' => '🇮🇷', 'show_in_menu' => true, 'dir' => 'rtl'],
