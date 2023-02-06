@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: 2023-02-02 05:19+0000\n"
+"PO-Revision-Date: 2023-02-06 11:25+0000\n"
 "Last-Translator: Goatli <goatli@porcod.io>\n"
 "Language-Team: Russian <https://weblate.danwin1210.de/projects/DanWin/"
 "onion-link-list/ru/>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15.1\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: www/index.php:37
 msgid "All legitimate"
-msgstr "Проверенные"
+msgstr "Легальные"
 
 #: www/index.php:38 www/index.php:67 www/index.php:113
 msgid "Last added"
@@ -33,16 +33,13 @@ msgid "Offline > 1 week"
 msgstr "Офлайн больше недели"
 
 #: www/index.php:97
-#, fuzzy
-#| msgid "Onion link list"
 msgid "Onion link list - Not found"
-msgstr "Список ссылок Onion"
+msgstr "Список ссылок Onion - Не найдено"
 
 #: www/index.php:99
-#, fuzzy, php-format
-#| msgid "Onion link list"
+#, php-format
 msgid "Onion link list - Searching for %s"
-msgstr "Список ссылок Onion"
+msgstr "Список ссылок Onion - Поиск %s"
 
 #: www/index.php:101
 #, php-format
@@ -50,16 +47,14 @@ msgid "Onion link list - Page %d"
 msgstr "Список ссылок onion - Страница %d"
 
 #: www/index.php:103 www/index.php:109
-#, fuzzy, php-format
-#| msgid "Onion link list"
+#, php-format
 msgid "Onion link list - %1$s - Page %2$d"
-msgstr "Список ссылок Onion"
+msgstr "Список ссылок Onion -%1$s - страница%2$d"
 
 #: www/index.php:105 www/index.php:107 www/index.php:111 www/index.php:113
-#, fuzzy, php-format
-#| msgid "Onion link list"
+#, php-format
 msgid "Onion link list - %s"
-msgstr "Список ссылок Onion"
+msgstr "Список ссылок Onion - %s"
 
 #: www/index.php:107 www/index.php:213
 msgid "Phishing Clones"
@@ -92,8 +87,8 @@ msgstr ""
 "Я не несу ответственности за любое содержание веб-сайтов ссылки на которые "
 "размещены здесь. 99% darkweb сайтов продающих что-либо мошенники. Будьте "
 "осторожны, хорошо подумайте прежде чем что-либо купить. Я регулярно получаю "
-"письма от людей, которые хотели заработать, но стали жертвами мошенников, не "
-"попадитесь на их удочку!"
+"письма от людей, которые хотели заработать, но стали жертвами мошенников, "
+"будьте бдительны не попадитесь на удочку мошенников!"
 
 #: www/index.php:145
 msgid "Onion address:"
@@ -313,7 +308,7 @@ msgstr "Адрес Onion успешно удален!"
 
 #: www/admin.php:58 www/admin.php:212
 msgid "Lock"
-msgstr ""
+msgstr "Заблокировать"
 
 #: www/admin.php:60
 msgid "Successfully locked onion address!"
@@ -390,7 +385,7 @@ msgstr "Адрес одобрен"
 
 #: www/admin.php:141
 msgid "No action taken!"
-msgstr ""
+msgstr "Никаких действий не предпринято!"
 
 #: www/admin.php:154
 msgid "Switch view mode"
@@ -424,11 +419,11 @@ msgstr "Заблокировано: %d"
 
 #: www/admin.php:174
 msgid "Clone of:"
-msgstr ""
+msgstr "Клон из:"
 
 #: www/admin.php:179
 msgid "Bitcoins:"
-msgstr "Биткоин:"
+msgstr "Биткоины:"
 
 #: www/sitemap.php:80
 msgid "Error creating the sitemap!"
@@ -440,11 +435,11 @@ msgstr "Поиск по списку"
 
 #: common_config.php:73
 msgid "Unsorted"
-msgstr ""
+msgstr "Несортированные"
 
 #: common_config.php:74
 msgid "Adult/Porn"
-msgstr "Для взрослых"
+msgstr "Сайты для взрослых"
 
 #: common_config.php:75
 msgid "Communication/Social"
@@ -456,7 +451,7 @@ msgstr "Форумы"
 
 #: common_config.php:77
 msgid "Hacking/Programming/Software"
-msgstr "Все для хакеров и взлома"
+msgstr "Все для хакинга"
 
 #: common_config.php:78
 msgid "Hosting"
@@ -472,7 +467,7 @@ msgstr "Списки ссылок"
 
 #: common_config.php:81
 msgid "Market/Shop/Store"
-msgstr "Маркеты/покупки"
+msgstr "Маркеты"
 
 #: common_config.php:82
 msgid "Other"
@@ -492,19 +487,19 @@ msgstr "Разоблачение"
 
 #: common_config.php:86
 msgid "Empty/Error/Unknown"
-msgstr "Ошибки/Неизвестные сайты"
+msgstr "Неизвестные сайты"
 
 #: common_config.php:87
 msgid "Cryptocurrencies"
-msgstr "Криптовалюты"
+msgstr "Криптовалюта"
 
 #: common_config.php:88
 msgid "Scams"
-msgstr "Скам/аферы"
+msgstr "Мошеннические сайты"
 
 #: common_config.php:89
 msgid "Fun/Games/Joke"
-msgstr "Развлечения/Игры/Шутки"
+msgstr "Развлечения"
 
 #: common_config.php:95
 msgid "Language:"
