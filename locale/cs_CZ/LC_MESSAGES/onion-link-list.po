@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: 2023-01-28 11:17+0000\n"
+"PO-Revision-Date: 2023-02-13 20:21+0000\n"
 "Last-Translator: Zdeněk Grůza <me@zgruza.me>\n"
 "Language-Team: Czech <https://weblate.danwin1210.de/projects/DanWin/"
 "onion-link-list/cs/>\n"
-"Language: cs\n"
+"Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15.1\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: www/index.php:37
 msgid "All legitimate"
@@ -102,7 +102,7 @@ msgstr "Kategorie:"
 
 #: www/index.php:175 www/admin.php:81 www/admin.php:221
 msgid "Update"
-msgstr "Aktualizace"
+msgstr "Aktualizovat"
 
 #: www/index.php:178
 msgid "Search:"
@@ -236,7 +236,7 @@ msgstr "Stránky:"
 
 #: www/index.php:516
 msgid "Copy:"
-msgstr "Zkopíruj:"
+msgstr "Přepiš:"
 
 #: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
