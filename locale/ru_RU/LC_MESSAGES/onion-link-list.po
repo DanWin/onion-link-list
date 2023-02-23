@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: 2023-02-06 11:25+0000\n"
+"PO-Revision-Date: 2023-02-23 11:05+0000\n"
 "Last-Translator: Goatli <goatli@porcod.io>\n"
 "Language-Team: Russian <https://weblate.danwin1210.de/projects/DanWin/"
 "onion-link-list/ru/>\n"
@@ -194,7 +194,7 @@ msgstr "По запросу \"%1$s\", %2$d найдены следующие р�
 
 #: www/index.php:349 www/index.php:409
 msgid "Onion link"
-msgstr "Ссылка"
+msgstr "Подделка"
 
 #: www/index.php:349 www/admin.php:166
 msgid "Description"
@@ -226,7 +226,7 @@ msgstr "Редактировать"
 
 #: www/index.php:409
 msgid "Clone of"
-msgstr "Клонировать из"
+msgstr "Оригинальный сайт"
 
 #: www/index.php:425
 msgid "Unknown"
