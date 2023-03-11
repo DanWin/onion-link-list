@@ -186,4 +186,5 @@ function alt_links(): void
 		echo '<link rel="alternate" href="'.$link.'" hreflang="'.$lang.'" />';
 		echo '<meta property="og:locale:alternate" content="'.$data['locale'].'">';
 	}
+	unset($canonical_query['lang']);
 }
