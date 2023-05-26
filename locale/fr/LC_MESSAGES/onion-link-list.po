@@ -6,69 +6,74 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-05-26 22:46+0000\n"
+"Last-Translator: Calvin Honecker <Calvineries@gmail.com>\n"
+"Language-Team: French <https://weblate.danwin1210.de/projects/DanWin/"
+"onion-link-list/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #: www/index.php:37
 msgid "All legitimate"
-msgstr ""
+msgstr "Tout légitime"
 
 #: www/index.php:38 www/index.php:67 www/index.php:113
 msgid "Last added"
-msgstr ""
+msgstr "Dernier ajouté"
 
 #: www/index.php:39 www/index.php:109 www/index.php:111
 msgid "Offline > 1 week"
-msgstr ""
+msgstr "Hors ligne > 1 semaine"
 
 #: www/index.php:97
 msgid "Onion link list - Not found"
-msgstr ""
+msgstr "Liste de liens Onion - Non trouvé"
 
 #: www/index.php:99
 #, php-format
 msgid "Onion link list - Searching for %s"
-msgstr ""
+msgstr "Liste de liens Onion - Recherche de %s"
 
 #: www/index.php:101
 #, php-format
 msgid "Onion link list - Page %d"
-msgstr ""
+msgstr "Liste de liens Onion - Page %d"
 
 #: www/index.php:103 www/index.php:109
 #, php-format
 msgid "Onion link list - %1$s - Page %2$d"
-msgstr ""
+msgstr "Liste de liens Onion - %1$s - Page %2$d"
 
 #: www/index.php:105 www/index.php:107 www/index.php:111 www/index.php:113
 #, php-format
 msgid "Onion link list - %s"
-msgstr ""
+msgstr "Liste de liens Onion - %s"
 
 #: www/index.php:107 www/index.php:213
 msgid "Phishing Clones"
-msgstr ""
+msgstr "Clones de phishing"
 
 #: www/index.php:115 www/index.php:123 www/opensearch.php:6
 msgid "Onion link list"
-msgstr ""
+msgstr "Liste de liens Onion"
 
 #: www/index.php:122 www/index.php:129
 msgid ""
 "Huge link list of Tor hidden service onions. All the darknet links you need "
 "in one place."
 msgstr ""
+"Énorme liste de liens Onion de service cachés de Tor. Tous les liens du "
+"darknet dont vous avez besoin en un seul endroit."
 
 #: www/index.php:140 www/index.php:436 www/index.php:453
 msgid "Error: No database connection!"
-msgstr ""
+msgstr "Erreur : Aucune connexion à la base de données !"
 
 #: www/index.php:142
 #, php-format
@@ -78,172 +83,177 @@ msgid ""
 "receive E-Mails from people that were desperate to make money and fell for "
 "scammers, don't be one of them!"
 msgstr ""
+"Je ne suis pas responsable du contenu des sites Web liés ici. 99% des sites "
+"du darkweb vendant quoi que ce soit sont des arnaques. Soyez prudent et "
+"utilisez votre cerveau. Je reçois régulièrement des e-mails de personnes qui "
+"cherchaient désespérément à gagner de l'argent et qui sont tombées dans le "
+"piège des escrocs, n'en faites pas partie !"
 
 #: www/index.php:145
 msgid "Onion address:"
-msgstr ""
+msgstr "Adresse Onion :"
 
 #: www/index.php:150 www/admin.php:184
 msgid "Description:"
-msgstr ""
+msgstr "Description :"
 
 #: www/index.php:165 www/index.php:183 www/admin.php:200
 msgid "Category:"
-msgstr ""
+msgstr "Catégorie :"
 
 #: www/index.php:175 www/admin.php:81 www/admin.php:221
 msgid "Update"
-msgstr ""
+msgstr "Actualiser"
 
 #: www/index.php:178
 msgid "Search:"
-msgstr ""
+msgstr "Recherche :"
 
 #: www/index.php:178
 msgid "Search term"
-msgstr ""
+msgstr "Terme de recherche"
 
 #: www/index.php:188 www/index.php:478
 msgid "All"
-msgstr ""
+msgstr "Tout"
 
 #: www/index.php:201
 msgid "Hide locked"
-msgstr ""
+msgstr "Masquer les verrouillés"
 
 #: www/index.php:202 common_config.php:90
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: www/index.php:204
 msgid "Format:"
-msgstr ""
+msgstr "Format :"
 
 #: www/index.php:207
 msgid "Special categories:"
-msgstr ""
+msgstr "Catégories spéciales :"
 
 #: www/index.php:214
 msgid "Removed/Child porn"
-msgstr ""
+msgstr "Supprimé/Child porn"
 
 #: www/index.php:216
 msgid "Pending approval"
-msgstr ""
+msgstr "En attente de validation"
 
 #: www/index.php:217
 msgid "Rejected"
-msgstr ""
+msgstr "Rejeté"
 
 #: www/index.php:221
 msgid "Categories:"
-msgstr ""
+msgstr "Catégories :"
 
 #: www/index.php:228 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
-msgstr ""
+msgstr "Adresse onion invalide !"
 
 #: www/index.php:229
 #, php-format
 msgid "A valid address looks like this: %s"
-msgstr ""
+msgstr "Une adresse valide ressemble à ceci : %s"
 
 #: www/index.php:233 www/index.php:246
 msgid "Error: Wrong captcha"
-msgstr ""
+msgstr "Erreur : Mauvais captcha"
 
 #: www/index.php:239
 msgid "Error: Captcha expired"
-msgstr ""
+msgstr "Erreur : Captcha expiré"
 
 #: www/index.php:268 www/admin.php:97
 msgid "Successfully added onion address!"
-msgstr ""
+msgstr "Adresse onion ajoutée avec succès !"
 
 #: www/index.php:270
 msgid "Sorry, editing this onion address has been locked!"
-msgstr ""
+msgstr "Désolé, la modification de cette adresse onion a été verrouillée !"
 
 #: www/index.php:274 www/admin.php:101
 msgid "Successfully updated description!"
-msgstr ""
+msgstr "Description mise à jour avec succès !"
 
 #: www/index.php:278 www/admin.php:105
 msgid "Successfully updated category!"
-msgstr ""
+msgstr "Catégorie mise à jour avec succès !"
 
 #: www/index.php:280 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
-msgstr ""
+msgstr "Merci, mais je connaissais déjà cette adresse !"
 
 #: www/index.php:302
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
-msgstr ""
+msgstr "Recherche de \"%1$s\", %2$d résultats trouvés :"
 
 #: www/index.php:349 www/index.php:409
 msgid "Onion link"
-msgstr ""
+msgstr "Lien Onion"
 
 #: www/index.php:349 www/admin.php:166
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: www/index.php:349 www/index.php:409
 msgid "Last seen"
-msgstr ""
+msgstr "Vu pour la dernière fois"
 
 #: www/index.php:349
 msgid "Added at"
-msgstr ""
+msgstr "Ajouté à"
 
 #: www/index.php:349
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: www/index.php:361 www/index.php:379 www/index.php:418
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #: www/index.php:369 www/index.php:395 www/test.php:34
 msgid "Test"
-msgstr ""
+msgstr "Tester"
 
 #: www/index.php:393
 msgid "Edit"
-msgstr ""
+msgstr "Editer"
 
 #: www/index.php:409
 msgid "Clone of"
-msgstr ""
+msgstr "Clone de"
 
 #: www/index.php:425
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: www/index.php:477
 msgid "Pages:"
-msgstr ""
+msgstr "Pages :"
 
 #: www/index.php:516
 msgid "Copy:"
-msgstr ""
+msgstr "Copie :"
 
 #: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
-msgstr ""
+msgstr "image captcha"
 
 #: www/test.php:7 www/test.php:16 www/test.php:22
 msgid "Online-Test"
-msgstr ""
+msgstr "Test en ligne"
 
 #: www/test.php:11 www/test.php:17 www/test.php:24
 msgid "Test whether a Tor hidden service onion is online or offline"
-msgstr ""
+msgstr "Testez si un onion de service caché de Tor est en ligne ou hors ligne"
 
 #: www/test.php:27 www/admin.php:160
 msgid "Onion link:"
-msgstr ""
+msgstr "Lien Onion :"
 
 #: www/test.php:43 www/admin.php:12 www/sitemap.php:8 cron/update.php:7
 #: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
@@ -251,254 +261,257 @@ msgstr ""
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
 #: setup.php:20 setup.php:23
 msgid "No database connection!"
-msgstr ""
+msgstr "Aucune connexion à la base de données !"
 
 #: www/test.php:61
 #, php-format
 msgid ""
 "Warning, this is a known phishing clone. The original site is located at %s."
 msgstr ""
+"Attention, il s'agit d'un clone de phishing connu. Le site d'origine est "
+"situé à %s."
 
 #: www/test.php:66
 msgid "Warning: This is a known scam!"
-msgstr ""
+msgstr "Attention : C'est une arnaque connue !"
 
 #: www/test.php:71 www/test.php:106
 msgid "Yes, the service is online!"
-msgstr ""
+msgstr "Oui, le service est en ligne !"
 
 #: www/test.php:110
 msgid "No, the service is offline!"
-msgstr ""
+msgstr "Non, le service est hors ligne !"
 
 #: www/admin.php:17 www/admin.php:27
 msgid "Admin interface"
-msgstr ""
+msgstr "Interface d'admin"
 
 #: www/admin.php:35
 msgid "Password:"
-msgstr ""
+msgstr "Mot de passe :"
 
 #: www/admin.php:36
 msgid "Login"
-msgstr ""
+msgstr "Connexion"
 
 #: www/admin.php:39
 msgid "Wrong Password!"
-msgstr ""
+msgstr "Mauvais mot de passe !"
 
 #: www/admin.php:55 www/admin.php:211
 msgid "Remove"
-msgstr ""
+msgstr "Retirer"
 
 #: www/admin.php:57
 msgid "Successfully removed onion address!"
-msgstr ""
+msgstr "Adresse onion supprimée avec succès !"
 
 #: www/admin.php:58 www/admin.php:212
 msgid "Lock"
-msgstr ""
+msgstr "Verrouiller"
 
 #: www/admin.php:60
 msgid "Successfully locked onion address!"
-msgstr ""
+msgstr "Adresse onion verrouillée avec succès !"
 
 #: www/admin.php:61 www/admin.php:216
 msgid "Re-add"
-msgstr ""
+msgstr "Ajouter à nouveau"
 
 #: www/admin.php:63
 msgid "Successfully re-added onion address!"
-msgstr ""
+msgstr "L'adresse onion a été ré-ajoutée avec succès !"
 
 #: www/admin.php:64 www/admin.php:217
 msgid "Unlock"
-msgstr ""
+msgstr "Déverrouiller"
 
 #: www/admin.php:66
 msgid "Successfully unlocked onion address!"
-msgstr ""
+msgstr "Adresse onion déverrouillée avec succès !"
 
 #: www/admin.php:67 www/admin.php:213
 msgid "Promote"
-msgstr ""
+msgstr "Promouvoir"
 
 #: www/admin.php:77
 #, php-format
 msgid "Successfully promoted onion address until %1$s!"
-msgstr ""
+msgstr "Adresse onion promue avec succès jusqu'au %1$s !"
 
 #: www/admin.php:78 www/admin.php:218
 msgid "Un-promote"
-msgstr ""
+msgstr "Dé-promouvoir"
 
 #: www/admin.php:80
 msgid "Successfully un-promoted onion address!"
-msgstr ""
+msgstr "Adresse oignon dé-promue avec succès !"
 
 #: www/admin.php:109 www/admin.php:214
 msgid "Phishing"
-msgstr ""
+msgstr "Phishing"
 
 #: www/admin.php:123
 msgid "Successfully added Phishing clone!"
-msgstr ""
+msgstr "Clone de phishing ajouté avec succès !"
 
 #: www/admin.php:125
 msgid "Not added Phishing clone! Phishing and original have the same address."
 msgstr ""
+"Clone de phishing non ajouté ! Le phishing et l'original ont la même adresse."
 
 #: www/admin.php:128 www/admin.php:219
 msgid "No phishing"
-msgstr ""
+msgstr "Pas de phishing"
 
 #: www/admin.php:133
 msgid "Successfully removed Phishing clone!"
-msgstr ""
+msgstr "Clone de phishing supprimé avec succès !"
 
 #: www/admin.php:134 www/admin.php:223
 msgid "Reject"
-msgstr ""
+msgstr "Rejeter"
 
 #: www/admin.php:136
 msgid "Successfully rejected onion address"
-msgstr ""
+msgstr "Adresse onion rejetée avec succès"
 
 #: www/admin.php:137 www/admin.php:224
 msgid "Approve"
-msgstr ""
+msgstr "Approuver"
 
 #: www/admin.php:139
 msgid "Successfully approved onion address"
-msgstr ""
+msgstr "Adresse onion approuvée avec succès"
 
 #: www/admin.php:141
 msgid "No action taken!"
-msgstr ""
+msgstr "Pas d'action prise !"
 
 #: www/admin.php:154
 msgid "Switch view mode"
-msgstr ""
+msgstr "Changer de mode d'affichage"
 
 #: www/admin.php:166
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 #: www/admin.php:166
 msgid "Address"
-msgstr ""
+msgstr "Addresse"
 
 #: www/admin.php:166
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #: www/admin.php:166
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: www/admin.php:170
 #, php-format
 msgid "Approved: %d"
-msgstr ""
+msgstr "Approuvé : %d"
 
 #: www/admin.php:170
 #, php-format
 msgid "Locked: %d"
-msgstr ""
+msgstr "Verrouiller : %d"
 
 #: www/admin.php:174
 msgid "Clone of:"
-msgstr ""
+msgstr "Clone de :"
 
 #: www/admin.php:179
 msgid "Bitcoins:"
-msgstr ""
+msgstr "Bitcoins :"
 
 #: www/sitemap.php:80
 msgid "Error creating the sitemap!"
-msgstr ""
+msgstr "Erreur lors de la création du plan du site !"
 
 #: www/opensearch.php:7
 msgid "Search the onion link list"
-msgstr ""
+msgstr "Rechercher dans la liste de liens onion"
 
 #: common_config.php:73
 msgid "Unsorted"
-msgstr ""
+msgstr "Non trié"
 
 #: common_config.php:74
 msgid "Adult/Porn"
-msgstr ""
+msgstr "Adulte/Porno"
 
 #: common_config.php:75
 msgid "Communication/Social"
-msgstr ""
+msgstr "Communication/Social"
 
 #: common_config.php:76
 msgid "Forums"
-msgstr ""
+msgstr "Forums"
 
 #: common_config.php:77
 msgid "Hacking/Programming/Software"
-msgstr ""
+msgstr "Hacking/Programmation/Logiciel"
 
 #: common_config.php:78
 msgid "Hosting"
-msgstr ""
+msgstr "Hébergement"
 
 #: common_config.php:79
 msgid "Libraries/Wikis"
-msgstr ""
+msgstr "Bibliothèques/Wiki"
 
 #: common_config.php:80
 msgid "Link Lists"
-msgstr ""
+msgstr "Listes de liens"
 
 #: common_config.php:81
 msgid "Market/Shop/Store"
-msgstr ""
+msgstr "Marché/Boutique/Magasin"
 
 #: common_config.php:82
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #: common_config.php:83
 msgid "Personal Sites/Blogs"
-msgstr ""
+msgstr "Sites personnels/Blogs"
 
 #: common_config.php:84
 msgid "Security/Privacy/Encryption"
-msgstr ""
+msgstr "Sécurité/Confidentialité/Cryptage"
 
 #: common_config.php:85
 msgid "Whistleblowing"
-msgstr ""
+msgstr "Dénonciation"
 
 #: common_config.php:86
 msgid "Empty/Error/Unknown"
-msgstr ""
+msgstr "Vide/Erreur/Inconnu"
 
 #: common_config.php:87
 msgid "Cryptocurrencies"
-msgstr ""
+msgstr "Crypto-monnaies"
 
 #: common_config.php:88
 msgid "Scams"
-msgstr ""
+msgstr "Arnaques"
 
 #: common_config.php:89
 msgid "Fun/Games/Joke"
-msgstr ""
+msgstr "Divertissement/Jeux/Blague"
 
 #: common_config.php:95
 msgid "Language:"
-msgstr ""
+msgstr "Langue :"
 
 #: setup.php:8
 #, php-format
 msgid "The %s extension of PHP is required. Please install it first."
-msgstr ""
+msgstr "L'extension %s de PHP est requise. Veuillez d'abord l'installer."
 
 #: setup.php:78
 msgid "Status: OK"
-msgstr ""
+msgstr "Statut : OK"
