@@ -24,6 +24,7 @@ const LANGUAGES = [
 	'de' => ['name' => 'Deutsch', 'locale' => 'de_DE', 'flag' => '🇩🇪', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'en' => ['name' => 'English', 'locale' => 'en_GB', 'flag' => '🇬🇧', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'fa' => ['name' => 'فارسی', 'locale' => 'fa_IR', 'flag' => '🇮🇷', 'show_in_menu' => true, 'dir' => 'rtl'],
+	'fr' => ['name' => 'Français', 'locale' => 'fr_FR', 'flag' => '🇫🇷', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'ja' => ['name' => '日本語', 'locale' => 'ja_JP', 'flag' => '🇯🇵', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'pl' => ['name' => 'Polski', 'locale' => 'pl_PL', 'flag' => '🇵🇱', 'show_in_menu' => true, 'dir' => 'ltr'],
 	'pt' => ['name' => 'Português', 'locale' => 'pt_PT', 'flag' => '🇵🇹', 'show_in_menu' => true, 'dir' => 'ltr'],
