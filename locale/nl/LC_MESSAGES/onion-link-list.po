@@ -6,69 +6,74 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-08-27 01:27+0000\n"
+"Last-Translator: Johan Gerards <vpwbpyzaba@rocketestate724.com>\n"
+"Language-Team: Dutch <https://weblate.danwin1210.de/projects/DanWin/"
+"onion-link-list/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18.2\n"
 
 #: www/index.php:37
 msgid "All legitimate"
-msgstr ""
+msgstr "Allemaal legitiem"
 
 #: www/index.php:38 www/index.php:67 www/index.php:113
 msgid "Last added"
-msgstr ""
+msgstr "Laatst toegevoegd"
 
 #: www/index.php:39 www/index.php:109 www/index.php:111
 msgid "Offline > 1 week"
-msgstr ""
+msgstr "Offline > 1 week"
 
 #: www/index.php:97
 msgid "Onion link list - Not found"
-msgstr ""
+msgstr "Onionlinklijst - Niet gevonden"
 
 #: www/index.php:99
 #, php-format
 msgid "Onion link list - Searching for %s"
-msgstr ""
+msgstr "Onionlinklijst - Zoeken naar %s"
 
 #: www/index.php:101
 #, php-format
 msgid "Onion link list - Page %d"
-msgstr ""
+msgstr "Onionlinklijst - Pagina %d"
 
 #: www/index.php:103 www/index.php:109
 #, php-format
 msgid "Onion link list - %1$s - Page %2$d"
-msgstr ""
+msgstr "Onionlinklijst - %1$s - Pagina %2$d"
 
 #: www/index.php:105 www/index.php:107 www/index.php:111 www/index.php:113
 #, php-format
 msgid "Onion link list - %s"
-msgstr ""
+msgstr "Onionlinklijst - %s"
 
 #: www/index.php:107 www/index.php:213
 msgid "Phishing Clones"
-msgstr ""
+msgstr "Phishing-klonen"
 
 #: www/index.php:115 www/index.php:123 www/opensearch.php:6
 msgid "Onion link list"
-msgstr ""
+msgstr "Onionlinklijst"
 
 #: www/index.php:122 www/index.php:129
 msgid ""
 "Huge link list of Tor hidden service onions. All the darknet links you need "
 "in one place."
 msgstr ""
+"Enorme linklijst van Tor hidden service onions. Alle darknet-links die je "
+"nodig hebt op één plek."
 
 #: www/index.php:140 www/index.php:436 www/index.php:453
 msgid "Error: No database connection!"
-msgstr ""
+msgstr "Fout: Geen databaseverbinding!"
 
 #: www/index.php:142
 #, php-format
@@ -78,87 +83,92 @@ msgid ""
 "receive E-Mails from people that were desperate to make money and fell for "
 "scammers, don't be one of them!"
 msgstr ""
+"Ik ben niet verantwoordelijk voor de inhoud van websites waarnaar hier wordt "
+"gelinkt. 99% van de darkwebsites die iets verkopen zijn oplichting. Wees "
+"voorzichtig en gebruik je verstand. Ik ontvang regelmatig e-mails van mensen "
+"die wanhopig geld wilden verdienen en voor oplichters vielen, wees niet een "
+"van hen!"
 
 #: www/index.php:145
 msgid "Onion address:"
-msgstr ""
+msgstr "Onionadres:"
 
 #: www/index.php:150 www/admin.php:184
 msgid "Description:"
-msgstr ""
+msgstr "Beschrijving:"
 
 #: www/index.php:165 www/index.php:183 www/admin.php:200
 msgid "Category:"
-msgstr ""
+msgstr "Categorie:"
 
 #: www/index.php:175 www/admin.php:81 www/admin.php:221
 msgid "Update"
-msgstr ""
+msgstr "Update"
 
 #: www/index.php:178
 msgid "Search:"
-msgstr ""
+msgstr "Zoeken:"
 
 #: www/index.php:178
 msgid "Search term"
-msgstr ""
+msgstr "Zoekterm"
 
 #: www/index.php:188 www/index.php:478
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: www/index.php:201
 msgid "Hide locked"
-msgstr ""
+msgstr "Verberg vergrendelde"
 
 #: www/index.php:202 common_config.php:90
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: www/index.php:204
 msgid "Format:"
-msgstr ""
+msgstr "Formaat:"
 
 #: www/index.php:207
 msgid "Special categories:"
-msgstr ""
+msgstr "Speciale categorieën:"
 
 #: www/index.php:214
 msgid "Removed/Child porn"
-msgstr ""
+msgstr "Verwijderd/kinderporno"
 
 #: www/index.php:216
 msgid "Pending approval"
-msgstr ""
+msgstr "In afwachting van goedkeuring"
 
 #: www/index.php:217
 msgid "Rejected"
-msgstr ""
+msgstr "Afgekeurd"
 
 #: www/index.php:221
 msgid "Categories:"
-msgstr ""
+msgstr "Categorieën:"
 
 #: www/index.php:228 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
-msgstr ""
+msgstr "Ongeldig onionadres!"
 
 #: www/index.php:229
 #, php-format
 msgid "A valid address looks like this: %s"
-msgstr ""
+msgstr "Een geldig adres ziet er zo uit: %s"
 
 #: www/index.php:233 www/index.php:246
 msgid "Error: Wrong captcha"
-msgstr ""
+msgstr "Fout: verkeerde captcha"
 
 #: www/index.php:239
 msgid "Error: Captcha expired"
-msgstr ""
+msgstr "Fout: captcha is verlopen"
 
 #: www/index.php:268 www/admin.php:97
 msgid "Successfully added onion address!"
-msgstr ""
+msgstr "Onionadres succesvol toegevoegd!"
 
 #: www/index.php:270
 msgid "Sorry, editing this onion address has been locked!"
@@ -227,7 +237,7 @@ msgstr ""
 
 #: www/index.php:516
 msgid "Copy:"
-msgstr ""
+msgstr "Kopieer:"
 
 #: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
