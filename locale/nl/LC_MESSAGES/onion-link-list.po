@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: 2023-08-27 01:27+0000\n"
+"PO-Revision-Date: 2023-08-31 16:27+0000\n"
 "Last-Translator: Johan Gerards <vpwbpyzaba@rocketestate724.com>\n"
 "Language-Team: Dutch <https://weblate.danwin1210.de/projects/DanWin/"
 "onion-link-list/nl/>\n"
@@ -172,68 +172,68 @@ msgstr "Onionadres succesvol toegevoegd!"
 
 #: www/index.php:270
 msgid "Sorry, editing this onion address has been locked!"
-msgstr ""
+msgstr "Sorry, het bewerken van dit onionadres is vergrendeld!"
 
 #: www/index.php:274 www/admin.php:101
 msgid "Successfully updated description!"
-msgstr ""
+msgstr "Beschrijving succesvol bijgewerkt!"
 
 #: www/index.php:278 www/admin.php:105
 msgid "Successfully updated category!"
-msgstr ""
+msgstr "Categorie succesvol bijgewerkt!"
 
 #: www/index.php:280 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
-msgstr ""
+msgstr "Bedankt, maar ik heb dit adres al!"
 
 #: www/index.php:302
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
-msgstr ""
+msgstr "Zoeken naar \"%1$s\", %2$d resultaten gevonden:"
 
 #: www/index.php:349 www/index.php:409
 msgid "Onion link"
-msgstr ""
+msgstr "Onionlink"
 
 #: www/index.php:349 www/admin.php:166
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 #: www/index.php:349 www/index.php:409
 msgid "Last seen"
-msgstr ""
+msgstr "Laatst gezien"
 
 #: www/index.php:349
 msgid "Added at"
-msgstr ""
+msgstr "Toegevoegd op"
 
 #: www/index.php:349
 msgid "Actions"
-msgstr ""
+msgstr "Acties"
 
 #: www/index.php:361 www/index.php:379 www/index.php:418
 msgid "Never"
-msgstr ""
+msgstr "Nooit"
 
 #: www/index.php:369 www/index.php:395 www/test.php:34
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: www/index.php:393
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
 #: www/index.php:409
 msgid "Clone of"
-msgstr ""
+msgstr "Kloon van"
 
 #: www/index.php:425
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #: www/index.php:477
 msgid "Pages:"
-msgstr ""
+msgstr "Pagina's:"
 
 #: www/index.php:516
 msgid "Copy:"
@@ -241,19 +241,19 @@ msgstr "Kopieer:"
 
 #: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
-msgstr ""
+msgstr "captcha-afbeelding"
 
 #: www/test.php:7 www/test.php:16 www/test.php:22
 msgid "Online-Test"
-msgstr ""
+msgstr "Onlinetest"
 
 #: www/test.php:11 www/test.php:17 www/test.php:24
 msgid "Test whether a Tor hidden service onion is online or offline"
-msgstr ""
+msgstr "Test of een Tor hidden service onion online of offline is"
 
 #: www/test.php:27 www/admin.php:160
 msgid "Onion link:"
-msgstr ""
+msgstr "Onionlink:"
 
 #: www/test.php:43 www/admin.php:12 www/sitemap.php:8 cron/update.php:7
 #: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
@@ -261,254 +261,258 @@ msgstr ""
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
 #: setup.php:20 setup.php:23
 msgid "No database connection!"
-msgstr ""
+msgstr "Geen databaseverbinding!"
 
 #: www/test.php:61
 #, php-format
 msgid ""
 "Warning, this is a known phishing clone. The original site is located at %s."
 msgstr ""
+"Waarschuwing: dit is een bekende phishing-kloon. De originele site bevindt "
+"zich op %s."
 
 #: www/test.php:66
 msgid "Warning: This is a known scam!"
-msgstr ""
+msgstr "Waarschuwing: dit is een bekende oplichting!"
 
 #: www/test.php:71 www/test.php:106
 msgid "Yes, the service is online!"
-msgstr ""
+msgstr "Ja, de service is online!"
 
 #: www/test.php:110
 msgid "No, the service is offline!"
-msgstr ""
+msgstr "Nee, de service is offline!"
 
 #: www/admin.php:17 www/admin.php:27
 msgid "Admin interface"
-msgstr ""
+msgstr "Admininterface"
 
 #: www/admin.php:35
 msgid "Password:"
-msgstr ""
+msgstr "Wachtwoord:"
 
 #: www/admin.php:36
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: www/admin.php:39
 msgid "Wrong Password!"
-msgstr ""
+msgstr "Verkeerd wachtwoord!"
 
 #: www/admin.php:55 www/admin.php:211
 msgid "Remove"
-msgstr ""
+msgstr "Verwijder"
 
 #: www/admin.php:57
 msgid "Successfully removed onion address!"
-msgstr ""
+msgstr "Onionadres succesvol verwijderd!"
 
 #: www/admin.php:58 www/admin.php:212
 msgid "Lock"
-msgstr ""
+msgstr "Vergrendel"
 
 #: www/admin.php:60
 msgid "Successfully locked onion address!"
-msgstr ""
+msgstr "Onionadres succesvol vergrendeld!"
 
 #: www/admin.php:61 www/admin.php:216
 msgid "Re-add"
-msgstr ""
+msgstr "Opnieuw toevoegen"
 
 #: www/admin.php:63
 msgid "Successfully re-added onion address!"
-msgstr ""
+msgstr "Onionadres succesvol opnieuw toegevoegd!"
 
 #: www/admin.php:64 www/admin.php:217
 msgid "Unlock"
-msgstr ""
+msgstr "Ontgrendelen"
 
 #: www/admin.php:66
 msgid "Successfully unlocked onion address!"
-msgstr ""
+msgstr "Onionadres succesvol ontgrendeld!"
 
 #: www/admin.php:67 www/admin.php:213
 msgid "Promote"
-msgstr ""
+msgstr "Promoot"
 
 #: www/admin.php:77
 #, php-format
 msgid "Successfully promoted onion address until %1$s!"
-msgstr ""
+msgstr "Onionadres succesvol gepromoot tot %1$s!"
 
 #: www/admin.php:78 www/admin.php:218
 msgid "Un-promote"
-msgstr ""
+msgstr "Ontpromoten"
 
 #: www/admin.php:80
 msgid "Successfully un-promoted onion address!"
-msgstr ""
+msgstr "Onionadres succesvol ongepromoot!"
 
 #: www/admin.php:109 www/admin.php:214
 msgid "Phishing"
-msgstr ""
+msgstr "Phishing"
 
 #: www/admin.php:123
 msgid "Successfully added Phishing clone!"
-msgstr ""
+msgstr "Phishing-kloon succesvol toegevoegd!"
 
 #: www/admin.php:125
 msgid "Not added Phishing clone! Phishing and original have the same address."
 msgstr ""
+"Phishing-kloon niet toegevoegd! Phishing-adres en het originele adres zijn "
+"hetzelfde."
 
 #: www/admin.php:128 www/admin.php:219
 msgid "No phishing"
-msgstr ""
+msgstr "Geen phishing"
 
 #: www/admin.php:133
 msgid "Successfully removed Phishing clone!"
-msgstr ""
+msgstr "Phishing-kloon succesvol verwijderd!"
 
 #: www/admin.php:134 www/admin.php:223
 msgid "Reject"
-msgstr ""
+msgstr "Afwijzen"
 
 #: www/admin.php:136
 msgid "Successfully rejected onion address"
-msgstr ""
+msgstr "Onionadres succesvol afgewezen"
 
 #: www/admin.php:137 www/admin.php:224
 msgid "Approve"
-msgstr ""
+msgstr "Goedkeuren"
 
 #: www/admin.php:139
 msgid "Successfully approved onion address"
-msgstr ""
+msgstr "Onionadres succesvol goedgekeurd"
 
 #: www/admin.php:141
 msgid "No action taken!"
-msgstr ""
+msgstr "Geen actie ondernomen!"
 
 #: www/admin.php:154
 msgid "Switch view mode"
-msgstr ""
+msgstr "Weergavemodus wijzigen"
 
 #: www/admin.php:166
 msgid "Select"
-msgstr ""
+msgstr "Selecteer"
 
 #: www/admin.php:166
 msgid "Address"
-msgstr ""
+msgstr "Adres"
 
 #: www/admin.php:166
 msgid "Category"
-msgstr ""
+msgstr "Categorie"
 
 #: www/admin.php:166
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: www/admin.php:170
 #, php-format
 msgid "Approved: %d"
-msgstr ""
+msgstr "Goedgekeurd: %d"
 
 #: www/admin.php:170
 #, php-format
 msgid "Locked: %d"
-msgstr ""
+msgstr "Vergrendeld: %d"
 
 #: www/admin.php:174
 msgid "Clone of:"
-msgstr ""
+msgstr "Kloon van:"
 
 #: www/admin.php:179
 msgid "Bitcoins:"
-msgstr ""
+msgstr "Bitcoins:"
 
 #: www/sitemap.php:80
 msgid "Error creating the sitemap!"
-msgstr ""
+msgstr "Fout bij het maken van de sitemap!"
 
 #: www/opensearch.php:7
 msgid "Search the onion link list"
-msgstr ""
+msgstr "Doorzoek de onionlinklijst"
 
 #: common_config.php:73
 msgid "Unsorted"
-msgstr ""
+msgstr "Ongesorteerd"
 
 #: common_config.php:74
 msgid "Adult/Porn"
-msgstr ""
+msgstr "18+/porno"
 
 #: common_config.php:75
 msgid "Communication/Social"
-msgstr ""
+msgstr "Communicatie/sociaal"
 
 #: common_config.php:76
 msgid "Forums"
-msgstr ""
+msgstr "Forums"
 
 #: common_config.php:77
 msgid "Hacking/Programming/Software"
-msgstr ""
+msgstr "Hacken/programmeren/software"
 
 #: common_config.php:78
 msgid "Hosting"
-msgstr ""
+msgstr "Hosting"
 
 #: common_config.php:79
 msgid "Libraries/Wikis"
-msgstr ""
+msgstr "Bibliotheken/wikis"
 
 #: common_config.php:80
 msgid "Link Lists"
-msgstr ""
+msgstr "Linklijsten"
 
 #: common_config.php:81
 msgid "Market/Shop/Store"
-msgstr ""
+msgstr "Markt/winkel"
 
 #: common_config.php:82
 msgid "Other"
-msgstr ""
+msgstr "Andere"
 
 #: common_config.php:83
 msgid "Personal Sites/Blogs"
-msgstr ""
+msgstr "Persoonlijke sites/blogs"
 
 #: common_config.php:84
 msgid "Security/Privacy/Encryption"
-msgstr ""
+msgstr "Veiligheid/privacy/encryptie"
 
 #: common_config.php:85
 msgid "Whistleblowing"
-msgstr ""
+msgstr "Klokkenluiden"
 
 #: common_config.php:86
 msgid "Empty/Error/Unknown"
-msgstr ""
+msgstr "Leeg/fout/onbekend"
 
 #: common_config.php:87
 msgid "Cryptocurrencies"
-msgstr ""
+msgstr "Cryptovaluta"
 
 #: common_config.php:88
 msgid "Scams"
-msgstr ""
+msgstr "Oplichtingen"
 
 #: common_config.php:89
 msgid "Fun/Games/Joke"
-msgstr ""
+msgstr "Plezier/spelletjes/grappen"
 
 #: common_config.php:95
 msgid "Language:"
-msgstr ""
+msgstr "Taal:"
 
 #: setup.php:8
 #, php-format
 msgid "The %s extension of PHP is required. Please install it first."
-msgstr ""
+msgstr "De %s-extensie van PHP is vereist. Installeer deze eerst."
 
 #: setup.php:78
 msgid "Status: OK"
-msgstr ""
+msgstr "Status: OK"
