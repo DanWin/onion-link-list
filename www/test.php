@@ -78,7 +78,7 @@ if(!empty($_REQUEST['addr'])){
 				$stmt=$db->prepare('SELECT null FROM ' . PREFIX . 'onions WHERE md5sum=?;');
 				$stmt->execute([$md5]);
 				if(!$stmt->fetch(PDO::FETCH_NUM)){
-					$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded) VALUES (?, ?, ?);')->execute([$addr, $md5, time()]);
+					$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, description) VALUES (?, ?, ?, "");')->execute([$addr, $md5, time()]);
 				}
 				$db->prepare('UPDATE ' . PREFIX . 'onions SET lasttest=?, lastup=lasttest, timediff=0 WHERE md5sum=?;')->execute([time(), $md5]);
 				if(preg_match('~window\.location\.replace\("http://'.$addr.'.onion/(.*?)"\)~', $content, $matches)){

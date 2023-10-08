@@ -24,7 +24,7 @@ function check(string $link, string $phishing_link): void
 	if(!empty($links) && !empty($phishing_links)){
 		$phishings=$db->prepare('INSERT IGNORE INTO ' . PREFIX . 'phishing (onion_id, original) VALUES ((SELECT id FROM onions WHERE md5sum=?), ?);');
 		$select=$db->prepare('SELECT id FROM ' . PREFIX . 'onions WHERE md5sum=?;');
-		$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, timechanged) VALUES (?, ?, ?, ?);');
+		$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, timechanged, description) VALUES (?, ?, ?, ?, "");');
 		$update=$db->prepare('UPDATE ' . PREFIX . 'onions SET locked=1, timechanged=? WHERE md5sum=?;');
 		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $links, $addr);
 		preg_match_all('~(https?://)?([a-z0-9]*\.)?([a-z2-7]{55}d).onion(/[^\s><"]*)?~i', $phishing_links, $phishing_addr);
