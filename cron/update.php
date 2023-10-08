@@ -90,7 +90,7 @@ function add_onions(&$onions, $db): void
 		}
 	}
 	$time=time();
-	$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, timechanged) VALUES (?, ?, ?, ?);');
+	$insert=$db->prepare('INSERT INTO ' . PREFIX . 'onions (address, md5sum, timeadded, timechanged, description) VALUES (?, ?, ?, ?, "");');
 	$db->beginTransaction();
 	foreach($onions as $md5=>$addr){
 		$insert->execute([$addr, $md5, $time, $time]);
