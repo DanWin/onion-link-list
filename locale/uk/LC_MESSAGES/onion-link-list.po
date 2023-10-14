@@ -6,69 +6,75 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-10-14 09:41+0000\n"
+"Last-Translator: Анонім <g2014test@yandex.com>\n"
+"Language-Team: Ukrainian <https://weblate.danwin1210.de/projects/DanWin/"
+"onion-link-list/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0.2\n"
 
 #: www/index.php:37
 msgid "All legitimate"
-msgstr ""
+msgstr "Усі законні"
 
 #: www/index.php:38 www/index.php:67 www/index.php:113
 msgid "Last added"
-msgstr ""
+msgstr "Останні додані"
 
 #: www/index.php:39 www/index.php:109 www/index.php:111
 msgid "Offline > 1 week"
-msgstr ""
+msgstr "Офлайн > 1 тижня"
 
 #: www/index.php:97
 msgid "Onion link list - Not found"
-msgstr ""
+msgstr "Список посилань Onion – Не знайдено"
 
 #: www/index.php:99
 #, php-format
 msgid "Onion link list - Searching for %s"
-msgstr ""
+msgstr "Список посилань Onion – Пошук %s"
 
 #: www/index.php:101
 #, php-format
 msgid "Onion link list - Page %d"
-msgstr ""
+msgstr "Список посилань Onion – Сторінка %d"
 
 #: www/index.php:103 www/index.php:109
 #, php-format
 msgid "Onion link list - %1$s - Page %2$d"
-msgstr ""
+msgstr "Список посилань Onion – %1$s – Сторінка %2$d"
 
 #: www/index.php:105 www/index.php:107 www/index.php:111 www/index.php:113
 #, php-format
 msgid "Onion link list - %s"
-msgstr ""
+msgstr "Список посилань Onion – %s"
 
 #: www/index.php:107 www/index.php:213
 msgid "Phishing Clones"
-msgstr ""
+msgstr "Фішингові клони"
 
 #: www/index.php:115 www/index.php:123 www/opensearch.php:6
 msgid "Onion link list"
-msgstr ""
+msgstr "Список посилань Onion"
 
 #: www/index.php:122 www/index.php:129
 msgid ""
 "Huge link list of Tor hidden service onions. All the darknet links you need "
 "in one place."
 msgstr ""
+"Величезний список посилань на приховані сервіси Tor. Всі потрібні Вам "
+"посилання з даркнету в одному місці."
 
 #: www/index.php:140 www/index.php:436 www/index.php:453
 msgid "Error: No database connection!"
-msgstr ""
+msgstr "Помилка: Нема підключення до бази даних!"
 
 #: www/index.php:142
 #, php-format
@@ -78,172 +84,177 @@ msgid ""
 "receive E-Mails from people that were desperate to make money and fell for "
 "scammers, don't be one of them!"
 msgstr ""
+"Я не несу відповідальності за вміст вебсайтів, на які посилаються тут. 99 % "
+"сайтів дарквебу, що продають що-небудь, є шахрайськими. Будьте обережні і "
+"використовуйте свій мозок. Я регулярно отримую електронні листи від людей, "
+"які відчайдушно хотіли заробити гроші і потрапили на вудку шахраїв, не "
+"будьте одним з них!"
 
 #: www/index.php:145
 msgid "Onion address:"
-msgstr ""
+msgstr "Адреса Onion:"
 
 #: www/index.php:150 www/admin.php:184
 msgid "Description:"
-msgstr ""
+msgstr "Опис:"
 
 #: www/index.php:165 www/index.php:183 www/admin.php:200
 msgid "Category:"
-msgstr ""
+msgstr "Категорія:"
 
 #: www/index.php:175 www/admin.php:81 www/admin.php:221
 msgid "Update"
-msgstr ""
+msgstr "Оновити"
 
 #: www/index.php:178
 msgid "Search:"
-msgstr ""
+msgstr "Пошук:"
 
 #: www/index.php:178
 msgid "Search term"
-msgstr ""
+msgstr "Пошуковий запит"
 
 #: www/index.php:188 www/index.php:478
 msgid "All"
-msgstr ""
+msgstr "Усі"
 
 #: www/index.php:201
 msgid "Hide locked"
-msgstr ""
+msgstr "Приховати заблоковані"
 
 #: www/index.php:202 common_config.php:90
 msgid "Search"
-msgstr ""
+msgstr "Знайти"
 
 #: www/index.php:204
 msgid "Format:"
-msgstr ""
+msgstr "Формат:"
 
 #: www/index.php:207
 msgid "Special categories:"
-msgstr ""
+msgstr "Спеціальні категорії:"
 
 #: www/index.php:214
 msgid "Removed/Child porn"
-msgstr ""
+msgstr "Видалено/Заборонене порно"
 
 #: www/index.php:216
 msgid "Pending approval"
-msgstr ""
+msgstr "Очікують підтвердження"
 
 #: www/index.php:217
 msgid "Rejected"
-msgstr ""
+msgstr "Відхилено"
 
 #: www/index.php:221
 msgid "Categories:"
-msgstr ""
+msgstr "Категорії:"
 
 #: www/index.php:228 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
-msgstr ""
+msgstr "Недопустима onion адреса!"
 
 #: www/index.php:229
 #, php-format
 msgid "A valid address looks like this: %s"
-msgstr ""
+msgstr "Правильна адреса виглядає наступним чином: %s"
 
 #: www/index.php:233 www/index.php:246
 msgid "Error: Wrong captcha"
-msgstr ""
+msgstr "Помилка: Неправильна капча"
 
 #: www/index.php:239
 msgid "Error: Captcha expired"
-msgstr ""
+msgstr "Помилка: Термін дії капчі закінчився"
 
 #: www/index.php:268 www/admin.php:97
 msgid "Successfully added onion address!"
-msgstr ""
+msgstr "Onion адресу успішно додано!"
 
 #: www/index.php:270
 msgid "Sorry, editing this onion address has been locked!"
-msgstr ""
+msgstr "Вибачте, редагування цієї onion-адреси було заблоковано!"
 
 #: www/index.php:274 www/admin.php:101
 msgid "Successfully updated description!"
-msgstr ""
+msgstr "Опис успішно оновлено!"
 
 #: www/index.php:278 www/admin.php:105
 msgid "Successfully updated category!"
-msgstr ""
+msgstr "Категорія успішно оновлена!"
 
 #: www/index.php:280 www/admin.php:107
 msgid "Thanks, but I already knew this address!"
-msgstr ""
+msgstr "Дякую, але я вже знаю цю адресу!"
 
 #: www/index.php:302
 #, php-format
 msgid "Searching for \"%1$s\", %2$d results found:"
-msgstr ""
+msgstr "За запитом «%1$s» знайдено %2$d результатів:"
 
 #: www/index.php:349 www/index.php:409
 msgid "Onion link"
-msgstr ""
+msgstr "Посилання Onion"
 
 #: www/index.php:349 www/admin.php:166
 msgid "Description"
-msgstr ""
+msgstr "Опис"
 
 #: www/index.php:349 www/index.php:409
 msgid "Last seen"
-msgstr ""
+msgstr "Останнє відвідування"
 
 #: www/index.php:349
 msgid "Added at"
-msgstr ""
+msgstr "Додано"
 
 #: www/index.php:349
 msgid "Actions"
-msgstr ""
+msgstr "Дії"
 
 #: www/index.php:361 www/index.php:379 www/index.php:418
 msgid "Never"
-msgstr ""
+msgstr "Ніколи"
 
 #: www/index.php:369 www/index.php:395 www/test.php:34
 msgid "Test"
-msgstr ""
+msgstr "Тест"
 
 #: www/index.php:393
 msgid "Edit"
-msgstr ""
+msgstr "Редагувати"
 
 #: www/index.php:409
 msgid "Clone of"
-msgstr ""
+msgstr "Оригінальний сайт"
 
 #: www/index.php:425
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
 #: www/index.php:477
 msgid "Pages:"
-msgstr ""
+msgstr "Сторінки:"
 
 #: www/index.php:516
 msgid "Copy:"
-msgstr ""
+msgstr "Перепишіть:"
 
 #: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
-msgstr ""
+msgstr "зображення з капчею"
 
 #: www/test.php:7 www/test.php:16 www/test.php:22
 msgid "Online-Test"
-msgstr ""
+msgstr "Онлайн-тест"
 
 #: www/test.php:11 www/test.php:17 www/test.php:24
 msgid "Test whether a Tor hidden service onion is online or offline"
-msgstr ""
+msgstr "Перевірте, прихований сервіс Tor онлайн чи офлайн"
 
 #: www/test.php:27 www/admin.php:160
 msgid "Onion link:"
-msgstr ""
+msgstr "Посилання Onion:"
 
 #: www/test.php:43 www/admin.php:12 www/sitemap.php:8 cron/update.php:7
 #: cron/phishing_tests.php:8 cron/tests.php:7 helpers/tmp5.php:6
@@ -251,254 +262,256 @@ msgstr ""
 #: helpers/tmp7.php:6 helpers/tmp4.php:6 helpers/tmp2.php:6 helpers/tmp.php:6
 #: setup.php:20 setup.php:23
 msgid "No database connection!"
-msgstr ""
+msgstr "Нема підключення до бази даних!"
 
 #: www/test.php:61
 #, php-format
 msgid ""
 "Warning, this is a known phishing clone. The original site is located at %s."
 msgstr ""
+"Увага, це відомий фішинговий клон. Оригінальний сайт знаходиться за адресою "
+"%s."
 
 #: www/test.php:66
 msgid "Warning: This is a known scam!"
-msgstr ""
+msgstr "Увага: Це відомий шахрайський сайт!"
 
 #: www/test.php:71 www/test.php:106
 msgid "Yes, the service is online!"
-msgstr ""
+msgstr "Так, сервіс доступний онлайн!"
 
 #: www/test.php:110
 msgid "No, the service is offline!"
-msgstr ""
+msgstr "Ні, сервіс офлайн!"
 
 #: www/admin.php:17 www/admin.php:27
 msgid "Admin interface"
-msgstr ""
+msgstr "Інтерфейс адміністратора"
 
 #: www/admin.php:35
 msgid "Password:"
-msgstr ""
+msgstr "Пароль:"
 
 #: www/admin.php:36
 msgid "Login"
-msgstr ""
+msgstr "Увійти"
 
 #: www/admin.php:39
 msgid "Wrong Password!"
-msgstr ""
+msgstr "Неправильний пароль!"
 
 #: www/admin.php:55 www/admin.php:211
 msgid "Remove"
-msgstr ""
+msgstr "Видалити"
 
 #: www/admin.php:57
 msgid "Successfully removed onion address!"
-msgstr ""
+msgstr "Onion адреса успішно видалена!"
 
 #: www/admin.php:58 www/admin.php:212
 msgid "Lock"
-msgstr ""
+msgstr "Заблокувати"
 
 #: www/admin.php:60
 msgid "Successfully locked onion address!"
-msgstr ""
+msgstr "Onion адреса успішно заблокована!"
 
 #: www/admin.php:61 www/admin.php:216
 msgid "Re-add"
-msgstr ""
+msgstr "Додати повторно"
 
 #: www/admin.php:63
 msgid "Successfully re-added onion address!"
-msgstr ""
+msgstr "Onion адреса повторно додана!"
 
 #: www/admin.php:64 www/admin.php:217
 msgid "Unlock"
-msgstr ""
+msgstr "Розблокувати"
 
 #: www/admin.php:66
 msgid "Successfully unlocked onion address!"
-msgstr ""
+msgstr "Onion адреса успішно розблокована!"
 
 #: www/admin.php:67 www/admin.php:213
 msgid "Promote"
-msgstr ""
+msgstr "Просувати"
 
 #: www/admin.php:77
 #, php-format
 msgid "Successfully promoted onion address until %1$s!"
-msgstr ""
+msgstr "Onion адреса просувається до %1$s!"
 
 #: www/admin.php:78 www/admin.php:218
 msgid "Un-promote"
-msgstr ""
+msgstr "Скасувати просування"
 
 #: www/admin.php:80
 msgid "Successfully un-promoted onion address!"
-msgstr ""
+msgstr "Onion-адреса більше не просувається!"
 
 #: www/admin.php:109 www/admin.php:214
 msgid "Phishing"
-msgstr ""
+msgstr "Фішинг"
 
 #: www/admin.php:123
 msgid "Successfully added Phishing clone!"
-msgstr ""
+msgstr "Фішинг-клон успішно доданий!"
 
 #: www/admin.php:125
 msgid "Not added Phishing clone! Phishing and original have the same address."
-msgstr ""
+msgstr "Фішинговий клон не додано! Фішинг та оригінал мають однакову адресу."
 
 #: www/admin.php:128 www/admin.php:219
 msgid "No phishing"
-msgstr ""
+msgstr "Не є фішингом"
 
 #: www/admin.php:133
 msgid "Successfully removed Phishing clone!"
-msgstr ""
+msgstr "Фішинговий клон успішно видалений!"
 
 #: www/admin.php:134 www/admin.php:223
 msgid "Reject"
-msgstr ""
+msgstr "Відхилити"
 
 #: www/admin.php:136
 msgid "Successfully rejected onion address"
-msgstr ""
+msgstr "Onion адреса успішно відхилена"
 
 #: www/admin.php:137 www/admin.php:224
 msgid "Approve"
-msgstr ""
+msgstr "Підтвердити"
 
 #: www/admin.php:139
 msgid "Successfully approved onion address"
-msgstr ""
+msgstr "Onion адреса успішно підтверджена"
 
 #: www/admin.php:141
 msgid "No action taken!"
-msgstr ""
+msgstr "Ніяких дій не зроблено!"
 
 #: www/admin.php:154
 msgid "Switch view mode"
-msgstr ""
+msgstr "Переключити режим перегляду"
 
 #: www/admin.php:166
 msgid "Select"
-msgstr ""
+msgstr "Вибрати"
 
 #: www/admin.php:166
 msgid "Address"
-msgstr ""
+msgstr "Адреса"
 
 #: www/admin.php:166
 msgid "Category"
-msgstr ""
+msgstr "Категорія"
 
 #: www/admin.php:166
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: www/admin.php:170
 #, php-format
 msgid "Approved: %d"
-msgstr ""
+msgstr "Підтверджено: %d"
 
 #: www/admin.php:170
 #, php-format
 msgid "Locked: %d"
-msgstr ""
+msgstr "Заблоковано: %d"
 
 #: www/admin.php:174
 msgid "Clone of:"
-msgstr ""
+msgstr "Клон з:"
 
 #: www/admin.php:179
 msgid "Bitcoins:"
-msgstr ""
+msgstr "Біткоіни:"
 
 #: www/sitemap.php:80
 msgid "Error creating the sitemap!"
-msgstr ""
+msgstr "Помилка при створенні карти сайту!"
 
 #: www/opensearch.php:7
 msgid "Search the onion link list"
-msgstr ""
+msgstr "Пошук у списку посилань onion"
 
 #: common_config.php:73
 msgid "Unsorted"
-msgstr ""
+msgstr "Несортовані"
 
 #: common_config.php:74
 msgid "Adult/Porn"
-msgstr ""
+msgstr "Для дорослих/Порно"
 
 #: common_config.php:75
 msgid "Communication/Social"
-msgstr ""
+msgstr "Спілкування/Соціальні мережі"
 
 #: common_config.php:76
 msgid "Forums"
-msgstr ""
+msgstr "Форуми"
 
 #: common_config.php:77
 msgid "Hacking/Programming/Software"
-msgstr ""
+msgstr "Хакерство/Програмування/Програмне забезпечення"
 
 #: common_config.php:78
 msgid "Hosting"
-msgstr ""
+msgstr "Хостинги"
 
 #: common_config.php:79
 msgid "Libraries/Wikis"
-msgstr ""
+msgstr "Бібліотеки/Вікі-сайти"
 
 #: common_config.php:80
 msgid "Link Lists"
-msgstr ""
+msgstr "Списки посилань"
 
 #: common_config.php:81
 msgid "Market/Shop/Store"
-msgstr ""
+msgstr "Маркети/Магазини"
 
 #: common_config.php:82
 msgid "Other"
-msgstr ""
+msgstr "Інше"
 
 #: common_config.php:83
 msgid "Personal Sites/Blogs"
-msgstr ""
+msgstr "Персональні сайти/Блоги"
 
 #: common_config.php:84
 msgid "Security/Privacy/Encryption"
-msgstr ""
+msgstr "Безпека/Конфіденційність/Шифрування"
 
 #: common_config.php:85
 msgid "Whistleblowing"
-msgstr ""
+msgstr "Викриття"
 
 #: common_config.php:86
 msgid "Empty/Error/Unknown"
-msgstr ""
+msgstr "Порожні/Помилки/Незрозумілі"
 
 #: common_config.php:87
 msgid "Cryptocurrencies"
-msgstr ""
+msgstr "Криптовалюти"
 
 #: common_config.php:88
 msgid "Scams"
-msgstr ""
+msgstr "Шахрайство"
 
 #: common_config.php:89
 msgid "Fun/Games/Joke"
-msgstr ""
+msgstr "Розваги/Ігри/Приколи"
 
 #: common_config.php:95
 msgid "Language:"
-msgstr ""
+msgstr "Мова:"
 
 #: setup.php:8
 #, php-format
 msgid "The %s extension of PHP is required. Please install it first."
-msgstr ""
+msgstr "Потрібне розширення %s для PHP. Будь ласка, спочатку встановіть його."
 
 #: setup.php:78
 msgid "Status: OK"
-msgstr ""
+msgstr "Статус: ОК"
