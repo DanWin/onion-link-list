@@ -17,7 +17,7 @@ const VERSION = '1.1'; // Script version
 const DBVERSION = 8; // Database layout version
 const REQUIRE_APPROVAL = false; // require admin approval of new sites? true/false
 const CANONICAL_URL = 'https://onions.danwin1210.de'; // our preferred domain for search engines
-const CAPTCHA = 0; // Captcha difficulty (0=off, 1=simple, 2=moderate, 3=extreme)
+const CAPTCHA = 0; // Captcha difficulty (0=off, 1=simple, 2=moderate, 3=hard, 4=extreme)
 // Language selection
 const LANGUAGES = [
 	'cs' => ['name' => 'čeština', 'locale' => 'cs_CZ', 'flag' => '🇨🇿', 'show_in_menu' => true, 'dir' => 'ltr'],
