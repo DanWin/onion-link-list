@@ -6,17 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: 2023-01-01 17:57+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2024-11-06 01:48+0000\n"
+"Last-Translator: Akira <kawaiisenpai@waifu.club>\n"
+"Language-Team: Japanese <https://weblate.danwin1210.de/projects/DanWin/"
+"onion-link-list/ja/>\n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: www/index.php:37
 msgid "All legitimate"
@@ -207,7 +208,7 @@ msgstr "追加された日"
 
 #: www/index.php:349
 msgid "Actions"
-msgstr "操作"
+msgstr "アクション"
 
 #: www/index.php:361 www/index.php:379 www/index.php:418
 msgid "Never"
@@ -235,7 +236,7 @@ msgstr "ページ："
 
 #: www/index.php:516
 msgid "Copy:"
-msgstr ""
+msgstr "コピー:"
 
 #: www/index.php:523 www/index.php:538 www/index.php:590
 msgid "captcha image"
@@ -293,7 +294,7 @@ msgstr "ログイン"
 
 #: www/admin.php:39
 msgid "Wrong Password!"
-msgstr "パスワードが違います！"
+msgstr "パスワードが間違っています！"
 
 #: www/admin.php:55 www/admin.php:211
 msgid "Remove"
