@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: daniel@danwin1210.de\n"
 "POT-Creation-Date: 2023-01-26 21:02+0100\n"
-"PO-Revision-Date: 2023-05-04 01:26+0000\n"
-"Last-Translator: Weblate Admin <daniel@danwin1210.de>\n"
+"PO-Revision-Date: 2025-10-27 22:20+0000\n"
+"Last-Translator: Turkish Mark <turkishmark@yandex.com>\n"
 "Language-Team: Turkish <https://weblate.danwin1210.de/projects/DanWin/"
 "onion-link-list/tr/>\n"
 "Language: tr_TR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.13.3\n"
 
 #: www/index.php:37
 msgid "All legitimate"
@@ -91,7 +91,7 @@ msgstr ""
 
 #: www/index.php:145
 msgid "Onion address:"
-msgstr "Onion-Adresi:"
+msgstr "Soğan adresi:"
 
 #: www/index.php:150 www/admin.php:184
 msgid "Description:"
@@ -151,7 +151,7 @@ msgstr "Kategoriler:"
 
 #: www/index.php:228 www/test.php:46 www/admin.php:51 www/admin.php:111
 msgid "Invalid onion address!"
-msgstr "Geçersiz onion-Adresi!"
+msgstr "Geçersiz soğan adresi!"
 
 #: www/index.php:229
 #, php-format
@@ -193,7 +193,7 @@ msgstr "\"%1$s\" için aranıyor, %2$d sonuç bulundu:"
 
 #: www/index.php:349 www/index.php:409
 msgid "Onion link"
-msgstr "Onion bağlantısı"
+msgstr "Soğan bağlantısı"
 
 #: www/index.php:349 www/admin.php:166
 msgid "Description"
@@ -221,7 +221,7 @@ msgstr "Dene"
 
 #: www/index.php:393
 msgid "Edit"
-msgstr "Düzenle"
+msgstr "Düzenlemek"
 
 #: www/index.php:409
 msgid "Clone of"
@@ -294,7 +294,7 @@ msgstr "Şifre:"
 
 #: www/admin.php:36
 msgid "Login"
-msgstr "Giriş"
+msgstr "Giriş yapmak"
 
 #: www/admin.php:39
 msgid "Wrong Password!"
